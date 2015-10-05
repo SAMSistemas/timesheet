@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ProjectController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -40,7 +40,7 @@ class ProjectController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect project
+                redirect action:"index", method:"GET"
             }
             '*' { respond project, [status: CREATED] }
         }
@@ -69,14 +69,14 @@ class ProjectController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect project
+                redirect action:"index", method:"GET"
             }
             '*'{ respond project, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(Project project) {
+    def able(Project project) {
 
         if (project == null) {
             transactionStatus.setRollbackOnly()
@@ -84,7 +84,29 @@ class ProjectController {
             return
         }
 
-        project.delete flush:true
+        project.enabled = true
+        project.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), project.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Transactional
+    def disable(Project project) {
+
+        if (project == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        project.enabled = false
+        project.save flush: true
 
         request.withFormat {
             form multipartForm {
