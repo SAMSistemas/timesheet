@@ -15,10 +15,10 @@
             </ul>
         </div>
         <div id="list-client" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
 
             <div id="table" ng-app="sortApp" ng-controller="mainController">
 
@@ -68,8 +68,8 @@
                                 <span ng-show="sortType == 'enabled' && sortReverse" class="fa fa-caret-up"></span>
                             </a>
                         </td>
-                        <td>Edit</td>
-                        <td>Delete</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </thead>
 
@@ -79,7 +79,9 @@
                         <td>{{ client.short_name }}</td>
                         <td>{{ client.enabled }}</td>
                         <td><a ng-href="/client/edit/{{ client.id }}">Edit</a></td>
-                        <td><input type="button" value="Remove" ng-click="removeRow(client.id)"/></td>
+                        <td><a href ng-click="disableClient(client)" ng-show="client.enabled">Disable</a>
+                            <a href ng-click="ableClient(client)" ng-hide="client.enabled">Able</a></td>
+                        </td>
                     </tr>
                     </tbody>
 

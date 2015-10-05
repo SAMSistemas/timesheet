@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ClientController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -40,7 +40,7 @@ class ClientController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect client
+                redirect action:"index", method:"GET"
             }
             '*' { respond client, [status: CREATED] }
         }
@@ -69,14 +69,14 @@ class ClientController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect client
+                redirect controller: "client", action: "index", method: "GET"
             }
             '*'{ respond client, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(Client client) {
+    def able(Client client) {
 
         if (client == null) {
             transactionStatus.setRollbackOnly()
@@ -84,12 +84,34 @@ class ClientController {
             return
         }
 
-        client.delete flush:true
+        client.enabled = true
+        client.save flush: true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
+//                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
+//                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Transactional
+    def disable(Client client) {
+
+        if (client == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        client.enabled = false
+        client.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+//                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
+//                redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
