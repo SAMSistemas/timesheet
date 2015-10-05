@@ -69,7 +69,7 @@ class ClientController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect controller: "client", action: "index", method: "GET"
+                redirect action:"index", method:"GET"
             }
             '*'{ respond client, [status: OK] }
         }
@@ -89,8 +89,8 @@ class ClientController {
 
         request.withFormat {
             form multipartForm {
-//                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-//                redirect action:"index", method:"GET"
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
+                redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -110,8 +110,8 @@ class ClientController {
 
         request.withFormat {
             form multipartForm {
-//                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-//                redirect action:"index", method:"GET"
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
+                redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
