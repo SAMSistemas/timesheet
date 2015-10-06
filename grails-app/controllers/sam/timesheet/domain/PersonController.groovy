@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class PersonController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -40,7 +40,7 @@ class PersonController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect person
+                redirect action:"index", method:"GET"
             }
             '*' { respond person, [status: CREATED] }
         }
@@ -69,7 +69,7 @@ class PersonController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect person
+                redirect action:"index", method:"GET"
             }
             '*'{ respond person, [status: OK] }
         }
@@ -84,7 +84,8 @@ class PersonController {
             return
         }
 
-        person.delete flush:true
+        person.enabled = true
+        person.save flush: true
 
         request.withFormat {
             form multipartForm {
