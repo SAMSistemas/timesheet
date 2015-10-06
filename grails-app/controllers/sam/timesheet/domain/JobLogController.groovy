@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class JobLogController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -40,7 +40,7 @@ class JobLogController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'jobLog.label', default: 'JobLog'), jobLog.id])
-                redirect jobLog
+                redirect action:"index", method:"GET"
             }
             '*' { respond jobLog, [status: CREATED] }
         }
@@ -69,14 +69,14 @@ class JobLogController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'jobLog.label', default: 'JobLog'), jobLog.id])
-                redirect jobLog
+                redirect action:"index", method:"GET"
             }
             '*'{ respond jobLog, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(JobLog jobLog) {
+    def able(JobLog jobLog) {
 
         if (jobLog == null) {
             transactionStatus.setRollbackOnly()
@@ -84,7 +84,29 @@ class JobLogController {
             return
         }
 
-        jobLog.delete flush:true
+        jobLog.enabled = true
+        jobLog.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'jobLog.label', default: 'JobLog'), jobLog.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Transactional
+    def disable(JobLog jobLog) {
+
+        if (jobLog == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        jobLog.enabled = false
+        jobLog.save flush: true
 
         request.withFormat {
             form multipartForm {

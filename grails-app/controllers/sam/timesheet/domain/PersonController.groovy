@@ -76,7 +76,7 @@ class PersonController {
     }
 
     @Transactional
-    def delete(Person person) {
+    def able(Person person) {
 
         if (person == null) {
             transactionStatus.setRollbackOnly()
@@ -85,6 +85,27 @@ class PersonController {
         }
 
         person.enabled = true
+        person.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'person.label', default: 'Person'), person.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Transactional
+    def disable(Person person) {
+
+        if (person == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        person.enabled = false
         person.save flush: true
 
         request.withFormat {

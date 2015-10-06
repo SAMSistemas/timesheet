@@ -76,7 +76,7 @@ class TaskTypeController {
     }
 
     @Transactional
-    def delete(TaskType taskType) {
+    def able(TaskType taskType) {
 
         if (taskType == null) {
             transactionStatus.setRollbackOnly()
@@ -85,6 +85,27 @@ class TaskTypeController {
         }
 
         taskType.enabled = true
+        taskType.save flush: true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'taskType.label', default: 'TaskType'), taskType.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    @Transactional
+    def disable(TaskType taskType) {
+
+        if (taskType == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        taskType.enabled = false
         taskType.save flush: true
 
         request.withFormat {
