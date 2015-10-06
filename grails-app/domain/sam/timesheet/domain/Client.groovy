@@ -6,15 +6,14 @@ class Client {
     String short_name
     Boolean enabled
 
-    /** Override toString method **/
-    String toString(){
-        return name
-    }
-
     static hasMany = [projects: Project]
 
     static constraints = {
         name blank: false, nullable: false, unique: true
         short_name blank: false, nullable: false, unique: true
+    }
+
+    String toString(){
+        return name
     }
 }

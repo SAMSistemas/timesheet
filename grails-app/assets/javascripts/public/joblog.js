@@ -1,8 +1,8 @@
 // app.js
-(function() {
+(function () {
     var app = angular.module('sortApp', []);
 
-    app.controller('mainController', function($scope) {
+    app.controller('mainController', function ($scope) {
         $scope.joblogs = [];
         $scope.sortType = 'project'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order
@@ -13,7 +13,7 @@
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $.getJSON( "/jobLog.json", function(data) {
+        $.getJSON("/jobLog.json", function (data) {
             $scope.joblogs = data;
             $scope.$apply();
         });

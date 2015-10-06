@@ -1,9 +1,9 @@
 // app.js
-(function() {
+(function () {
     var app = angular.module('sortApp', []);
 
-    app.controller('mainController', function($scope) {
-        $scope.tasktypes = [];
+    app.controller('mainController', function ($scope) {
+        $scope.people = [];
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order
         $scope.search = '';     // set the default search/filter term
@@ -13,24 +13,24 @@
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.disable = function(tasktype) {
+        $scope.disable = function (person) {
             $.ajax({
-                url: '/taskType/disable/' + tasktype.id,
+                url: '/person/disable/' + person.id,
                 type: 'PUT'
             });
-            tasktype.enabled = false;
+            person.enabled = false;
         };
 
-        $scope.able = function(tasktype) {
+        $scope.able = function (person) {
             $.ajax({
-                url: '/taskType/able/' + tasktype.id,
+                url: '/person/able/' + person.id,
                 type: 'PUT'
             });
-            tasktype.enabled = true;
+            person.enabled = true;
         };
 
-        $.getJSON("/taskType.json", function(data) {
-            $scope.tasktypes = data;
+        $.getJSON("/person.json", function (data) {
+            $scope.people = data;
             $scope.$apply();
         });
 
