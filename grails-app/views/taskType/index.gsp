@@ -14,15 +14,60 @@
             </ul>
         </div>
         <div id="list-taskType" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${taskTypeList}" />
+            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
 
-            <div class="pagination">
-                <g:paginate total="${taskTypeCount ?: 0}" />
+            <div id="table" ng-app="sortApp" ng-controller="mainController">
+
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                            <input type="text" class="form-control" placeholder="Search for name" ng-model="search.name">
+                        </div>
+                    </div>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                    Client Name
+                                    <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" ng-click="sortType = 'enabled'; sortReverse = !sortReverse">
+                                    Enabled
+                                    <span ng-show="sortType == 'enabled' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'enabled' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="tasktype in tasktypes | orderBy:sortType:sortReverse | filter:search:startsWith">
+                            <td>{{ tasktype.name }}</td>
+                            <td>{{ tasktype.enabled }}</td>
+                            <td><a ng-href="/tasktype/edit/{{ tasktype.id }}">Edit</a></td>
+                            <td><a href ng-click="disable(tasktype)" ng-show="tasktype.enabled">Disable</a>
+                                <a href ng-click="able(tasktype)" ng-hide="tasktype.enabled">Able</a></td>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
             </div>
         </div>
+
+    <asset:javascript src="tasktype.js"/>
+
     </body>
 </html>
