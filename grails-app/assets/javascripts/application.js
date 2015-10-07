@@ -7,8 +7,8 @@
 //
 //= require jquery-2.1.3.js
 //= require_tree vendor
-//= require_tree directives
 //= require_self
+//= require_tree directives
 
 if (typeof jQuery !== 'undefined') {
     (function($) {
@@ -20,4 +20,4 @@ if (typeof jQuery !== 'undefined') {
     })(jQuery);
 }
 
-
+angular.module('directives', []);

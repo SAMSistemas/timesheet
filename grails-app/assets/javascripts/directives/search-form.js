@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module('directives', [])
+    var app = angular.module('directives');
 
     app.directive('searchForm', function() {
         return {

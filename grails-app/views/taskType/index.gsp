@@ -35,20 +35,8 @@
 
             <thead>
             <tr>
-                <th>
-                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                        Client Name
-                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'enabled'; sortReverse = !sortReverse">
-                        Enabled
-                        <span ng-show="sortType == 'enabled' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'enabled' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
+                <th><a href ng-click="reverseOrder(name)">Task Type Name</a></th>
+                <th><a href ng-click="reverseOrder(enabled)">Enabled</a></th>
                 <th></th>
                 <th></th>
             </tr>

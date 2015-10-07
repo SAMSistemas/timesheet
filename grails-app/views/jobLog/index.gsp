@@ -39,27 +39,9 @@
 
             <thead>
             <tr>
-                <th>
-                    <a href="#" ng-click="sortType = 'project'; sortReverse = !sortReverse">
-                        Project
-                        <span ng-show="sortType == 'project' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'project' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'person'; sortReverse = !sortReverse">
-                        Person
-                        <span ng-show="sortType == 'person' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'person' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'tasktype'; sortReverse = !sortReverse">
-                        Tasktype
-                        <span ng-show="sortType == 'tasktype' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'tasktype' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
+                <th><a href ng-click="reverseOrder(project)">Project Name</a></th>
+                <th><a href ng-click="reverseOrder(person)">Person Name</a></th>
+                <th><a href ng-click="reverseOrder(tasktype)">Task Type Name</a></th>
                 <th></th>
             </tr>
             </thead>

@@ -39,34 +39,10 @@
 
             <thead>
             <tr>
-                <th>
-                    <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                        Client Name
-                        <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'lastname'; sortReverse = !sortReverse">
-                        Last Name
-                        <span ng-show="sortType == 'lastname' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'lastname' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'username'; sortReverse = !sortReverse">
-                        User Name
-                        <span ng-show="sortType == 'username' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'username' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
-                <th>
-                    <a href="#" ng-click="sortType = 'enabled'; sortReverse = !sortReverse">
-                        Enabled
-                        <span ng-show="sortType == 'enabled' && !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'enabled' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
-                </th>
+                <th><a href ng-click="reverseOrder(name)">Client Name</a></th>
+                <th><a href ng-click="reverseOrder(lastname)">Last Name</a></th>
+                <th><a href ng-click="reverseOrder(username)">User Name</a></th>
+                <th><a href ng-click="reverseOrder(enabled)">Enabled</a></th>
                 <th></th>
                 <th></th>
             </tr>

@@ -8,6 +8,11 @@
         $scope.sortReverse = false;  // set the default sort order
         $scope.search = '';     // set the default search/filter term
 
+        $scope.reverseOrder = function(sortType) {
+            $scope.sortType = sortType;
+            $scope.sortReverse = !$scope.sortReverse
+        };
+
         $scope.startsWith = function (actual, expected) {
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
