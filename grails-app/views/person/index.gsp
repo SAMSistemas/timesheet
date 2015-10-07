@@ -29,34 +29,11 @@
 
     <div id="table" ng-app="sortApp" ng-controller="mainController">
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for name" ng-model="search.name">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.name" ng-placeholder="Search for name"></search-form>
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for lastname"
-                           ng-model="search.lastname">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.lastname" ng-placeholder="Search for lastname"></search-form>
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for username"
-                           ng-model="search.username">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.username" ng-placeholder="Search for username"></search-form>
 
         <table>
 

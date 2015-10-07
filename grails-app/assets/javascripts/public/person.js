@@ -1,6 +1,6 @@
 // app.js
 (function () {
-    var app = angular.module('sortApp', []);
+    var app = angular.module('sortApp', ['directives']);
 
     app.controller('mainController', function ($scope) {
         $scope.people = [];

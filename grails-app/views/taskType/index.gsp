@@ -29,14 +29,7 @@
 
     <div id="table" ng-app="sortApp" ng-controller="mainController">
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for name" ng-model="search.name">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.name" ng-placeholder="Search for name"></search-form>
 
         <table>
 

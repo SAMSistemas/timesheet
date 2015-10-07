@@ -29,33 +29,11 @@
 
     <div id="table" ng-app="sortApp" ng-controller="mainController">
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for project" ng-model="search.project">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.project" ng-placeholder="Search for project"></search-form>
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for person" ng-model="search.person">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.person" ng-placeholder="Search for person"></search-form>
 
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search for tasktype"
-                           ng-model="search.tasktype">
-                </div>
-            </div>
-        </form>
+        <search-form ng-model="search.tasktype" ng-placeholder="Search for task type"></search-form>
 
         <table>
 

@@ -7,6 +7,7 @@
 //
 //= require jquery-2.1.3.js
 //= require_tree vendor
+//= require_tree directives
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
@@ -18,3 +19,5 @@ if (typeof jQuery !== 'undefined') {
         });
     })(jQuery);
 }
+
+
