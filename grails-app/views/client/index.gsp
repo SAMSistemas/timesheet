@@ -23,6 +23,10 @@
     #edit-icon {
         margin-right: 5px;
     }
+    #create-btn {
+        padding-left: 20px;
+        padding-right: 25px;
+    }
 
     </style>
 
@@ -41,16 +45,16 @@
     </ul>
 </div>
 
+
 <div id="list-client" class="content scaffold-list" role="main">
 
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
-    %{--<h1><g:message code="default.list.label" args="[entityName]"/></h1>--}%
-
     <h3 class="card-title">Lista de Clientes</h3>
 
+    <a href="/client/create" id="create-btn" class="waves-effect waves-light btn"><i class="material-icons left">person_add</i>Crear Cliente</a>
 
     <div id="table" ng-app="sortApp" ng-controller="mainController">
 
