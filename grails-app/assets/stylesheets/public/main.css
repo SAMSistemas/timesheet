@@ -10,6 +10,7 @@ a.button-collapse.top-nav {
     position: absolute;
     height: 64px;
     top: 0px;
+    padding-left: 2%;
     color: #FFF;
     font-size: 32px;
     line-height: 64px;
