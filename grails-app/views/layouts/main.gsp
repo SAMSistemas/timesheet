@@ -52,14 +52,18 @@
                 </div>
             </div>
         </li>
-        <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal</a>
-        </li>
-        <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">group_add</i>Clientes
+        <li><a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal
         </a>
         </li>
-        <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">apps</i>Proyectos</a>
+        <li><a href="/client" class="waves-effect waves-teal btn-flat"><i
+                class="material-icons left">group_add</i>Clientes
+        </a>
         </li>
-        <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">archive</i>Tipo de Tarea
+        <li><a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">apps</i>Proyectos
+        </a>
+        </li>
+        <li><a href="/taskType" class="waves-effect waves-teal btn-flat"><i
+                class="material-icons left">archive</i>Tipo de Tarea
         </a></li>
         <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>
         </li>
