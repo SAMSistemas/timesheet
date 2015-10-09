@@ -4,6 +4,28 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'client.label', default: 'Client')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
+    <style>
+    .card-title {
+        color: #009688 !important;
+        font-size: 180%  !important;
+    }
+    .transparent-green {
+        background-color: transparent;
+        color: #009688;
+        padding-right: 10px;
+        padding-left: 5px;
+    }
+
+    .transparent-green:hover  {
+        color: white;
+    }
+    #edit-icon {
+        margin-right: 5px;
+    }
+
+    </style>
+
 </head>
 
 <body>
@@ -25,7 +47,10 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
+    %{--<h1><g:message code="default.list.label" args="[entityName]"/></h1>--}%
+
+    <h3 class="card-title">Lista de Clientes</h3>
+
 
     <div id="table" ng-app="sortApp" ng-controller="mainController">
 
@@ -33,13 +58,14 @@
 
         <search-form ng-model="search.short_name" ng-placeholder="Search for short name"></search-form>
 
-        <table>
+        <table class="responsive-table striped centered">
 
             <thead>
             <tr>
-                <th><a href ng-click="reverseOrder(name)">Client Name</a></th>
-                <th><a href ng-click="reverseOrder(short_name)">Short Name</a></th>
-                <th><a href ng-click="reverseOrder(enabled)">Enabled</a></th>
+                <th></th>
+                <th><a href ng-click="reverseOrder(name)">Nombre del cliente</a></th>
+                <th><a href ng-click="reverseOrder(short_name)">Sigla del cliente</a></th>
+                <th><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -47,10 +73,11 @@
 
             <tbody>
             <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith">
+                <td><i class="material-icons center">business</i></td>
                 <td>{{ client.name }}</td>
                 <td>{{ client.short_name }}</td>
                 <td>{{ client.enabled }}</td>
-                <td><a ng-href="/client/edit/{{ client.id }}">Edit</a></td>
+                <td><a ng-href="/client/edit/{{ client.id }}" class="waves-effect waves-light btn transparent-green z-depth-0 modal-trigger"><i id="edit-icon" class="material-icons left">mode_edit</i>Editar</a></td>
                 <td><a href ng-click="disable(client)" ng-show="client.enabled">Disable</a>
                     <a href ng-click="able(client)" ng-hide="client.enabled">Able</a></td>
             </tr>

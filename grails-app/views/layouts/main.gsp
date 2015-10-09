@@ -11,10 +11,10 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <g:layoutHead/>
-
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="application.js"/>
+
+    <g:layoutHead/>
 
 </head>
 
@@ -34,7 +34,7 @@
     </nav>
 
     <div class="container">
-        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav hide-on-large-only"><i
+        <a href="#" data-activates="side-nav" class="button-collapse top-nav hide-on-large-only"><i
                 class="mdi-navigation-menu"></i></a>
     </div>
 
@@ -78,6 +78,10 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(".button-collapse").sideNav();
+</script>
 
 </body>
 </html>
