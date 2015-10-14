@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class JobLogController {
 
-    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
+    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT", asign: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -115,6 +115,25 @@ class JobLogController {
             }
             '*'{ render status: NO_CONTENT }
         }
+    }
+
+    def asignation() {
+        return
+    }
+
+    @Transactional
+    def asign() {
+        def paramsJSON = request.JSON
+
+        def jobLog = new JobLog()
+        jobLog.person = Person.findById(paramsJSON.get("person"))
+        jobLog.project = Project.findById(paramsJSON.get("project"))
+        jobLog.task_type = TaskType.findOrCreateByName("asignacion")
+        jobLog.date = new Date()
+        jobLog.hours = "0"
+        jobLog.save flush:true
+
+        render status: OK
     }
 
     protected void notFound() {
