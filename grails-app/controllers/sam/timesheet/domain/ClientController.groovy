@@ -1,129 +1,58 @@
 package sam.timesheet.domain
 
+import grails.converters.JSON
+
+import static grails.artefact.controller.RestResponder$Trait$Helper.respond
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ClientController {
 
-    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
+    static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Client.list(params), model:[clientCount: Client.count()]
+    def index() {
+        return
     }
 
-    def show(Client client) {
-        respond client
+    def all() {
+        def clients = Client.list()
+
+        withFormat {
+            json { render clients as JSON }
+        }
     }
 
+    def show() {
+        respond Client.findById(request.JSON.get("id"))
+    }
+
+    @Transactional
     def create() {
-        respond new Client(params)
+        def paramsJSON = request.JSON
+
+        def newClientParams = [
+                name: paramsJSON.get("name"),
+                short_name: paramsJSON.get("short_name"),
+                enabled: paramsJSON.get("enabled")
+        ]
+
+        (new Client(newClientParams)).save flush: true
+
+        render status: CREATED
     }
 
     @Transactional
-    def save(Client client) {
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+    def update() {
+        def paramsJSON = request.JSON
 
-        if (client.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond client.errors, view:'create'
-            return
-        }
+        def clientToUpdate = Client.findById(paramsJSON.get("id"))
+        clientToUpdate.name = paramsJSON.get("name")
+        clientToUpdate.short_name = paramsJSON.get("short_name")
+        clientToUpdate.enabled = paramsJSON.get("enabled")
+        clientToUpdate.save flush: true
 
-        client.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
-            }
-            '*' { respond client, [status: CREATED] }
-        }
+        render status: OK
     }
 
-    def edit(Client client) {
-        respond client
-    }
-
-    @Transactional
-    def update(Client client) {
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (client.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond client.errors, view:'edit'
-            return
-        }
-
-        client.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ respond client, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def able(Client client) {
-
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        client.enabled = true
-        client.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    @Transactional
-    def disable(Client client) {
-
-        if (client == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        client.enabled = false
-        client.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), client.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'client.label', default: 'Client'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
 }
