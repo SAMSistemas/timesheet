@@ -1,0 +1,90 @@
+.card-title {
+    color: #009688 !important;
+    font-size: 180% !important;
+}
+
+.card-title-padding {
+    padding-left: 0 !important;
+    padding-bottom: 20px !important;
+    margin: 0;
+}
+
+.btn-edit-padding {
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.transparent-green {
+    background-color: transparent;
+    color: #009688;
+}
+
+.transparent-green:hover {
+    color: white;
+    background-color: #009688;
+}
+
+.icon-margin {
+    margin-right: 5px !important;
+}
+
+.btn-padding {
+    padding-left: 20px;
+    padding-right: 25px;
+}
+
+.input-field {
+    width: 100%;
+    margin: 0 !important;
+    height: 30px;
+}
+
+.input-field input[type="search"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border-color: transparent !important;
+}
+
+.search_input {
+    height: 30px !important;
+}
+
+.tr-filter-height {
+    height: 56px;
+}
+
+.th-padding {
+    padding: 10px 0 0 15px;
+}
+
+*::-moz-placeholder {
+    color: #666666;
+}
+
+.filled-in[type="checkbox"]:not(:checked) + label::after {
+    border: 2px solid #bdbdbd !important;
+}
+
+.search_input {
+    height: 30px !important;
+}
+
+.input-field-modal {
+    width: 100%;
+}
+
+.modal-content-padding {
+    padding: 40px 40px 0 40px !important;
+}
+
+.modal-footer-padding {
+    padding: 0px 40px 0px 40px !important;
+}
+
+.btn-flat {
+    padding: 0 20px 0 20px;
+}
+.modal-width {
+    width: 600px;
+}

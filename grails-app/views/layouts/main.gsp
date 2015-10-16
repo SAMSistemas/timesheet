@@ -42,11 +42,11 @@
     <ul id="side-nav" class="side-nav fixed">
         <li class="user-panel li-no-hover">
             <div class="user-info">
-                <div class="row user-picture">
+                <div class="row user-picture-padding">
                     <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
                 </div>
 
-                <div class="row user-data">
+                <div class="row user-data-padding">
                     <span class="white-text truncate">Leandro Alessandrello</span>
                     <span class="white-text truncate">leandro.alessandrello@samsistemas.com.ar</span>
                 </div>
@@ -74,7 +74,7 @@
 <section>
     <div class="container">
         <div class="card z-depth-2">
-            <div class="card-content"><g:layoutBody/></div>
+            <div class="card-content card-content-padding"><g:layoutBody/></div>
         </div>
     </div>
 </section>

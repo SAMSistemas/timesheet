@@ -46,13 +46,16 @@ a.button-collapse.top-nav {
     margin-left: 0;
 }
 
-.user-picture {
-    padding-top: 10px;
-    padding-left: 10px;
+.user-picture-padding {
+    padding: 10px 0 0 10px;
 }
 
-.user-data {
+.user-data-padding {
     padding: 10px 40px 10px 15px;
+}
+
+.card-content-padding {
+    padding: 0 20px 0 20px !important;
 }
 
 li.li-no-hover:hover {
