@@ -60,8 +60,8 @@
         <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith"
             class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
-            <td>{{ client.name }}</td>
-            <td>{{ client.short_name }}</td>
+            <td class="truncate">{{ client.name }}</td>
+            <td class="truncate">{{ client.short_name }}</td>
             <td>
                 <div class="switch">
                     <label>
