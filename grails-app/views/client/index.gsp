@@ -45,7 +45,7 @@
             </th>
             <th class="th-filter-padding">
                 <div class="input-field">
-                    <select ng-model="search.status">
+                    <select>
                         <option value="todos" selected>Todos</option>
                         <option value="habilitados">Habilitados</option>
                         <option value="deshabilitados">Inhabilitados</option>
@@ -57,7 +57,8 @@
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith | filter:search:checkStatus" class="tr-body-width-and-height">
+        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith"
+            class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td>{{ client.name }}</td>
             <td>{{ client.short_name }}</td>
@@ -82,73 +83,86 @@
 
     <!--Create Modal-->
     <div id="create-modal" class="modal modal-width">
-    <form name="createForm" ng-submit="create()" novalidate>
-        <div class="modal-content modal-content-padding">
-            <h2 class="card-title card-title-padding">Crear cliente</h2>
+        <form name="createForm" ng-submit="create()" novalidate>
+            <div class="modal-content modal-content-padding">
+                <h2 class="card-title card-title-padding">Crear cliente</h2>
 
-            <div class="row align-center">
-                %{--<div class="input-field-modal col s12" ng-class="{ 'has-error' : createForm.name.$invalid && !createForm.name.$pristine }">--}%
-                <div ng-class="{ 'has-error' : createForm.name.$invalid && !createForm.name.$pristine }">
-                        <input id="name" type="text" ng-model="clientToCreate.name" required>
-                    <label for="name">Nombre</label>
-                    <p ng-show="createForm.name.$invalid && !createForm.name.$pristine" class="help-block">You name is required.</p>
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required
+                               ng-class="{ 'has-error' : createForm.name.$invalid }">
+                        <label for="name"
+                               ng-class="{ 'has-error' : createForm.name.$invalid }">Nombre</label>
+                        <p ng-show="createForm.name.$invalid" class="has-error">El nombre es obligatorio</p>
+                    </div>
+                </div>
+
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required
+                               ng-class="{ 'has-error' : createForm.sname.$invalid }">
+                        <label for="sname" ng-class="{ 'has-error' : createForm.sname.$invalid }">Sigla</label>
+
+                        <p ng-show="createForm.sname.$invalid" class="has-error">La sigla es obligatoria</p>
+                    </div>
+                </div>
+
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="enable" type="checkbox" class="filled-in" ng-model="clientToCreate.enabled">
+                        <label for="enable">Habilitado</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="sname" type="text" ng-model="clientToCreate.short_name" required>
-                    <label for="sname">Sigla</label>
-                </div>
+            <div class="modal-footer modal-footer-padding">
+                <button ng-disabled="createForm.$invalid"
+                        class="modal-action modal-close waves-effect btn-flat transparent-green">Guardar</button>
+                <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
             </div>
-
-            <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="enable" type="checkbox" class="filled-in" ng-model="clientToCreate.enabled">
-                    <label for="enable">Habilitado</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-footer modal-footer-padding">
-            <button ng-disabled="createForm.$invalid" class="modal-action modal-close waves-effect btn-flat transparent-green">Guardar</button>
-            <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
-        </div>
-    </form>
+        </form>
     </div>
 
     <!--Edit Modal-->
     <div id="edit-modal" class="modal modal-width">
-        <div class="modal-content modal-content-padding">
-            <h2 class="card-title card-title-padding">Editar cliente</h2>
+        <form name="editForm" ng-submit="update()" novalidate>
+            <div class="modal-content modal-content-padding">
+                <h2 class="card-title card-title-padding">Editar cliente</h2>
 
-            <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="edit_name" placeholder="" type="text" ng-model="clientToEdit.name">
-                    <label for="edit_name">Nombre</label>
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required
+                               ng-class="{ 'has-error' : editForm.name.$invalid }">
+                        <label for="edit_name"
+                               ng-class="{ 'has-error' : editForm.name.$invalid }">Nombre</label>
+                        <p ng-show="editForm.name.$invalid" class="has-error">El nombre es obligatorio</p>
+                    </div>
+                </div>
+
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="edit_sname" name="sname" type="text" ng-model="clientToEdit.short_name"
+                               ng-model="clientToEdit.short_name" required
+                               ng-class="{ 'has-error' : editForm.sname.$invalid }">
+                        <label for="edit_sname" ng-class="{ 'has-error' : editForm.sname.$invalid }">Sigla</label>
+                        <p ng-show="editForm.sname.$invalid" class="has-error">La sigla es obligatoria</p>
+                    </div>
+                </div>
+
+                <div class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientToEdit.enabled">
+                        <label for="edit_enable">Habilitado</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="edit_sname" placeholder="" type="text" ng-model="clientToEdit.short_name">
-                    <label for="edit_sname">Sigla</label>
-                </div>
+            <div class="modal-footer modal-footer-padding">
+                <button ng-disabled="editForm.$invalid"
+                        class="modal-action modal-close waves-effect btn-flat transparent-green">Guardar</button>
+                <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
             </div>
-
-            <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientToEdit.enabled">
-                    <label for="edit_enable">Habilitado</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-footer modal-footer-padding">
-            <a href class="modal-action modal-close waves-effect waves-teal btn-flat transparent-green"
-               ng-click="update()">Guardar</a>
-            <a href class="modal-action modal-close waves-effect waves-teal btn-flat transparent-green">Cancelar</a>
-        </div>
+        </form>
     </div>
 
 </div>

@@ -27,7 +27,11 @@
         $scope.clientToCreate = {name: "", short_name: "", enabled: false};
         $scope.clientToEdit = null;
 
+        $scope.createForm = null;
+        $scope.editForm = null;
+
         $http.get('/client/all').then(function(response) {
+            $('select').material_select();
             $scope.clients = response.data;
             $('.modal-trigger').leanModal();
         });
@@ -37,8 +41,10 @@
         };
 
         $scope.create = function() {
-            $http.post('/client/create', $scope.clientToCreate);
-            $scope.addNewClientToTable();
+            if ($scope.createForm.$valid) {
+                $http.post('/client/create', $scope.clientToCreate);
+                $scope.addNewClientToTable();
+            }
         };
 
         $scope.edit = function(client) {
@@ -46,8 +52,10 @@
         };
 
         $scope.update = function() {
-            $http.put('/client/update', $scope.clientToEdit);
-            $scope.editUpdatedClientInTable();
+            if ($scope.editForm.$valid) {
+                $http.put('/client/update', $scope.clientToEdit);
+                $scope.editUpdatedClientInTable();
+            }
         };
 
         $scope.reverseOrder = function(sortType) {

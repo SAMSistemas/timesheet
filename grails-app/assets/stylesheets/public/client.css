@@ -80,6 +80,18 @@
     height: 30px !important;
 }
 
+input.has-error {
+    border-color: red;
+}
+
+label.has-error {
+    color: red;
+}
+
+p.has-error {
+    color: red !important;
+}
+
 .input-field-modal {
     width: 100%;
 }
