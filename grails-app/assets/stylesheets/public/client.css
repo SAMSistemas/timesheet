@@ -130,6 +130,7 @@ tr:after {
 tbody {
     height: 350px;
     overflow-y: auto;
+    width: calc(100% - 14px);
 }
 
 tbody td, thead th {
