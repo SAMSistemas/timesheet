@@ -18,14 +18,14 @@
     <table class="responsive-table striped centered">
 
         <thead>
-        <tr class="tr-filter-width-and-height">
+        <tr class="tr-header-width-and-height">
             <th></th>
             <th><a href ng-click="reverseOrder(name)">Nombre del cliente</a></th>
             <th><a href ng-click="reverseOrder(short_name)">Sigla del cliente</a></th>
             <th><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
             <th></th>
         </tr>
-        <tr class="grey darken-2 tr-filter-width-and-height">
+        <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding"></th>
             <th class="th-filter-padding">
                 <div class="input-field white teal-text">
@@ -44,14 +44,20 @@
                 </div>
             </th>
             <th class="th-filter-padding">
-                <input type="checkbox" id="check" class="filled-in center"/><label for="check"></label>
+                <div class="input-field">
+                    <select ng-model="search.status">
+                        <option value="todos" selected>Todos</option>
+                        <option value="habilitados">Habilitados</option>
+                        <option value="deshabilitados">Inhabilitados</option>
+                    </select>
+                </div>
             </th>
             <th class="th-filter-padding"></th>
-        </tr >
+        </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith" class="tr-filter-width-and-height">
+        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith | filter:search:checkStatus" class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td>{{ client.name }}</td>
             <td>{{ client.short_name }}</td>
@@ -76,13 +82,16 @@
 
     <!--Create Modal-->
     <div id="create-modal" class="modal modal-width">
+    <form name="createForm" ng-submit="create()" novalidate>
         <div class="modal-content modal-content-padding">
             <h2 class="card-title card-title-padding">Crear cliente</h2>
 
             <div class="row align-center">
-                <div class="input-field-modal col s12">
-                    <input id="name" type="text" ng-model="clientToCreate.name" required>
+                %{--<div class="input-field-modal col s12" ng-class="{ 'has-error' : createForm.name.$invalid && !createForm.name.$pristine }">--}%
+                <div ng-class="{ 'has-error' : createForm.name.$invalid && !createForm.name.$pristine }">
+                        <input id="name" type="text" ng-model="clientToCreate.name" required>
                     <label for="name">Nombre</label>
+                    <p ng-show="createForm.name.$invalid && !createForm.name.$pristine" class="help-block">You name is required.</p>
                 </div>
             </div>
 
@@ -102,10 +111,10 @@
         </div>
 
         <div class="modal-footer modal-footer-padding">
-            <a href class="modal-action modal-close waves-effect btn-flat transparent-green"
-               ng-click="create()">Guardar</a>
-            <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+            <button ng-disabled="createForm.$invalid" class="modal-action modal-close waves-effect btn-flat transparent-green">Guardar</button>
+            <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
         </div>
+    </form>
     </div>
 
     <!--Edit Modal-->

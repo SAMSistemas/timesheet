@@ -55,9 +55,13 @@
     padding-left: 10px;
 }
 
-.tr-filter-width-and-height {
+.tr-header-width-and-height {
     height: 50px;
-    width: calc(100% - 13px);
+    width: calc(100% - 14px);
+}
+
+.tr-body-width-and-height {
+    height: 50px;
 }
 
 .th-padding {
@@ -131,4 +135,31 @@ thead th {
 
 .material-icons-line-heigth {
     line-height: 50px;
+}
+/** Select styles **/
+.dropdown-content li{
+    text-align: center !important;
+}
+
+.select-wrapper {
+    height: 100% !important;
+}
+
+.select-wrapper span.caret {
+    color: white;
+    position: absolute;
+    right: 0px;
+    top: 0px !important;
+    font-size: 10px;
+    height: 30px !important;
+    line-height: 31px !important;
+}
+
+.select-wrapper input.select-dropdown {
+    color: white !important;
+    border-color: transparent !important;
+    margin: 0 !important;
+    text-align: center !important;
+    height: 100% !important;
+    line-height: 100% !important;
 }
