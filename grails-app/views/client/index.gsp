@@ -18,16 +18,16 @@
     <table class="responsive-table striped centered">
 
         <thead>
-        <tr>
+        <tr class="tr-filter-width-and-height">
             <th></th>
             <th><a href ng-click="reverseOrder(name)">Nombre del cliente</a></th>
             <th><a href ng-click="reverseOrder(short_name)">Sigla del cliente</a></th>
             <th><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
             <th></th>
         </tr>
-        <tr class="grey darken-2 tr-filter-height">
-            <th class="my-th"></th>
-            <th>
+        <tr class="grey darken-2 tr-filter-width-and-height">
+            <th class="th-filter-padding"></th>
+            <th class="th-filter-padding">
                 <div class="input-field white teal-text">
                     <input id="search_name" class="center search_input" type="search" required
                            placeholder="Ingrese nombre" onfocus="placeholder = ''"
@@ -35,7 +35,7 @@
                     <label for="search_name"></label>
                 </div>
             </th>
-            <th>
+            <th class="th-filter-padding">
                 <div class="input-field white teal-text">
                     <input id="search_sname" class="center search_input" type="search" required
                            placeholder="Ingrese sigla" onfocus="placeholder = ''"
@@ -43,16 +43,16 @@
                     <label for="search_sname"></label>
                 </div>
             </th>
-            <th class="th-padding">
+            <th class="th-filter-padding">
                 <input type="checkbox" id="check" class="filled-in center"/><label for="check"></label>
             </th>
-            <th></th>
-        </tr>
+            <th class="th-filter-padding"></th>
+        </tr >
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith" on-last-repeat>
-            <td><i class="material-icons center">business</i></td>
+        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith" class="tr-filter-width-and-height">
+            <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td>{{ client.name }}</td>
             <td>{{ client.short_name }}</td>
             <td>
@@ -81,14 +81,14 @@
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="name" type="text" ng-model="clientToCreate.name">
+                    <input id="name" type="text" ng-model="clientToCreate.name" required>
                     <label for="name">Nombre</label>
                 </div>
             </div>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="sname" type="text" ng-model="clientToCreate.short_name">
+                    <input id="sname" type="text" ng-model="clientToCreate.short_name" required>
                     <label for="sname">Sigla</label>
                 </div>
             </div>

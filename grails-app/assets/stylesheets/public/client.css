@@ -34,7 +34,7 @@
 }
 
 .input-field {
-    width: 100%;
+    width: calc(100% - 5%);
     margin: 0 !important;
     height: 30px;
 }
@@ -50,8 +50,14 @@
     height: 30px !important;
 }
 
-.tr-filter-height {
-    height: 56px;
+.th-filter-padding {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.tr-filter-width-and-height {
+    height: 50px;
+    width: calc(100% - 13px);
 }
 
 .th-padding {
@@ -87,4 +93,42 @@
 }
 .modal-width {
     width: 600px;
+}
+
+body {
+    background-color: #e0e0e0;
+}
+
+/** Styles to make the table content scrollable **/
+thead, tbody, tr, td, th {
+    display: block;
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+tbody {
+    height: 350px;
+    overflow-y: auto;
+}
+
+tbody td, thead th {
+    width: 20%;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+thead th {
+    height: 50px;
+}
+
+.material-icons-line-heigth {
+    line-height: 50px;
 }
