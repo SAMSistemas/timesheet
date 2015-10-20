@@ -8,7 +8,7 @@
 
 <body>
 
-<div id="list-client" class="content scaffold-list" role="main" ng-app="clientApp" ng-controller="mainController">
+<div ng-app="clientApp" ng-controller="mainController">
 
     <h3 class="card-title">Lista de Clientes</h3>
 
