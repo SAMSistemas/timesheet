@@ -3,7 +3,8 @@
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
     var observer = new MutationObserver(function () {
-        $('td .modal-trigger').leanModal();
+        $('td .modal-trigger').not('.modal-trigger-applied').leanModal();
+        $('td .modal-trigger').addClass('modal-trigger-applied');
     });
 
     observer.observe(document.querySelector('#table-body'), {
@@ -35,7 +36,7 @@
         $http.get('/client/all').then(function (response) {
             $('select').material_select();
             $scope.clients = response.data;
-            $('.modal-trigger').leanModal();
+            $('a.modal-trigger').leanModal();
         });
 
         $scope.new = function () {
