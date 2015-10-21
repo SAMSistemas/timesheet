@@ -22,6 +22,7 @@
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order
         $scope.search = '';     // set the default search/filter term
+        $scope.enabled = 'todos';
 
         $scope.clients = [];
         $scope.clientToCreate = null;
@@ -70,6 +71,18 @@
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
+
+        $scope.searchEnabled = function (actual, expected) {
+            if (expected === 'todos') {
+                return true;
+            }
+            if (expected === 'habilitados') {
+                return actual.enabled === true;
+            }
+            if (expected === 'deshabilitados') {
+                return actual.enabled === false;
+            }
+        }
 
         $scope.addNewClientToTable = function () {
             $scope.clients.push($scope.clientToCreate);

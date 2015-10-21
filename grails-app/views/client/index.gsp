@@ -45,10 +45,10 @@
             </th>
             <th class="th-filter-padding">
                 <div class="input-field">
-                    <select>
+                    <select ng-model="enabled">
                         <option value="todos" selected>Todos</option>
                         <option value="habilitados">Habilitados</option>
-                        <option value="deshabilitados">Inhabilitados</option>
+                        <option value="deshabilitados">Deshabilitados</option>
                     </select>
                 </div>
             </th>
@@ -57,7 +57,7 @@
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith"
+        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith | filter:enabled:searchEnabled"
             class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td class="truncate">{{ client.name }}</td>
