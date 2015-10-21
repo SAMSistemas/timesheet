@@ -89,17 +89,22 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required>
-                        <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre <span
-                                ng-show="createForm.name.$invalid" class="has-error">es obligatorio</span></label>
+                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required name-available>
+                        <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
+                            <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="createForm.name.$error.nameAvailable" class="has-error">ya existe</span>
+                        </label>
+
                     </div>
                 </div>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required>
-                        <label for="sname" ng-class="{'has-error': createForm.sname.$invalid}">Sigla <span
-                                ng-show="createForm.sname.$invalid" class="has-error">es obligatoria</span></label>
+                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required sname-available>
+                        <label for="sname" ng-class="{'has-error': createForm.sname.$invalid}">Sigla
+                            <span ng-show="createForm.sname.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="createForm.sname.$error.snameAvailable" class="has-error">ya existe</span>
+                        </label>
                     </div>
                 </div>
 
@@ -115,7 +120,7 @@
                 <button ng-disabled="createForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': createForm.$invalid}">Guardar</button>
-                <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
+                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
         </form>
     </div>
@@ -128,18 +133,22 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required>
-                        <label for="name" ng-class="{'has-error': editForm.name.$invalid}">Nombre <span
-                                ng-show="editForm.name.$invalid" class="has-error">es obligatorio</span></label>
+                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required name-available>
+                        <label for="name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
+                            <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="editForm.name.$error.nameAvailable" class="has-error">ya existe</span>
+                        </label>
                     </div>
                 </div>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_sname" name="sname" type="text" ng-model="clientToEdit.short_name"
-                               ng-model="clientToEdit.short_name" required>
-                        <label for="sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla <span
-                                ng-show="editForm.sname.$invalid" class="has-error">es obligatoria</span></label>
+                               ng-model="clientToEdit.short_name" required sname-available>
+                        <label for="sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla
+                            <span ng-show="editForm.sname.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="editForm.sname.$error.snameAvailable" class="has-error">ya existe</span>
+                        </label>
                     </div>
                 </div>
 
@@ -155,7 +164,7 @@
                 <button ng-disabled="editForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': editForm.$invalid}">Guardar</button>
-                <button class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</button>
+                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
         </form>
     </div>

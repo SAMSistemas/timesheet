@@ -33,6 +33,36 @@ class ClientController {
         render client as JSON
     }
 
+    def existsName() {
+
+        def client = Client.findByName(params.id)
+
+        if (client == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
+    def existsSName() {
+
+        def client = Client.findByShort_name(params.id)
+
+        if (client == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
     @Transactional
     def create() {
         def paramsJSON = request.JSON

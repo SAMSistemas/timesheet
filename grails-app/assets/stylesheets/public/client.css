@@ -87,6 +87,7 @@ label.has-error {
 
 span.has-error {
     color: red !important;
+    font-size: 0.8rem;
 }
 
 button.has-error {
