@@ -42,6 +42,12 @@
         $scope.new = function () {
             $scope.clientToCreate = {name: "", short_name: "", enabled: false};
             $scope.client = {name: "", short_name: "", enabled: false};
+
+            // To clear the errors from previos create forms
+            if ($scope.createForm !== null) {
+                $scope.createForm.name.$setValidity('nameAvailable', true);
+                $scope.createForm.sname.$setValidity('snameAvailable', true);
+            }
         };
 
         $scope.create = function () {
@@ -54,6 +60,12 @@
         $scope.edit = function (client) {
             $scope.clientToEdit = angular.copy(client);
             $scope.client = client;
+
+            // To clear the errors from previos edit forms
+            if ($scope.editForm !== null) {
+                $scope.editForm.name.$setValidity('nameAvailable', true);
+                $scope.editForm.sname.$setValidity('snameAvailable', true);
+            }
         };
 
         $scope.update = function () {
