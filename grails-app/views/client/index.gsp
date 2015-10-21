@@ -133,8 +133,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_name" name="edit_name" type="text" ng-model="clientToEdit.name" required name-available>
-                        <label for="edit_name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
+                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required name-available>
+                        <label for="name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="editForm.name.$error.nameAvailable" class="has-error">ya existe</span>
                         </label>
@@ -143,9 +143,9 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_sname" name="edit_sname" type="text" ng-model="clientToEdit.short_name"
+                        <input id="edit_sname" name="sname" type="text" ng-model="clientToEdit.short_name"
                                ng-model="clientToEdit.short_name" required sname-available>
-                        <label for="edit_sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla
+                        <label for="sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla
                             <span ng-show="editForm.sname.$error.required" class="has-error">es obligatoria</span>
                             <span ng-show="editForm.sname.$error.snameAvailable" class="has-error">ya existe</span>
                         </label>

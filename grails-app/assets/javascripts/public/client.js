@@ -52,7 +52,7 @@
         };
 
         $scope.edit = function (client) {
-            $scope.clientToEdit = angular.copy(client)
+            $scope.clientToEdit = angular.copy(client);
             $scope.client = client;
         };
 
