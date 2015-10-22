@@ -113,10 +113,13 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="username" name="username" type="text" ng-model="personToCreate.username" required username-available>
+                        <input id="username" name="username" type="text" ng-model="personToCreate.username" required
+                               available
+                               url-to-check="/person/existsUsername/">
                         <label for="username" ng-class="{'has-error': createForm.username.$invalid}">Usuario
                             <span ng-show="createForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.username.$error.usernameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="createForm.username.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -175,10 +178,12 @@
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_username" name="username" type="text" ng-model="personToEdit.username"
-                               ng-model="personToEdit.username" required username-available>
+                               ng-model="personToEdit.username" required available original-value="person.username"
+                               url-to-check="/person/existsUsername/">
                         <label for="edit_username" ng-class="{'has-error': editForm.username.$invalid}">Usuario
                             <span ng-show="editForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="editForm.username.$error.usernameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="editForm.username.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>

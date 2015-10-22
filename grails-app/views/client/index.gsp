@@ -85,10 +85,11 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required name-available>
+                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required available
+                               url-to-check="/client/existsName/">
                         <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.name.$error.nameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="createForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
 
                     </div>
@@ -96,10 +97,12 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required sname-available>
+                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required
+                               available
+                               url-to-check="/client/existsSName/">
                         <label for="sname" ng-class="{'has-error': createForm.sname.$invalid}">Sigla
                             <span ng-show="createForm.sname.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="createForm.sname.$error.snameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="createForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -129,10 +132,11 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required name-available>
+                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required available
+                               original-value="client.name" url-to-check="/client/existsName/">
                         <label for="name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="editForm.name.$error.nameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="editForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -140,10 +144,11 @@
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_sname" name="sname" type="text" ng-model="clientToEdit.short_name"
-                               ng-model="clientToEdit.short_name" required sname-available>
+                               ng-model="clientToEdit.short_name" required available
+                               original-value="client.short_name" url-to-check="/client/existsSName/">
                         <label for="sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla
                             <span ng-show="editForm.sname.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="editForm.sname.$error.snameAvailable" class="has-error">ya existe</span>
+                            <span ng-show="editForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>

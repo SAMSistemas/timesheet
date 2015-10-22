@@ -95,36 +95,4 @@
 
     });
 
-    // Fuente: http://stackoverflow.com/questions/15592117/email-form-validation-one-at-a-time
-    app.directive('usernameAvailable', function ($http) {
-        return {
-            require: 'ngModel',
-            link: function (scope, elem, attr, ctrl) {
-                elem.on('blur', function() {
-
-                    // get the value of the input
-                    var viewValue = ctrl.$viewValue;
-
-                    // check if the value is equal to the value before the edition
-                    if (scope.person.username !== viewValue) {
-                        $http.get('/person/existsUsername/' + viewValue).then(
-                            function (response) {
-                                if (response.data["exists"] === "true") { // if it exists, it set the validity to false
-                                    ctrl.$setValidity('usernameAvailable', false);
-                                } else {
-                                    ctrl.$setValidity('usernameAvailable', true);
-                                }
-                            },
-                            function () {
-                                ctrl.$setValidity('usernameAvailable', false);
-                            });
-                    } else { // if it is equal, it's ok
-                        ctrl.$setValidity('usernameAvailable', true);
-                        scope.$apply();
-                    }
-                })
-            }
-        };
-    });
-
 }());
