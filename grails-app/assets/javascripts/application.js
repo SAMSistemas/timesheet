@@ -8,6 +8,7 @@
 //= require vendor/jquery-2.1.4.min
 //= require_tree vendor
 //= require_self
+//= require_tree angular-directives
 //= require_tree angular-filters
 
 if (typeof jQuery !== 'undefined') {
@@ -20,4 +21,5 @@ if (typeof jQuery !== 'undefined') {
     })(jQuery);
 }
 
+angular.module('directives', []);
 angular.module('filters', []);

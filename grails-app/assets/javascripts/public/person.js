@@ -16,7 +16,7 @@
         characterDataOldValue: false
     });
 
-    var app = angular.module('personApp', ['filters']);
+    var app = angular.module('personApp', ['directives', 'filters']);
 
     app.controller('mainController', function ($scope, $http) {
 
@@ -36,7 +36,6 @@
         $http.get('/person/all').then(function(response) {
             $('select').material_select();
             $scope.people = response.data;
-            console.log($scope.people);
             $('.modal-trigger').leanModal();
         });
 

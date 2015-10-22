@@ -45,11 +45,7 @@
             </th>
             <th class="th-filter-padding">
                 <div class="input-field">
-                    <select ng-model="status">
-                        <option value="all" selected>Todos</option>
-                        <option value="enabled">Habilitados</option>
-                        <option value="disable">Deshabilitados</option>
-                    </select>
+                    <select-status ng-model="status"></select-status>
                 </div>
             </th>
             <th class="th-filter-padding"></th>

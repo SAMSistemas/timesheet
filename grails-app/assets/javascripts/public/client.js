@@ -16,7 +16,7 @@
         characterDataOldValue: false
     });
 
-    var app = angular.module('clientApp', ['filters']);
+    var app = angular.module('clientApp', ['directives', 'filters']);
 
     app.controller('mainController', function ($scope, $http) {
 
