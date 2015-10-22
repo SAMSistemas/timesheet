@@ -120,7 +120,7 @@ class ClientController {
 
             response.status = 500
 
-            def fieldErrors = newClient.errors.fieldErrors
+            def fieldErrors = clientToUpdate.errors.fieldErrors
             def fieldErrorArray = new ArrayList<Errorcito>()
 
             for (e in fieldErrors) {
