@@ -23,7 +23,7 @@
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order
         $scope.search = '';     // set the default search/filter term
-        $scope.status = 'todos';
+        $scope.status = 'all';
 
         $scope.clients = [];
         $scope.clientToCreate = null;
