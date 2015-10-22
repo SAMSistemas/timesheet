@@ -40,7 +40,7 @@
         });
 
         $scope.new = function () {
-            $scope.taskToCreate = {name: "", enabled: false};
+            $scope.taskTypeToCreate = {name: "", enabled: false};
             $scope.taskType = {name: "", enabled: false};
 
             // To clear the errors from previos create forms
@@ -52,7 +52,7 @@
         $scope.create = function () {
             if ($scope.createForm.$valid) {
                 $http.post('/taskType/create', $scope.taskTypeToCreate);
-                $scope.addNewTaskTypeToTable();
+                $scope.addToTable($scope.taskTypes, $scope.taskTypeToCreate);
             }
         };
 
@@ -69,7 +69,7 @@
         $scope.update = function () {
             if ($scope.editForm.$valid) {
                 $http.put('/taskType/update', $scope.taskTypeToEdit);
-                $scope.editUpdatedTaskTypeInTable();
+                $scope.updateInTable($scope.taskTypes, $scope.taskTypeToEdit);
             }
         };
 
@@ -83,14 +83,14 @@
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addNewTaskTypeToTable = function () {
-            $scope.taskTypes.push($scope.taskTypeToCreate);
+        $scope.addToTable = function (items, item) {
+            items.push(item);
         };
 
-        $scope.editUpdatedTaskTypeInTable = function () {
-            for (var i = 0, len = $scope.taskTypes.length; i < len; i++)
-                if ($scope.taskTypes[i].id === $scope.taskTypeToEdit.id)
-                    $scope.taskTypes[i] = $scope.taskTypeToEdit;
+        $scope.updateInTable = function (items, item) {
+            for (var i = 0; i < items.length; i++)
+                if (items[i].id === item.id)
+                    items[i] = item;
         };
 
     });

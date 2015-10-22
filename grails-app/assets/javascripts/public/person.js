@@ -52,7 +52,7 @@
         $scope.create = function() {
             if ($scope.createForm.$valid) {
                 $http.post('/person/create', $scope.personToCreate);
-                $scope.addNewPersonToTable();
+                $scope.addToTable($scope.people, $scope.personToCreate);
             }
         };
 
@@ -69,7 +69,7 @@
         $scope.update = function() {
             if ($scope.editForm.$valid) {
                 $http.put('/person/update', $scope.personToEdit);
-                $scope.editUpdatedPersonInTable();
+                $scope.updateInTable($scope.people, $scope.personToEdit);
             }
         };
 
@@ -83,14 +83,14 @@
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addNewPersonToTable = function() {
-            $scope.people.push($scope.personToCreate);
+        $scope.addToTable = function (items, item) {
+            items.push(item);
         };
 
-        $scope.editUpdatedPersonInTable = function() {
-            for (var i = 0, len = $scope.people.length; i < len; i ++)
-                if ($scope.people[i].id === $scope.personToEdit.id)
-                    $scope.people[i] = $scope.personToEdit;
+        $scope.updateInTable = function (items, item) {
+            for (var i = 0; i < items.length; i++)
+                if (items[i].id === item.id)
+                    items[i] = item;
         };
 
     });

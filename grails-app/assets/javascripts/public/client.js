@@ -53,7 +53,7 @@
         $scope.create = function () {
             if ($scope.createForm.$valid) {
                 $http.post('/client/create', $scope.clientToCreate);
-                $scope.addNewClientToTable();
+                $scope.addToTable($scope.clients, $scope.clientToCreate);
             }
         };
 
@@ -71,7 +71,7 @@
         $scope.update = function () {
             if ($scope.editForm.$valid) {
                 $http.put('/client/update', $scope.clientToEdit);
-                $scope.editUpdatedClientInTable();
+                $scope.updateInTable($scope.clients, $scope.clientToEdit);
             }
         };
 
@@ -85,14 +85,14 @@
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addNewClientToTable = function () {
-            $scope.clients.push($scope.clientToCreate);
+        $scope.addToTable = function (items, item) {
+            items.push(item);
         };
 
-        $scope.editUpdatedClientInTable = function () {
-            for (var i = 0, len = $scope.clients.length; i < len; i++)
-                if ($scope.clients[i].id === $scope.clientToEdit.id)
-                    $scope.clients[i] = $scope.clientToEdit;
+        $scope.updateInTable = function (items, item) {
+            for (var i = 0; i < items.length; i++)
+                if (items[i].id === item.id)
+                    items[i] = item;
         };
 
     });
