@@ -1,129 +1,127 @@
 package sam.timesheet.domain
 
-import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TaskTypeController {
 
-    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
+    static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond TaskType.list(params), model:[taskTypeCount: TaskType.count()]
+    def index() {
+        return
     }
 
-    def show(TaskType taskType) {
-        respond taskType
+    def all() {
+        render TaskType.list() as JSON
     }
 
+    def show() {
+
+        def taskType = TaskType.findById(params.id)
+
+        if (taskType == null) {
+
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El tipo de tarea no existe"
+            }
+        }
+
+        render taskType as JSON
+    }
+
+    def existsName() {
+
+        def taskType = TaskType.findByName(params.id)
+
+        if (taskType == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
+    @Transactional
     def create() {
-        respond new TaskType(params)
+        def paramsJSON = request.JSON
+
+        def newTaskTypeParams = [
+                name: paramsJSON.get("name"),
+                enabled: paramsJSON.get("enabled")
+        ]
+
+        def newTaskType = new TaskType(newTaskTypeParams)
+
+        if (!newTaskType.validate()) {
+
+            response.status = 500
+
+            def fieldErrors = newTaskType.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
+            }
+
+            render fieldErrorArray as JSON
+        }
+
+        newTaskType.save flush: true
+
+        response.status = 200
     }
 
     @Transactional
-    def save(TaskType taskType) {
-        if (taskType == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+    def update() {
+        def paramsJSON = request.JSON
 
-        if (taskType.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond taskType.errors, view:'create'
-            return
-        }
+        def taskTypeToUpdate = TaskType.findById(paramsJSON.get("id"))
 
-        taskType.save flush:true
+        if (taskTypeToUpdate == null) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'taskType.label', default: 'TaskType'), taskType.id])
-                redirect action:"index", method:"GET"
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El tipo de tarea no existe"
             }
-            '*' { respond taskType, [status: CREATED] }
         }
+
+        taskTypeToUpdate.name = paramsJSON.get("name")
+        taskTypeToUpdate.enabled = paramsJSON.get("enabled")
+
+        if (!taskTypeToUpdate.validate()) {
+
+            response.status = 500
+
+            def fieldErrors = taskTypeToUpdate.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
+            }
+
+            render fieldErrorArray as JSON
+        }
+
+        taskTypeToUpdate.save flush: true
+
+        response.status = 200
     }
 
-    def edit(TaskType taskType) {
-        respond taskType
-    }
-
-    @Transactional
-    def update(TaskType taskType) {
-        if (taskType == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (taskType.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond taskType.errors, view:'edit'
-            return
-        }
-
-        taskType.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'taskType.label', default: 'TaskType'), taskType.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ respond taskType, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def able(TaskType taskType) {
-
-        if (taskType == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        taskType.enabled = true
-        taskType.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'taskType.label', default: 'TaskType'), taskType.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    @Transactional
-    def disable(TaskType taskType) {
-
-        if (taskType == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        taskType.enabled = false
-        taskType.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'taskType.label', default: 'TaskType'), taskType.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'taskType.label', default: 'TaskType'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+    class Errorcito {
+        def field
+        def message
     }
 }
