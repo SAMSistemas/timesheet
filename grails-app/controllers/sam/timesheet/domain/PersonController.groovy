@@ -1,129 +1,135 @@
 package sam.timesheet.domain
 
-import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
+
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PersonController {
 
-    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
+    static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Person.list(params), model:[personCount: Person.count()]
+    def index() {
+        return
     }
 
-    def show(Person person) {
-        respond person
+    def all() {
+        render Person.list() as JSON
     }
 
+    def show() {
+
+        def person = Person.findById(params.id)
+
+        if (person == null) {
+
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El cliente no existe"
+            }
+        }
+
+        render person as JSON
+    }
+
+    def existsUsername() {
+
+        def person = Person.findByUsername(params.id)
+
+        if (person == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
+    @Transactional
     def create() {
-        respond new Person(params)
+        def paramsJSON = request.JSON
+
+        def newPersonParams = [
+                name: paramsJSON.get("name"),
+                lastname: paramsJSON.get("lastname"),
+                username: paramsJSON.get("username"),
+                password: paramsJSON.get("password"),
+                enabled: paramsJSON.get("enabled")
+        ]
+
+        def newPerson = new Person(newPersonParams)
+
+        if (!newPerson.validate()) {
+
+            response.status = 500
+
+            def fieldErrors = newPerson.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
+            }
+
+            render fieldErrorArray as JSON
+        }
+
+        newPerson.save flush: true
+
+        response.status = 200
     }
 
     @Transactional
-    def save(Person person) {
-        if (person == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+    def update() {
+        def paramsJSON = request.JSON
 
-        if (person.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond person.errors, view:'create'
-            return
-        }
+        def personToUpdate = Person.findById(paramsJSON.get("id"))
 
-        person.save flush:true
+        if (personToUpdate == null) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect action:"index", method:"GET"
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El cliente no existe"
             }
-            '*' { respond person, [status: CREATED] }
-        }
-    }
-
-    def edit(Person person) {
-        respond person
-    }
-
-    @Transactional
-    def update(Person person) {
-        if (person == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
         }
 
-        if (person.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond person.errors, view:'edit'
-            return
-        }
+        personToUpdate.name = paramsJSON.get("name")
+        personToUpdate.lastname = paramsJSON.get("lastname")
+        personToUpdate.username = paramsJSON.get("username")
+        personToUpdate.password = paramsJSON.get("password")
+        personToUpdate.enabled = paramsJSON.get("enabled")
 
-        person.save flush:true
+        if (!personToUpdate.validate()) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect action:"index", method:"GET"
+            response.status = 500
+
+            def fieldErrors = newClient.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
             }
-            '*'{ respond person, [status: OK] }
+
+            render fieldErrorArray as JSON
         }
+
+        personToUpdate.save flush: true
+
+        response.status = 200
     }
 
-    @Transactional
-    def able(Person person) {
-
-        if (person == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        person.enabled = true
-        person.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+    class Errorcito {
+        def field
+        def message
     }
 
-    @Transactional
-    def disable(Person person) {
-
-        if (person == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        person.enabled = false
-        person.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'person.label', default: 'Person'), person.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
 }
