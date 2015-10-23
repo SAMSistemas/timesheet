@@ -30,7 +30,7 @@
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-20">
                 <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search" required
+                    <input id="search_name" class="center search_input" type="search"
                            placeholder="Ingrese nombre" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese nombre'" ng-model="search.name">
                     <label for="search_name"></label>
@@ -38,7 +38,7 @@
             </th>
             <th class="th-filter-padding width-20">
                 <div class="input-field white teal-text">
-                    <input id="search_lastname" class="center search_input" type="search" required
+                    <input id="search_lastname" class="center search_input" type="search"
                            placeholder="Ingrese apellido" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese apellido'" ng-model="search.lastname">
                     <label for="search_lastname"></label>
@@ -46,7 +46,7 @@
             </th>
             <th class="th-filter-padding width-20">
                 <div class="input-field white teal-text">
-                    <input id="search_username" class="center search_input" type="search" required
+                    <input id="search_username" class="center search_input" type="search"
                            placeholder="Ingrese usuario" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese usuario'" ng-model="search.username">
                     <label for="search_username"></label>

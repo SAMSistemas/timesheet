@@ -28,7 +28,7 @@
             <th class="th-filter-padding width-10"></th>
             <th class="th-filter-padding width-40">
                 <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search" required
+                    <input id="search_name" class="center search_input" type="search"
                            placeholder="Ingrese nombre" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese nombre'" ng-model="search.name">
                     <label for="search_name"></label>

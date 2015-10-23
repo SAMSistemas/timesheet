@@ -29,7 +29,7 @@
             <th class="th-filter-padding"></th>
             <th class="th-filter-padding">
                 <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search" required
+                    <input id="search_name" class="center search_input" type="search"
                            placeholder="Ingrese nombre" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese nombre'" ng-model="search.name">
                     <label for="search_name"></label>
@@ -37,7 +37,7 @@
             </th>
             <th class="th-filter-padding">
                 <div class="input-field white teal-text">
-                    <input id="search_sname" class="center search_input" type="search" required
+                    <input id="search_sname" class="center search_input" type="search"
                            placeholder="Ingrese sigla" onfocus="placeholder = ''"
                            onblur="placeholder = 'Ingrese sigla'" ng-model="search.short_name">
                     <label for="search_sname"></label>
