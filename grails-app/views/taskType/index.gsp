@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'taskType.label', default: 'TaskType')}"/>
+    <g:set var="entityName" value="${message(code: 'taskType.label', default: 'Tipo de Tareas')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 

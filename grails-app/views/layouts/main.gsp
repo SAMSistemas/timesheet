@@ -56,14 +56,14 @@
         </a>
         </li>
         <li><a href="/client" class="waves-effect waves-teal btn-flat"><i
-                class="material-icons left">group_add</i>Clientes
+                class="material-icons left">business</i>Clientes
         </a>
         </li>
-        <li><a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">apps</i>Proyectos
+        <li><a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos
         </a>
         </li>
         <li><a href="/taskType" class="waves-effect waves-teal btn-flat"><i
-                class="material-icons left">archive</i>Tipo de Tarea
+                class="material-icons left">assignment</i>Tipo de Tarea
         </a></li>
         <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>
         </li>
