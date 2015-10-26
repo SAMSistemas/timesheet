@@ -2,8 +2,24 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}"/>
+    <g:set var="entityName" value="${message(code: 'project.label', default: 'Projectos')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
+    <style>
+        .select-modal input.select-dropdown {
+            color: #757575 !important;
+            border-color: #bdbdbd !important;
+            margin-bottom: 30px !important;
+            line-height: 3rem !important;
+        }
+
+        .select-modal span.caret {
+            top: 7px !important;
+            color: #757575 !important;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -96,12 +112,11 @@
             <div class="modal-content modal-content-padding">
                 <h2 class="card-title card-title-padding">Crear projecto</h2>
 
-                <div class="row align-center">
+                <div id="create-project" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="client" name="client" type="text" ng-model="projectToCreate.client_name" required>
-                        <label for="client" ng-class="{'has-error': createForm.client.$invalid}">Cliente
-                            <span ng-show="createForm.client.$error.required" class="has-error">es obligatorio</span>
-                        </label>
+                        <select class="select-modal" ng-change="changeColor('create-project')"
+                                ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">
+                        </select>
                     </div>
                 </div>
 
@@ -129,7 +144,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date" required>
+                        <input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date"
+                               mo-date-input="dd-MM-yyyy" required>
                         <label for="date" ng-class="{'has-error': createForm.start_date.$invalid}">Fecha
                             <span ng-show="createForm.start_date.$error.required" class="has-error">es obligatoria</span>
                         </label>
@@ -159,12 +175,11 @@
             <div class="modal-content modal-content-padding">
                 <h2 class="card-title card-title-padding">Editar projecto</h2>
 
-                <div class="row align-center">
+                <div id="edit-project" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_client" name="client_name" type="text" ng-model="projectToEdit.client_name" required>
-                        <label for="edit_client" ng-class="{'has-error': editForm.client_name.$invalid}">Cliente
-                            <span ng-show="editForm.client_name.$error.required" class="has-error">es obligatorio</span>
-                        </label>
+                        <select class="select-modal" ng-change="changeColor('edit-project')"
+                                ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">
+                        </select>
                     </div>
                 </div>
 

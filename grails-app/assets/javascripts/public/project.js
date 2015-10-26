@@ -30,13 +30,20 @@
         $scope.projectToEdit = null;
         $scope.project = null;
 
+        $scope.clients = [];
+        $scope.clientSelected = null;
+
         $scope.createForm = null;
         $scope.editForm = null;
+
+        $http.get('/client/all').then(function (response) {
+            $scope.clients = response.data;
+            $scope.clientSelected = $scope.clients[0];
+        });
 
         $http.get('/project/all').then(function(response) {
             $('select').material_select();
             $scope.projects = response.data;
-            console.log($scope.projects);
             $('.modal-trigger').leanModal();
         });
 
@@ -46,12 +53,15 @@
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
-                $scope.createForm.name.$setValidity('nameAvailable', true);
+                $scope.createForm.project_name.$setValidity('nameAvailable', true);
                 $scope.createForm.sname.$setValidity('snameAvailable', true);
             }
         };
 
         $scope.create = function() {
+            $scope.projectToCreate.client_name = $scope.clientSelected.name;
+            console.log($scope.projectToCreate);
+
             if ($scope.createForm.$valid) {
                 $http.post('/project/create', $scope.projectToCreate);
                 $scope.addToTable($scope.projects, $scope.projectToCreate);
@@ -62,9 +72,12 @@
             $scope.projectToEdit = angular.copy(project);
             $scope.project = project;
 
-            // To clear the errors from previos edit forms
+
+            $scope.clientSelected = $scope.projectToEdit.client_name;
+
+            // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
-                $scope.editForm.name.$setValidity('nameAvailable', true);
+                $scope.editForm.project_name.$setValidity('nameAvailable', true);
                 $scope.editForm.sname.$setValidity('snameAvailable', true);
             }
         };
@@ -96,6 +109,41 @@
                     items[i] = item;
         };
 
+        $scope.changeColor = function(divId){
+            $( "#"+divId+" .select-modal input.select-dropdown").css("cssText", " color: #009688 !important;");
+        };
+
+        //$scope.$watch('projectToCreate.start_date', function (newValue) {
+        //    $scope.projectToCreate.start_date = $filter('date')(newValue, 'dd-MM-yyyy');
+        //});
+
+    });
+
+    app.directive('moDateInput', function ($window) {
+        return {
+            require:'^ngModel',
+            restrict:'A',
+            link:function (scope, elm, attrs, ctrl) {
+                var moment = $window.moment;
+                var dateFormat = attrs.moMediumDate;
+                attrs.$observe('moDateInput', function (newValue) {
+                    if (dateFormat == newValue || !ctrl.$modelValue) return;
+                    dateFormat = newValue;
+                    ctrl.$modelValue = new Date(ctrl.$setViewValue);
+                });
+
+                ctrl.$formatters.unshift(function (modelValue) {
+                    if (!dateFormat || !modelValue) return "";
+                    var retVal = moment(modelValue).format(dateFormat);
+                    return retVal;
+                });
+
+                ctrl.$parsers.unshift(function (viewValue) {
+                    var date = moment(viewValue, dateFormat);
+                    return (date && date.isValid() && date.year() > 1950 ) ? date.toDate() : "";
+                });
+            }
+        };
     });
 
 }());

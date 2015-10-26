@@ -103,8 +103,8 @@ class ProjectController {
         def paramsJSON = request.JSON
 
         def newProjectParams = [
-                client: Client.findByName(paramsJSON.get("client")),
-                name: paramsJSON.get("name"),
+                client: Client.findByName(paramsJSON.get("client_name")),
+                name: paramsJSON.get("project_name"),
                 short_name: paramsJSON.get("short_name"),
                 start_date: formatDate(paramsJSON.get("start_date")),
                 enabled: paramsJSON.get("enabled")
@@ -149,8 +149,8 @@ class ProjectController {
             }
         }
 
-        projectToUpdate.client = Client.findByName(paramsJSON.get("client"))
-        projectToUpdate.name = paramsJSON.get("name")
+        projectToUpdate.client = Client.findByName(paramsJSON.get("client_name"))
+        projectToUpdate.name = paramsJSON.get("project_name")
         projectToUpdate.short_name = paramsJSON.get("short_name")
         projectToUpdate.start_date = formatDate(paramsJSON.get("start_date"))
         projectToUpdate.enabled = paramsJSON.get("enabled")
