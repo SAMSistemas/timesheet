@@ -26,7 +26,7 @@
         $scope.status = 'all';
 
         $scope.people = [];
-        $scope.personToCreate = {name: "", lastname: "", username: "", password: "", enabled: false};
+        $scope.personToCreate = null;
         $scope.personToEdit = null;
         $scope.person = null;
 
