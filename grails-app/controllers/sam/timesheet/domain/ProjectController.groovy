@@ -1,129 +1,193 @@
 package sam.timesheet.domain
 
-import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
+
+import java.lang.reflect.Array
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 @Transactional(readOnly = true)
 class ProjectController {
 
-    static allowedMethods = [save: "POST", update: "PUT", able: "PUT", disable: "PUT"]
+    static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Project.list(params), model:[projectCount: Project.count()]
+    def index() {
+        return
     }
 
-    def show(Project project) {
-        respond project
+    def all() {
+
+        def projectViews = new ArrayList<ProjectView>()
+
+        for (project in Project.list()) {
+            def projectToShow = new ProjectView()
+
+            def client_found = Client.findById(project.client.id)
+            projectToShow.client_name = client_found.name
+            projectToShow.project_name = project.name
+            projectToShow.short_name = project.short_name
+            projectToShow.start_date = project.start_date
+            projectToShow.enabled = project.enabled
+
+            projectViews.add(projectToShow)
+        }
+
+        render projectViews as JSON
     }
 
+    def show() {
+
+        def project = Project.findById(params.id)
+
+        if (project == null) {
+
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El cliente no existe"
+            }
+        }
+
+        render project as JSON
+    }
+
+    def existsName() {
+
+        def project = Project.findByName(params.id)
+
+        if (project == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
+    def existsSName() {
+
+        def project = Project.findByShort_name(params.id)
+
+        if (project == null) {
+            render(status: 200, contentType: "application/json") {
+                exists = "false"
+            }
+        }
+
+        render(status: 200, contentType: "application/json") {
+            exists = "true"
+        }
+    }
+
+    def formatDate(dateInString) {
+
+        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+        try {
+
+            def date = formatter.parse(dateInString);
+            return date
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Transactional
     def create() {
-        respond new Project(params)
+        def paramsJSON = request.JSON
+
+        def newProjectParams = [
+                client: Client.findByName(paramsJSON.get("client")),
+                name: paramsJSON.get("name"),
+                short_name: paramsJSON.get("short_name"),
+                start_date: formatDate(paramsJSON.get("start_date")),
+                enabled: paramsJSON.get("enabled")
+        ]
+
+        def newProject = new Project(newProjectParams)
+
+        if (!newProject.validate()) {
+
+            response.status = 500
+
+            def fieldErrors = newProject.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
+            }
+
+            render fieldErrorArray as JSON
+        }
+
+        newProject.save flush: true
+
+        response.status = 200
     }
 
     @Transactional
-    def save(Project project) {
-        if (project == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+    def update() {
+        def paramsJSON = request.JSON
 
-        if (project.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond project.errors, view:'create'
-            return
-        }
+        def projectToUpdate = Project.findById(paramsJSON.get("id"))
 
-        project.save flush:true
+        if (projectToUpdate == null) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect action:"index", method:"GET"
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El cliente no existe"
             }
-            '*' { respond project, [status: CREATED] }
-        }
-    }
-
-    def edit(Project project) {
-        respond project
-    }
-
-    @Transactional
-    def update(Project project) {
-        if (project == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
         }
 
-        if (project.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond project.errors, view:'edit'
-            return
-        }
+        projectToUpdate.client = Client.findByName(paramsJSON.get("client"))
+        projectToUpdate.name = paramsJSON.get("name")
+        projectToUpdate.short_name = paramsJSON.get("short_name")
+        projectToUpdate.start_date = formatDate(paramsJSON.get("start_date"))
+        projectToUpdate.enabled = paramsJSON.get("enabled")
 
-        project.save flush:true
+        if (!projectToUpdate.validate()) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect action:"index", method:"GET"
+            response.status = 500
+
+            def fieldErrors = projectToUpdate.errors.fieldErrors
+            def fieldErrorArray = new ArrayList<Errorcito>()
+
+            for (e in fieldErrors) {
+                Errorcito err = new Errorcito()
+                err.field = e.field
+                err.message = e.defaultMessage
+                fieldErrorArray.add(err)
             }
-            '*'{ respond project, [status: OK] }
+
+            render fieldErrorArray as JSON
         }
+
+        projectToUpdate.save flush: true
+
+        response.status = 200
     }
 
-    @Transactional
-    def able(Project project) {
+}
 
-        if (project == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
+class Errorcito {
+    def field
+    def message
+}
 
-        project.enabled = true
-        project.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    @Transactional
-    def disable(Project project) {
-
-        if (project == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        project.enabled = false
-        project.save flush: true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'project.label', default: 'Project'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+class ProjectView {
+    def client_name
+    def project_name
+    def short_name
+    def start_date
+    def enabled
 }

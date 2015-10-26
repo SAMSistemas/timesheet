@@ -4,6 +4,7 @@ class Project {
 
     String name
     String short_name
+    Date start_date
     Boolean enabled
 
     static belongsTo = [client: Client]
