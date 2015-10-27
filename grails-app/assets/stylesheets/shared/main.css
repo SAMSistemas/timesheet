@@ -1,3 +1,7 @@
+body {
+    background-color: #e0e0e0;
+}
+
 header, section {
     padding-left: 240px;
 }

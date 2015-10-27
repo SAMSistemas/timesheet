@@ -4,31 +4,7 @@
     <meta name="layout" content="main"/>
     <title>Asignar</title>
 
-    <style>
-    select {
-        display: inherit;
-    }
-
-    .card-title {
-        color: #009688 !important;
-        font-size: 180% !important;
-    }
-
-    .div-wrapper {
-        padding: 30px 25px 30px 25px;
-    }
-
-    .divider {
-        margin-bottom: 20px;
-    }
-
-    .label {
-        text-align: center;
-        margin: 0 !important;
-        line-height: 45px !important;
-        color: #1565c0 !important;
-    }
-    </style>
+    <asset:stylesheet href="public/asignation.css"></asset:stylesheet>
 </head>
 
 <body>
