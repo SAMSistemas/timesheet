@@ -1,57 +1,145 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="main" />
+    <meta name="layout" content="main"/>
     <title>Asignar</title>
     <style>
-       select {
-           display: inherit;
-       }
+    select {
+        display: inherit;
+    }
+
+    /** Select styles **/
+    .select-wrapper input.select-dropdown {
+        color: #9e9e9e !important;
+        padding-top: 0 !important;
+        border-color: transparent !important;
+        border-bottom-width: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .dropdown-content {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 150px;
+    }
+
+    .select-wrapper {
+        width: 50%;
+    }
+
+    .title {
+        padding: 30px 25px 30px 25px;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+
+    .div-wrapper {
+        padding: 30px 25px 30px 25px;
+    }
+
+    .label {
+        text-align: center;
+        height: 45px !important;
+        margin: 0 !important;
+        line-height: 45px !important;
+        color: #1565c0 !important;
+    }
     </style>
 </head>
+
 <body>
 
 <div ng-app="myApp" ng-controller="mainController">
-    <form ng-submit="submit()">
-        <select ng-model="personSelected">
-            <option ng-repeat="person in people" value="{{person.id}}">{{person.name}}</option>
-        </select>
-        <select ng-model="projectSelected">
-            <option ng-repeat="project in projects" value="{{project.id}}">{{project.name}}</option>
-        </select>
-        <input type="submit" value="Asignar"></form>
-    </form>
-</div>
 
-<script>
-    var app = angular.module('myApp', []);
+    <div class="card large" style="height: 650px;">
+        <div class="card-container container">
 
-    app.controller('mainController', function ($scope, $http) {
-        $scope.people = [];
-        $scope.projects = [];
-        $scope.personSelected = null;
-        $scope.projectSelected = null;
+            <div class="title">
+                <h3 class="card-title">Asignación de Personas a Proyectos</h3>
+            </div>
 
-        $.getJSON("/person.json", function (data) {
-            $scope.people = data;
-            $scope.$apply();
-        });
+            <div class="divider"></div>
 
-        $.getJSON("/project.json", function (data) {
-            $scope.projects = data;
-            $scope.$apply();
-        });
+            <div class="div-wrapper row">
+                <h6 class="col s6 label">Clientes habilitadas</h6>
 
-        $scope.submit = function() {
-            var jobLog = {
-                person: "" + $scope.personSelected,
-                project: "" + $scope.projectSelected
-            }
-            $http.post('/jobLog/asign', jobLog);
-        }
+                <select class="col s6" ng-change="changeClient()" ng-model="clientSelected"
+                        ng-options="client.name for client in clients">
+                </select>
+            </div>
 
-    });
-</script>
+            <div class="divider"></div>
+
+            <div class="div-wrapper row">
+                <h6 class="col s6 label">Proyectos habilitados</h6>
+
+                <select class="col s6" ng-change="changeProject()" ng-model="projectSelected"
+                        ng-options="project.project_name for project in projects">
+                </select>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="div-wrapper row">
+                <h6 class="col s6 label">Personas habilitados</h6>
+
+                <select class="col s6" ng-change="changePerson()" ng-model="personSelected"
+                        ng-options="person.name for person in people">
+                </select>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="center div-wrapper">
+                <a href class="waves-effect waves-light btn z-depth-0 center" ng-click="submit()"><i
+                        class="material-icons left">assignment_turned_in</i>Asignar</a>
+            </div>
+
+        </div>
+
+        <script>
+
+            var app = angular.module('myApp', []);
+
+            app.controller('mainController', function ($scope, $http) {
+                $scope.clients = [];
+                $scope.projects = [];
+                $scope.people = [];
+
+                $scope.clientSelected = null;
+                $scope.projectSelected = null;
+                $scope.personSelected = null;
+
+                $http.get('/client/all').then(function (response) {
+                    $scope.clients = response.data;
+                });
+
+                $scope.changeClient = function () {
+                    $http.get('/project/allByClient/' + $scope.clientSelected.name).then(function (response) {
+                        $scope.projects = response.data;
+                    });
+                };
+
+                $scope.changeProject = function () {
+                    $http.get('/person/all').then(function (response) {
+                        $scope.people = response.data;
+                    });
+                };
+
+                $scope.submit = function () {
+                    var jobLog = {
+                        person: $scope.personSelected.name,
+                        project: $scope.projectSelected.project_name
+                    }
+                    console.log(jobLog);
+                    $http.post('/jobLog/asign', jobLog);
+                }
+
+            });
+        </script>
 
 </body>
 </html>

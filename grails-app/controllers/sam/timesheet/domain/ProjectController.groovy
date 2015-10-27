@@ -36,6 +36,27 @@ class ProjectController {
         render projectViews as JSON
     }
 
+    def allByClient() {
+
+        def client = Client.findByName(params.id)
+
+        def projectViews = new ArrayList<ProjectView>()
+
+        for (project in Project.findAllWhere(client: client)) {
+            def projectToShow = new ProjectView()
+
+            projectToShow.client_name = client.name
+            projectToShow.project_name = project.name
+            projectToShow.short_name = project.short_name
+            projectToShow.start_date = project.start_date
+            projectToShow.enabled = project.enabled
+
+            projectViews.add(projectToShow)
+        }
+
+        render projectViews as JSON
+    }
+
     def show() {
 
         def project = Project.findById(params.id)

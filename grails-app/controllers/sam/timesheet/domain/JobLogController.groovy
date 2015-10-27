@@ -125,13 +125,15 @@ class JobLogController {
     def asign() {
         def paramsJSON = request.JSON
 
+        log.info paramsJSON
+
         def jobLog = new JobLog()
-        jobLog.person = Person.findById(paramsJSON.get("person"))
-        jobLog.project = Project.findById(paramsJSON.get("project"))
-        jobLog.task_type = TaskType.findOrCreateByName("asignacion")
+        jobLog.person = Person.findByName(paramsJSON.get("person"))
+        jobLog.project = Project.findByName(paramsJSON.get("project"))
+        jobLog.task_type = TaskType.findOrCreateByName("Asignacion")
         jobLog.date = new Date()
         jobLog.hours = "0"
-        jobLog.save flush:true
+        log.info jobLog.save(flush: true)
 
         render status: OK
     }
