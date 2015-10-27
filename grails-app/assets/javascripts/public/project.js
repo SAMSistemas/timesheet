@@ -36,6 +36,8 @@
         $scope.createForm = null;
         $scope.editForm = null;
 
+        $scope.daySelected = null;
+
         $http.get('/client/all').then(function (response) {
             $scope.clients = response.data;
             $scope.clientSelected = $scope.clients[0];
@@ -45,6 +47,12 @@
             $('select').material_select();
             $scope.projects = response.data;
             $('.modal-trigger').leanModal();
+            $('#date').combodate({
+                minYear: 2010,
+                maxYear: 2020,
+                value: new Date(),
+                errorClass: 'has-error'
+            });
         });
 
         $scope.new = function() {
