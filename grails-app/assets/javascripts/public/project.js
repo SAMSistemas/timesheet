@@ -36,8 +36,6 @@
         $scope.createForm = null;
         $scope.editForm = null;
 
-        $scope.daySelected = null;
-
         $http.get('/client/all').then(function (response) {
             $scope.clients = response.data;
             $scope.clientSelected = $scope.clients[0];
@@ -50,8 +48,7 @@
             $('#date').combodate({
                 minYear: 2010,
                 maxYear: 2020,
-                value: new Date(),
-                errorClass: 'has-error'
+                value: new Date()
             });
         });
 
@@ -112,6 +109,8 @@
         };
 
         $scope.updateInTable = function (items, item) {
+            console.log(items);
+            console.log(item);
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;

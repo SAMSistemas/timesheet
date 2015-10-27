@@ -2,8 +2,6 @@ package sam.timesheet.domain
 
 import grails.converters.JSON
 import grails.transaction.Transactional
-
-import java.lang.reflect.Array
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
@@ -24,10 +22,11 @@ class ProjectController {
             def projectToShow = new ProjectView()
 
             def client_found = Client.findById(project.client.id)
+            projectToShow.id = project.id
             projectToShow.client_name = client_found.name
             projectToShow.project_name = project.name
             projectToShow.short_name = project.short_name
-            projectToShow.start_date = project.start_date
+            projectToShow.start_date = project.start_date.format("dd-MM-yyyy")
             projectToShow.enabled = project.enabled
 
             projectViews.add(projectToShow)
@@ -48,7 +47,7 @@ class ProjectController {
             projectToShow.client_name = client.name
             projectToShow.project_name = project.name
             projectToShow.short_name = project.short_name
-            projectToShow.start_date = project.start_date
+            projectToShow.start_date = project.start_date.format("dd-MM-yyyy")
             projectToShow.enabled = project.enabled
 
             projectViews.add(projectToShow)
@@ -105,12 +104,12 @@ class ProjectController {
 
     def formatDate(dateInString) {
 
-        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
         try {
 
-            def date = formatter.parse(dateInString);
-            return date
+            def date = formatter.parse(dateInString)
+            return  date
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -166,7 +165,7 @@ class ProjectController {
             response.status = 500
 
             render(contentType: "application/json") {
-                error = "El cliente no existe"
+                error = "El proyecto no existe"
             }
         }
 
@@ -206,6 +205,7 @@ class Errorcito {
 }
 
 class ProjectView {
+    def id
     def client_name
     def project_name
     def short_name
