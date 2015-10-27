@@ -1,0 +1,15 @@
+.modal-width {
+    width: 600px;
+}
+
+.modal-content-padding {
+    padding: 40px 40px 0 40px !important;
+}
+
+.modal-footer-padding {
+    padding: 0px 40px 0px 40px !important;
+}
+
+.input-field-modal {
+    width: 100%;
+}

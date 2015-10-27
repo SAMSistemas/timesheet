@@ -1,0 +1,68 @@
+
+
+.tr-header-width-and-height {
+    height: 50px;
+    width: calc(100% - 14px);
+}
+
+.tr-body-width-and-height {
+    height: 50px;
+}
+
+.th-filter-padding {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.th-padding {
+    padding: 10px 0 0 15px;
+}
+
+.input-field {
+    width: calc(100% - 5%);
+    margin: 0 !important;
+    height: 30px;
+}
+
+.input-field input[type="search"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border-color: transparent !important;
+}
+
+.search_input {
+    height: 30px !important;
+    line-height: 30px !important;
+}
+
+/** Styles to make the table content scrollable **/
+thead, tbody, tr, td, th {
+    display: block;
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+tbody {
+    height: 350px;
+    overflow-y: auto;
+    width: calc(100% - 14px);
+}
+
+tbody td, thead th {
+    width: 20%;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+thead th {
+    height: 50px;
+}

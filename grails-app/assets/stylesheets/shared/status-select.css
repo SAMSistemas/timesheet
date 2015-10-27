@@ -1,0 +1,26 @@
+.dropdown-content li{
+    text-align: center !important;
+}
+
+.select-wrapper {
+    height: 100% !important;
+}
+
+.select-wrapper span.caret {
+    color: white;
+    position: absolute;
+    right: 0px;
+    top: 0px !important;
+    font-size: 10px;
+    height: 30px !important;
+    line-height: 31px !important;
+}
+
+.select-wrapper input.select-dropdown {
+    color: white !important;
+    border-color: transparent !important;
+    margin: 0 !important;
+    text-align: center !important;
+    height: 100% !important;
+    line-height: 100% !important;
+}
