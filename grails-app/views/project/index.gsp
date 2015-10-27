@@ -18,6 +18,13 @@
             color: #757575 !important;
         }
 
+        .combodate select {
+            display: inline;
+            text-align: center;
+            color: #009688;
+            width: 20% !important;
+        }
+
     </style>
 
 </head>
@@ -144,12 +151,18 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date"
-                               mo-date-input="dd-MM-yyyy" required>
-                        <label for="date" ng-class="{'has-error': createForm.start_date.$invalid}">Fecha
-                            <span ng-show="createForm.start_date.$error.required" class="has-error">es obligatoria</span>
-                        </label>
+                        %{--<input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date"--}%
+                               %{--mo-date-input="dd-MM-yyyy" required>--}%
+                        %{--<label for="date" ng-class="{'has-error': createForm.start_date.$invalid}">Fecha--}%
+                            %{--<span ng-show="createForm.start_date.$error.required" class="has-error">es obligatoria</span>--}%
+                        %{--</label>--}%
+                        <input id="date" type="text"  data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date"
+                               ng-model="daySelected">
                     </div>
+                </div>
+
+                <div class="row align-center">
+                    <span> DaySelected: {{daySelected}}</span>
                 </div>
 
                 <div class="row align-center">
