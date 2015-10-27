@@ -12,11 +12,11 @@ class Person {
     static hasMany = [job_logs: JobLog]
 
     static constraints = {
-        name blank: false, nullable: false
-        lastname blank: false, nullable: false
-        username blank: false, nullable: false, unique: true
-        password blank: false, matches: "[a-zA-Z]{8}", nullable: false
-        picture nullable: true, maxSize: 32768 //32k
+        name blank: false, nullable: false, maxSize: 30
+        lastname blank: false, nullable: false, maxSize: 30
+        username blank: false, nullable: false, unique: true, maxSize: 15
+        password blank: false, nullable: false, matches: "[a-zA-Z]{8}"
+        picture nullable: true
     }
 
     String toString(){
