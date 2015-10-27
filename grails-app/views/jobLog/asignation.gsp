@@ -51,6 +51,7 @@
             <button class="waves-effect waves-light btn z-depth-0 center" ng-disabled="myForm.$invalid"
                     ng-class="{'has-error': myForm.$invalid}" ng-click="submit()"><i
                     class="material-icons left">assignment_turned_in</i>Asignar</button>
+            <span>{{confirmation}}</span>
         </div>
 
     </form>

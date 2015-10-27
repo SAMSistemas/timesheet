@@ -9,6 +9,8 @@ app.controller('mainController', function ($scope, $http) {
     $scope.projectSelected = null;
     $scope.personSelected = null;
 
+    $scope.confirmation = "";
+
     $http.get('/client/all').then(function (response) {
         $scope.clients = response.data;
     });
@@ -30,8 +32,12 @@ app.controller('mainController', function ($scope, $http) {
             person: $scope.personSelected.name,
             project: $scope.projectSelected.project_name
         }
-        console.log(jobLog);
-        $http.post('/jobLog/asign', jobLog);
+        $http.post('/jobLog/asign', jobLog).then(function(response) {
+            if (response.status === 200)
+                $scope.confirmation = "Se asigno la persona al proyecto";
+            else
+                $scope.confirmation = "Fallo la asignacion";
+        });
     }
 
 });
