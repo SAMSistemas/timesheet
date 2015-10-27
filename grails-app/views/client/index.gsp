@@ -85,7 +85,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="name" name="name" type="text" ng-model="clientToCreate.name" required available
+                        <input id="name" name="name" type="text" maxlength="30" ng-model="clientToCreate.name" required
+                               available
                                url-to-check="/client/existsName/">
                         <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
@@ -97,7 +98,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="sname" name="sname" type="text" ng-model="clientToCreate.short_name" required
+                        <input id="sname" name="sname" type="text" maxlength="5" ng-model="clientToCreate.short_name"
+                               required
                                available
                                url-to-check="/client/existsSName/">
                         <label for="sname" ng-class="{'has-error': createForm.sname.$invalid}">Sigla
@@ -132,7 +134,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_name" name="name" type="text" ng-model="clientToEdit.name" required available
+                        <input id="edit_name" name="name" type="text" maxlength="30" ng-model="clientToEdit.name"
+                               required available
                                original-value="client.name" url-to-check="/client/existsName/">
                         <label for="name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
@@ -143,7 +146,7 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_sname" name="sname" type="text" ng-model="clientToEdit.short_name"
+                        <input id="edit_sname" name="sname" type="text" maxlength="5" ng-model="clientToEdit.short_name"
                                ng-model="clientToEdit.short_name" required available
                                original-value="client.short_name" url-to-check="/client/existsSName/">
                         <label for="sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla

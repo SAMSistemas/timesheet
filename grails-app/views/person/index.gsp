@@ -95,7 +95,7 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="name" name="name" type="text" ng-model="personToCreate.name" required>
+                        <input id="name" name="name" type="text" maxlength="30" ng-model="personToCreate.name" required>
                         <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
                         </label>
@@ -104,7 +104,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="lastname" name="lastname" type="text" ng-model="personToCreate.lastname" required>
+                        <input id="lastname" name="lastname" type="text" maxlength="30"
+                               ng-model="personToCreate.lastname" required>
                         <label for="lastname" ng-class="{'has-error': createForm.lastname.$invalid}">Apellido
                             <span ng-show="createForm.lastname.$error.required" class="has-error">es obligatorio</span>
                         </label>
@@ -113,7 +114,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="username" name="username" type="text" ng-model="personToCreate.username" required
+                        <input id="username" name="username" type="text" maxlength="15"
+                               ng-model="personToCreate.username" required
                                available
                                url-to-check="/person/existsUsername/">
                         <label for="username" ng-class="{'has-error': createForm.username.$invalid}">Usuario
@@ -126,7 +128,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="password" name="password" type="text" ng-model="personToCreate.password" required>
+                        <input id="password" name="password" type="text" maxlength="8"
+                               ng-model="personToCreate.password" required>
                         <label for="password" ng-class="{'has-error': createForm.password.$invalid}">Contraseña
                             <span ng-show="createForm.password.$error.required" class="has-error">es obligatoria</span>
                         </label>
@@ -158,7 +161,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_name" name="name" type="text" ng-model="personToEdit.name" required>
+                        <input id="edit_name" name="name" type="text" maxlength="30" ng-model="personToEdit.name"
+                               required>
                         <label for="edit_name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
                         </label>
@@ -167,7 +171,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_lastname" name="lastname" type="text" ng-model="personToEdit.lastname"
+                        <input id="edit_lastname" name="lastname" type="text" maxlength="30"
+                               ng-model="personToEdit.lastname"
                                ng-model="personToEdit.lastname" required>
                         <label for="edit_lastname" ng-class="{'has-error': editForm.lastname.$invalid}">Apellido
                             <span ng-show="editForm.lastname.$error.required" class="has-error">es obligatorio</span>
@@ -177,7 +182,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_username" name="username" type="text" ng-model="personToEdit.username"
+                        <input id="edit_username" name="username" type="text" maxlength="15"
+                               ng-model="personToEdit.username"
                                ng-model="personToEdit.username" required available original-value="person.username"
                                url-to-check="/person/existsUsername/">
                         <label for="edit_username" ng-class="{'has-error': editForm.username.$invalid}">Usuario
@@ -190,7 +196,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_password" name="password" type="text" ng-model="personToEdit.password"
+                        <input id="edit_password" name="password" type="text" maxlength="8"
+                               ng-model="personToEdit.password"
                                ng-model="personToEdit.password" required>
                         <label for="edit_password" ng-class="{'has-error': editForm.password.$invalid}">Password
                             <span ng-show="editForm.password.$invalid" class="has-error">es obligatorio</span>
