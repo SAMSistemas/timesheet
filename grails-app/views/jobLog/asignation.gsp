@@ -18,6 +18,7 @@
 
         <select class="col s6" ng-change="changeClient()" ng-model="clientSelected"
                 ng-options="client.name for client in clients">
+            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
         </select>
     </div>
 
@@ -28,6 +29,7 @@
 
         <select class="col s6" ng-change="changeProject()" ng-model="projectSelected"
                 ng-options="project.project_name for project in projects">
+            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
         </select>
     </div>
 
@@ -38,6 +40,7 @@
 
         <select class="col s6" ng-change="changePerson()" ng-model="personSelected"
                 ng-options="person.name for person in people">
+            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
         </select>
     </div>
 
