@@ -65,7 +65,7 @@
         <li><a href="/taskType" class="waves-effect waves-teal btn-flat"><i
                 class="material-icons left">assignment</i>Tipo de Tarea
         </a></li>
-        <li><a href="#" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>
+        <li><a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
         </li>
     </ul>
 
