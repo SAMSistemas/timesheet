@@ -3,7 +3,6 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Asignar</title>
-
     <asset:stylesheet href="public/asignation.css"></asset:stylesheet>
 </head>
 
@@ -13,41 +12,48 @@
 
     <h3 class="card-title">Asignación de Personas a Proyectos</h3>
 
-    <div class="div-wrapper row">
-        <h6 class="col s6 label">Clientes habilitadas</h6>
+    <form name="myForm">
 
-        <select class="col s6" ng-change="changeClient()" ng-model="clientSelected"
-                ng-options="client.name for client in clients">
-            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
-        </select>
-    </div>
+        <div class="div-wrapper row">
+            <h6 class="col s6 label">Clientes habilitadas</h6>
 
-    <div class="divider"></div>
+            <select name="clientSelect" class="col s6" ng-change="changeClient()" ng-model="clientSelected"
+                    ng-options="client.name for client in clients" required>
+                <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+            </select>
+        </div>
 
-    <div class="div-wrapper row">
-        <h6 class="col s6 label">Proyectos habilitados</h6>
+        <div class="divider"></div>
 
-        <select class="col s6" ng-change="changeProject()" ng-model="projectSelected"
-                ng-options="project.project_name for project in projects">
-            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
-        </select>
-    </div>
+        <div class="div-wrapper row">
+            <h6 class="col s6 label">Proyectos habilitados</h6>
 
-    <div class="divider"></div>
+            <select name="projectSelect" class="col s6" ng-change="changeProject()" ng-model="projectSelected"
+                    ng-options="project.project_name for project in projects"
+                    ng-disabled="myForm.clientSelect.$error.required" required>
+                <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+            </select>
+        </div>
 
-    <div class="div-wrapper row">
-        <h6 class="col s6 label">Personas habilitados</h6>
+        <div class="divider"></div>
 
-        <select class="col s6" ng-change="changePerson()" ng-model="personSelected"
-                ng-options="person.name for person in people">
-            <option value="" disabled selected> - Elegí una de las siguientes opciones - </option>
-        </select>
-    </div>
+        <div class="div-wrapper row">
+            <h6 class="col s6 label">Personas habilitados</h6>
 
-    <div class="center div-wrapper">
-        <a href class="waves-effect waves-light btn z-depth-0 center" ng-click="submit()"><i
-                class="material-icons left">assignment_turned_in</i>Asignar</a>
-    </div>
+            <select name="personSelect" class="col s6" ng-change="changePerson()" ng-model="personSelected"
+                    ng-options="person.name for person in people" ng-disabled="myForm.projectSelect.$error.required"
+                    required>
+                <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+            </select>
+        </div>
+
+        <div class="center div-wrapper">
+            <button class="waves-effect waves-light btn z-depth-0 center" ng-disabled="myForm.$invalid"
+                    ng-class="{'has-error': myForm.$invalid}" ng-click="submit()"><i
+                    class="material-icons left">assignment_turned_in</i>Asignar</button>
+        </div>
+
+    </form>
 
 </div>
 
