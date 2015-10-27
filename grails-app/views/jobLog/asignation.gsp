@@ -9,6 +9,11 @@
         display: inherit;
     }
 
+    .card-title {
+        color: #009688 !important;
+        font-size: 180% !important;
+    }
+
     .div-wrapper {
         padding: 30px 25px 30px 25px;
     }
@@ -26,11 +31,11 @@
     </style>
 </head>
 
-<body ng-app="myApp" ng-controller="mainController">
+<body>
 
-    <div class="title">
-        <h3 class="card-title">Asignación de Personas a Proyectos</h3>
-    </div>
+<div ng-app="myApp" ng-controller="mainController">
+
+    <h3 class="card-title">Asignación de Personas a Proyectos</h3>
 
     <div class="div-wrapper row">
         <h6 class="col s6 label">Clientes habilitadas</h6>
