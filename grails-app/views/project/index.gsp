@@ -25,6 +25,12 @@
             width: 20% !important;
         }
 
+        .label-name{
+            color: #009688 !important;
+            font-size: 120% !important;
+            padding-right: 40px;
+        }
+
     </style>
 
 </head>
@@ -153,18 +159,15 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
+                        <label class="label-name active">Fecha </label>
                         %{--<input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date"--}%
                                %{--mo-date-input="dd-MM-yyyy" required>--}%
                         %{--<label for="date" ng-class="{'has-error': createForm.start_date.$invalid}">Fecha--}%
                             %{--<span ng-show="createForm.start_date.$error.required" class="has-error">es obligatoria</span>--}%
                         %{--</label>--}%
                         <input id="date" type="text"  data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date"
-                               ng-model="daySelected">
+                               ng-model="projectToCreate.start_date" required>
                     </div>
-                </div>
-
-                <div class="row align-center">
-                    <span> DaySelected: {{daySelected}}</span>
                 </div>
 
                 <div class="row align-center">
@@ -224,10 +227,13 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_date" name="date" type="text" ng-model="projectToEdit.start_date" required>
-                        <label for="edit_date" ng-class="{'has-error': editForm.start_date.$invalid}">Fecha
-                            <span ng-show="editForm.start_date.$error.required" class="has-error">es obligatorio</span>
-                        </label>
+                        <label class="label-name active">Fecha </label>
+                        %{--<input id="edit_date" name="date" type="text" ng-model="projectToEdit.start_date" required>--}%
+                        %{--<label for="edit_date" ng-class="{'has-error': editForm.start_date.$invalid}">Fecha--}%
+                            %{--<span ng-show="editForm.start_date.$error.required" class="has-error">es obligatorio</span>--}%
+                        %{--</label>--}%
+                        <input id="date" type="text"  data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date"
+                               ng-model="projectToEdit.start_date" value="projectToEdit.start_date" required>
                     </div>
                 </div>
 
