@@ -33,8 +33,13 @@ app.controller('asignationController', function ($scope, $http) {
             project: $scope.projectSelected.project_name
         }
         $http.post('/jobLog/asign', jobLog).then(function(response) {
-            if (response.status === 200)
+            if (response.status === 200) {
                 $scope.confirmation = "Se asigno la persona al proyecto";
+                $scope.personSelected = null;
+                $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
+                    $scope.people = response.data;
+                });
+            }
             else
                 $scope.confirmation = "Fallo la asignacion";
         });

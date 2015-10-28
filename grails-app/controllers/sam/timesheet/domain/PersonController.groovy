@@ -21,15 +21,36 @@ class PersonController {
 
         def project = Project.findByName(params.id)
 
-        def results = JobLog.findAllByProjectNotEqual(project)
+        def taskType = TaskType.findByName("Asignacion")
+
+        def jobLogForProject = JobLog.findAllByProjectAndTask_type(project, taskType)
+
+        def people = Person.findAll()
+
+        def results = []
+
+        for (p in people) {
+            if (!isAsignated(jobLogForProject, p)) {
+                results.add(p)
+            }
+        }
 
         render(contentType: "application/json") {
             array {
                 for (p in results) {
-                    person name: p.person.name
+                    person name: p.name
                 }
             }
         }
+    }
+
+    def isAsignated(joblogs, person) {
+        for (j in joblogs) {
+            if (person.name == j.person.name) {
+                return true
+            }
+        }
+        return false
     }
 
     def show() {
