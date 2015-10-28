@@ -8,7 +8,7 @@
 
 <body>
 
-<div ng-app="taskTypeApp" ng-controller="mainController">
+<div ng-controller="taskTypeController">
 
     <h3 class="card-title">Lista de Tipos de Tarea</h3>
 

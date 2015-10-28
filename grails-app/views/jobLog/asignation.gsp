@@ -8,7 +8,7 @@
 
 <body>
 
-<div ng-app="myApp" ng-controller="mainController">
+<div ng-controller="asignationController">
 
     <h3 class="card-title">Asignación de Personas a Proyectos</h3>
 

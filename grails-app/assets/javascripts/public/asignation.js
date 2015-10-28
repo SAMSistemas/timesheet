@@ -1,6 +1,6 @@
-var app = angular.module('myApp', []);
+var app = angular.module('myApp');
 
-app.controller('mainController', function ($scope, $http) {
+app.controller('asignationController', function ($scope, $http) {
     $scope.clients = [];
     $scope.projects = [];
     $scope.people = [];
@@ -22,7 +22,7 @@ app.controller('mainController', function ($scope, $http) {
     };
 
     $scope.changeProject = function () {
-        $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name|).then(function (response) {
+        $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
             $scope.people = response.data;
         });
     };

@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body ng-app="myApp">
 
 <header>
 

@@ -8,7 +8,7 @@
 
 <body>
 
-<div ng-app="personApp" ng-controller="mainController">
+<div ng-controller="personController">
 
     <h3 class="card-title">Lista de Personas</h3>
 

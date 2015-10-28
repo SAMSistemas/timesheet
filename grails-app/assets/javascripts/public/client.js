@@ -16,9 +16,9 @@
         characterDataOldValue: false
     });
 
-    var app = angular.module('clientApp', ['directives', 'filters']);
+    var app = angular.module('myApp');
 
-    app.controller('mainController', function ($scope, $http) {
+    app.controller('clientController', function ($scope, $http) {
 
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order

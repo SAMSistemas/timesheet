@@ -31,7 +31,7 @@
 
 <body>
 
-<div ng-app="projectApp" ng-controller="mainController">
+<div ng-controller="projectController">
 
     <h3 class="card-title">Lista de Projectos</h3>
 

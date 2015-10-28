@@ -23,3 +23,5 @@ if (typeof jQuery !== 'undefined') {
 
 angular.module('directives', []);
 angular.module('filters', []);
+angular.module('myApp', ['directives', 'filters']);
+
