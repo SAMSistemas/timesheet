@@ -22,7 +22,7 @@ app.controller('mainController', function ($scope, $http) {
     };
 
     $scope.changeProject = function () {
-        $http.get('/person/all').then(function (response) {
+        $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name|).then(function (response) {
             $scope.people = response.data;
         });
     };

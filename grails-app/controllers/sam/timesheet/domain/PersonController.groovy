@@ -17,21 +17,11 @@ class PersonController {
         render Person.list() as JSON
     }
 
-    def allByProject() {
+    def allAvailableForProject() {
 
-        def jobLog = new JobLog()
-        jobLog.person = Person.findByName("JAJAj")
-        jobLog.project = Project.findByName(params.id)
-        jobLog.task_type = TaskType.findByName("Asignacion")
-        jobLog.date = new Date()
-        jobLog.hours = "0"
-        jobLog.save flush:true
+        def project = Project.findByName(params.id)
 
-        log.info JobLog.count
-
-        def results = JobLog.findAllWhere(project: jobLog.project)
-
-        log.info results
+        def results = JobLog.findAllByProjectNotEqual(project)
 
         render(contentType: "application/json") {
             array {

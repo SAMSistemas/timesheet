@@ -15,11 +15,11 @@
     <form name="myForm">
 
         <div class="div-wrapper row">
-            <h6 class="col s6 label">Clientes habilitadas</h6>
+            <h6 class="col s6 label">Clientes habilitados</h6>
 
             <select name="clientSelect" class="col s6" ng-change="changeClient()" ng-model="clientSelected"
                     ng-options="client.name for client in clients" required>
-                <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                <option value="" disabled>- Elegí una de las siguientes opciones -</option>
             </select>
         </div>
 
