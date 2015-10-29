@@ -6,7 +6,9 @@
 // to create separate JavaScript files as needed.
 //
 //= require vendor/jquery-2.1.4.min
+//= require vendor/moment.min
 //= require_tree vendor
+//= require_tree vendor/lang
 //= require_self
 //= require_tree angular-directives
 //= require_tree angular-filters

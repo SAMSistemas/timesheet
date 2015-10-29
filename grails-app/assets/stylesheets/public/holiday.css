@@ -1,0 +1,41 @@
+
+h2 {
+    font-size: 2rem !important;
+}
+
+#calendar {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#calendar .fc-agenda-axis, #calendar .fc-widget-header{
+    background-color: #C2E6FF;
+    border-color: #AED0EA;
+    font-weight: normal;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+#calendar .fc-today{
+    color: #0d47a1;
+    font-weight: bold;
+}
+
+#calendar .fc-sat,
+#calendar .fc-sun {
+    color: darkred;
+}
+
+#calendar div.fc-widget-header,
+#calendar td.fc-widget-header {
+    padding: 3px 0px;
+}
+
+#calendar .fc-widget-header .fc-sat,
+#calendar .fc-widget-header .fc-sun{
+    color: #000000;
+}
+
+#calendar .fc-center {
+    color: #009688;
+}
