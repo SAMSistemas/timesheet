@@ -36,7 +36,6 @@
         $http.get('/taskType/all').then(function (response) {
             $('select').material_select();
             $scope.taskTypes = response.data;
-            $('a.modal-trigger').leanModal();
         });
 
         $scope.new = function () {

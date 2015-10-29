@@ -159,14 +159,11 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name active">Fecha </label>
-                        %{--<input id="date" name="start_date" type="text" ng-model="projectToCreate.start_date"--}%
-                               %{--mo-date-input="dd-MM-yyyy" required>--}%
-                        %{--<label for="date" ng-class="{'has-error': createForm.start_date.$invalid}">Fecha--}%
-                            %{--<span ng-show="createForm.start_date.$error.required" class="has-error">es obligatoria</span>--}%
-                        %{--</label>--}%
-                        <input id="date" type="text"  data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date"
-                               ng-model="projectToCreate.start_date" required>
+                        <label class="label-name left">Fecha Inicio </label>
+                        <div class="row">
+                            <span id="dateComboCreate" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
+                            ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        </div>
                     </div>
                 </div>
 
@@ -227,13 +224,11 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name active">Fecha </label>
-                        %{--<input id="edit_date" name="date" type="text" ng-model="projectToEdit.start_date" required>--}%
-                        %{--<label for="edit_date" ng-class="{'has-error': editForm.start_date.$invalid}">Fecha--}%
-                            %{--<span ng-show="editForm.start_date.$error.required" class="has-error">es obligatorio</span>--}%
-                        %{--</label>--}%
-                        <input id="date" type="text"  data-format="DD-MM-YYYY" data-template="D MMM YYYY" name="date"
-                               ng-model="projectToEdit.start_date" value="projectToEdit.start_date" required>
+                        <label class="label-name left">Fecha Inicio </label>
+                        <div class="row">
+                            <span id="dateComboEdit" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
+                                  ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        </div>
                     </div>
                 </div>
 

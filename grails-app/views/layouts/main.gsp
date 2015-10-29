@@ -15,6 +15,39 @@
     <asset:javascript src="application.js"/>
 
     <g:layoutHead/>
+    <style>
+
+        .select-modal input.select-dropdown {
+            color: #757575 !important;
+            border-color: #bdbdbd !important;
+            margin-bottom: 30px !important;
+            line-height: 3rem !important;
+        }
+
+        .select-modal span.caret {
+            top: 7px !important;
+            color: #757575 !important;
+        }
+
+        .combodate select {
+            display: inline;
+            text-align: center;
+            color: #009688;
+            width: 20% !important;
+        }
+
+        .combodate{
+            margin-left: 10%;
+        }
+
+        #clientSelect{
+            display: inline;
+        }
+
+        #projectSelect{
+            display: inline;
+        }
+    </style>
 
 </head>
 
@@ -67,9 +100,75 @@
         </a></li>
         <li><a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
         </li>
+        <li><a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat  modal-trigger"><i class="material-icons left">book</i>Reportes</a>
+        </li>
     </ul>
 
 </header>
+
+<div  ng-controller="mainController" id="report-modal" class="modal" style="width: 500px;">
+    <div class="modal-content">
+        <h2 class="card-title" style="padding-left: 15px; padding-bottom: 20px;">Reporte de horas</h2>
+        %{--Radio Buttons--}%
+        <div class="row align-center" style="padding-bottom: 20px;">
+            <div class="input-field-modal col s12">
+                <input class="with-gap" name="group1" type="radio" id="test3"/>
+                <label for="test3" class="label-radioButton">Reporte de horas por proyecto</label>
+            </div>
+        </div>
+
+        <div class="row align-center">
+            <div class="input-field-modal col s12">
+                <label class="label-name">Cliente</label>
+                %{--<select id="clientSelect" class="select-modal" ng-change="changeClient()"--}%
+                        %{--ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">--}%
+                %{--</select>--}%
+                <select id="clientSelect" class="col s12" ng-model="clientSelected" ng-change="changeClient()" ng-options="client.name for client in clients">
+                    <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                </select>
+
+            </div>
+        </div>
+
+
+        %{--Projects Select--}%
+        <div class="row align-center">
+            <div class="input-field-modal col s12">
+                <label class="label-name">Proyecto</label>
+                %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
+                <select id="clientSelect" class="col s12" ng-model="projectSelected" ng-options="project.project_name for project in projects">
+                    <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                </select>
+
+            </div>
+        </div>
+
+        %{--Date Selection--}%
+
+        <div class="row align-center">
+            <div class="input-field-modal col s12">
+                <label class="label-name left">Desde </label>
+                <div class="row">
+                    <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-center">
+            <div class="input-field-modal col s12">
+                <label class="label-name left">Hasta </label>
+                <div class="row">
+                    <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer" style="padding-right: 50px;">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
+    </div>
+</div>
 
 <section>
     <div class="container">
@@ -82,6 +181,6 @@
 <script>
     $(".button-collapse").sideNav();
 </script>
-
+<asset:javascript src="public/main.js"/>
 </body>
 </html>

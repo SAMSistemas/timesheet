@@ -36,7 +36,7 @@
         $http.get('/client/all').then(function (response) {
             $('select').material_select();
             $scope.clients = response.data;
-            $('a.modal-trigger').leanModal();
+            //$('a.modal-trigger').leanModal();
         });
 
         $scope.new = function () {

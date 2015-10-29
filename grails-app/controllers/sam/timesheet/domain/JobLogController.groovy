@@ -52,4 +52,28 @@ class JobLogController {
         render status: OK
     }
 
+    def projectForHour(){
+        def paramsJSON = request.JSON
+
+        def filters  = new FilterHsForProject();
+
+        filters.client = Client.findByName(paramsJSON.get("clientName"))
+        filters.dateFrom = paramsJSON.get("dateFrom")
+        filters.dateTo = paramsJSON.get("dateTo")
+        filters.project = Project.findByName(paramsJSON.get("projectName"))
+
+        def resultData = JobLog.findAllByProjectAndDateBetween(filters.project,filters.dateFrom,filters.dateTo)
+
+        render status: OK
+
+    }
+
+
+    class FilterHsForProject{
+        def client
+        def project
+        def dateFrom
+        def dateTo
+    }
+
 }

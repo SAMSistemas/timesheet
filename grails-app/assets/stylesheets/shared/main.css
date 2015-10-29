@@ -86,3 +86,48 @@ li.li-no-hover:hover {
     }
 
 }
+
+/**** Modal Styles ****/
+
+.modal-content-padding {
+    padding: 40px 40px 0 40px !important;
+}
+
+.modal-footer-padding {
+    padding: 0px 40px 0px 40px !important;
+}
+
+.card-title {
+    color: #009688 !important;
+    font-size: 180% !important;
+}
+
+.btn-flat {
+    padding: 0 20px 0 20px;
+}
+.modal-width {
+    width: 600px;
+}
+
+*::-moz-placeholder {
+    color: #666666;
+}
+
+.label-name{
+    color: #009688 !important;
+    font-size: 120% !important;
+    width: 100%;
+}
+
+.label-radioButton{
+    color: #009688 !important;
+    font-size: 80% !important;
+}
+
+.modal{
+    max-height: 90% !important;
+}
+
+#report-modal .row {
+    margin-bottom: 10px;
+}

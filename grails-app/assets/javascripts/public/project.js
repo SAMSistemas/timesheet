@@ -36,20 +36,17 @@
         $scope.createForm = null;
         $scope.editForm = null;
 
+        $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
+
+        $scope.dateSelected = new Date();
+
         $http.get('/client/all').then(function (response) {
             $scope.clients = response.data;
             $scope.clientSelected = $scope.clients[0];
         });
 
         $http.get('/project/all').then(function(response) {
-            $('select').material_select();
             $scope.projects = response.data;
-            $('.modal-trigger').leanModal();
-            $('#date').combodate({
-                minYear: 2010,
-                maxYear: 2020,
-                value: new Date()
-            });
         });
 
         $scope.new = function() {
@@ -65,20 +62,28 @@
 
         $scope.create = function() {
             $scope.projectToCreate.client_name = $scope.clientSelected.name;
-            console.log($scope.projectToCreate);
-
+            alert($scope.dateSelected);
+            $scope.generateCreateStringDate($scope.dateSelected);
             if ($scope.createForm.$valid) {
                 $http.post('/project/create', $scope.projectToCreate);
                 $scope.addToTable($scope.projects, $scope.projectToCreate);
             }
         };
 
+        $scope.generateCreateStringDate = function(date){
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var month = monthIndex+1;
+            var year = date.getFullYear();
+            $scope.projectToCreate.start_date = day+ '-' +month+ '-' +year;
+
+        };
+
         $scope.edit = function(project) {
             $scope.projectToEdit = angular.copy(project);
             $scope.project = project;
-
-
             $scope.clientSelected = $scope.projectToEdit.client_name;
+            //$scope.parseDate($scope.projectToEdit.start_date);
 
             // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
@@ -87,11 +92,26 @@
             }
         };
 
+        //$scope.parseDate = function(date) {
+        //    var date_array = date.split('-');
+        //    $scope.dateSelected = new Date(date_array[2],date_array[1],date_array[0]);
+        //};
+
         $scope.update = function() {
+            $scope.generateEditStringDate($scope.dateSelected);
             if ($scope.editForm.$valid) {
                 $http.put('/project/update', $scope.projectToEdit);
                 $scope.updateInTable($scope.projects, $scope.projectToEdit);
             }
+        };
+
+        $scope.generateEditStringDate = function(date){
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var month = monthIndex+1;
+            var year = date.getFullYear();
+
+            $scope.projectToEdit.start_date = day+ '-' +month+ '-' +year;
         };
 
         $scope.reverseOrder = function(sortType) {
@@ -120,37 +140,5 @@
             $( "#"+divId+" .select-modal input.select-dropdown").css("cssText", " color: #009688 !important;");
         };
 
-        //$scope.$watch('projectToCreate.start_date', function (newValue) {
-        //    $scope.projectToCreate.start_date = $filter('date')(newValue, 'dd-MM-yyyy');
-        //});
-
     });
-
-    app.directive('moDateInput', function ($window) {
-        return {
-            require:'^ngModel',
-            restrict:'A',
-            link:function (scope, elm, attrs, ctrl) {
-                var moment = $window.moment;
-                var dateFormat = attrs.moMediumDate;
-                attrs.$observe('moDateInput', function (newValue) {
-                    if (dateFormat == newValue || !ctrl.$modelValue) return;
-                    dateFormat = newValue;
-                    ctrl.$modelValue = new Date(ctrl.$setViewValue);
-                });
-
-                ctrl.$formatters.unshift(function (modelValue) {
-                    if (!dateFormat || !modelValue) return "";
-                    var retVal = moment(modelValue).format(dateFormat);
-                    return retVal;
-                });
-
-                ctrl.$parsers.unshift(function (viewValue) {
-                    var date = moment(viewValue, dateFormat);
-                    return (date && date.isValid() && date.year() > 1950 ) ? date.toDate() : "";
-                });
-            }
-        };
-    });
-
 }());
