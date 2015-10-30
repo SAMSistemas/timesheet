@@ -72,6 +72,9 @@ dependencies {
     testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
 
     console "org.grails:grails-console"
+
+    /* MySQL Connector */
+    runtime 'mysql:mysql-connector-java:5.1.29'
 }
 
 task wrapper(type: Wrapper) {
