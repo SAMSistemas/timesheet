@@ -9,6 +9,8 @@ class Person {
     Byte[] picture
     Boolean enabled
 
+    static belongsTo = [work_position: WorkPosition]
+
     static hasMany = [job_logs: JobLog]
 
     static constraints = {
