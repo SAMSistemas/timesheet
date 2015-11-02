@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'client.label', default: 'Clientes')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <asset:stylesheet src="public/table.css"/>
 </head>
 
 <body>

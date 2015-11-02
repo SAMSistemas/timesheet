@@ -4,16 +4,38 @@ h2 {
 }
 
 #calendar {
-    max-width: 700px;
-    margin: 0 auto;
+    margin: 30px auto;
+}
+
+/** Header with day names **/
+
+#calendar .fc-widget-header th {
+    width: 14.09% !important;
+}
+
+#calendar .fc-widget-header tr {
+    width: 100% !important;
 }
 
 #calendar .fc-agenda-axis, #calendar .fc-widget-header{
     background-color: #C2E6FF;
     border-color: #AED0EA;
     font-weight: normal;
-    padding: 3px;
+    padding: 0 !important;
     border-radius: 3px;
+}
+
+#calendar .fc-body {
+    width: 100%;
+}
+
+#calendar .fc-body tr td {
+    /*width: 100%;*/
+    /*height: 100%;*/
+}
+
+#calendar div .fc-row .fc-week .fc-widget-content .fc-rigid {
+    height: 20%;
 }
 
 #calendar .fc-today{
@@ -26,10 +48,10 @@ h2 {
     color: darkred;
 }
 
-#calendar div.fc-widget-header,
-#calendar td.fc-widget-header {
-    padding: 3px 0px;
-}
+/*#calendar div.fc-widget-header,*/
+/*#calendar td.fc-widget-header {*/
+    /*padding: 3px 0px;*/
+/*}*/
 
 #calendar .fc-widget-header .fc-sat,
 #calendar .fc-widget-header .fc-sun{
@@ -38,4 +60,8 @@ h2 {
 
 #calendar .fc-center {
     color: #009688;
+}
+
+.fc-time-grid .fc-event.fc-not-end {
+    border-bottom-width: 1px !important;
 }

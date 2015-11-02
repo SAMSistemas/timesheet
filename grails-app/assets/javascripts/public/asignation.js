@@ -1,6 +1,7 @@
 var app = angular.module('myApp');
 
 app.controller('asignationController', function ($scope, $http) {
+
     $scope.clients = [];
     $scope.projects = [];
     $scope.people = [];

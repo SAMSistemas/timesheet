@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Projectos')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <asset:stylesheet src="public/table.css"/>
 
     <style>
         .select-modal input.select-dropdown {

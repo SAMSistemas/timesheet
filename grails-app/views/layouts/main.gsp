@@ -85,22 +85,26 @@
                 </div>
             </div>
         </li>
-        <li><a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal
-        </a>
+        <li>
+            <a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal</a>
         </li>
-        <li><a href="/client" class="waves-effect waves-teal btn-flat"><i
-                class="material-icons left">business</i>Clientes
-        </a>
+        <li>
+            <a href="/client" class="waves-effect waves-teal btn-flat"><i class="material-icons left">business</i>Clientes</a>
         </li>
-        <li><a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos
-        </a>
+        <li>
+            <a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos</a>
         </li>
-        <li><a href="/taskType" class="waves-effect waves-teal btn-flat"><i
-                class="material-icons left">assignment</i>Tipo de Tarea
-        </a></li>
-        <li><a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
+        <li>
+            <a href="/taskType" class="waves-effect waves-teal btn-flat"><i class="material-icons left">assignment</i>Tipo de Tarea</a>
         </li>
-        <li><a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat  modal-trigger"><i class="material-icons left">book</i>Reportes</a>
+        <li>
+            <a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
+        </li>
+        <li>
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat  modal-trigger"><i class="material-icons left">book</i>Reportes</a>
+        </li>
+        <li>
+            <a href="/holiday" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>
         </li>
     </ul>
 

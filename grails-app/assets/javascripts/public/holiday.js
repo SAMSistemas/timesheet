@@ -1,119 +1,107 @@
-$(document).ready(function() {
+var app = angular.module('myApp');
 
-    var events_array = [
-        {
-            title: 'All Day Event',
-            start: '2015-02-01'
-        },
-        {
-            title: 'Long Event',
-            start: '2015-10-07',
-            end: '2015-10-10'
-        },
-        {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2015-10-09T16:00:00'
-        },
-        {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2015-02-16T16:00:00'
-        },
-        {
-            title: 'Conference',
-            start: '2015-02-11',
-            end: '2015-02-13'
-        },
-        {
-            title: 'Meeting',
-            start: '2015-02-12T10:30:00',
-            end: '2015-02-12T12:30:00'
-        },
-        {
-            title: 'Lunch',
-            start: '2015-02-12T12:00:00'
-        },
-        {
-            title: 'Meeting',
-            start: '2015-10-12',
-            end: '2015-10-14'
-        },
-        {
-            title: 'Happy Hour',
-            start: '2015-02-12T17:30:00'
-        },
-        {
-            title: 'Dinner',
-            start: '2015-02-12T20:00:00'
-        },
-        {
-            title: 'Birthday Party',
-            start: '2015-02-13T07:00:00'
-        },
-        {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2015-02-28'
-        }
-    ];
+app.controller('holidayController', function ($scope, $http) {
 
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today', // --> mover a derecha?
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay' // --> sacar?
-        },
-        defaultDate: new Date(),
-        lang: 'es', // --> sacar todos los otros lenguajes
-        timezone: 'America/Argentina/Buenos_Aires',
-        editable: true,
-        businessHours: {
-            start: '09:00', // a start time (9am in this example) // --> si sacamos agendaDay, se iria?
-            end: '18:00', // an end time (6pm in this example) // --> si sacamos agendaDay, se iria?
+    $(document).ready(function () {
 
-            dow: [ 1, 2, 3, 4, 5 ]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
-        },
-        dayClick: function(date, event) {
+        $scope.holiday = null;
 
-            //event.editable = true;
-            //
-            //event.constraint = {
-            //    start: '09:00', // a start time (9am in this example)
-            //    end: '18:00', // an end time (6pm in this example)
-            //    dow: [ 1, 2, 3, 4, 5 ]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
-            //};
+        $scope.events_array = [
+            {
+                title: 'All Day Event',
+                start: '2015-02-01'
+            },
+            {
+                title: 'Long Event',
+                start: '2015-10-07',
+                end: '2015-10-10'
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2015-10-09T16:00:00'
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2015-02-16T16:00:00'
+            },
+            {
+                title: 'Conference',
+                start: '2015-02-11',
+                end: '2015-02-13'
+            },
+            {
+                title: 'Meeting',
+                start: '2015-02-12T10:30:00',
+                end: '2015-02-12T12:30:00'
+            },
+            {
+                title: 'Lunch',
+                start: '2015-02-12T12:00:00'
+            },
+            {
+                title: 'Meeting',
+                start: '2015-10-12',
+                end: '2015-10-14'
+            },
+            {
+                title: 'Happy Hour',
+                start: '2015-02-12T17:30:00'
+            },
+            {
+                title: 'Dinner',
+                start: '2015-02-12T20:00:00'
+            },
+            {
+                title: 'Birthday Party',
+                start: '2015-02-13T07:00:00'
+            },
+            {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2015-02-28'
+            }
+        ];
 
-            $("#create_name").val(event.title); // --> sacar cuando pongamos angular
-            $('#create_date').val(date.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
-            //$('#create_date').attr('disabled','disabled');
-            //$(this).attr('href', '#create_modal');
-            $('#create_modal').openModal();
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: new Date(),
+            lang: 'es',
+            timezone: 'America/Argentina/Buenos_Aires',
+            editable: true,
+            businessHours: {
+                start: '09:00', // a start time (9am in this example) // --> si sacamos agendaDay, se iria?
+                end: '18:00', // an end time (6pm in this example) // --> si sacamos agendaDay, se iria?
 
-        },
-        eventLimit: true, // allow "more" link when too many events
-        //events: {
-        //    url: 'http://10.0.0.67:8080/client/all',
-        //    type: 'GET'
-        //},
-        events: events_array,
-        eventColor: '#009688',
-        eventClick: function(calEvent) {
+                dow: [1, 2, 3, 4, 5]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
+            },
+            dayClick: function (date, event) {
 
-            //calEvent.editable = true;
+                $("#create_name").val(event.title); // --> sacar cuando pongamos angular
+                $('#create_date').val(date.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
+                $('#create_modal').openModal();
 
-            //calEvent.constraint = {
-            //    start: '09:00', // a start time (9am in this example)
-            //    end: '18:00', // an end time (6pm in this example)
-            //    dow: [ 1, 2, 3, 4, 5 ]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
-            //};
+            },
+            eventLimit: true, // allow "more" link when too many events
+            //events: {
+            //    url: 'http://10.0.0.67:8080/client/all',
+            //    type: 'GET'
+            //},
+            events: $scope.events_array,
+            eventColor: '#009688',
+            eventClick: function (calEvent) {
 
-            $("#edit_name").val(calEvent.title); // --> sacar cuando pongamos angular
-            $('#edit_date').val(calEvent.start.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
-            //$('#edit_date').attr('disabled','disabled');
-            //$(this).attr('href', '#edit_modal');
-            $('#edit_modal').openModal();
-        }
+                $("#edit_name").val(calEvent.title); // --> sacar cuando pongamos angular
+                $('#edit_date').val(calEvent.start.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
+                $('#edit_modal').openModal();
+            }
+        });
+
     });
 
 });
