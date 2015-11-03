@@ -1,12 +1,21 @@
 package sam.timesheet.domain
 
+import com.itextpdf.text.Document
 import grails.converters.JSON
-
-import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+
+import java.text.SimpleDateFormat
+import java.text.ParseException
+
+
+
+import static org.springframework.http.HttpStatus.OK
 
 @Transactional(readOnly = true)
 class JobLogController {
+
+    ReportService reportService
+
 
     static allowedMethods = [asign: "POST"]
 
@@ -56,15 +65,37 @@ class JobLogController {
         def paramsJSON = request.JSON
 
         def filters  = new FilterHsForProject();
-
+        def projectSelected = paramsJSON.get("projectName")
         filters.client = Client.findByName(paramsJSON.get("clientName"))
-        filters.dateFrom = paramsJSON.get("dateFrom")
-        filters.dateTo = paramsJSON.get("dateTo")
-        filters.project = Project.findByName(paramsJSON.get("projectName"))
+        filters.dateFrom = formatDate(paramsJSON.get("dateFrom"))
+        filters.dateTo = formatDate(paramsJSON.get("dateTo"))
+        filters.project = Project.findById(projectSelected.id)
 
-        def resultData = JobLog.findAllByProjectAndDateBetween(filters.project,filters.dateFrom,filters.dateTo)
+        log.info("nombre del proyecto -------------->>"+projectSelected.name)
+        ArrayList<JobLog> resultData = JobLog.findAllByProject(paramsJSON.get("projectName"))
 
-        render status: OK
+        log.info("RESULTADO -------------->>"+resultData)
+
+
+        Document file = reportService.makeReport(resultData)
+
+
+        render resultData as JSON
+
+    }
+
+    def formatDate(dateInString) {
+
+        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+
+        try {
+
+            def date = formatter.parse(dateInString)
+            return  date
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -74,6 +105,15 @@ class JobLogController {
         def project
         def dateFrom
         def dateTo
+    }
+
+    class JobLogReport{
+        def dateR
+        def taskR
+        def personR
+        def solicitudeR
+        def obsR
+        def hoursR
     }
 
 }

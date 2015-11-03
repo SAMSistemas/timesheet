@@ -8,8 +8,8 @@ app.controller('mainController', function ($scope, $http) {
 
     $scope.clientSelected = null;
     $scope.projectSelected = null;
-    $scope.fromDateSelected = null;
-    $scope.toDateSelected = null;
+    $scope.fromDateSelected = new Date();
+    $scope.toDateSelected = new Date();
 
     $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
@@ -30,15 +30,17 @@ app.controller('mainController', function ($scope, $http) {
 
 
     $scope.export = function(){
+
+
         var filters = {
             clientName: $scope.clientSelected,
             projectName: $scope.projectSelected,
-            dateFrom: $scope.dateFrom,
-            dateTo: $scope.dateTo
+            dateFrom: $scope.dateToString($scope.fromDateSelected),
+            dateTo: $scope.dateToString($scope.toDateSelected)
         }
 
-        $http.get('/joblog/projectForHour/'+ filters).then(function (response) {
-            $scope.projects = response.data;
+        $http.post('/jobLog/projectForHour/', filters).then(function (response) {
+            console.log(response.data);
         });
     };
 
@@ -47,6 +49,16 @@ app.controller('mainController', function ($scope, $http) {
         $scope.projectSelected = null;
         $scope.fromDateSelected = null;
         $scope.toDateSelected = null;
+    };
+
+    $scope.dateToString = function(date){
+
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var month = monthIndex+1;
+        var year = date.getFullYear();
+        return  day+ '-' +month+ '-' +year;
+
     };
 
 

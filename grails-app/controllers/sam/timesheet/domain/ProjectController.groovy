@@ -45,6 +45,7 @@ class ProjectController {
             def projectToShow = new ProjectView()
 
             projectToShow.client_name = client.name
+            projectToShow.id = project.id
             projectToShow.project_name = project.name
             projectToShow.short_name = project.short_name
             projectToShow.start_date = project.start_date.format("dd-MM-yyyy")

@@ -2,67 +2,13 @@ var app = angular.module('myApp');
 
 app.controller('holidayController', function ($scope, $http) {
 
-    $(document).ready(function () {
+        $scope.holidayToCreate = {};
+        $scope.holidayToUpdate = {};
 
-        $scope.holiday = null;
+        $scope.eventToCreate = {};
+        $scope.eventToEdit = {};
 
-        $scope.events_array = [
-            {
-                title: 'All Day Event',
-                start: '2015-02-01'
-            },
-            {
-                title: 'Long Event',
-                start: '2015-10-07',
-                end: '2015-10-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2015-10-09T16:00:00'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2015-02-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                start: '2015-02-11',
-                end: '2015-02-13'
-            },
-            {
-                title: 'Meeting',
-                start: '2015-02-12T10:30:00',
-                end: '2015-02-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                start: '2015-02-12T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: '2015-10-12',
-                end: '2015-10-14'
-            },
-            {
-                title: 'Happy Hour',
-                start: '2015-02-12T17:30:00'
-            },
-            {
-                title: 'Dinner',
-                start: '2015-02-12T20:00:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: '2015-02-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2015-02-28'
-            }
-        ];
+        $scope.events_array = [];
 
         $('#calendar').fullCalendar({
             header: {
@@ -75,33 +21,90 @@ app.controller('holidayController', function ($scope, $http) {
             timezone: 'America/Argentina/Buenos_Aires',
             editable: true,
             businessHours: {
-                start: '09:00', // a start time (9am in this example) // --> si sacamos agendaDay, se iria?
-                end: '18:00', // an end time (6pm in this example) // --> si sacamos agendaDay, se iria?
+                start: '09:00', // a start time (9am in this example)
+                end: '18:00', // an end time (6pm in this example)
 
                 dow: [1, 2, 3, 4, 5]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
             },
             dayClick: function (date, event) {
+                $scope.holidayToCreate.description = event.title;
+                $scope.holidayToCreate.date = date.format();
 
-                $("#create_name").val(event.title); // --> sacar cuando pongamos angular
-                $('#create_date').val(date.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
                 $('#create_modal').openModal();
 
             },
             eventLimit: true, // allow "more" link when too many events
-            //events: {
-            //    url: 'http://10.0.0.67:8080/client/all',
-            //    type: 'GET'
-            //},
             events: $scope.events_array,
             eventColor: '#009688',
             eventClick: function (calEvent) {
 
-                $("#edit_name").val(calEvent.title); // --> sacar cuando pongamos angular
-                $('#edit_date').val(calEvent.start.format("dddd DD [de] MMMM [de] YYYY")); // --> sacar cuando pongamos angular
+                var indexEvent = $scope.searchHoliday(calEvent.title, $scope.events_array);
+
+                if(indexEvent >= 0) {
+                    $scope.eventToEdit = $scope.events_array[indexEvent];
+                    $scope.events_array.splice(indexEvent, 1);
+                    $scope.holidayToUpdate.description = calEvent.title;
+                    $scope.holidayToUpdate.date = calEvent.start.format();
+                }
+
                 $('#edit_modal').openModal();
             }
         });
 
+    $http.get('/holiday/all').then(function (response) {
+        $scope.events_array = response.data;
     });
+
+    $scope.create = function(holidayToCreate) {
+
+        /** Add holiday to DB **/
+        $http.post('/holiday/create', holidayToCreate);
+
+        $scope.eventToCreate.title = holidayToCreate.description;
+        $scope.eventToCreate.start = holidayToCreate.date;
+        $scope.events_array.push($scope.eventToCreate);
+
+        /** Refresh event source **/
+        $('#calendar').fullCalendar('addEventSource', $scope.events_array );
+
+        $scope.holidayToCreate = {};
+    };
+
+    $scope.edit = function(holidayToEdit) {
+
+        $http.put('/holiday/update', holidayToEdit);
+        $scope.eventToEdit.title = holidayToEdit.description;
+        $scope.eventToEdit.start = holidayToEdit.date;
+        $scope.events_array.push($scope.eventToCreate);
+
+        /** Refresh event source **/
+        $('#calendar').fullCalendar( 'removeEventSource', $scope.events_array );
+        $('#calendar').fullCalendar('addEventSource', $scope.events_array );
+
+        $scope.holidayToUpdate = {};
+
+    };
+
+    $scope.delete = function(holidayToEdit) {
+
+        $http.delete('/holiday/delete', holidayToEdit);
+
+        /** Refresh event source **/
+        $('#calendar').fullCalendar( 'removeEventSource', $scope.events_array );
+        $('#calendar').fullCalendar('addEventSource', $scope.events_array );
+
+        $scope.holidayToUpdate = {};
+
+    };
+
+    /** Utils **/
+
+    $scope.searchHoliday = function(nameKey, myArray){
+        for (var i=0; i < myArray.length; i++) {
+            if (myArray[i].title === nameKey) {
+                return i;
+            }
+        }
+    };
 
 });

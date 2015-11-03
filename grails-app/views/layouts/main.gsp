@@ -127,8 +127,8 @@
                 %{--<select id="clientSelect" class="select-modal" ng-change="changeClient()"--}%
                         %{--ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">--}%
                 %{--</select>--}%
-                <select id="clientSelect" class="col s12" ng-model="clientSelected" ng-change="changeClient()" ng-options="client.name for client in clients">
-                    <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                <select id="clientSelect" class="col s12" ng-model="ttttttttttttttttt" ng-change="changeClient()" ng-options="client.name for client in clients">
+                    <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
 
             </div>
@@ -140,7 +140,7 @@
             <div class="input-field-modal col s12">
                 <label class="label-name">Proyecto</label>
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
-                <select id="clientSelect" class="col s12" ng-model="projectSelected" ng-options="project.project_name for project in projects">
+                <select id="projectSelect" class="col s12" ng-model="projectSelected" ng-options="project.project_name for project in projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                 </select>
 
@@ -153,7 +153,8 @@
             <div class="input-field-modal col s12">
                 <label class="label-name left">Desde </label>
                 <div class="row">
-                    <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"></span>
+                    <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
+                          ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
                 </div>
             </div>
         </div>
@@ -162,7 +163,8 @@
             <div class="input-field-modal col s12">
                 <label class="label-name left">Hasta </label>
                 <div class="row">
-                    <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"></span>
+                    <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
+                          ng-min-date="2010-01-01"></span>
                 </div>
             </div>
         </div>

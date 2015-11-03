@@ -22,46 +22,47 @@
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="create_name" type="text" ng-model="holiday.name">
+                    <input id="create_name" type="text" ng-model="holidayToCreate.description">
                     <label for="create_name">Nombre</label>
                 </div>
             </div>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="create_date" type="text" ng-model="holiday.date" disabled>
+                    <input id="create_date" type="text" ng-model="holidayToCreate.date" disabled>
                     <label for="create_date">Fecha</label>
                 </div>
             </div>
 
             <div class="modal-footer" style="padding-right: 50px;">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Guardar</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(holidayToCreate)">Guardar</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
         </div>
     </div>
 
     <!--Edit Modal-->
-    <div id="edit_modal" class="modal" style="width: 400px;">
+    <div id="edit_modal" class="modal" style="width: 450px;">
         <div class="modal-content">
             <h2 class="card-title" style="text-align: center; color: #009688">Editar feriado</h2>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="edit_name" type="text" ng-model="holiday.name">
+                    <input id="edit_name" type="text" ng-model="holidayToUpdate.description">
                     <label for="edit_name">Nombre</label>
                 </div>
             </div>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
-                    <input id="edit_date" type="text" ng-model="holiday.date" disabled>
+                    <input id="edit_date" type="text" ng-model="holidayToUpdate.date" disabled>
                     <label for="edit_date">Fecha</label>
                 </div>
             </div>
 
             <div class="modal-footer" style="padding-right: 50px;">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Guardar</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete(holidayToUpdate)">Eliminar</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="edit(holidayToUpdate)">Guardar</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
         </div>

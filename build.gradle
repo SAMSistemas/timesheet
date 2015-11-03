@@ -41,6 +41,9 @@ assets {
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    flatDir {
+        dirs 'libraries'
+    }
 }
 
 dependencyManagement {
@@ -64,6 +67,8 @@ dependencies {
     compile "org.grails.plugins:scaffolding"
 
     runtime "org.grails.plugins:asset-pipeline"
+
+    compile files( 'libraries/itextpdf-5.5.7.jar')
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
