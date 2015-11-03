@@ -18,12 +18,24 @@ class HolidayController {
     }
 
     def all() {
-        render Holiday.list() as JSON
+
+        def holidayViews = new ArrayList<HolidayView>()
+
+        for(holiday in Holiday.list()) {
+            def eventView = new HolidayView()
+            eventView.id = holiday.id
+            eventView.title = holiday.description
+            eventView.start = holiday.holiday_date.format("yyyy-MM-dd")
+
+            holidayViews.add(eventView)
+        }
+
+        render holidayViews as JSON
     }
 
     def show() {
 
-        def holiday = Holiday.findByDescription(params.description)
+        def holiday = Holiday.findById(params.id)
 
         if (holiday == null) {
 
@@ -39,7 +51,7 @@ class HolidayController {
 
     def formatDate(dateInString) {
 
-        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        def formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
         try {
 
@@ -88,7 +100,7 @@ class HolidayController {
 
 
     @Transactional
-    def update() {
+    def update() {     //Todo FIX
         def paramsJSON = request.JSON
 
         def holidayToUpdate = Holiday.findById(paramsJSON.get("id"))
@@ -129,7 +141,7 @@ class HolidayController {
 
 
     @Transactional
-    def delete() {
+    def delete() {     //Todo FIX
 
         def paramsJSON = request.JSON
 
@@ -169,4 +181,10 @@ class HolidayController {
         response.status = 200
     }
 
+}
+
+class HolidayView {
+    def id
+    def title
+    def start
 }

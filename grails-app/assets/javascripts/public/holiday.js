@@ -53,6 +53,8 @@ app.controller('holidayController', function ($scope, $http) {
 
     $http.get('/holiday/all').then(function (response) {
         $scope.events_array = response.data;
+        $('#calendar').fullCalendar( 'removeEventSource', $scope.events_array );
+        $('#calendar').fullCalendar('addEventSource', $scope.events_array );
     });
 
     $scope.create = function(holidayToCreate) {
