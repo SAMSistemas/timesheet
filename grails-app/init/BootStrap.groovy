@@ -1,4 +1,5 @@
 import sam.timesheet.domain.Client
+import sam.timesheet.domain.Holiday
 import sam.timesheet.domain.Person
 import sam.timesheet.domain.Project
 import sam.timesheet.domain.JobLog
@@ -19,7 +20,7 @@ class BootStrap {
         def asignacion = (new TaskType(name: "Asignacion", enabled: true)).save flush: true
         (new JobLog(person: person1, project: project1, task_type: asignacion, hours: "3", solicitude: 1,observation: "TEST 2",date: new Date())).save flush: true
         (new JobLog(person: person2, project: project1, task_type: asignacion, hours: "3", solicitude: 2,observation: "TEST 2",date: new Date())).save flush: true
-
+        (new Holiday(description: "El dia de hoy" , holiday_date: new Date())).save flush: true
     }
 
     def destroy = {

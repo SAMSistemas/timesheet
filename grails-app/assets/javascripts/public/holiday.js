@@ -2,14 +2,8 @@ var app = angular.module('myApp');
 
 app.controller('holidayController', function ($scope, $http) {
 
-        $scope.holidayToCreate = {};  //Todo quitar holiday y hacer solo con event
-        $scope.holidayBefore = {};
-        $scope.holidayAfter = {};
-
-        $scope.holidays = [];
-
         $scope.eventToCreate = {};
-        $scope.eventToEdit = {};
+        $scope.eventToUpdate = {};
 
         $scope.events_array = [];
 
@@ -32,6 +26,7 @@ app.controller('holidayController', function ($scope, $http) {
             dayClick: function (date, event) {
                 $scope.eventToCreate.title = event.title;
                 $scope.eventToCreate.start = date.format();
+                $scope.$apply();
 
                 $('#create_modal').openModal();
 
@@ -44,12 +39,8 @@ app.controller('holidayController', function ($scope, $http) {
                 var indexEvent = $scope.searchEvent(calEvent.title, $scope.events_array);
 
                 if(indexEvent >= 0) {
-                    $scope.eventToEdit = $scope.events_array[indexEvent];
+                    $scope.eventToUpdate = $scope.events_array[indexEvent];
                     $scope.events_array.splice(indexEvent, 1);
-                    $scope.holidayBefore.id = $scope.eventToEdit.id;
-                    $scope.holidayBefore.description = calEvent.title;
-                    $scope.holidayBefore.holiday_date = calEvent.start.format();
-                    $scope.holidayAfter = angular.copy($scope.holidayBefore);
                     $scope.$apply();
                 }
 
@@ -65,44 +56,35 @@ app.controller('holidayController', function ($scope, $http) {
     $scope.create = function(holidayToCreate) {
 
         $http.post('/holiday/create', holidayToCreate).success(function(response){
-            $scope.holidays.push(response);
+            holidayToCreate.id = response.id;
+            $scope.events_array.push(holidayToCreate);
         });
 
-        $scope.eventToCreate.title = holidayToCreate.description;
-        $scope.eventToCreate.start = holidayToCreate.holiday_date;
-        $scope.events_array.push($scope.eventToCreate);
+        console.log($scope.events_array);
 
         $scope.refreshEventSource();
 
-        $scope.holidayToCreate = {};
     };
 
-    $scope.edit = function(holidayToEdit) {
-        var holidayFound = $scope.getHoliday($scope.holidayBefore);
+    $scope.update = function() {
 
-        console.log(holidayFound);
+        $http.put('/holiday/update', $scope.eventToUpdate);
 
-        $http.put('/holiday/update', holidayFound).success(function(response){
-            $scope.holidays.push(response);
-        });
+        $scope.events_array.push($scope.eventToUpdate);
 
-        $scope.eventToEdit.id = $scope.holidayBefore.id;
-        $scope.eventToEdit.title = holidayToEdit.description;
-        $scope.eventToEdit.start = holidayToEdit.holiday_date;
-        $scope.events_array.push($scope.eventToEdit);
+        console.log($scope.events_array);
 
         $scope.refreshEventSource();
 
-        $scope.holidayBefore = {};
-        $scope.holidayAfter = {};
-
     };
 
-    $scope.delete = function(holidayToDelete) {
+    $scope.delete = function() {
 
-        var holidayFound = $scope.getHoliday(holidayToDelete);
+        console.log($scope.eventToUpdate);
 
-        $http.delete('/holiday/delete', holidayFound);
+        $http.delete('/holiday/delete/' + $scope.eventToUpdate.id);
+
+        console.log($scope.events_array);
 
         $scope.refreshEventSource();
     };
@@ -115,19 +97,6 @@ app.controller('holidayController', function ($scope, $http) {
         for (var i=0; i < myArray.length; i++) {
             if (myArray[i].title === nameKey) {
                 return i;
-            }
-        }
-    };
-
-
-    // Remove and return holiday of list of holidays
-
-    $scope.getHoliday = function(element) {
-        for (var i=0; i < $scope.holidays.length; i++) {
-            if ($scope.holidays[i].description === element.description) {
-                var found = $scope.holidays[i];
-                $scope.holidays.splice(i, 1);
-                return found;
             }
         }
     };

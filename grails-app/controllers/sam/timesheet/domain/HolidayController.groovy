@@ -56,7 +56,7 @@ class HolidayController {
         try {
 
             def date = formatter.parse(dateInString)
-            return  date
+            return date
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -70,8 +70,8 @@ class HolidayController {
         def paramsJSON = request.JSON
 
         def newHolidayParams = [
-                description: paramsJSON.get("description"),
-                holiday_date: formatDate(paramsJSON.get("holiday_date"))
+                description: paramsJSON.get("title"),
+                holiday_date: formatDate(paramsJSON.get("start"))
         ]
 
         def newHoliday = new Holiday(newHolidayParams)
@@ -116,8 +116,8 @@ class HolidayController {
             }
         }
 
-        holidayToUpdate.description = paramsJSON.get("description")
-        holidayToUpdate.holiday_date = formatDate(paramsJSON.get("holiday_date"))
+        holidayToUpdate.description = paramsJSON.get("title")
+        holidayToUpdate.holiday_date = formatDate(paramsJSON.get("start"))
 
         if (!holidayToUpdate.validate()) {
 
@@ -139,17 +139,13 @@ class HolidayController {
         holidayToUpdate.save flush: true
 
         response.status = 200
-
-        render holidayToUpdate as JSON
     }
 
 
     @Transactional
     def delete() {
 
-        def paramsJSON = request.JSON
-
-        def holidayToDelete = Holiday.findById(paramsJSON.get("id"))
+        def holidayToDelete = Holiday.findById(params.id)
 
         if (holidayToDelete == null) {
 
@@ -159,9 +155,6 @@ class HolidayController {
                 error = "El feriado no existe"
             }
         }
-
-        holidayToDelete.description = paramsJSON.get("description")
-        holidayToDelete.holiday_date = paramsJSON.get("holiday_date")
 
         if (!holidayToDelete.validate()) {
 
