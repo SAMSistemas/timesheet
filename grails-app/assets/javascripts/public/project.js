@@ -61,8 +61,9 @@
         };
 
         $scope.create = function() {
+
             $scope.projectToCreate.client_name = $scope.clientSelected.name;
-            alert($scope.dateSelected);
+
             $scope.generateCreateStringDate($scope.dateSelected);
             if ($scope.createForm.$valid) {
                 $http.post('/project/create', $scope.projectToCreate);
@@ -82,7 +83,7 @@
         $scope.edit = function(project) {
             $scope.projectToEdit = angular.copy(project);
             $scope.project = project;
-            $scope.clientSelected = $scope.projectToEdit.client_name;
+            //$scope.clientSelected = $scope.projectToEdit.client_name;
             //$scope.parseDate($scope.projectToEdit.start_date);
 
             // To clear the errors from previous edit forms
@@ -98,6 +99,7 @@
         //};
 
         $scope.update = function() {
+            $scope.projectToEdit.client_name = $scope.clientSelected.name;
             $scope.generateEditStringDate($scope.dateSelected);
             if ($scope.editForm.$valid) {
                 $http.put('/project/update', $scope.projectToEdit);
@@ -129,15 +131,13 @@
         };
 
         $scope.updateInTable = function (items, item) {
-            console.log(items);
-            console.log(item);
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
         };
 
         $scope.changeColor = function(divId){
-            $( "#"+divId+" .select-modal input.select-dropdown").css("cssText", " color: #009688 !important;");
+            $( "#"+divId).css("cssText", " color: #009688 !important;");
         };
 
     });
