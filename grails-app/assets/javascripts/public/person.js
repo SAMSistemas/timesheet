@@ -44,7 +44,7 @@
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
-                $scope.createForm.username.$setValidity('usernameAvailable', true);
+                $scope.createForm.username.$setValidity('available', true);
             }
         };
 
@@ -61,7 +61,7 @@
 
             // To clear the errors from previos edit forms
             if ($scope.editForm !== null) {
-                $scope.editForm.username.$setValidity('usernameAvailable', true);
+                $scope.editForm.username.$setValidity('available', true);
             }
         };
 

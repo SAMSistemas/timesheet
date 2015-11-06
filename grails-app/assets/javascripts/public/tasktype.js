@@ -44,7 +44,7 @@
 
             // To clear the errors from previos create forms
             if ($scope.createForm !== null) {
-                $scope.createForm.name.$setValidity('nameAvailable', true);
+                $scope.createForm.name.$setValidity('available', true);
             }
         };
 
@@ -61,7 +61,7 @@
 
             // To clear the errors from previos edit forms
             if ($scope.editForm !== null) {
-                $scope.editForm.name.$setValidity('nameAvailable', true);
+                $scope.editForm.name.$setValidity('available', true);
             }
         };
 

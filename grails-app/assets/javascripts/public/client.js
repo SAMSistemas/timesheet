@@ -36,7 +36,6 @@
         $http.get('/client/all').then(function (response) {
             $('select').material_select();
             $scope.clients = response.data;
-            //$('a.modal-trigger').leanModal();
         });
 
         $scope.new = function () {
@@ -45,8 +44,8 @@
 
             // To clear the errors from previos create forms
             if ($scope.createForm !== null) {
-                $scope.createForm.name.$setValidity('nameAvailable', true);
-                $scope.createForm.sname.$setValidity('snameAvailable', true);
+                $scope.createForm.name.$setValidity('available', true);
+                $scope.createForm.sname.$setValidity('available', true);
             }
         };
 
@@ -63,8 +62,8 @@
 
             // To clear the errors from previos edit forms
             if ($scope.editForm !== null) {
-                $scope.editForm.name.$setValidity('nameAvailable', true);
-                $scope.editForm.sname.$setValidity('snameAvailable', true);
+                $scope.createForm.name.$setValidity('available', true);
+                $scope.createForm.sname.$setValidity('available', true);
             }
         };
 

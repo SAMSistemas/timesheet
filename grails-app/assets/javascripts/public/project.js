@@ -55,8 +55,8 @@
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
-                $scope.createForm.project_name.$setValidity('nameAvailable', true);
-                $scope.createForm.sname.$setValidity('snameAvailable', true);
+                $scope.createForm.project_name.$setValidity('available', true);
+                $scope.createForm.sname.$setValidity('available', true);
             }
         };
 
@@ -87,8 +87,8 @@
 
             // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
-                $scope.editForm.project_name.$setValidity('nameAvailable', true);
-                $scope.editForm.sname.$setValidity('snameAvailable', true);
+                $scope.editForm.project_name.$setValidity('available', true);
+                $scope.editForm.sname.$setValidity('available', true);
             }
         };
 
