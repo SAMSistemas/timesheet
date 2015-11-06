@@ -8,6 +8,7 @@ app.controller('holidayController', function ($scope, $http) {
         $scope.events_array = [];
 
         $('#calendar').fullCalendar({
+            height: 500,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -63,7 +64,6 @@ app.controller('holidayController', function ($scope, $http) {
         console.log($scope.events_array);
 
         $scope.refreshEventSource();
-
     };
 
     $scope.update = function() {

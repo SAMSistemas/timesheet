@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="modal-footer" style="padding-right: 50px;">
+            <div class="modal-footer" style="padding-right: 6px;">
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(eventToCreate)">Guardar</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="modal-footer" style="padding-right: 50px;">
+            <div class="modal-footer" style="padding-right: 6px;">
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete()">Eliminar</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="update()">Guardar</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
