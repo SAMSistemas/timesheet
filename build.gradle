@@ -80,7 +80,7 @@ dependencies {
     console "org.grails:grails-console"
 
     /* MySQL Connector */
-//    runtime 'mysql:mysql-connector-java:5.1.29'
+    runtime 'mysql:mysql-connector-java:5.1.29'
 }
 
 task wrapper(type: Wrapper) {
