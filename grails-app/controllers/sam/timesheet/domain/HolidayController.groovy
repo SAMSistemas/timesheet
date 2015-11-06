@@ -71,7 +71,7 @@ class HolidayController {
 
         def newHolidayParams = [
                 description: paramsJSON.get("description"),
-                holiday_date: formatDate(paramsJSON.get("date"))
+                holiday_date: formatDate(paramsJSON.get("holiday_date"))
         ]
 
         def newHoliday = new Holiday(newHolidayParams)
@@ -96,11 +96,13 @@ class HolidayController {
         newHoliday.save flush: true
 
         response.status = 200
+
+        render newHoliday as JSON
     }
 
 
     @Transactional
-    def update() {     //Todo FIX
+    def update() {
         def paramsJSON = request.JSON
 
         def holidayToUpdate = Holiday.findById(paramsJSON.get("id"))
@@ -115,7 +117,7 @@ class HolidayController {
         }
 
         holidayToUpdate.description = paramsJSON.get("description")
-        holidayToUpdate.holiday_date = formatDate(paramsJSON.get("date"))
+        holidayToUpdate.holiday_date = formatDate(paramsJSON.get("holiday_date"))
 
         if (!holidayToUpdate.validate()) {
 
@@ -137,11 +139,13 @@ class HolidayController {
         holidayToUpdate.save flush: true
 
         response.status = 200
+
+        render holidayToUpdate as JSON
     }
 
 
     @Transactional
-    def delete() {     //Todo FIX
+    def delete() {
 
         def paramsJSON = request.JSON
 
@@ -157,7 +161,7 @@ class HolidayController {
         }
 
         holidayToDelete.description = paramsJSON.get("description")
-        holidayToDelete.holiday_date = paramsJSON.get("date")
+        holidayToDelete.holiday_date = paramsJSON.get("holiday_date")
 
         if (!holidayToDelete.validate()) {
 

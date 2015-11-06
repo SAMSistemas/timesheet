@@ -46,6 +46,7 @@ h2 {
 #calendar .fc-sat,
 #calendar .fc-sun {
     color: darkred;
+    font-weight: bold;
 }
 
 /*#calendar div.fc-widget-header,*/
@@ -56,6 +57,7 @@ h2 {
 #calendar .fc-widget-header .fc-sat,
 #calendar .fc-widget-header .fc-sun{
     color: #000000;
+    font-weight: normal;
 }
 
 #calendar .fc-center {
