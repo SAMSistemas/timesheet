@@ -37,15 +37,16 @@
         <thead>
         <tr class="tr-header-width-and-height">
             <th class="width-5"></th>
-            <th class="width-20"><a href ng-click="reverseOrder(name)">Nombre</a></th>
-            <th class="width-20"><a href ng-click="reverseOrder(lastname)">Apellido</a></th>
+            <th class="width-15"><a href ng-click="reverseOrder(name)">Nombre</a></th>
+            <th class="width-15"><a href ng-click="reverseOrder(lastname)">Apellido</a></th>
             <th class="width-20"><a href ng-click="reverseOrder(username)">Usuario</a></th>
+            <th class="width-20"><a href ng-click="reverseOrder(work_position)">Posicion</a></th>
             <th class="width-20"><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
-            <th class="width-15"></th>
+            <th class="width-5"></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-5"></th>
-            <th class="th-filter-padding width-20">
+            <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
                     <input id="search_name" class="center search_input" type="search"
                            placeholder="Ingrese nombre" onfocus="placeholder = ''"
@@ -53,7 +54,7 @@
                     <label for="search_name"></label>
                 </div>
             </th>
-            <th class="th-filter-padding width-20">
+            <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
                     <input id="search_lastname" class="center search_input" type="search"
                            placeholder="Ingrese apellido" onfocus="placeholder = ''"
@@ -69,12 +70,13 @@
                     <label for="search_username"></label>
                 </div>
             </th>
+            <th class="th-filter-padding width-20"></th> <!-- Implementar buscador por posicion?? -->
             <th class="th-filter-padding width-20">
                 <div class="input-field">
                     <select-status ng-model="status"></select-status>
                 </div>
             </th>
-            <th class="th-filter-padding width-15"></th>
+            <th class="th-filter-padding width-5"></th>
         </tr>
         </thead>
 
@@ -82,10 +84,10 @@
         <tr ng-repeat="person in people | orderBy:sortType:sortReverse | filter:search:startsWith | filterByStatus:status"
             class="tr-body-width-and-height">
             <td class="width-5"><i class="material-icons center material-icons-line-heigth">person</i></td>
-            <td class="width-20 truncate">{{ person.name }}</td>
-            <td class="width-20 truncate">{{ person.lastname }}</td>
+            <td class="width-15 truncate">{{ person.name }}</td>
+            <td class="width-15 truncate">{{ person.lastname }}</td>
             <td class="width-20 truncate">{{ person.username }}</td>
-            %{--<td class="width-20 truncate">{{ person.work_position }}</td>--}%
+            <td class="width-20 truncate">{{ person.work_position | uppercase }}</td>
             <td class="width-20">
                 <div class="switch">
                     <label>

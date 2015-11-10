@@ -131,6 +131,7 @@ class PersonController {
         personToUpdate.lastname = paramsJSON.get("lastname")
         personToUpdate.username = paramsJSON.get("username")
         personToUpdate.password = paramsJSON.get("password")
+        personToUpdate.work_position = WorkPosition.findByDescription(paramsJSON.get("work_position"))
         personToUpdate.enabled = paramsJSON.get("enabled")
 
         if (!personToUpdate.validate()) {
