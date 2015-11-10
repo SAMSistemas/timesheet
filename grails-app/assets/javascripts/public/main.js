@@ -40,7 +40,7 @@ app.controller('mainController', function ($scope, $http) {
         }
 
         $http.post('/jobLog/projectForHour/', filters).then(function (response) {
-            console.log(response.data);
+
         });
     };
 

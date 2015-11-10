@@ -4,7 +4,7 @@ class JobLog {
 
     Date date
     String hours
-    int solicitude
+    String solicitude
     String observation
 
     static belongsTo = [project: Project, person: Person, task_type: TaskType]
