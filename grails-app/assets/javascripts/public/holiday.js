@@ -10,7 +10,6 @@ app.controller('holidayController', function ($scope, $http) {
 
         $http.get('/holiday/all').then(function (response) {
             $scope.events_array = response.data;
-            console.log($scope.events_array);
 
 
         $('#calendar').fullCalendar({
@@ -52,8 +51,6 @@ app.controller('holidayController', function ($scope, $http) {
                 $scope.eventToUpdate.start = events[0].start.format();
                 $scope.$apply();
 
-                //$('#calendar').fullCalendar( 'removeEventSource', $scope.findEventById($scope.eventToUpdate.id));
-
                 $('#edit_modal').openModal();
             }
         });});
@@ -69,17 +66,22 @@ app.controller('holidayController', function ($scope, $http) {
 
     $scope.update = function() {
 
+        //Remove previous event from calendar
+        $scope.removeEvent($scope.eventToUpdate);
+
         $http.put('/holiday/update', $scope.eventToUpdate);
 
+        //Add new event source to calendar to render it
         $scope.addEventSource($scope.eventToUpdate);
 
     };
 
     $scope.delete = function() {
 
-        $http.delete('/holiday/delete/' + $scope.eventToUpdate.id);
+        //$http.delete('/holiday/delete/'+ $scope.eventToUpdate.id);
 
-        $scope.removeEventSource($scope.eventToUpdate);
+        //Remove event from calendar
+        $scope.removeEvent($scope.eventToUpdate);
     };
 
     /** Utils **/
@@ -108,6 +110,7 @@ app.controller('holidayController', function ($scope, $http) {
         $('#calendar').fullCalendar( 'addEventSource', $scope.new_array );
     };
 
+
     //Remove calendar event source to render view
 
     $scope.removeEventSource = function(event){
@@ -115,5 +118,11 @@ app.controller('holidayController', function ($scope, $http) {
         $scope.new_array.push(event);
         $('#calendar').fullCalendar( 'removeEventSource', $scope.new_array );
     };
+
+
+    //Remove event from calendar
+    $scope.removeEvent = function(event) {
+        $('#calendar').fullCalendar( 'removeEvents', event.id);
+    }
 
 });

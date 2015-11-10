@@ -145,7 +145,7 @@ class HolidayController {
             return
         }
 
-        holidayToDelete.delete flush:true
+        holidayToDelete.delete flush: true
     }
 
 }
