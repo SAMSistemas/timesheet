@@ -69,12 +69,17 @@ class HolidayController {
 
         def paramsJSON = request.JSON
 
+        log.info paramsJSON
+        log.info params
+
         def newHolidayParams = [
                 description: paramsJSON.get("title"),
                 holiday_date: formatDate(paramsJSON.get("start"))
         ]
 
         def newHoliday = new Holiday(newHolidayParams)
+
+        log.info newHoliday.validate()
 
         if (!newHoliday.validate()) {
 
@@ -91,11 +96,15 @@ class HolidayController {
             }
 
             render fieldErrorArray as JSON
+
+            return
         }
+
+        log.info Holiday.count
 
         newHoliday.save flush: true
 
-        response.status = 200
+        log.info Holiday.count
 
         render newHoliday as JSON
     }
