@@ -6,6 +6,12 @@ app.controller('holidayController', function ($scope, $http) {
         $scope.eventToUpdate = {};
 
         $scope.events_array = [];
+        $scope.new_event_source = [];
+
+        $http.get('/holiday/all').then(function (response) {
+            $scope.events_array = response.data;
+            console.log($scope.events_array);
+
 
         $('#calendar').fullCalendar({
             height: 500,
@@ -25,6 +31,7 @@ app.controller('holidayController', function ($scope, $http) {
                 dow: [1, 2, 3, 4, 5]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
             },
             dayClick: function (date, event) {
+                $scope.eventToCreate.id = null;
                 $scope.eventToCreate.title = event.title;
                 $scope.eventToCreate.start = date.format();
                 $scope.$apply();
@@ -37,56 +44,42 @@ app.controller('holidayController', function ($scope, $http) {
             eventColor: '#009688',
             eventClick: function (calEvent) {
 
-                var indexEvent = $scope.searchEvent(calEvent.title, $scope.events_array);
+                var event_id = calEvent.id;
+                var events = $scope.findEventById(event_id);
 
-                if(indexEvent >= 0) {
-                    $scope.eventToUpdate = $scope.events_array[indexEvent];
-                    $scope.events_array.splice(indexEvent, 1);
-                    $scope.$apply();
-                }
+                $scope.eventToUpdate.id = events[0].id;
+                $scope.eventToUpdate.title = events[0].title;
+                $scope.eventToUpdate.start = events[0].start.format();
+                $scope.$apply();
+
+                //$('#calendar').fullCalendar( 'removeEventSource', $scope.findEventById($scope.eventToUpdate.id));
 
                 $('#edit_modal').openModal();
             }
-        });
-
-    $http.get('/holiday/all').then(function (response) {
-        $scope.events_array = response.data;
-        $scope.refreshEventSource();
-    });
+        });});
 
     $scope.create = function(holidayToCreate) {
 
-        $http.post('/holiday/create', holidayToCreate).success(function(response){
-            holidayToCreate.id = response.id;
-            $scope.events_array.push(holidayToCreate);
+        $http.post('/holiday/create', holidayToCreate).then(function(response){
+            $scope.eventToCreate.id = response.data.id;
+            $scope.addEventSource($scope.eventToCreate);
         });
 
-        console.log($scope.events_array);
-
-        $scope.refreshEventSource();
     };
 
     $scope.update = function() {
 
         $http.put('/holiday/update', $scope.eventToUpdate);
 
-        $scope.events_array.push($scope.eventToUpdate);
-
-        console.log($scope.events_array);
-
-        $scope.refreshEventSource();
+        $scope.addEventSource($scope.eventToUpdate);
 
     };
 
     $scope.delete = function() {
 
-        console.log($scope.eventToUpdate);
-
         $http.delete('/holiday/delete/' + $scope.eventToUpdate.id);
 
-        console.log($scope.events_array);
-
-        $scope.refreshEventSource();
+        $scope.removeEventSource($scope.eventToUpdate);
     };
 
     /** Utils **/
@@ -101,12 +94,26 @@ app.controller('holidayController', function ($scope, $http) {
         }
     };
 
+    $scope.findEventById = function(id) {
+       return $('#calendar').fullCalendar('clientEvents', function(evt) {
+            return evt.id == id;
+        });
+    };
 
-    //Refresh calendar event source to render view
+    //Add calendar event source to render view
 
-    $scope.refreshEventSource = function() {
-        $('#calendar').fullCalendar( 'removeEventSource', $scope.events_array );
-        $('#calendar').fullCalendar('addEventSource', $scope.events_array );
+    $scope.addEventSource = function(event){
+        $scope.new_array = [];
+        $scope.new_array.push(event);
+        $('#calendar').fullCalendar( 'addEventSource', $scope.new_array );
+    };
+
+    //Remove calendar event source to render view
+
+    $scope.removeEventSource = function(event){
+        $scope.new_array = [];
+        $scope.new_array.push(event);
+        $('#calendar').fullCalendar( 'removeEventSource', $scope.new_array );
     };
 
 });

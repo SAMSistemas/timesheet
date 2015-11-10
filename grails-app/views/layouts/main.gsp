@@ -171,7 +171,7 @@
 
     </div>
     <div class="modal-footer" style="padding-right: 50px;">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
+        <a href="/jobLog/projectForHour/" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
     </div>
 </div>
