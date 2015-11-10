@@ -7,19 +7,19 @@
     <asset:stylesheet src="public/table.css"/>
 
     <style>
-        #positionCreateSelect {
-            display: inline;
-        }
+    #positionCreateSelect {
+        display: inline;
+    }
 
-        #positionEditSelect {
-            display: inline;
-        }
+    #positionEditSelect {
+        display: inline;
+    }
 
-        .label-name {
-            color: #009688 !important;
-            font-size: 120% !important;
-            padding-right: 40px;
-        }
+    .label-name {
+        color: #009688 !important;
+        font-size: 120% !important;
+        padding-right: 40px;
+    }
     </style>
 </head>
 
@@ -138,8 +138,7 @@
                                url-to-check="/person/existsUsername/">
                         <label for="username" ng-class="{'has-error': createForm.username.$invalid}">Usuario
                             <span ng-show="createForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.username.$error.available"
-                                  class="has-error">ya existe</span>
+                            <span ng-show="createForm.username.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -147,17 +146,20 @@
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="password" name="password" type="text" maxlength="8"
-                               ng-model="personToCreate.password" required>
+                               ng-model="personToCreate.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label for="password" ng-class="{'has-error': createForm.password.$invalid}">Contraseña
                             <span ng-show="createForm.password.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="createForm.password.$error.pattern"
+                                  class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>
 
                 <div id="create-person" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name left">Posicion </label>
-                        <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')" ng-model="personToCreate.work_position"
+                        <label class="label-name left">Posicion</label>
+                        <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
+                                ng-model="personToCreate.work_position"
                                 ng-options="position for position in work_positions" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
@@ -166,7 +168,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled" checked="checked">
+                        <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled"
+                               checked="checked">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -226,17 +229,20 @@
                     <div class="input-field-modal col s12">
                         <input id="edit_password" name="password" type="text" maxlength="8"
                                ng-model="personToEdit.password"
-                               ng-model="personToEdit.password" required>
+                               ng-model="personToEdit.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label for="edit_password" ng-class="{'has-error': editForm.password.$invalid}">Password
                             <span ng-show="editForm.password.$invalid" class="has-error">es obligatorio</span>
+                            <span ng-show="createForm.password.$error.pattern"
+                                  class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>
 
                 <div id="edit-person" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name left">Posicion </label>
-                        <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')" ng-model="personToCreate.work_position"
+                        <label class="label-name left">Posicion</label>
+                        <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')"
+                                ng-model="personToCreate.work_position"
                                 ng-options="position for position in work_positions" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
