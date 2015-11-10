@@ -7,6 +7,6 @@ class Holiday {
 
     static constraints = {
         description unique: true, nullable: false, blank: false
-        holiday_date nullable: false, blank: false
+        holiday_date nullable: false
     }
 }

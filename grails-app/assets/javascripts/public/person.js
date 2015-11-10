@@ -33,14 +33,26 @@
         $scope.createForm = null;
         $scope.editForm = null;
 
+        $scope.work_positions = [];
+
         $http.get('/person/all').then(function(response) {
             $('select').material_select();
             $scope.people = response.data;
         });
 
+        $http.get('/workPosition/all').then(function(response){
+
+            var workPositions = response.data;
+            for(x in workPositions) {
+                $scope.work_positions.push(workPositions[x].description);
+            }
+            console.log($scope.work_positions);
+
+        });
+
         $scope.new = function() {
-            $scope.personToCreate = {name: "", lastname: "", username: "", password: "", enabled: false};
-            $scope.person = {name: "", lastname: "", username: "", password: "", enabled: false};
+            $scope.personToCreate = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: true};
+            $scope.person = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: false};
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
@@ -90,6 +102,10 @@
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
+        };
+
+        $scope.changeColor = function(divId){
+            $( "#"+divId).css("cssText", " color: #009688 !important;");
         };
 
     });

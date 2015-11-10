@@ -5,6 +5,22 @@
     <g:set var="entityName" value="${message(code: 'person.label', default: 'Personas')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
     <asset:stylesheet src="public/table.css"/>
+
+    <style>
+        #positionCreateSelect {
+            display: inline;
+        }
+
+        #positionEditSelect {
+            display: inline;
+        }
+
+        .label-name {
+            color: #009688 !important;
+            font-size: 120% !important;
+            padding-right: 40px;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,6 +85,7 @@
             <td class="width-20 truncate">{{ person.name }}</td>
             <td class="width-20 truncate">{{ person.lastname }}</td>
             <td class="width-20 truncate">{{ person.username }}</td>
+            %{--<td class="width-20 truncate">{{ person.work_position }}</td>--}%
             <td class="width-20">
                 <div class="switch">
                     <label>
@@ -77,10 +94,10 @@
                     </label>
                 </div>
             </td>
-            <td class="width-15">
+            <td class="width-5">
                 <a href="#edit-modal" ng-click="edit(person)"
                    class="waves-effect waves-light btn btn-edit-padding transparent-green z-depth-0 modal-trigger"><i
-                        class="material-icons left icon-margin">mode_edit</i>Editar</a>
+                        class="material-icons center icon-margin">mode_edit</i></a>
             </td>
         </tr>
         </tbody>
@@ -137,9 +154,19 @@
                     </div>
                 </div>
 
+                <div id="create-person" class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <label class="label-name left">Posicion </label>
+                        <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')" ng-model="personToCreate.work_position"
+                                ng-options="position for position in work_positions" required>
+                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled">
+                        <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled" checked="checked">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -203,6 +230,16 @@
                         <label for="edit_password" ng-class="{'has-error': editForm.password.$invalid}">Password
                             <span ng-show="editForm.password.$invalid" class="has-error">es obligatorio</span>
                         </label>
+                    </div>
+                </div>
+
+                <div id="edit-person" class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <label class="label-name left">Posicion </label>
+                        <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')" ng-model="personToCreate.work_position"
+                                ng-options="position for position in work_positions" required>
+                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                        </select>
                     </div>
                 </div>
 

@@ -103,7 +103,6 @@ dataSource:
         testWhileIdle: true
         testOnReturn: false
         jdbcInterceptors: ConnectionState;StatementCache(max=200)
-#        defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
         defaultTransactionIsolation: 2
 
 #environments:

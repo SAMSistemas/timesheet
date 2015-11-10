@@ -93,10 +93,12 @@ class PersonController {
                 lastname: paramsJSON.get("lastname"),
                 username: paramsJSON.get("username"),
                 password: paramsJSON.get("password"),
+                work_position: WorkPosition.findByDescription(paramsJSON.get("work_position")),
                 enabled: paramsJSON.get("enabled")
         ]
 
         def newPerson = new Person(newPersonParams)
+//        newPerson.work_position = WorkPosition.findByDescription("desarrollador")
 
         if (!newPerson.validate()) {
 
@@ -112,7 +114,9 @@ class PersonController {
                 fieldErrorArray.add(err)
             }
 
-            render fieldErrorArray as JSON
+            render new JSON(fieldErrorArray)
+
+            return
         }
 
         newPerson.save flush: true
