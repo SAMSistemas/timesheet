@@ -98,30 +98,18 @@ class PersonController {
         ]
 
         def newPerson = new Person(newPersonParams)
-//        newPerson.work_position = WorkPosition.findByDescription("desarrollador")
 
         if (!newPerson.validate()) {
 
             response.status = 500
 
-            def fieldErrors = newPerson.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
-
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render new JSON(fieldErrorArray)
+            render newPerson.errors.fieldErrors as JSON
 
             return
         }
 
         newPerson.save flush: true
 
-        response.status = 200
     }
 
     @Transactional
@@ -149,27 +137,13 @@ class PersonController {
 
             response.status = 500
 
-            def fieldErrors = personToUpdate.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render personToUpdate.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         personToUpdate.save flush: true
 
-        response.status = 200
-    }
-
-    class Errorcito {
-        def field
-        def message
     }
 
 }

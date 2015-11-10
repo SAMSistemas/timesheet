@@ -80,22 +80,12 @@ class HolidayController {
 
             response.status = 500
 
-            def fieldErrors = newHoliday.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render newHoliday.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         newHoliday.save flush: true
-
-        response.status = 200
 
         render newHoliday as JSON
     }
@@ -123,22 +113,12 @@ class HolidayController {
 
             response.status = 500
 
-            def fieldErrors = holidayToUpdate.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render holidayToUpdate.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         holidayToUpdate.save flush: true
-
-        response.status = 200
     }
 
 
@@ -160,22 +140,12 @@ class HolidayController {
 
             response.status = 500
 
-            def fieldErrors = holidayToDelete.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render holidayToDelete.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         holidayToDelete.delete flush:true
-
-        response.status = 200
     }
 
 }

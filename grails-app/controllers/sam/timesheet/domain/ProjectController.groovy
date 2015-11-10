@@ -137,22 +137,13 @@ class ProjectController {
 
             response.status = 500
 
-            def fieldErrors = newProject.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render newProject.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         newProject.save flush: true
 
-        response.status = 200
     }
 
     @Transactional
@@ -180,29 +171,15 @@ class ProjectController {
 
             response.status = 500
 
-            def fieldErrors = projectToUpdate.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render projectToUpdate.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         projectToUpdate.save flush: true
 
-        response.status = 200
     }
 
-}
-
-class Errorcito {
-    def field
-    def message
 }
 
 class ProjectView {

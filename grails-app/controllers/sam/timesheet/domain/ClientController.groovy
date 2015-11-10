@@ -79,22 +79,13 @@ class ClientController {
 
             response.status = 500
 
-            def fieldErrors = newClient.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render newClient.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         newClient.save flush: true
 
-        response.status = 200
     }
 
     @Transactional
@@ -120,27 +111,13 @@ class ClientController {
 
             response.status = 500
 
-            def fieldErrors = clientToUpdate.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render clientToUpdate.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         clientToUpdate.save flush: true
 
-        response.status = 200
-    }
-
-    class Errorcito {
-        def field
-        def message
     }
 
 }

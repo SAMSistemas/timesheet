@@ -45,17 +45,7 @@ class JobLogController {
 
             response.status = 500
 
-            def fieldErrors = jobLog.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
-
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            render jobLog.errors.fieldErrors as JSON
 
             return
         }
@@ -80,9 +70,7 @@ class JobLogController {
 
         log.info("RESULTADO -------------->>"+resultData)
 
-
         Document file = reportService.makeReport(resultData)
-
 
         render resultData as JSON
 

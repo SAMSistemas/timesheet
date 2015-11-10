@@ -62,22 +62,13 @@ class TaskTypeController {
 
             response.status = 500
 
-            def fieldErrors = newTaskType.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render newTaskType.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         newTaskType.save flush: true
 
-        response.status = 200
     }
 
     @Transactional
@@ -102,26 +93,13 @@ class TaskTypeController {
 
             response.status = 500
 
-            def fieldErrors = taskTypeToUpdate.errors.fieldErrors
-            def fieldErrorArray = new ArrayList<Errorcito>()
+            render taskTypeToUpdate.errors.fieldErrors as JSON
 
-            for (e in fieldErrors) {
-                Errorcito err = new Errorcito()
-                err.field = e.field
-                err.message = e.defaultMessage
-                fieldErrorArray.add(err)
-            }
-
-            render fieldErrorArray as JSON
+            return
         }
 
         taskTypeToUpdate.save flush: true
 
-        response.status = 200
     }
 
-    class Errorcito {
-        def field
-        def message
-    }
 }

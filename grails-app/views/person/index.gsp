@@ -113,7 +113,8 @@
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="name" name="name" type="text" maxlength="30" ng-model="personToCreate.name" required>
+                        <input id="name" name="name" type="text" maxlength="30" ng-model="personToCreate.name"
+                               required/>
                         <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
                         </label>
@@ -203,7 +204,6 @@
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_lastname" name="lastname" type="text" maxlength="30"
-                               ng-model="personToEdit.lastname"
                                ng-model="personToEdit.lastname" required>
                         <label for="edit_lastname" ng-class="{'has-error': editForm.lastname.$invalid}">Apellido
                             <span ng-show="editForm.lastname.$error.required" class="has-error">es obligatorio</span>
