@@ -39,7 +39,7 @@
         });
 
         $scope.new = function () {
-            $scope.taskTypeToCreate = {name: "", enabled: false};
+            $scope.taskTypeToCreate = {name: "", enabled: true};
             $scope.taskType = {name: "", enabled: false};
 
             // To clear the errors from previos create forms

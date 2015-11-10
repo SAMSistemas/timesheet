@@ -39,7 +39,7 @@
         });
 
         $scope.new = function () {
-            $scope.clientToCreate = {name: "", short_name: "", enabled: false};
+            $scope.clientToCreate = {name: "", short_name: "", enabled: true};
             $scope.client = {name: "", short_name: "", enabled: false};
 
             // To clear the errors from previos create forms

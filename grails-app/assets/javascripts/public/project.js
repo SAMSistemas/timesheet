@@ -50,7 +50,7 @@
         });
 
         $scope.new = function() {
-            $scope.projectToCreate = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: false};
+            $scope.projectToCreate = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: true};
             $scope.project = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: false};
 
             // To clear the errors from previous create forms
