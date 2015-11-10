@@ -38,6 +38,8 @@ class JobLogController {
         jobLog.task_type = TaskType.findOrCreateByName("Asignacion")
         jobLog.date = new Date()
         jobLog.hours = "0"
+        jobLog.observation = ""
+        jobLog.solicitude = 0
 
         if (!jobLog.validate()) {
 
@@ -54,6 +56,8 @@ class JobLogController {
             }
 
             render fieldErrorArray as JSON
+
+            return
         }
 
         jobLog.save(flush: true)
