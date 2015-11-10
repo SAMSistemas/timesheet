@@ -41,13 +41,10 @@
         });
 
         $http.get('/workPosition/all').then(function(response){
-
             var workPositions = response.data;
             for(x in workPositions) {
                 $scope.work_positions.push(workPositions[x].description);
             }
-            console.log($scope.work_positions);
-
         });
 
         $scope.new = function() {
@@ -62,8 +59,11 @@
 
         $scope.create = function() {
             if ($scope.createForm.$valid) {
-                $http.post('/person/create', $scope.personToCreate);
-                $scope.addToTable($scope.people, $scope.personToCreate);
+                $http.post('/person/create', $scope.personToCreate).then(function(){
+                    $scope.addToTable($scope.people, $scope.personToCreate);
+                }, function(){
+
+                });
             }
         };
 
