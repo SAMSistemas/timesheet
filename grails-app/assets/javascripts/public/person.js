@@ -40,6 +40,10 @@
             $scope.people = response.data;
         });
 
+        $http.get('/workPosition/all').then(function(response) {
+            $scope.work_positions = response.data;
+        });
+
         $scope.new = function() {
             $scope.personToCreate = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: true};
             $scope.person = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: false};
@@ -51,6 +55,9 @@
         };
 
         $scope.create = function() {
+
+            console.log($scope.personToCreate);
+
             if ($scope.createForm.$valid) {
                 $http.post('/person/create', $scope.personToCreate).then(function(){
                     $scope.addToTable($scope.people, $scope.personToCreate);

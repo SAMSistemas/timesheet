@@ -163,7 +163,7 @@
                         <label class="label-name left">Posicion</label>
                         <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
-                                ng-options="position for position in work_positions" required>
+                                ng-options="position.description for position in work_positions" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
                     </div>

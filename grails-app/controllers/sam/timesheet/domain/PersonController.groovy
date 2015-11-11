@@ -107,7 +107,7 @@ class PersonController {
                 lastname: paramsJSON.get("lastname"),
                 username: paramsJSON.get("username"),
                 password: paramsJSON.get("password"),
-                work_position: WorkPosition.findByDescription(paramsJSON.get("work_position")),
+                work_position: paramsJSON.get("work_position").get("id"),
                 enabled: paramsJSON.get("enabled")
         ]
 
