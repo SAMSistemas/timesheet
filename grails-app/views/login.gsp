@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Login</title>
+    <asset:javascript src="application.js"></asset:javascript>
     <asset:stylesheet src="vendor/materialize.min.css"></asset:stylesheet>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -53,20 +54,22 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input type="text" name="username" placeholder="Username">
+                                <input id="username" type="text" name="username">
+                                <label for="username">Correo Electrónico</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input type="password" name="password" placeholder="Password">
+                                <input id="password" type="password" name="password" maxlength="8">
+                                <label for="password">Contraseña</label>
                             </div>
                         </div>
 
                         <div class="row center-align">
                             <div class="input-field col s12">
-                                <input class="btn waves-effect waves-light" type="submit" value="Iniciar Sesión"/>
+                                <button class="btn waves-effect waves-light">Iniciar sesión</button>
                             </div>
                         </div>
                     </form>
