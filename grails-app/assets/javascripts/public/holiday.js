@@ -78,7 +78,7 @@ app.controller('holidayController', function ($scope, $http) {
 
     $scope.delete = function() {
 
-        //$http.delete('/holiday/delete/'+ $scope.eventToUpdate.id);
+        $http.delete('/holiday/delete/'+ $scope.eventToUpdate.id);
 
         //Remove event from calendar
         $scope.removeEvent($scope.eventToUpdate);
