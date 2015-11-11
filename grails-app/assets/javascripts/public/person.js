@@ -40,13 +40,6 @@
             $scope.people = response.data;
         });
 
-        $http.get('/workPosition/all').then(function(response){
-            var workPositions = response.data;
-            for(x in workPositions) {
-                $scope.work_positions.push(workPositions[x].description);
-            }
-        });
-
         $scope.new = function() {
             $scope.personToCreate = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: true};
             $scope.person = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: false};

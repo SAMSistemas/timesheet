@@ -14,7 +14,21 @@ class PersonController {
     }
 
     def all() {
-        render Person.list() as JSON
+
+        render(contentType: "application/json") {
+            array {
+                for (p in Person.list()) {
+                    person (
+                            id: p.id,
+                            name: p.name,
+                            lastname: p.lastname,
+                            username: p.username,
+                            work_position: p.work_position.description
+                    )
+                }
+            }
+        }
+
     }
 
     def allAvailableForProject() {
