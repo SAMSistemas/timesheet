@@ -195,9 +195,6 @@
 
                 <div id="edit-project" class="row align-center">
                     <div class="input-field-modal col s12">
-                        %{--<select class="select-modal" ng-change="changeColor('edit-project')"--}%
-                                %{--ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">--}%
-                        %{--</select>--}%
                         <label class="label-name left">Cliente </label>
                         <select id="projectSelect" class="col s12" ng-change="changeColor('edit-project')" ng-model="clientSelected"
                                 ng-options="client.name for client in clients track by client.name">

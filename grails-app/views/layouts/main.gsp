@@ -127,7 +127,7 @@
                 %{--<select id="clientSelect" class="select-modal" ng-change="changeClient()"--}%
                         %{--ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">--}%
                 %{--</select>--}%
-                <select id="clientSelect" class="col s12" ng-model="ttttttttttttttttt" ng-change="changeClient()" ng-options="client.name for client in clients">
+                <select id="clientSelect" class="col s12" ng-model="clientSelected" ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
 
@@ -164,7 +164,7 @@
                 <label class="label-name left">Hasta </label>
                 <div class="row">
                     <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
-                          ng-min-date="2010-01-01"></span>
+                          ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
                 </div>
             </div>
         </div>

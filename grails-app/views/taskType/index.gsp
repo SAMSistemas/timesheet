@@ -48,7 +48,7 @@
         <tr ng-repeat="taskType in taskTypes | orderBy:sortType:sortReverse | filter:search:startsWith | filterByStatus:status"
             class="tr-body-width-and-height">
             <td class="width-10"><i class="material-icons center material-icons-line-heigth">assignment</i></td>
-            <td class="width-40 truncate">{{ taskType.name }}</td>
+            <td class="width-40 truncate">{{ taskType.name | uppercase }}</td>
             <td class="width-25">
                 <div class="switch">
                     <label>

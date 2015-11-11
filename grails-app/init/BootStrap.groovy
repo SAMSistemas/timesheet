@@ -21,8 +21,8 @@ class BootStrap {
         def person4 = (new Person(name:"Silvana", lastname:"Rojo", username: "srojo", password: "SSSSSSSS", picture: null, work_position: project_manager,  enabled: false)).save flush: true
         def project1 = (new Project(name:"Chat", client: client1, short_name: "C", enabled: true, start_date: new Date())).save flush: true
         def asignacion = (new TaskType(name: "Asignacion", enabled: true)).save flush: true
-        (new JobLog(person: person1, project: project1, task_type: asignacion, hours: "3", solicitude: 1,observation: "TEST 2",date: new Date())).save flush: true
-        (new JobLog(person: person2, project: project1, task_type: asignacion, hours: "3", solicitude: 2,observation: "TEST 2",date: new Date())).save flush: true
+        (new JobLog(person: person1, project: project1, task_type: asignacion, hours: "3", solicitude: 168720,observation: "Corregir anchos de columnas de reporte, poner encabezado y pie.  ",date: new Date())).save flush: true
+        (new JobLog(person: person2, project: project1, task_type: asignacion, hours: "3", solicitude: 213485,observation: "Agregar ROL en el ABM de persona (en listado de personas)     ",date: new Date())).save flush: true
         (new Holiday(description: "El dia de hoy" , holiday_date: new Date())).save flush: true
 
         def springContext = WebApplicationContextUtils.getWebApplicationContext( servletContext )

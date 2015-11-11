@@ -80,6 +80,7 @@ endpoints:
 dataSource:
     pooled: true
     dbCreate: create-drop
+#   dbCreate: update
     jmxExport: true
     url: jdbc:mysql://10.0.0.3:3306/cargahoras
     driverClassName: com.mysql.jdbc.Driver

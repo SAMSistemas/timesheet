@@ -31,7 +31,7 @@
         $scope.project = null;
 
         $scope.clients = [];
-        $scope.clientSelected = null;
+        $scope.clientSelected = {};
 
         $scope.createForm = null;
         $scope.editForm = null;
@@ -42,7 +42,6 @@
 
         $http.get('/client/all').then(function (response) {
             $scope.clients = response.data;
-            $scope.clientSelected = $scope.clients[0];
         });
 
         $http.get('/project/all').then(function(response) {
@@ -50,6 +49,7 @@
         });
 
         $scope.new = function() {
+            $scope.clientSelected = {};
             $scope.projectToCreate = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: true};
             $scope.project = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: false};
 
@@ -65,10 +65,13 @@
             $scope.projectToCreate.client_name = $scope.clientSelected.name;
 
             $scope.generateCreateStringDate($scope.dateSelected);
+
             if ($scope.createForm.$valid) {
                 $http.post('/project/create', $scope.projectToCreate);
                 $scope.addToTable($scope.projects, $scope.projectToCreate);
             }
+
+            $scope.clientSelected = {};
         };
 
         $scope.generateCreateStringDate = function(date){
@@ -81,30 +84,37 @@
         };
 
         $scope.edit = function(project) {
+
+            $scope.clientSelected.name = project.client_name;
+            $scope.parseDate(project.start_date);
+
             $scope.projectToEdit = angular.copy(project);
             $scope.project = project;
-            //$scope.clientSelected = $scope.projectToEdit.client_name;
-            //$scope.parseDate($scope.projectToEdit.start_date);
 
             // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
                 $scope.editForm.project_name.$setValidity('available', true);
                 $scope.editForm.sname.$setValidity('available', true);
             }
+
         };
 
-        //$scope.parseDate = function(date) {
-        //    var date_array = date.split('-');
-        //    $scope.dateSelected = new Date(date_array[2],date_array[1],date_array[0]);
-        //};
+        $scope.parseDate = function(date) {
+            var date_array = date.split('-');
+            $scope.dateSelected = new Date(date_array[2],date_array[1]-1,date_array[0]);
+        };
 
         $scope.update = function() {
             $scope.projectToEdit.client_name = $scope.clientSelected.name;
+
             $scope.generateEditStringDate($scope.dateSelected);
+
             if ($scope.editForm.$valid) {
                 $http.put('/project/update', $scope.projectToEdit);
                 $scope.updateInTable($scope.projects, $scope.projectToEdit);
             }
+
+            $scope.clientSelected = {};
         };
 
         $scope.generateEditStringDate = function(date){

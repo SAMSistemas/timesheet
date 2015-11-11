@@ -10,6 +10,7 @@ app.controller('mainController', function ($scope, $http) {
     $scope.projectSelected = null;
     $scope.fromDateSelected = new Date();
     $scope.toDateSelected = new Date();
+    $scope.max = new Date();
 
     $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
@@ -18,7 +19,6 @@ app.controller('mainController', function ($scope, $http) {
         $('select').material_select();
         $('.modal-trigger').leanModal();
         $scope.clients = response.data;
-        $scope.clientSelected = $scope.clients[0]
     });
 
 
@@ -30,25 +30,29 @@ app.controller('mainController', function ($scope, $http) {
 
 
     $scope.export = function(){
+        //var flag = $scope.verifyDates();
+        //if(flag){
+            var filters = {
+                clientName: $scope.clientSelected,
+                projectName: $scope.projectSelected,
+                dateFrom: $scope.dateToString($scope.fromDateSelected),
+                dateTo: $scope.dateToString($scope.toDateSelected)
+            };
+            //$scope.clean();
 
+            $http.post('/jobLog/projectForHour/', filters).then(function (response) {
 
-        var filters = {
-            clientName: $scope.clientSelected,
-            projectName: $scope.projectSelected,
-            dateFrom: $scope.dateToString($scope.fromDateSelected),
-            dateTo: $scope.dateToString($scope.toDateSelected)
-        }
-
-        $http.post('/jobLog/projectForHour/', filters).then(function (response) {
-
-        });
+            });
+        //}else{
+            //$scope.showDateError();
+        //}
     };
 
     $scope.clean = function(){
         $scope.clientSelected = null;
         $scope.projectSelected = null;
-        $scope.fromDateSelected = null;
-        $scope.toDateSelected = null;
+        $scope.fromDateSelected = new Date();
+        $scope.toDateSelected = new Date();
     };
 
     $scope.dateToString = function(date){
@@ -60,6 +64,29 @@ app.controller('mainController', function ($scope, $http) {
         return  day+ '-' +month+ '-' +year;
 
     };
+
+    $scope.verifyDates = function (){
+        var dayFrom = $scope.fromDateSelected.getDate();
+        var dayTo = $scope.toDateSelected.getDate();
+        var flag = false;
+
+        var monthFrom = $scope.fromDateSelected.getMonth();
+        var monthTo = $scope.toDateSelected.getMonth();
+
+        if(monthFrom>monthTo){
+        }else if(monthFrom==monthTo){
+            if(dayFrom>dayTo){
+            }else{
+                flag =  true;
+            }
+        }
+        return flag
+    };
+
+    //$scope.showDateError = function(){
+    //
+    //    $(#errorDate).show()
+    //}
 
 
 
