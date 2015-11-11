@@ -55,9 +55,6 @@
         };
 
         $scope.create = function() {
-
-            console.log($scope.personToCreate);
-
             if ($scope.createForm.$valid) {
                 $http.post('/person/create', $scope.personToCreate).then(function(){
                     $scope.addToTable($scope.people, $scope.personToCreate);

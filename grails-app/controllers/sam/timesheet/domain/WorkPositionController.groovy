@@ -12,6 +12,7 @@ class WorkPositionController {
         render WorkPosition.list() as JSON
     }
 
+
     def show() {
 
         def work_position = WorkPosition.findById(params.id)

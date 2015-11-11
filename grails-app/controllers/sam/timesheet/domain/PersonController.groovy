@@ -23,7 +23,9 @@ class PersonController {
                             name: p.name,
                             lastname: p.lastname,
                             username: p.username,
-                            work_position: p.work_position.description
+                            password: p.password,
+                            work_position: p.work_position.description,
+                            enabled: p.enabled
                     )
                 }
             }
@@ -107,7 +109,7 @@ class PersonController {
                 lastname: paramsJSON.get("lastname"),
                 username: paramsJSON.get("username"),
                 password: paramsJSON.get("password"),
-                work_position: paramsJSON.get("work_position").get("id"),
+                work_position: WorkPosition.findByDescription(paramsJSON.get("work_position")),
                 enabled: paramsJSON.get("enabled")
         ]
 

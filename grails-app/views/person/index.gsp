@@ -163,7 +163,7 @@
                         <label class="label-name left">Posicion</label>
                         <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
-                                ng-options="position.description for position in work_positions" required>
+                                ng-options="work_position.description as work_position.description for work_position in work_positions" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
                     </div>
@@ -244,9 +244,8 @@
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Posicion</label>
                         <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')"
-                                ng-model="personToCreate.work_position"
-                                ng-options="position for position in work_positions" required>
-                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                                ng-model="personToEdit.work_position"
+                                ng-options="work_position.description as work_position.description for work_position in work_positions" required>
                         </select>
                     </div>
                 </div>
