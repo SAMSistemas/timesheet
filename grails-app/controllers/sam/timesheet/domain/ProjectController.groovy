@@ -52,6 +52,31 @@ class ProjectController {
         }
     }
 
+    def allByUsername() {
+
+        def person = Person.findByUsername(params.id)
+
+        render(contentType: "application/json") {
+            array {
+                for (p in Project.findAllWhere(person: person)) {
+                    project (
+                            id: p.id,
+                            name: p.name,
+                            short_name: p.short_name,
+                            start_date: p.start_date.format("dd-MM-yyyy"),
+                            enabled: p.enabled,
+                            client: [
+                                    id: p.client.id,
+                                    name: p.client.name,
+                                    short_name: p.client.short_name,
+                                    enabled: p.client.enabled
+                            ]
+                    )
+                }
+            }
+        }
+    }
+
     def show() {
 
         def project = Project.findById(params.id)
