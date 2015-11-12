@@ -58,7 +58,8 @@ class ProjectController {
 
         render(contentType: "application/json") {
             array {
-                for (p in Project.findAllWhere(person: person)) {
+                for (j in JobLog.findAllWhere(person: person, task_type: TaskType.findByName("Asignacion"))) {
+                    def p = j.project
                     project (
                             id: p.id,
                             name: p.name,
