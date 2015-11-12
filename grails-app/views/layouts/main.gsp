@@ -124,9 +124,6 @@
         <div class="row align-center">
             <div class="input-field-modal col s12">
                 <label class="label-name">Cliente</label>
-                %{--<select id="clientSelect" class="select-modal" ng-change="changeClient()"--}%
-                        %{--ng-model="clientSelected" ng-options="client.name for client in clients track by client.name">--}%
-                %{--</select>--}%
                 <select id="clientSelect" class="col s12" ng-model="clientSelected" ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
@@ -155,6 +152,7 @@
                 <div class="row">
                     <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
                           ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
+                    %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
                 </div>
             </div>
         </div>
@@ -165,13 +163,14 @@
                 <div class="row">
                     <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
                           ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
+                    %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
                 </div>
             </div>
         </div>
 
     </div>
     <div class="modal-footer" style="padding-right: 50px;">
-        <a href="/jobLog/projectForHour/" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
+        <a href="#" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
     </div>
 </div>
