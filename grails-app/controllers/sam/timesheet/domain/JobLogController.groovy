@@ -72,6 +72,37 @@ class JobLogController {
         render status: OK
     }
 
+    @Transactional
+    def create() {
+        def paramsJSON = request.JSON
+
+        def newJoblogParams = [
+                date: formatDate(paramsJSON.get("date")),
+                hours: paramsJSON.get("hours"),
+                solicitude: paramsJSON.get("solicitude"),
+                observation: paramsJSON.get("observation"),
+                project: Project.findByName(paramsJSON.get("project_name")),
+                person: Person.findByUsername(paramsJSON.get("username")),
+                task_type: TaskType.findByName(paramsJSON.get("task_type_name"))
+        ]
+
+        def newJobLog = new JobLog(newJoblogParams)
+
+        if (!newJobLog.validate()) {
+
+            response.status = 500
+
+            render newJobLog.errors.fieldErrors as JSON
+
+            return
+        }
+
+        newJobLog.save flush: true
+
+        render newJobLog
+
+    }
+
     def projectForHour(){
         def paramsJSON = request.JSON
 
