@@ -102,6 +102,8 @@ class TaskTypeController {
 
         taskTypeToUpdate.save flush: true
 
+        render taskTypeToUpdate as JSON
+
     }
 
 }

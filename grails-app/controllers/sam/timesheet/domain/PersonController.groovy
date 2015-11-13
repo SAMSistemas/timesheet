@@ -179,6 +179,8 @@ class PersonController {
 
         personToUpdate.save flush: true
 
+        render personToUpdate as JSON
+
     }
 
 }

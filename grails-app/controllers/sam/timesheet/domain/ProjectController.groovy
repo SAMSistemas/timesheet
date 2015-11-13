@@ -201,6 +201,8 @@ class ProjectController {
 
         projectToUpdate.save flush: true
 
+        render projectToUpdate as JSON
+
     }
 
 }

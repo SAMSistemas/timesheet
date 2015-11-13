@@ -117,6 +117,8 @@ class HolidayController {
         }
 
         holidayToUpdate.save flush: true
+
+        render holidayToUpdate as JSON
     }
 
 

@@ -121,6 +121,8 @@ class ClientController {
 
         clientToUpdate.save flush: true
 
+        render clientToUpdate as JSON
+
     }
 
 }
