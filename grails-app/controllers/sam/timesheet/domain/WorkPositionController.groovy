@@ -4,9 +4,7 @@ import grails.converters.JSON
 
 class WorkPositionController {
 
-    def index() {
-        return
-    }
+    def index() {}
 
     def all() {
         render WorkPosition.list() as JSON

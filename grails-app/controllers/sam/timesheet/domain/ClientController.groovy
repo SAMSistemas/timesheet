@@ -9,9 +9,7 @@ class ClientController {
 
     static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index() {
-        return
-    }
+    def index() {}
 
     def all() {
         render Client.list() as JSON
@@ -122,7 +120,6 @@ class ClientController {
         clientToUpdate.save flush: true
 
         render clientToUpdate as JSON
-
     }
 
 }

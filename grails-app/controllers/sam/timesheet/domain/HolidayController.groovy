@@ -13,9 +13,7 @@ class HolidayController {
 
     static allowedMethods = [create: "POST", update: "PUT", delete: "DELETE"]
 
-    def index() {
-        return
-    }
+    def index() {}
 
     def all() {
         render(contentType: "application/json") {

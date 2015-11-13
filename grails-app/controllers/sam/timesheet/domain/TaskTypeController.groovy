@@ -8,9 +8,7 @@ class TaskTypeController {
 
     static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index() {
-        return
-    }
+    def index() {}
 
     def all() {
         render TaskType.list() as JSON

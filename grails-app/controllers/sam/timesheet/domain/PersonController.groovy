@@ -9,9 +9,7 @@ class PersonController {
 
     static allowedMethods = [create: "POST", update: "PUT"]
 
-    def index() {
-        return
-    }
+    def index() {}
 
     def all() {
 
