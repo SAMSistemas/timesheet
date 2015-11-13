@@ -21,7 +21,7 @@ class JobLogController {
     ReportService reportService
 
 
-    static allowedMethods = [asign: "POST"]
+    static allowedMethods = [create: "POST", asign: "POST"]
 
 
     def all() {
@@ -99,7 +99,7 @@ class JobLogController {
 
         newJobLog.save flush: true
 
-        render newJobLog
+        render newJobLog as JSON
 
     }
 

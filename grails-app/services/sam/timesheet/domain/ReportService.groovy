@@ -22,6 +22,7 @@ import grails.transaction.Transactional
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 
 @Transactional
 class ReportService {
@@ -41,7 +42,8 @@ class ReportService {
             Footer pageFooter = new Footer()
 
             def dateCreated = new Date()
-            pageFooter.setFooter("Fecha de impresión:"+dateCreated.format("dd-MM-yyyy"));
+            LocalTime now = LocalTime.now();
+            pageFooter.setFooter("Fecha de impresión:"+dateCreated.format("dd-MM-yyyy")+"     Hora:"+now.getHour()+":"+now.getMinute());
 
             writer.setPageEvent(pageFooter);
             // step 3
@@ -82,17 +84,6 @@ class ReportService {
         reportTitleCell.setFixedHeight(65f)
         reportTitleCell.setBackgroundColor(BaseColor.LIGHT_GRAY)
         table.addCell(reportTitleCell)
-
-        //ADD DATE of Creation
-//        def dateCreated = new Date()
-//        Phrase datePhrase = new Phrase("Fecha:"+dateCreated.format("dd-MM-yyyy"),font)
-//        PdfPCell dateCreatedCell = new PdfPCell(datePhrase)
-//        dateCreatedCell.setColspan(3)
-//        dateCreatedCell.setFixedHeight(65f);
-//        dateCreatedCell.setBorderColor(BaseColor.LIGHT_GRAY)
-//        dateCreatedCell.setHorizontalAlignment(Element.ALIGN_RIGHT)
-//        dateCreatedCell.setBackgroundColor(BaseColor.LIGHT_GRAY)
-//        table.addCell(dateCreatedCell)
 
         //Filter Report Client Label
         Phrase clientLabel = new Phrase("Cliente: "+filters.client.name,fontLabel);
@@ -176,7 +167,6 @@ class ReportService {
 
             log.info("ROW CREATED!")
 
-            for(int i = 0; i<20;i++){
 
                 PdfPCell dateCell = new PdfPCell(new Phrase(jLog.date.format("dd-MM-yyyy")))
                 table.addCell(dateCell)
@@ -205,7 +195,6 @@ class ReportService {
                 log.info("CELL HOURS CREATED!")
 
                 hourCounter = hourCounter + Float.valueOf(jLog.hours)
-            }
         }
 
 
@@ -245,7 +234,7 @@ class ReportService {
                 table.addCell(footer);
                 table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
 
-                table.addCell(String.format("Pagina %d de", writer.getPageNumber()));
+                table.addCell(String.format("Página %d de", writer.getPageNumber()));
 
                 PdfPCell cell = new PdfPCell(Image.getInstance(total));
 

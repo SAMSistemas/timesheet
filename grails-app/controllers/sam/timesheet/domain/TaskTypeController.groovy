@@ -69,7 +69,7 @@ class TaskTypeController {
 
         newTaskType.save flush: true
 
-        render newTaskType
+        render newTaskType as JSON
 
     }
 

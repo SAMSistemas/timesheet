@@ -165,7 +165,7 @@ class ProjectController {
 
         newProject.save flush: true
 
-        render newProject
+        render newProject as JSON
 
     }
 
