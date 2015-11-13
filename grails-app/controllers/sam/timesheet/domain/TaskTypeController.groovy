@@ -69,6 +69,8 @@ class TaskTypeController {
 
         newTaskType.save flush: true
 
+        render newTaskType
+
     }
 
     @Transactional

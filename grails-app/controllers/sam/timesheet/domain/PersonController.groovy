@@ -142,6 +142,8 @@ class PersonController {
 
         newPerson.save flush: true
 
+        render newPerson
+        
     }
 
     @Transactional

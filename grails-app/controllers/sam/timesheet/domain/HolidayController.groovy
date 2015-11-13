@@ -85,7 +85,7 @@ class HolidayController {
 
         newHoliday.save flush: true
 
-        render newHoliday as JSON
+        render newHoliday
     }
 
 

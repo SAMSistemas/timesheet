@@ -65,6 +65,7 @@ class ClientController {
 
     @Transactional
     def create() {
+
         def paramsJSON = request.JSON
 
         def newClientParams = [
@@ -85,6 +86,8 @@ class ClientController {
         }
 
         newClient.save flush: true
+
+        render newClient as JSON
 
     }
 

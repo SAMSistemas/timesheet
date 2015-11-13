@@ -165,6 +165,8 @@ class ProjectController {
 
         newProject.save flush: true
 
+        render newProject
+
     }
 
     @Transactional
