@@ -30,7 +30,7 @@ app.controller('mainController', function ($scope, $http) {
 
 
     $scope.export = function(){
-        //var flag = $scope.verifyDates();
+        var flag = $scope.verifyDates();
         //if(flag){
             var filters = {
                 clientName: $scope.clientSelected,
@@ -38,13 +38,15 @@ app.controller('mainController', function ($scope, $http) {
                 dateFrom: $scope.dateToString($scope.fromDateSelected),
                 dateTo: $scope.dateToString($scope.toDateSelected)
             };
-            //$scope.clean();
+
 
             $http.post('/jobLog/projectForHour/', filters).then(function (response) {
-
+                window.location.href = '/jobLog/projectForHour/'
+                $scope.clean();
             });
         //}else{
             //$scope.showDateError();
+            //alert("fecha incorrecta!");
         //}
     };
 
@@ -83,10 +85,10 @@ app.controller('mainController', function ($scope, $http) {
         return flag
     };
 
-    //$scope.showDateError = function(){
-    //
-    //    $(#errorDate).show()
-    //}
+    $scope.showDateError = function(){
+
+        $('#errorDate').show();
+    }
 
 
 
