@@ -16,45 +16,66 @@ class ProjectController {
 
     def all() {
 
-        def projectViews = new ArrayList<ProjectView>()
-
-        for (project in Project.list()) {
-            def projectToShow = new ProjectView()
-
-            def client_found = Client.findById(project.client.id)
-            projectToShow.id = project.id
-            projectToShow.client_name = client_found.name
-            projectToShow.project_name = project.name
-            projectToShow.short_name = project.short_name
-            projectToShow.start_date = project.start_date.format("dd-MM-yyyy")
-            projectToShow.enabled = project.enabled
-
-            projectViews.add(projectToShow)
+        render(contentType: "application/json") {
+            array {
+                for (p in Project.list()) {
+                    project (
+                            id: p.id,
+                            client_name: p.client.name,
+                            project_name: p.name,
+                            short_name: p.short_name,
+                            start_date: p.start_date.format("dd-MM-yyyy"),
+                            enabled: p.enabled
+                    )
+                }
+            }
         }
-
-        render projectViews as JSON
     }
 
     def allByClient() {
 
         def client = Client.findByName(params.id)
 
-        def projectViews = new ArrayList<ProjectView>()
-
-        for (project in Project.findAllWhere(client: client)) {
-            def projectToShow = new ProjectView()
-
-            projectToShow.client_name = client.name
-            projectToShow.id = project.id
-            projectToShow.project_name = project.name
-            projectToShow.short_name = project.short_name
-            projectToShow.start_date = project.start_date.format("dd-MM-yyyy")
-            projectToShow.enabled = project.enabled
-
-            projectViews.add(projectToShow)
+        render(contentType: "application/json") {
+            array {
+                for (p in Project.findAllWhere(client: client)) {
+                    project (
+                            id: p.id,
+                            client_name: p.client.name,
+                            project_name: p.name,
+                            short_name: p.short_name,
+                            start_date: p.start_date.format("dd-MM-yyyy"),
+                            enabled: p.enabled
+                    )
+                }
+            }
         }
+    }
 
-        render projectViews as JSON
+    def allByUsername() {
+
+        def person = Person.findByUsername(params.id)
+
+        render(contentType: "application/json") {
+            array {
+                for (j in JobLog.findAllWhere(person: person, task_type: TaskType.findByName("Asignacion"))) {
+                    def p = j.project
+                    project (
+                            id: p.id,
+                            name: p.name,
+                            short_name: p.short_name,
+                            start_date: p.start_date.format("dd-MM-yyyy"),
+                            enabled: p.enabled,
+                            client: [
+                                    id: p.client.id,
+                                    name: p.client.name,
+                                    short_name: p.client.short_name,
+                                    enabled: p.client.enabled
+                            ]
+                    )
+                }
+            }
+        }
     }
 
     def show() {
@@ -180,13 +201,4 @@ class ProjectController {
 
     }
 
-}
-
-class ProjectView {
-    def id
-    def client_name
-    def project_name
-    def short_name
-    def start_date
-    def enabled
 }

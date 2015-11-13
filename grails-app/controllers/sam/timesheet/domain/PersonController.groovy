@@ -30,7 +30,39 @@ class PersonController {
                 }
             }
         }
+    }
 
+    def show() {
+
+        def person = Person.findByUsername(params.id)
+
+        if (person == null) {
+
+            response.status = 500
+
+            render(contentType: "application/json") {
+                error = "El cliente no existe"
+            }
+        }
+
+        render(contentType: "application/json") {[
+                id: person.id,
+                name: person.name,
+                lastname: person.lastname,
+                work_position: [
+                    id: person.work_position.id,
+                    description: person.work_position.description,
+                ],
+                task_types: array {
+                    for (t in TaskType_x_WorkPosition.findAllByWork_position(person.work_position)) {
+                        tasktype (
+                                id: t.task_type.id,
+                                name: t.task_type.name,
+                                enabled: t.task_type.enabled
+                        )
+                    }
+                }
+        ]}
     }
 
     def allAvailableForProject() {
@@ -46,7 +78,7 @@ class PersonController {
         def results = []
 
         for (p in people) {
-            if (!isAsignated(jobLogForProject, p)) {
+            if (!isAssigned(jobLogForProject, p)) {
                 results.add(p)
             }
         }
@@ -60,29 +92,13 @@ class PersonController {
         }
     }
 
-    def isAsignated(joblogs, person) {
+    def isAssigned(joblogs, person) {
         for (j in joblogs) {
             if (person.name == j.person.name) {
                 return true
             }
         }
         return false
-    }
-
-    def show() {
-
-        def person = Person.findById(params.id)
-
-        if (person == null) {
-
-            response.status = 500
-
-            render(contentType: "application/json") {
-                error = "El cliente no existe"
-            }
-        }
-
-        render person as JSON
     }
 
     def existsUsername() {

@@ -18,19 +18,17 @@ class HolidayController {
     }
 
     def all() {
-
-        def holidayViews = new ArrayList<HolidayView>()
-
-        for(holiday in Holiday.list()) {
-            def eventView = new HolidayView()
-            eventView.id = holiday.id
-            eventView.title = holiday.description
-            eventView.start = holiday.holiday_date.format("yyyy-MM-dd")
-
-            holidayViews.add(eventView)
+        render(contentType: "application/json") {
+            array {
+                for (h in Holiday.list()) {
+                    holiday (
+                            id: h.id,
+                            title: h.description,
+                            start: h.holiday_date.format("yyyy-MM-dd"),
+                    )
+                }
+            }
         }
-
-        render holidayViews as JSON
     }
 
     def show() {
@@ -150,10 +148,4 @@ class HolidayController {
         render OK
     }
 
-}
-
-class HolidayView {
-    def id
-    def title
-    def start
 }

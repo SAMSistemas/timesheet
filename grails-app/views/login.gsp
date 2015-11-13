@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Login</title>
-    <asset:javascript src="application.js"></asset:javascript>
     <asset:stylesheet src="vendor/materialize.min.css"></asset:stylesheet>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,12 +30,20 @@
         line-height: 1.5;
     }
 
+    label.has-error {
+        color: red !important;
+    }
+
+    span.has-error {
+        color: red !important;
+        font-size: 0.8rem;
+    }
     </style>
 </head>
 
 <body>
 
-<div class="flex-container">
+<div class="flex-container" ng-app="myApp" ng-controller="loginController">
     <!-- Login Card -->
     <div class="row">
         <div class="s12 m4 l8">
@@ -50,11 +57,11 @@
                         <img class="responsive-img" src="assets/account_box.png" width="145px;" height="145px;">
                     </div>
 
-                    <form class="col s12" action="/login" method="post">
+                    <form class="col s12" name="loginForm" action="/login" method="post" novalidate>
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input id="username" type="text" name="username">
+                                <input id="username" type="text" name="username" maxlength="15" ng-model="user" required>
                                 <label for="username">Correo Electrónico</label>
                             </div>
                         </div>
@@ -62,14 +69,16 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="password" type="password" name="password" maxlength="8">
-                                <label for="password">Contraseña</label>
+                                <input id="password" type="password" name="password" maxlength="8"
+                                       ng-pattern="/[a-zA-Z]{8}/" ng-model="pass" required>
+                                <label for="password" ng-class="{'has-error': loginForm.password.$error.pattern}">Contraseña <span ng-show="loginForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
+                                </label>
                             </div>
                         </div>
 
                         <div class="row center-align">
                             <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light">Iniciar sesión</button>
+                                <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid">Iniciar sesión</button>
                             </div>
                         </div>
                     </form>
@@ -78,6 +87,9 @@
         </div>
     </div>
 </div>
+
+<asset:javascript src="application.js"></asset:javascript>
+<asset:javascript src="public/login.js"></asset:javascript>
 
 </body>
 </html>
