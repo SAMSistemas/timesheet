@@ -165,7 +165,7 @@ class PersonController {
 
         if (personToUpdate == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El cliente no existe"
@@ -181,7 +181,7 @@ class PersonController {
 
         if (!personToUpdate.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render personToUpdate.errors.fieldErrors as JSON
 

@@ -79,7 +79,7 @@ class TaskTypeController {
 
         if (taskTypeToUpdate == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El tipo de tarea no existe"
@@ -91,7 +91,7 @@ class TaskTypeController {
 
         if (!taskTypeToUpdate.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render taskTypeToUpdate.errors.fieldErrors as JSON
 

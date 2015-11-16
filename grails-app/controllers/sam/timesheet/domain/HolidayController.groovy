@@ -95,7 +95,7 @@ class HolidayController {
 
         if (holidayToUpdate == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El feriado no existe"
@@ -107,7 +107,7 @@ class HolidayController {
 
         if (!holidayToUpdate.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render holidayToUpdate.errors.fieldErrors as JSON
 

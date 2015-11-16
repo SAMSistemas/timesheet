@@ -82,7 +82,7 @@ class JobLogController {
 
         if (!jobLog.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render jobLog.errors.fieldErrors as JSON
 

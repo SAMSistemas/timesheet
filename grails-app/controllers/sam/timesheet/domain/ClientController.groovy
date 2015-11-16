@@ -97,7 +97,7 @@ class ClientController {
 
         if (clientToUpdate == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El cliente no existe"
@@ -110,7 +110,7 @@ class ClientController {
 
         if (!clientToUpdate.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render clientToUpdate.errors.fieldErrors as JSON
 

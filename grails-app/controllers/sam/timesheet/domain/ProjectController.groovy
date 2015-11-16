@@ -188,7 +188,7 @@ class ProjectController {
 
         if (projectToUpdate == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El proyecto no existe"
@@ -203,7 +203,7 @@ class ProjectController {
 
         if (!projectToUpdate.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render projectToUpdate.errors.fieldErrors as JSON
 
