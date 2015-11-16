@@ -21,6 +21,13 @@
         font-size: 120% !important;
         padding-right: 40px;
     }
+    /* To center the edit button */
+    .btn-edit-padding {
+        padding: 0px 5px;
+    }
+    .btn i {
+        margin-right: 0 !important;
+    }
     </style>
 </head>
 

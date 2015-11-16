@@ -17,7 +17,8 @@ app.controller('mainController', function ($scope, $http) {
 
     $http.get('/client/all').then(function (response) {
         $('select').material_select();
-        $('.modal-trigger').leanModal();
+        $('.modal-trigger').not('.modal-trigger-applied').leanModal();
+        $('.modal-trigger').addClass('modal-trigger-applied');
         $scope.clients = response.data;
     });
 
@@ -41,7 +42,7 @@ app.controller('mainController', function ($scope, $http) {
 
 
             $http.post('/jobLog/projectForHour/', filters).then(function (response) {
-                window.location.href = '/jobLog/projectForHour/'
+                window.location.href = '/jobLog/projectForHour/';
                 $scope.clean();
             });
         //}else{

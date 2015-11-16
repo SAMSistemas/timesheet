@@ -101,7 +101,7 @@
             <a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
-            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat  modal-trigger"><i class="material-icons left">book</i>Reportes</a>
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"><i class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
             <a href="/holiday" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>

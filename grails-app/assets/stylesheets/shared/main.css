@@ -39,20 +39,9 @@ li.li-no-hover:hover {
 
 }
 
-.icon-margin {
-    margin-right: 5px !important;
-}
-
-.material-icons-line-heigth {
-    line-height: 50px;
-}
-
-*::-moz-placeholder {
-    color: #666666;
-}
-
-.filled-in[type="checkbox"]:not(:checked) + label::after {
-    border: 2px solid #bdbdbd !important;
+.card-title {
+    color: #009688 !important;
+    font-size: 180% !important;
 }
 
 *::-moz-placeholder {
@@ -70,7 +59,7 @@ li.li-no-hover:hover {
     font-size: 80% !important;
 }
 
-.modal {
+.modal{
     max-height: 90% !important;
 }
 
