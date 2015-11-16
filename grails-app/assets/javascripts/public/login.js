@@ -1,6 +1,5 @@
+var app = angular.module('myApp');
 
-    var app = angular.module('myApp');
+app.controller('loginController', function ($scope, $http) {
 
-    app.controller('loginController', function ($scope, $http) {
-
-    })
+})

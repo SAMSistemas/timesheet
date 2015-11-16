@@ -1,7 +1,5 @@
-(function() {
-    var app = angular.module('filters');
-
-    app.filter('filterByStatus', function () {
+angular.module('filters')
+    .filter('filterByStatus', function () {
         return function (items, status) {
             var filtered = [];
 
@@ -22,5 +20,3 @@
             return filtered;
         }
     });
-
-})();
