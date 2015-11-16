@@ -10,6 +10,8 @@ angular.module('myApp')
 
     $scope.searchName = function() {
 
+        $scope.user = sessionStorage.getItem("username");
+
         if (sessionStorage.getItem("name") === null) {
             $http.get('/person/show/' + $scope.user).then(function(response){
                 var user = response.data;
@@ -20,7 +22,6 @@ angular.module('myApp')
             });
         }
 
-        $scope.user = sessionStorage.getItem("username");
         $scope.name = sessionStorage.getItem("name");
     };
 
