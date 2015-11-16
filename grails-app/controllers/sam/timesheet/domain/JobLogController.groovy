@@ -21,16 +21,38 @@ class JobLogController {
     ReportService reportService
 
 
-    static allowedMethods = [create: "POST", asign: "POST"]
+    static allowedMethods = [create: "POST", asign: "POST", all: "POST"]
 
 
     def all() {
 
+        def paramsJSON = request.JSON
+
+        def person = Person.findByUsername(paramsJSON.username)
+
+        if(!person.enabled) {
+            response.status = 404
+
+            render(contentType: "application/json") {
+                code = response.status
+                error = "La persona "+paramsJSON.username+" no esta habilitada"
+            }
+        }
+
         def result = JobLog.findAll {
-            eq('person', Person.findByUsername(params.username))
-            eq('date_month', params.month)
-            eq('date_year', params.year)
+            eq('person', person)
+            eq('date_month', paramsJSON.month)
+            eq('date_year', paramsJSON.year)
             ne('task_type',TaskType.findByName("Asignacion"))
+        }
+
+        if(result.isEmpty()) {
+            response.status = 404
+
+            render(contentType: "application/json") {
+                code = response.status
+                error = "No hay joblogs para la persona "+paramsJSON.username
+            }
         }
 
         render result as JSON

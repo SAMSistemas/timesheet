@@ -56,23 +56,36 @@ class ProjectController {
 
         def person = Person.findByUsername(params.id)
 
+        if(!person.enabled) {
+
+            response.status = 404
+
+            render(contentType: "application/json") {
+                code = response.status
+                error = "La persona "+person.username+" no esta habilitada"
+            }
+        }
+
         render(contentType: "application/json") {
             array {
                 for (j in JobLog.findAllWhere(person: person, task_type: TaskType.findByName("Asignacion"))) {
                     def p = j.project
-                    project (
-                            id: p.id,
-                            name: p.name,
-                            short_name: p.short_name,
-                            start_date: p.start_date.format("dd-MM-yyyy"),
-                            enabled: p.enabled,
-                            client: [
-                                    id: p.client.id,
-                                    name: p.client.name,
-                                    short_name: p.client.short_name,
-                                    enabled: p.client.enabled
-                            ]
-                    )
+
+                    if(p.enabled) {
+                        project(
+                                id: p.id,
+                                name: p.name,
+                                short_name: p.short_name,
+                                start_date: p.start_date.format("dd-MM-yyyy"),
+                                enabled: p.enabled,
+                                client: [
+                                        id        : p.client.id,
+                                        name      : p.client.name,
+                                        short_name: p.client.short_name,
+                                        enabled   : p.client.enabled
+                                ]
+                        )
+                    }
                 }
             }
         }
