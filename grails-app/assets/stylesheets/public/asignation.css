@@ -2,11 +2,6 @@ select {
     display: inherit;
 }
 
-.card-title {
-    color: #009688 !important;
-    font-size: 180% !important;
-}
-
 .div-wrapper {
     padding: 30px 25px 30px 25px;
 }

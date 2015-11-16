@@ -112,7 +112,7 @@
 
 <div  ng-controller="mainController" id="report-modal" class="modal modal-large">
     <div class="modal-content">
-        <h2 class="modal-card-title">Reporte de horas</h2>
+        <h2 class="card-title modal-card-title">Reporte de horas</h2>
 
         %{--Client Select--}%
         <div class="row align-center">

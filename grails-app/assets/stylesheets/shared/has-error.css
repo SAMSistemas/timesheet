@@ -1,0 +1,17 @@
+label.has-error {
+    color: red !important;
+}
+
+span.has-error {
+    color: red !important;
+    font-size: 0.8rem;
+}
+
+button.has-error {
+    color: grey;
+}
+
+button.has-error.transparent-green:hover {
+    color: grey;
+    background-color: #FAFAFA;
+}

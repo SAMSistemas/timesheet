@@ -10,54 +10,6 @@ header, section {
     width: 95%;
 }
 
-a.button-collapse.top-nav {
-    position: absolute;
-    height: 64px;
-    top: 0px;
-    padding-left: 2%;
-    color: #FFF;
-    font-size: 32px;
-    line-height: 64px;
-}
-
-/* Para centrar el boton cerrar sesion */
-#nav-botton-ul {
-    padding-top: 13px;
-}
-
-#nav-botton-li {
-    line-height: 0;
-}
-
-#side-nav {
-    width: 240px;
-}
-
-#side-nav li {
-    padding: 0;
-}
-
-#side-nav .row {
-    margin-bottom: 0;
-}
-
-.user-panel {
-    background-color: #009688;
-}
-
-.user-info {
-    width: 240px;
-    margin-left: 0;
-}
-
-.user-picture-padding {
-    padding: 10px 0 0 10px;
-}
-
-.user-data-padding {
-    padding: 10px 40px 10px 15px;
-}
-
 .card-content-padding {
     padding: 0 20px 0 20px !important;
 }
@@ -87,8 +39,20 @@ li.li-no-hover:hover {
 
 }
 
-.btn-flat {
-    padding: 0 20px 0 20px;
+.icon-margin {
+    margin-right: 5px !important;
+}
+
+.material-icons-line-heigth {
+    line-height: 50px;
+}
+
+*::-moz-placeholder {
+    color: #666666;
+}
+
+.filled-in[type="checkbox"]:not(:checked) + label::after {
+    border: 2px solid #bdbdbd !important;
 }
 
 *::-moz-placeholder {
@@ -106,7 +70,7 @@ li.li-no-hover:hover {
     font-size: 80% !important;
 }
 
-.modal{
+.modal {
     max-height: 90% !important;
 }
 

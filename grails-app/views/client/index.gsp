@@ -84,7 +84,7 @@
     <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="modal-card-title">Crear cliente</h2>
+                <h2 class="card-title modal-card-title">Crear cliente</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
@@ -133,7 +133,7 @@
     <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="modal-card-title">Editar cliente</h2>
+                <h2 class="card-title modal-card-title">Editar cliente</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
