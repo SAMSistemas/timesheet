@@ -71,8 +71,8 @@
             </td>
             <td>
                 <a href="#edit-modal" ng-click="edit(client)"
-                   class="waves-effect waves-light btn btn-edit-padding transparent-green z-depth-0 modal-trigger"><i
-                        class="material-icons left icon-margin">mode_edit</i>Editar</a>
+                   class="waves-effect waves-light btn btn-edit-padding transparent-green z-depth-0 modal-trigger">
+                    <i class="material-icons left icon-margin">mode_edit</i>Editar</a>
             </td>
         </tr>
         </tbody>
@@ -84,8 +84,11 @@
     <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Crear cliente</h2>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="clientToCreate.name" required
@@ -95,10 +98,10 @@
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="createForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
-
                     </div>
                 </div>
 
+                %{--Short Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="sname" name="sname" type="text" maxlength="5" ng-model="clientToCreate.short_name"
@@ -112,20 +115,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="clientToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="createForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': createForm.$invalid}">Guardar</button>
+                <button class="modal-action modal-close waves-effect btn-flat transparent-green"
+                        ng-class="{'has-error': createForm.$invalid}"
+                        ng-disabled="createForm.$invalid">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 
@@ -133,8 +140,11 @@
     <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Editar cliente</h2>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="clientToEdit.name"
@@ -147,6 +157,7 @@
                     </div>
                 </div>
 
+                %{--Short Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_sname" name="sname" type="text" maxlength="5" ng-model="clientToEdit.short_name"
@@ -159,20 +170,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="editForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': editForm.$invalid}">Guardar</button>
+                <button class="modal-action modal-close waves-effect btn-flat transparent-green"
+                        ng-class="{'has-error': editForm.$invalid}"
+                        ng-disabled="editForm.$invalid">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 

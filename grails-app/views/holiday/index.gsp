@@ -18,8 +18,11 @@
     <!--Create Modal-->
     <div id="create_modal" class="modal modal-medium">
         <div class="modal-content">
+
+            %{--Title--}%
             <h2 class="card-title modal-card-title">Crear feriado</h2>
 
+            %{--Name Field--}%
             <div class="row align-center">
                 <div class="input-field-modal col s12">
                     <input id="create_name" type="text" ng-model="eventToCreate.title">
@@ -27,6 +30,7 @@
                 </div>
             </div>
 
+            %{--Date Field--}%
             <div class="row align-center">
                 <div class="input-field-modal col s12">
                     <input id="create_date" type="text" ng-model="eventToCreate.start" disabled>
@@ -34,18 +38,23 @@
                 </div>
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer" style="padding-right: 6px;">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(eventToCreate)">Guardar</a>
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
+                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(eventToCreate)">Guardar</a>
+                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
+
         </div>
     </div>
 
     <!--Edit Modal-->
     <div id="edit_modal" class="modal modal-medium">
         <div class="modal-content">
+
+            %{--Title--}%
             <h2 class="card-title modal-card-title">Editar feriado</h2>
 
+            %{--Name Field--}%
             <div class="row align-center">
                 <div class="input-field-modal col s12">
                     <input id="edit_name" type="text" ng-model="eventToUpdate.title">
@@ -53,6 +62,7 @@
                 </div>
             </div>
 
+            %{--Date Field--}%
             <div class="row align-center">
                 <div class="input-field-modal col s12">
                     <input id="edit_date" type="text" ng-model="eventToUpdate.start" disabled>
@@ -60,11 +70,13 @@
                 </div>
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer" style="padding-right: 6px;">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete()">Eliminar</a>
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="update()">Guardar</a>
-                <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
+                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete()">Eliminar</a>
+                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="update()">Guardar</a>
+                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
+
         </div>
     </div>
 

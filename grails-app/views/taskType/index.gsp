@@ -4,7 +4,9 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'taskType.label', default: 'Tipo de Tareas')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
     <asset:stylesheet src="public/table.css"/>
+
 </head>
 
 <body>
@@ -72,8 +74,11 @@
     <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Crear tipo de tarea</h2>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="taskTypeToCreate.name"
@@ -86,20 +91,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="taskTypeToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="createForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': createForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 
@@ -107,8 +116,11 @@
     <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Editar tipo de tarea</h2>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="taskTypeToEdit.name"
@@ -121,20 +133,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="taskTypeToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="editForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': editForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 

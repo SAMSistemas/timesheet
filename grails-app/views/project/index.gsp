@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'project.label', default: 'Projectos')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
     <asset:stylesheet src="public/table.css"/>
 
     <style>
@@ -124,8 +125,11 @@
     <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Crear projecto</h2>
 
+                %{--Client Select--}%
                 <div id="create-project" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Cliente </label>
@@ -136,6 +140,7 @@
                     </div>
                 </div>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="name" name="name" type="text" maxlength="50" ng-model="projectToCreate.project_name"
@@ -148,6 +153,7 @@
                     </div>
                 </div>
 
+                %{--Short Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="sname" name="sname" type="text" maxlength="10" ng-model="projectToCreate.short_name"
@@ -160,6 +166,7 @@
                     </div>
                 </div>
 
+                %{--Date Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Fecha Inicio </label>
@@ -170,20 +177,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="projectToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="createForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': createForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 
@@ -191,8 +202,11 @@
     <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title--}%
                 <h2 class="card-title modal-card-title">Editar projecto</h2>
 
+                %{--Client Select--}%
                 <div id="edit-project" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Cliente </label>
@@ -203,6 +217,7 @@
                     </div>
                 </div>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_name" name="project_name" type="text" maxlength="50"
@@ -215,6 +230,7 @@
                     </div>
                 </div>
 
+                %{--Short Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_sname" name="sname" type="text" maxlength="10"
@@ -227,6 +243,7 @@
                     </div>
                 </div>
 
+                %{--Date Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Fecha Inicio </label>
@@ -237,20 +254,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="projectToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="editForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': editForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 

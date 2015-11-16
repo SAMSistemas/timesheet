@@ -4,6 +4,7 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'person.label', default: 'Personas')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
     <asset:stylesheet src="public/table.css"/>
 
     <style>
@@ -111,8 +112,11 @@
     <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title Field--}%
                 <h2 class="card-title modal-card-title">Crear persona</h2>
 
+                %{--Name Field --}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="personToCreate.name"
@@ -123,6 +127,7 @@
                     </div>
                 </div>
 
+                %{--Lastname Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="lastname" name="lastname" type="text" maxlength="30"
@@ -133,6 +138,7 @@
                     </div>
                 </div>
 
+                %{--Username Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="username" name="username" type="text" maxlength="15"
@@ -146,6 +152,7 @@
                     </div>
                 </div>
 
+                %{--Password Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="password" name="password" type="text" maxlength="8"
@@ -158,6 +165,7 @@
                     </div>
                 </div>
 
+                %{--Work Position Select--}%
                 <div id="create-person" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Posición</label>
@@ -169,6 +177,7 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled"
@@ -176,14 +185,17 @@
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="createForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': createForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 
@@ -191,8 +203,11 @@
     <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
+
+                %{--Title Field--}%
                 <h2 class="card-title modal-card-title">Editar persona</h2>
 
+                %{--Name Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="personToEdit.name"
@@ -203,6 +218,7 @@
                     </div>
                 </div>
 
+                %{--Lastname Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_lastname" name="lastname" type="text" maxlength="30"
@@ -213,6 +229,7 @@
                     </div>
                 </div>
 
+                %{--Username Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_username" name="username" type="text" maxlength="15"
@@ -227,6 +244,7 @@
                     </div>
                 </div>
 
+                %{--Password Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_password" name="password" type="text" maxlength="8"
@@ -240,6 +258,7 @@
                     </div>
                 </div>
 
+                %{--Work Position Select--}%
                 <div id="edit-person" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Posición</label>
@@ -250,20 +269,24 @@
                     </div>
                 </div>
 
+                %{--Enabled Checkbox--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="personToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>
+
             </div>
 
+            %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
                 <button ng-disabled="editForm.$invalid"
                         class="modal-action modal-close waves-effect btn-flat transparent-green"
                         ng-class="{'has-error': editForm.$invalid}">Guardar</button>
                 <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
             </div>
+
         </form>
     </div>
 

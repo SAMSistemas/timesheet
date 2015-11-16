@@ -3,7 +3,9 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Asignar</title>
+
     <asset:stylesheet href="public/asignation.css"></asset:stylesheet>
+
 </head>
 
 <body>
