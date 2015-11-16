@@ -36,7 +36,6 @@
         $scope.work_positions = [];
 
         $http.get('/person/all').then(function(response) {
-            $('select').material_select();
             $scope.people = response.data;
         });
 

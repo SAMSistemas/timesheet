@@ -34,7 +34,6 @@
         $scope.editForm = null;
 
         $http.get('/taskType/all').then(function (response) {
-            $('select').material_select();
             $scope.taskTypes = response.data;
         });
 
