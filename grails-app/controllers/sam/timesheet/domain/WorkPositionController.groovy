@@ -17,7 +17,7 @@ class WorkPositionController {
 
         if (work_position == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "La ocupación no existe"

@@ -95,7 +95,7 @@ class ProjectController {
 
         if (project == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El cliente no existe"

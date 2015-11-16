@@ -35,7 +35,7 @@ class PersonController {
 
         if (person == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "La persona no existe"

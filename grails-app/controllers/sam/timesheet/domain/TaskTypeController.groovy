@@ -20,7 +20,7 @@ class TaskTypeController {
 
         if (taskType == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El tipo de tarea no existe"

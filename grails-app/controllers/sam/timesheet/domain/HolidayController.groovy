@@ -35,7 +35,7 @@ class HolidayController {
 
         if (holiday == null) {
 
-            response.status = 500
+            response.status = 404
 
             render(contentType: "application/json") {
                 error = "El feriado no existe"
