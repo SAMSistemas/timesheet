@@ -144,7 +144,7 @@ class PersonController {
 
         if (!newPerson.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render newPerson.errors.fieldErrors as JSON
 

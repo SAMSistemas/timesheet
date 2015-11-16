@@ -58,7 +58,7 @@ class TaskTypeController {
 
         if (!newTaskType.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render newTaskType.errors.fieldErrors as JSON
 

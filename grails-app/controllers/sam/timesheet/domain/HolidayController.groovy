@@ -74,7 +74,7 @@ class HolidayController {
 
         if (!newHoliday.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render newHoliday.errors.fieldErrors as JSON
 

@@ -167,7 +167,7 @@ class ProjectController {
 
         if (!newProject.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render newProject.errors.fieldErrors as JSON
 

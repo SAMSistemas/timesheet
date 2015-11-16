@@ -76,7 +76,7 @@ class ClientController {
 
         if (!newClient.validate()) {
 
-            response.status = 500
+            response.status = 422
 
             render newClient.errors.fieldErrors as JSON
 
