@@ -8,16 +8,15 @@ angular.module('myApp')
     $scope.storeData = function() {
         /* Putting user credentials in session storage */
         sessionStorage.setItem("username", $scope.user);
+    };
+
+    $scope.searchName = function() {
+        $scope.user = sessionStorage.getItem("username");
         $http.get('/person/show/'+$scope.user).then(function(response){
             var user = response.data;
             $scope.name = user.name+' '+user.lastname;
             sessionStorage.setItem("name", $scope.name);
         });
-    };
-
-    $scope.searchName = function() {
-        $scope.user = sessionStorage.getItem("username");
-        $scope.name = sessionStorage.getItem("name");
     };
 
     $scope.logOut = function() {

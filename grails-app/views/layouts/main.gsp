@@ -110,7 +110,6 @@
 
 </header>
 
-<div  ng-controller="mainController" id="report-modal" class="modal modal-large">
 <div ng-controller="mainController" id="report-modal" class="modal" style="width: 500px;">
     <div class="modal-content">
         <h2 class="card-title modal-card-title">Reporte de horas</h2>
