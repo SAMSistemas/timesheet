@@ -108,10 +108,10 @@
 
 
     <!--Create Modal-->
-    <div id="create-modal" class="modal modal-width">
+    <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Crear persona</h2>
+                <h2 class="modal-card-title">Crear persona</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
@@ -160,7 +160,7 @@
 
                 <div id="create-person" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name left">Posicion</label>
+                        <label class="label-name left">Posición</label>
                         <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
@@ -188,10 +188,10 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-width">
+    <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Editar persona</h2>
+                <h2 class="modal-card-title">Editar persona</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
@@ -232,7 +232,7 @@
                         <input id="edit_password" name="password" type="text" maxlength="8"
                                ng-model="personToEdit.password"
                                ng-model="personToEdit.password" ng-pattern="/[a-zA-Z]{8}/" required>
-                        <label for="edit_password" ng-class="{'has-error': editForm.password.$invalid}">Password
+                        <label for="edit_password" ng-class="{'has-error': editForm.password.$invalid}">Contraseña
                             <span ng-show="editForm.password.$invalid" class="has-error">es obligatorio</span>
                             <span ng-show="createForm.password.$error.pattern"
                                   class="has-error">debe ser de ocho letras</span>
@@ -242,7 +242,7 @@
 
                 <div id="edit-person" class="row align-center">
                     <div class="input-field-modal col s12">
-                        <label class="label-name left">Posicion</label>
+                        <label class="label-name left">Posición</label>
                         <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')"
                                 ng-model="personToEdit.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>

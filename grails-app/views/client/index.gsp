@@ -4,7 +4,9 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'client.label', default: 'Clientes')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+
     <asset:stylesheet src="public/table.css"/>
+
 </head>
 
 <body>
@@ -79,10 +81,10 @@
 
 
     <!--Create Modal-->
-    <div id="create-modal" class="modal modal-width">
+    <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Crear cliente</h2>
+                <h2 class="modal-card-title">Crear cliente</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
@@ -128,10 +130,10 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-width">
+    <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Editar cliente</h2>
+                <h2 class="modal-card-title">Editar cliente</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">

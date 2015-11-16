@@ -69,10 +69,10 @@
 
 
     <!--Create Modal-->
-    <div id="create-modal" class="modal modal-width">
+    <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Crear tipo de tarea</h2>
+                <h2 class="modal-card-title">Crear tipo de tarea</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
@@ -104,10 +104,10 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-width">
+    <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Editar tipo de tarea</h2>
+                <h2 class="modal-card-title">Editar tipo de tarea</h2>
 
                 <div class="row align-center">
                     <div class="input-field-modal col s12">

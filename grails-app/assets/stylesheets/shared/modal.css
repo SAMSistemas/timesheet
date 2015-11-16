@@ -1,4 +1,8 @@
-.modal-width {
+.modal-medium {
+    width: 400px;
+}
+
+.modal-large {
     width: 600px;
 }
 
@@ -8,6 +12,14 @@
 
 .modal-footer-padding {
     padding: 0px 40px 0px 40px !important;
+}
+
+.modal-card-title {
+    color: #009688 !important;
+    font-size: 180% !important;
+    text-align: center !important;
+    padding-bottom: 20px !important;
+    margin: 0;
 }
 
 .input-field-modal {

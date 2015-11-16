@@ -16,9 +16,9 @@
     <div id='calendar'></div>
 
     <!--Create Modal-->
-    <div id="create_modal" class="modal" style="width: 400px;">
+    <div id="create_modal" class="modal modal-medium">
         <div class="modal-content">
-            <h2 class="card-title" style="text-align: center; color: #009688">Crear feriado</h2>
+            <h2 class="modal-card-title">Crear feriado</h2>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">
@@ -42,9 +42,9 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit_modal" class="modal" style="width: 450px;">
+    <div id="edit_modal" class="modal modal-medium">
         <div class="modal-content">
-            <h2 class="card-title" style="text-align: center; color: #009688">Editar feriado</h2>
+            <h2 class="modal-card-title">Editar feriado</h2>
 
             <div class="row align-center">
                 <div class="input-field-modal col s12">

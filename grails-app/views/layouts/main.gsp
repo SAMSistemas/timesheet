@@ -110,17 +110,11 @@
 
 </header>
 
-<div  ng-controller="mainController" id="report-modal" class="modal" style="width: 500px;">
+<div  ng-controller="mainController" id="report-modal" class="modal modal-large">
     <div class="modal-content">
-        <h2 class="card-title" style="padding-left: 15px; padding-bottom: 20px;">Reporte de horas</h2>
-        %{--Radio Buttons--}%
-        <div class="row align-center" style="padding-bottom: 20px;">
-            <div class="input-field-modal col s12">
-                <input class="with-gap" name="group1" type="radio" id="test3"/>
-                <label for="test3" class="label-radioButton">Reporte de horas por proyecto</label>
-            </div>
-        </div>
+        <h2 class="modal-card-title">Reporte de horas</h2>
 
+        %{--Client Select--}%
         <div class="row align-center">
             <div class="input-field-modal col s12">
                 <label class="label-name">Cliente</label>
@@ -130,7 +124,6 @@
 
             </div>
         </div>
-
 
         %{--Projects Select--}%
         <div class="row align-center">
@@ -144,8 +137,7 @@
             </div>
         </div>
 
-        %{--Date Selection--}%
-
+        %{--From Date Selection--}%
         <div class="row align-center">
             <div class="input-field-modal col s12">
                 <label class="label-name left">Desde </label>
@@ -157,6 +149,7 @@
             </div>
         </div>
 
+        %{--To Date Selection--}%
         <div class="row align-center">
             <div class="input-field-modal col s12">
                 <label class="label-name left">Hasta </label>
@@ -168,8 +161,16 @@
             </div>
         </div>
 
+        %{--Radio Buttons--}%
+        <div class="row align-center">
+            <div class="input-field-modal col s12">
+                <input class="with-gap" name="group1" type="radio" id="test3"/>
+                <label for="test3" class="label-radioButton">Reporte de horas por proyecto</label>
+            </div>
+        </div>
+
     </div>
-    <div class="modal-footer" style="padding-right: 50px;">
+    <div class="modal-footer modal-footer-padding">
         <a href="#" class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
     </div>
@@ -186,6 +187,8 @@
 <script>
     $(".button-collapse").sideNav();
 </script>
+
 <asset:javascript src="public/main.js"/>
+
 </body>
 </html>

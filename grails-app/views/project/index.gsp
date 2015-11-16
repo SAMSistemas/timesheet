@@ -121,10 +121,10 @@
 
 
     <!--Create Modal-->
-    <div id="create-modal" class="modal modal-width">
+    <div id="create-modal" class="modal modal-large">
         <form name="createForm" ng-submit="create()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Crear projecto</h2>
+                <h2 class="modal-card-title">Crear projecto</h2>
 
                 <div id="create-project" class="row align-center">
                     <div class="input-field-modal col s12">
@@ -188,10 +188,10 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-width">
+    <div id="edit-modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content modal-content-padding">
-                <h2 class="card-title card-title-padding">Editar projecto</h2>
+                <h2 class="modal-card-title">Editar projecto</h2>
 
                 <div id="edit-project" class="row align-center">
                     <div class="input-field-modal col s12">
@@ -257,5 +257,6 @@
 </div>
 
 <asset:javascript src="public/project.js"/>
+
 </body>
 </html>
