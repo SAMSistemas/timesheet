@@ -1,7 +1,6 @@
 package sam.timesheet.domain
 
 import grails.converters.JSON
-
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -39,7 +38,19 @@ class PersonController {
             response.status = 500
 
             render(contentType: "application/json") {
-                error = "El cliente no existe"
+                error = "La persona no existe"
+            }
+        }
+
+        if(!person.enabled) {
+
+            response.status = 404
+
+            log.info("Entre al 404")
+
+            render(contentType: "application/json") {
+                code = response.status
+                error = "La persona "+person.username+" no esta habilitada"
             }
         }
 
@@ -53,11 +64,13 @@ class PersonController {
                 ],
                 task_types: array {
                     for (t in TaskType_x_WorkPosition.findAllByWork_position(person.work_position)) {
-                        tasktype (
-                                id: t.task_type.id,
-                                name: t.task_type.name,
-                                enabled: t.task_type.enabled
-                        )
+                        if(t.task_type.enabled) {
+                            tasktype(
+                                    id: t.task_type.id,
+                                    name: t.task_type.name,
+                                    enabled: t.task_type.enabled
+                            )
+                        }
                     }
                 }
         ]}
