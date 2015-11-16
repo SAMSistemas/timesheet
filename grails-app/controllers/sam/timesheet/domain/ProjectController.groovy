@@ -193,6 +193,8 @@ class ProjectController {
             render(contentType: "application/json") {
                 error = "El proyecto no existe"
             }
+
+            return
         }
 
         projectToUpdate.client = Client.findByName(paramsJSON.get("client_name"))

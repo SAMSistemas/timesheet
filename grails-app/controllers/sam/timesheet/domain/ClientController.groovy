@@ -102,6 +102,8 @@ class ClientController {
             render(contentType: "application/json") {
                 error = "El cliente no existe"
             }
+
+            return
         }
 
         clientToUpdate.name = paramsJSON.get("name")

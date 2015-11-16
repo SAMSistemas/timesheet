@@ -100,6 +100,8 @@ class HolidayController {
             render(contentType: "application/json") {
                 error = "El feriado no existe"
             }
+
+            return
         }
 
         holidayToUpdate.description = paramsJSON.get("title")

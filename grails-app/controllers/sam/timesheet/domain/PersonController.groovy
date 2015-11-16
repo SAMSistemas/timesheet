@@ -168,8 +168,10 @@ class PersonController {
             response.status = 404
 
             render(contentType: "application/json") {
-                error = "El cliente no existe"
+                error = "La persona no existe"
             }
+
+            return
         }
 
         personToUpdate.name = paramsJSON.get("name")

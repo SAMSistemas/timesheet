@@ -84,6 +84,8 @@ class TaskTypeController {
             render(contentType: "application/json") {
                 error = "El tipo de tarea no existe"
             }
+
+            return
         }
 
         taskTypeToUpdate.name = paramsJSON.get("name")
