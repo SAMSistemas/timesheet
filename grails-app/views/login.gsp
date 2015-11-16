@@ -60,9 +60,9 @@
                     <form class="col s12" name="loginForm" action="/login" method="post" novalidate>
                         <div class="row">
                             <div class="input-field col s12">
-                                <i class="material-icons prefix">email</i>
+                                <i class="material-icons prefix">accessibility</i>
                                 <input id="username" type="text" name="username" maxlength="15" ng-model="user" required>
-                                <label for="username">Correo Electrónico</label>
+                                <label for="username">Usuario</label>
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
 
                         <div class="row center-align">
                             <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid">Iniciar sesión</button>
+                                <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid" ng-click="storeData()">Iniciar sesión</button>
                             </div>
                         </div>
                     </form>

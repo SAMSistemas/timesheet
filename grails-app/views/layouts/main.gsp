@@ -51,7 +51,7 @@
 
 </head>
 
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="loginController" ng-init="searchName()">
 
 <header>
 
@@ -60,7 +60,7 @@
             <div class="nav-wrapper">
                 <a class="brand-logo">Timesheet</a>
                 <ul id="nav-botton-ul" class="right hide-on-med-and-down">
-                    <li id="nav-botton-li"><a href="/logout" class="waves-effect waves-light btn">Cerrar Sesión</a></li>
+                    <li id="nav-botton-li"><a href="/logout" class="waves-effect waves-light btn" ng-click="logOut()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -80,8 +80,8 @@
                 </div>
 
                 <div class="row user-data-padding">
-                    <span class="white-text truncate">Leandro Alessandrello</span>
-                    <span class="white-text truncate">leandro.alessandrello@samsistemas.com.ar</span>
+                    <span class="white-text truncate">{{ name }}</span>
+                    <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
                 </div>
             </div>
         </li>
@@ -111,6 +111,7 @@
 </header>
 
 <div  ng-controller="mainController" id="report-modal" class="modal modal-large">
+<div ng-controller="mainController" id="report-modal" class="modal" style="width: 500px;">
     <div class="modal-content">
         <h2 class="card-title modal-card-title">Reporte de horas</h2>
 
@@ -189,6 +190,7 @@
 </script>
 
 <asset:javascript src="public/main.js"/>
+<asset:javascript src="public/login.js"/>
 
 </body>
 </html>
