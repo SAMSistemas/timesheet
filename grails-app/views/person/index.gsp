@@ -56,26 +56,20 @@
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search"
-                           placeholder="Ingrese nombre" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese nombre'" ng-model="search.name">
-                    <label for="search_name"></label>
+                    <input-field-text ng-id="search_name" ng-model="search.name"
+                                      ng-placeholder="Ingrese Nombre"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
-                    <input id="search_lastname" class="center search_input" type="search"
-                           placeholder="Ingrese apellido" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese apellido'" ng-model="search.lastname">
-                    <label for="search_lastname"></label>
+                    <input-field-text ng-id="search_lastname" ng-model="search.lastname"
+                                      ng-placeholder="Ingrese Apellido"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-20">
                 <div class="input-field white teal-text">
-                    <input id="search_username" class="center search_input" type="search"
-                           placeholder="Ingrese usuario" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese usuario'" ng-model="search.username">
-                    <label for="search_username"></label>
+                    <input-field-text ng-id="search_username" ng-model="search.username"
+                                      ng-placeholder="Ingrese Usuario"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-20"></th> <!-- Implementar buscador por posicion?? -->

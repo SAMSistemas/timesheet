@@ -31,20 +31,12 @@
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding"></th>
             <th class="th-filter-padding">
-                <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search"
-                           placeholder="Ingrese nombre" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese nombre'" ng-model="search.name">
-                    <label for="search_name"></label>
-                </div>
+                <input-field-text ng-id="search_name" ng-model="search.name"
+                                  ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding">
-                <div class="input-field white teal-text">
-                    <input id="search_sname" class="center search_input" type="search"
-                           placeholder="Ingrese sigla" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese sigla'" ng-model="search.short_name">
-                    <label for="search_sname"></label>
-                </div>
+                <input-field-text ng-id="search_sname" ng-model="search.short_name"
+                                  ng-placeholder="Ingrese Sigla"></input-field-text>
             </th>
             <th class="th-filter-padding">
                 <div class="input-field">

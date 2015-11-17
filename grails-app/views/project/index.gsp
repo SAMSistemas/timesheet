@@ -62,26 +62,20 @@
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
-                    <input id="search_client" class="center search_input" type="search"
-                           placeholder="Ingrese cliente" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese cliente'" ng-model="search.client_name">
-                    <label for="search_client"></label>
+                    <input-field-text ng-id="search_client" ng-model="search.client_name"
+                                      ng-placeholder="Ingrese Cliente"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
-                    <input id="search_name" class="center search_input" type="search"
-                           placeholder="Ingrese nombre" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese nombre'" ng-model="search.project_name">
-                    <label for="search_name"></label>
+                    <input-field-text ng-id="search_name" ng-model="search.project_name"
+                                      ng-placeholder="Ingrese Nombre"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
-                    <input id="search_sname" class="center search_input" type="search"
-                           placeholder="Ingrese sigla" onfocus="placeholder = ''"
-                           onblur="placeholder = 'Ingrese sigla'" ng-model="search.short_name">
-                    <label for="search_sname"></label>
+                    <input-field-text ng-id="search_sname" ng-model="search.short_name"
+                                      ng-placeholder="Ingrese Sigla"></input-field-text>
                 </div>
             </th>
             <th class="th-filter-padding width-15"></th>
