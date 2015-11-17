@@ -13,7 +13,6 @@ class ProjectController {
     def index() {}
 
     def all() {
-
         render(contentType: "application/json") {
             array {
                 for (p in Project.list()) {
@@ -100,9 +99,12 @@ class ProjectController {
             render(contentType: "application/json") {
                 error = "El cliente no existe"
             }
+
+            return
         }
 
         render project as JSON
+
     }
 
     def existsName() {
@@ -113,6 +115,8 @@ class ProjectController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -128,6 +132,8 @@ class ProjectController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -153,6 +159,7 @@ class ProjectController {
 
     @Transactional
     def create() {
+
         def paramsJSON = request.JSON
 
         def newProjectParams = [
@@ -182,6 +189,7 @@ class ProjectController {
 
     @Transactional
     def update() {
+
         def paramsJSON = request.JSON
 
         def projectToUpdate = Project.findById(paramsJSON.get("id"))

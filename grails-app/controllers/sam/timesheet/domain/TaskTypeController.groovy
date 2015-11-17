@@ -25,9 +25,12 @@ class TaskTypeController {
             render(contentType: "application/json") {
                 error = "El tipo de tarea no existe"
             }
+
+            return
         }
 
         render taskType as JSON
+
     }
 
     def existsName() {
@@ -38,6 +41,8 @@ class TaskTypeController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -47,6 +52,7 @@ class TaskTypeController {
 
     @Transactional
     def create() {
+
         def paramsJSON = request.JSON
 
         def newTaskTypeParams = [
@@ -73,6 +79,7 @@ class TaskTypeController {
 
     @Transactional
     def update() {
+
         def paramsJSON = request.JSON
 
         def taskTypeToUpdate = TaskType.findById(paramsJSON.get("id"))

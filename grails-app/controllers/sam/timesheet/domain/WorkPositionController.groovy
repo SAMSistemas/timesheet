@@ -24,8 +24,11 @@ class WorkPositionController {
             render(contentType: "application/json") {
                 error = "La ocupación no existe"
             }
+
+            return
         }
 
         render work_position as JSON
+
     }
 }

@@ -35,6 +35,8 @@ class JobLogController {
                 code = response.status
                 error = "La persona "+paramsJSON.username+" no esta habilitada"
             }
+
+            return
         }
 
         def result = JobLog.findAll {
@@ -45,15 +47,19 @@ class JobLogController {
         }
 
         if(result.isEmpty()) {
+
             response.status = 404
 
             render(contentType: "application/json") {
                 code = response.status
                 error = "No hay joblogs para la persona "+paramsJSON.username
             }
+
+            return
         }
 
         render result as JSON
+
     }
 
     def index(Integer max) {
@@ -67,6 +73,7 @@ class JobLogController {
 
     @Transactional
     def asign() {
+
         def paramsJSON = request.JSON
 
         def jobLog = new JobLog()
@@ -90,6 +97,7 @@ class JobLogController {
         jobLog.save(flush: true)
 
         render status: OK
+
     }
 
     @Transactional
@@ -124,6 +132,7 @@ class JobLogController {
     }
 
     def projectForHour(){
+
         def paramsJSON = request.JSON
 
         if(paramsJSON!=[:]){
@@ -148,6 +157,7 @@ class JobLogController {
         response.setHeader("Content-disposition", "attachment; filename=report.pdf")
         response.setContentLength(data.length)
         response.getOutputStream().write(data)
+
     }
 
     def formatDate(dateInString) {

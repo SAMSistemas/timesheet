@@ -40,9 +40,12 @@ class HolidayController {
             render(contentType: "application/json") {
                 error = "El feriado no existe"
             }
+
+            return
         }
 
         render holiday as JSON
+
     }
 
     def formatDate(dateInString) {
@@ -84,11 +87,13 @@ class HolidayController {
         newHoliday.save flush: true
 
         render newHoliday as JSON
+
     }
 
 
     @Transactional
     def update() {
+
         def paramsJSON = request.JSON
 
         def holidayToUpdate = Holiday.findById(paramsJSON.get("id"))
@@ -119,6 +124,7 @@ class HolidayController {
         holidayToUpdate.save flush: true
 
         render holidayToUpdate as JSON
+
     }
 
 
@@ -134,6 +140,8 @@ class HolidayController {
             render(contentType: "application/json") {
                 error = "El feriado no existe"
             }
+
+            return
         }
 
         if (!holidayToDelete.validate()) {
@@ -148,6 +156,7 @@ class HolidayController {
         holidayToDelete.delete flush: true
 
         render OK
+
     }
 
 }

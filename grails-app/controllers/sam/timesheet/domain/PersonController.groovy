@@ -11,7 +11,6 @@ class PersonController {
     def index() {}
 
     def all() {
-
         render(contentType: "application/json") {
             array {
                 for (p in Person.list()) {
@@ -40,18 +39,20 @@ class PersonController {
             render(contentType: "application/json") {
                 error = "La persona no existe"
             }
+
+            return
         }
 
         if(!person.enabled) {
 
             response.status = 404
 
-            log.info("Entre al 404")
-
             render(contentType: "application/json") {
                 code = response.status
-                error = "La persona "+person.username+" no esta habilitada"
+                error = "La persona " + person.username + " no esta habilitada"
             }
+
+            return
         }
 
         render(contentType: "application/json") {[
@@ -120,6 +121,8 @@ class PersonController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -129,6 +132,7 @@ class PersonController {
 
     @Transactional
     def create() {
+
         def paramsJSON = request.JSON
 
         def newPersonParams = [
@@ -159,6 +163,7 @@ class PersonController {
 
     @Transactional
     def update() {
+
         def paramsJSON = request.JSON
 
         def personToUpdate = Person.findById(paramsJSON.get("id"))

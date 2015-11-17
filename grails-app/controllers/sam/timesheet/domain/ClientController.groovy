@@ -26,9 +26,12 @@ class ClientController {
             render(contentType: "application/json") {
                 error = "El cliente no existe"
             }
+
+            return
         }
 
         render client as JSON
+
     }
 
     def existsName() {
@@ -39,6 +42,8 @@ class ClientController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -54,6 +59,8 @@ class ClientController {
             render(status: 200, contentType: "application/json") {
                 exists = "false"
             }
+
+            return
         }
 
         render(status: 200, contentType: "application/json") {
@@ -91,6 +98,7 @@ class ClientController {
 
     @Transactional
     def update() {
+
         def paramsJSON = request.JSON
 
         def clientToUpdate = Client.findById(paramsJSON.get("id"))
@@ -122,6 +130,7 @@ class ClientController {
         clientToUpdate.save flush: true
 
         render clientToUpdate as JSON
+
     }
 
 }
