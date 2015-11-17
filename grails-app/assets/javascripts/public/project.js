@@ -27,6 +27,7 @@ angular.module('myApp')
         $scope.projectToEdit = null;
         $scope.project = null;
 
+        $scope.enabledClients = [];
         $scope.clients = [];
         $scope.clientSelected = {};
 
@@ -39,6 +40,12 @@ angular.module('myApp')
 
         $http.get('/client/all').then(function (response) {
             $scope.clients = response.data;
+        }, function () {
+
+        });
+
+        $http.get('/client/allEnabled').then(function (response) {
+            $scope.enabledClients = response.data;
         }, function () {
 
         });
@@ -155,6 +162,31 @@ angular.module('myApp')
 
         $scope.changeColor = function (divId) {
             $("#" + divId).css("cssText", " color: #009688 !important;");
+        };
+
+        /* Filter clients by enabled */
+
+        $scope.filter = function(clients) {
+            var result = {};
+            angular.forEach(clients, function(client, key) {
+                if (!client.enabled) {
+                    return;
+                }
+                result[key] = client;
+            });
+            return result;
+        };
+
+        $scope.isEnabled = function(client_name) {
+
+            $scope.enabledClients.forEach(function(client){
+                console.log(client_name);
+                console.log(client.name);
+                if(!client.name.localeCompare(client_name)) {
+                    return true;
+                }
+            });
+            return false;
         };
 
     });

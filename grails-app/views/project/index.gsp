@@ -128,7 +128,7 @@
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Cliente </label>
                         <select id="clientSelect" class="col s12" ng-change="changeColor('create-project')" ng-model="clientSelected"
-                                ng-options="client.name for client in clients track by client.name">
+                                ng-options="client.name for client in enabledClients track by client.name">
                             <option value="" disabled selected> ~ Elija un cliente ~</option>
                         </select>
                     </div>
