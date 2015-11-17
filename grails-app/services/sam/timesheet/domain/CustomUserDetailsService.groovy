@@ -12,7 +12,7 @@ class CustomUserDetailsService implements UserDetailsService {
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Person person = Person.findByUsername(username)
+        Person person = Person.findByUsernameAndEnabled(username, true)
         if (person == null) {
             throw new UsernameNotFoundException(String.format("User %s does not exist!", username))
         }
