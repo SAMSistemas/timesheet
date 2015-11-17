@@ -4,6 +4,8 @@ import grails.converters.JSON
 
 class WorkPositionController {
 
+    static allowedMethods = [all: "GET", show: "GET"]
+
     def index() {}
 
     def all() {

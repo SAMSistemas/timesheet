@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 @Transactional(readOnly = true)
 class ProjectController {
 
-    static allowedMethods = [create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", allByClient: "GET", allByUsername: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 

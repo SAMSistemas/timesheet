@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TaskTypeController {
 
-    static allowedMethods = [create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", show: "GET", existsName: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 

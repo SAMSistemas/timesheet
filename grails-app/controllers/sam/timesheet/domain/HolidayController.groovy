@@ -11,7 +11,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class HolidayController {
 
-    static allowedMethods = [create: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [all: "GET", show: "GET", create: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {}
 

@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ClientController {
 
-    static allowedMethods = [create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 

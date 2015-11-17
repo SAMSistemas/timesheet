@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class PersonController {
 
-    static allowedMethods = [create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", show: "GET", allAvailableForProject: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 
