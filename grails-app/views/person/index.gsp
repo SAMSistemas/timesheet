@@ -72,7 +72,10 @@
                                       ng-placeholder="Ingrese Usuario"></input-field-text>
                 </div>
             </th>
-            <th class="th-filter-padding width-20"></th> <!-- Implementar buscador por posicion?? -->
+            <th class="th-filter-padding width-20">
+                <input-field-text ng-id="search_position" ng-model="search.work_position"
+                                  ng-placeholder="Ingrese Posición"></input-field-text>
+            </th>
             <th class="th-filter-padding width-20">
                 <div class="input-field">
                     <select-status ng-model="status"></select-status>
