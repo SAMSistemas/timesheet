@@ -19,7 +19,7 @@
         <div class="div-wrapper row">
             <h6 class="col s6 label">Clientes habilitados</h6>
 
-            <select name="clientSelect" class="col s6" ng-change="changeClient()" ng-model="clientSelected"
+            <select name="clientSelect" class="col s6 browser-default" ng-change="changeClient()" ng-model="clientSelected"
                     ng-options="client.name for client in clients" required>
                 <option value="" disabled>- Elegí una de las siguientes opciones -</option>
             </select>
@@ -30,7 +30,7 @@
         <div class="div-wrapper row">
             <h6 class="col s6 label">Proyectos habilitados</h6>
 
-            <select name="projectSelect" class="col s6" ng-change="changeProject()" ng-model="projectSelected"
+            <select name="projectSelect" class="col s6 browser-default" ng-change="changeProject()" ng-model="projectSelected"
                     ng-options="project.project_name for project in projects"
                     ng-disabled="myForm.clientSelect.$error.required" required>
                 <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
@@ -42,7 +42,7 @@
         <div class="div-wrapper row">
             <h6 class="col s6 label">Personas habilitados</h6>
 
-            <select name="personSelect" class="col s6" ng-change="changePerson()" ng-model="personSelected"
+            <select name="personSelect" class="col s6 browser-default" ng-change="changePerson()" ng-model="personSelected"
                     ng-options="person.name for person in people" ng-disabled="myForm.projectSelect.$error.required"
                     required>
                 <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
