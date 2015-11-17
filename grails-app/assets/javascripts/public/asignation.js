@@ -11,14 +11,14 @@ angular.module('myApp')
 
         $scope.confirmation = "";
 
-        $http.get('/client/all').then(function (response) {
+        $http.get('/client/allEnabled').then(function (response) {
             $scope.clients = response.data;
         }, function () {
 
         });
 
         $scope.changeClient = function () {
-            $http.get('/project/allByClient/' + $scope.clientSelected.name).then(function (response) {
+            $http.get('/project/allEnabledByClient/' + $scope.clientSelected.name).then(function (response) {
                 $scope.projects = response.data;
             }, function () {
 
@@ -26,7 +26,7 @@ angular.module('myApp')
         };
 
         $scope.changeProject = function () {
-            $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
+            $http.get('/person/allEnabledAndAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
                 $scope.people = response.data;
             }, function () {
 
@@ -43,7 +43,7 @@ angular.module('myApp')
                 if (response.status === 200) {
                     $scope.confirmation = "Se asigno la persona al proyecto";
                     $scope.personSelected = null;
-                    $http.get('/person/allAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
+                    $http.get('/person/allEnabledAndAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
                         $scope.people = response.data;
                     }, function () {
 

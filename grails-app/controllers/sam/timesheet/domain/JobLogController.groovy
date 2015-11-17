@@ -79,7 +79,7 @@ class JobLogController {
         def jobLog = new JobLog()
         jobLog.person = Person.findByName(paramsJSON.get("person"))
         jobLog.project = Project.findByName(paramsJSON.get("project"))
-        jobLog.task_type = TaskType.findOrCreateByName("Asignacion")
+        jobLog.task_type = TaskType.findByName("Asignacion")
         jobLog.date = new Date()
         jobLog.hours = "0"
         jobLog.observation = ""
@@ -96,7 +96,7 @@ class JobLogController {
 
         jobLog.save(flush: true)
 
-        render status: OK
+        render jobLog
 
     }
 

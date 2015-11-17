@@ -7,12 +7,16 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ClientController {
 
-    static allowedMethods = [all: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", allEnabled: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 
     def all() {
         render Client.list() as JSON
+    }
+
+    def allEnabled() {
+        render Client.findAllByEnabled(true) as JSON
     }
 
     def show() {

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 @Transactional(readOnly = true)
 class ProjectController {
 
-    static allowedMethods = [all: "GET", allByClient: "GET", allByUsername: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", allEnabledByClient: "GET", allByUsername: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 
@@ -29,13 +29,13 @@ class ProjectController {
         }
     }
 
-    def allByClient() {
+    def allEnabledByClient() {
 
         def client = Client.findByName(params.id)
 
         render(contentType: "application/json") {
             array {
-                for (p in Project.findAllWhere(client: client)) {
+                for (p in Project.findAllWhere(client: client, enabled: true)) {
                     project (
                             id: p.id,
                             client_name: p.client.name,

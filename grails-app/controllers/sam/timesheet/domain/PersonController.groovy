@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class PersonController {
 
-    static allowedMethods = [all: "GET", show: "GET", allAvailableForProject: "GET", create: "POST", update: "PUT"]
+    static allowedMethods = [all: "GET", show: "GET", allEnabledAndAvailableForProject: "GET", create: "POST", update: "PUT"]
 
     def index() {}
 
@@ -77,7 +77,7 @@ class PersonController {
         ]}
     }
 
-    def allAvailableForProject() {
+    def allEnabledAndAvailableForProject() {
 
         def project = Project.findByName(params.id)
 
@@ -85,7 +85,7 @@ class PersonController {
 
         def jobLogForProject = JobLog.findAllByProjectAndTask_type(project, taskType)
 
-        def people = Person.findAll()
+        def people = Person.findAllByEnabled(true)
 
         def results = []
 
