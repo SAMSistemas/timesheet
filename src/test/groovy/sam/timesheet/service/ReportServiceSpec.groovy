@@ -1,6 +1,7 @@
 package sam.timesheet.service
 
 import grails.test.mixin.TestFor
+import sam.timesheet.domain.ReportService
 import spock.lang.Specification
 
 /**
@@ -11,6 +12,7 @@ class ReportServiceSpec extends Specification {
 
     def setup() {
     }
+
 
     def cleanup() {
     }
