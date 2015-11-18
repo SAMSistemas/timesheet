@@ -17,36 +17,39 @@
     <g:layoutHead/>
     <style>
 
-        .select-modal input.select-dropdown {
-            color: #757575 !important;
-            border-color: #bdbdbd !important;
-            margin-bottom: 30px !important;
-            line-height: 3rem !important;
-        }
+    .select-modal input.select-dropdown {
+        color: #757575 !important;
+        border-color: #bdbdbd !important;
+        margin-bottom: 30px !important;
+        line-height: 3rem !important;
+    }
 
-        .select-modal span.caret {
-            top: 7px !important;
-            color: #757575 !important;
-        }
+    .select-modal span.caret {
+        top: 7px !important;
+        color: #757575 !important;
+    }
 
-        .combodate select {
-            display: inline;
-            text-align: center;
-            color: #009688;
-            width: 20% !important;
-        }
+    .combodate select {
+        display: inline;
+        text-align: center;
+        color: #009688;
+        width: 20% !important;
+    }
 
-        .combodate{
-            margin-left: 10%;
-        }
+    .label-name {
+        color: #009688 !important;
+        font-size: 120% !important;
+        padding-right: 40px;
+    }
 
-        #clientSelect{
-            display: inline;
-        }
+    #clientSelect {
+        display: inline;
+    }
 
-        #projectSelect{
-            display: inline;
-        }
+    #projectSelect {
+        display: inline;
+    }
+
     </style>
 
 </head>
@@ -60,7 +63,8 @@
             <div class="nav-wrapper">
                 <a class="brand-logo">Timesheet</a>
                 <ul id="nav-botton-ul" class="right hide-on-med-and-down">
-                    <li id="nav-botton-li"><a href="/logout" class="waves-effect waves-light btn" ng-click="logOut()">Cerrar Sesión</a></li>
+                    <li id="nav-botton-li"><a href="/logout" class="waves-effect waves-light btn"
+                                              ng-click="logOut()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -86,31 +90,38 @@
             </div>
         </li>
         <li>
-            <a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal</a>
+            <a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal
+            </a>
         </li>
         <li>
-            <a href="/client" class="waves-effect waves-teal btn-flat"><i class="material-icons left">business</i>Clientes</a>
+            <a href="/client" class="waves-effect waves-teal btn-flat"><i
+                    class="material-icons left">business</i>Clientes</a>
         </li>
         <li>
-            <a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos</a>
+            <a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos
+            </a>
         </li>
         <li>
-            <a href="/taskType" class="waves-effect waves-teal btn-flat"><i class="material-icons left">assignment</i>Tipo de Tarea</a>
+            <a href="/taskType" class="waves-effect waves-teal btn-flat"><i
+                    class="material-icons left">assignment</i>Tipo de Tarea</a>
         </li>
         <li>
-            <a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Asignar</a>
+            <a href="/jobLog/asignation" class="waves-effect waves-teal btn-flat"><i
+                    class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
-            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"><i class="material-icons left">book</i>Reportes</a>
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"><i
+                    class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
-            <a href="/holiday" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados</a>
+            <a href="/holiday" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados
+            </a>
         </li>
     </ul>
 
 </header>
 
-<div ng-controller="mainController" id="report-modal" class="modal" style="width: 500px;">
+<div ng-controller="mainController" id="report-modal" class="modal modal-large">
     <div class="modal-content">
         <h2 class="card-title modal-card-title">Reporte de horas</h2>
 
@@ -118,7 +129,8 @@
         <div class="row align-center">
             <div class="input-field-modal col s12">
                 <label class="label-name">Cliente</label>
-                <select id="clientSelect" class="col s12" ng-model="clientSelected" ng-change="changeClient()" ng-options="client.name for client in clients">
+                <select id="clientSelect" class="col s12 browser-default" ng-model="clientSelected"
+                        ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
 
@@ -130,7 +142,8 @@
             <div class="input-field-modal col s12">
                 <label class="label-name">Proyecto</label>
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
-                <select id="projectSelect" class="col s12" ng-model="projectSelected" ng-options="project.project_name for project in projects">
+                <select id="projectSelect" class="col s12 browser-default" ng-model="projectSelected"
+                        ng-options="project.project_name for project in projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                 </select>
 
@@ -140,7 +153,8 @@
         %{--From Date Selection--}%
         <div class="row align-center">
             <div class="input-field-modal col s12">
-                <label class="label-name left">Desde </label>
+                <label class="label-name left">Desde</label>
+
                 <div class="row">
                     <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
                           ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
@@ -152,7 +166,8 @@
         %{--To Date Selection--}%
         <div class="row align-center">
             <div class="input-field-modal col s12">
-                <label class="label-name left">Hasta </label>
+                <label class="label-name left">Hasta</label>
+
                 <div class="row">
                     <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
                           ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
@@ -170,6 +185,7 @@
         </div>
 
     </div>
+
     <div class="modal-footer modal-footer-padding">
         <a href class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
         <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>

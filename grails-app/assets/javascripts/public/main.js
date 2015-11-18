@@ -20,7 +20,7 @@ angular.module('myApp')
         });
 
         $scope.changeClient = function () {
-            $http.get('/project/allByClient/' + $scope.clientSelected.name).then(function (response) {
+            $http.get('/project/allEnabledByClient/' + $scope.clientSelected.name).then(function (response) {
                 $scope.projects = response.data;
             }, function () {
 
@@ -42,7 +42,7 @@ angular.module('myApp')
                 window.location.href = '/jobLog/projectForHour/';
                 $scope.clean();
             }, function () {
-
+                $scope.clean();
             });
             //}else{
             //$scope.showDateError();
