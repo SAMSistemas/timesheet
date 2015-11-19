@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Login</title>
+    <asset:stylesheet src="shared/has-error.css"></asset:stylesheet>
     <asset:stylesheet src="vendor/materialize.min.css"></asset:stylesheet>
 
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,7 +17,7 @@
 
     .login-card {
         background-color: white;
-        height: 650px;
+        height: 600px;
         width: 500px;
         margin-top: 20px;
     }
@@ -30,13 +31,9 @@
         line-height: 1.5;
     }
 
-    label.has-error {
-        color: red !important;
-    }
-
-    span.has-error {
-        color: red !important;
-        font-size: 0.8rem;
+    .logo {
+        width: 100px;
+        height: auto;
     }
     </style>
 </head>
@@ -54,7 +51,7 @@
                     </div>
 
                     <div class="row center-align">
-                        <img class="responsive-img" src="assets/account_box.png" width="145px;" height="145px;">
+                        <img class="logo" src="assets/timesheet-logo.png">
                     </div>
 
                     <div class="row">
