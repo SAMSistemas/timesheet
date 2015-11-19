@@ -38,7 +38,7 @@
     <h3 class="card-title">Lista de Personas</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
-            class="material-icons left">person_add</i>Crear</a>
+            class="material-icons left" style="padding-right: 15px;">person_add</i>Crear</a>
 
     <table class="responsive-table striped centered">
 
@@ -47,9 +47,10 @@
             <th class="width-5"></th>
             <th class="width-15"><a href ng-click="reverseOrder(name)">Nombre</a></th>
             <th class="width-15"><a href ng-click="reverseOrder(lastname)">Apellido</a></th>
-            <th class="width-20"><a href ng-click="reverseOrder(username)">Usuario</a></th>
+            <th class="width-15"><a href ng-click="reverseOrder(username)">Usuario</a></th>
             <th class="width-20"><a href ng-click="reverseOrder(work_position)">Posicion</a></th>
-            <th class="width-20"><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
+            <th class="width-10"><a href ng-click="reverseOrder(work_hours)">Asignacion</a></th>
+            <th class="width-15"><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
             <th class="width-5"></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
@@ -66,7 +67,7 @@
                                       ng-placeholder="Ingrese Apellido"></input-field-text>
                 </div>
             </th>
-            <th class="th-filter-padding width-20">
+            <th class="th-filter-padding width-15">
                 <div class="input-field white teal-text">
                     <input-field-text ng-id="search_username" ng-model="search.username"
                                       ng-placeholder="Ingrese Usuario"></input-field-text>
@@ -76,7 +77,11 @@
                 <input-field-text ng-id="search_position" ng-model="search.work_position"
                                   ng-placeholder="Ingrese Posición"></input-field-text>
             </th>
-            <th class="th-filter-padding width-20">
+            <th class="th-filter-padding width-10">
+                <input-field-text ng-id="search_hours" ng-model="search.work_hours"
+                                  ng-placeholder="Ingrese Horas"></input-field-text>
+            </th>
+            <th class="th-filter-padding width-15">
                 <div class="input-field">
                     <select-status ng-model="status"></select-status>
                 </div>
@@ -91,9 +96,10 @@
             <td class="width-5"><i class="material-icons center material-icons-line-heigth">person</i></td>
             <td class="width-15 truncate">{{ person.name }}</td>
             <td class="width-15 truncate">{{ person.lastname }}</td>
-            <td class="width-20 truncate">{{ person.username }}</td>
+            <td class="width-15 truncate">{{ person.username }}</td>
             <td class="width-20 truncate">{{ person.work_position | uppercase }}</td>
-            <td class="width-20">
+            <td class="width-10 truncate">{{ person.work_hours }}</td>
+            <td class="width-15">
                 <div class="switch">
                     <label>
                         <input disabled type="checkbox" ng-model="person.enabled">
@@ -176,6 +182,18 @@
                         <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
+                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                        </select>
+                    </div>
+                </div>
+
+                %{--Hours Field--}%
+                <div id="create-person" class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <label class="label-name left">Horas</label>
+                        <select id="hours" class="col s12" ng-change="changeColor('create-person')"
+                                ng-model="personToCreate.work_hours"
+                                ng-options="work_hour for work_hour in work_hours" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
                     </div>
@@ -269,6 +287,18 @@
                         <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')"
                                 ng-model="personToEdit.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
+                        </select>
+                    </div>
+                </div>
+
+                %{--Hours Field--}%
+                <div id="edit-person" class="row align-center">
+                    <div class="input-field-modal col s12">
+                        <label class="label-name left">Horas</label>
+                        <select id="edit_hours" class="col s12" ng-change="changeColor('edit-person')"
+                                ng-model="personToCreate.work_hours"
+                                ng-options="work_hour for work_hour in work_hours" required>
+                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
                     </div>
                 </div>

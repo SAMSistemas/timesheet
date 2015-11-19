@@ -20,6 +20,7 @@ class PersonController {
                             lastname: p.lastname,
                             username: p.username,
                             password: p.password,
+                            work_hours: p.work_hours,
                             work_position: p.work_position.description,
                             enabled: p.enabled
                     )
@@ -59,6 +60,7 @@ class PersonController {
                 id: person.id,
                 name: person.name,
                 lastname: person.lastname,
+                work_hours: person.work_hours,
                 work_position: [
                     id: person.work_position.id,
                     description: person.work_position.description,
@@ -140,6 +142,7 @@ class PersonController {
                 lastname: paramsJSON.get("lastname"),
                 username: paramsJSON.get("username"),
                 password: paramsJSON.get("password"),
+                work_hours: paramsJSON.get("work_hours"),
                 work_position: WorkPosition.findByDescription(paramsJSON.get("work_position")),
                 enabled: paramsJSON.get("enabled")
         ]
@@ -183,6 +186,7 @@ class PersonController {
         personToUpdate.lastname = paramsJSON.get("lastname")
         personToUpdate.username = paramsJSON.get("username")
         personToUpdate.password = paramsJSON.get("password")
+        personToUpdate.work_hours = paramsJSON.get("work_hours")
         personToUpdate.work_position = WorkPosition.findByDescription(paramsJSON.get("work_position"))
         personToUpdate.enabled = paramsJSON.get("enabled")
 
