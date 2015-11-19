@@ -1,0 +1,28 @@
+/*
+* This is a manifest file that'll be compiled into login.css, which will include all the files listed below.
+*
+*= require vendor/materialize.min.css
+*= require shared/has-error.css
+*= require_self
+*/
+
+body, html {
+    margin: 0;
+    min-height: 100%;
+    background-image: radial-gradient(ellipse farthest-side at center top, #00a8ff 50%, #0078c0 75%, #004890 90%, #003078 100%);
+}
+
+.login-card {
+    height: 600px;
+    width: 500px;
+    margin: 20px auto 0px auto; /* to center the card */
+}
+
+.material-icons {
+    line-height: 1.5; /* to align the icon to the input */
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
