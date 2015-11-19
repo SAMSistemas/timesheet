@@ -183,7 +183,7 @@
                 <div id="create-person" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Posición</label>
-                        <select id="positionCreateSelect" class="col s12" ng-change="changeColor('create-person')"
+                        <select id="positionCreateSelect" class="col s12 browser-default" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
@@ -195,7 +195,7 @@
                 <div id="create-hours" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Horas</label>
-                        <select id="hours" class="col s12" ng-change="changeColor('create-hours')"
+                        <select id="hours" class="col s12 browser-default" ng-change="changeColor('create-hours')"
                                 ng-model="personToCreate.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
@@ -288,7 +288,7 @@
                 <div id="edit-person" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Posición</label>
-                        <select id="positionEditSelect" class="col s12" ng-change="changeColor('edit-person')"
+                        <select id="positionEditSelect" class="col s12 browser-default" ng-change="changeColor('edit-person')"
                                 ng-model="personToEdit.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
                         </select>
@@ -299,7 +299,7 @@
                 <div id="edit-hours" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Horas</label>
-                        <select id="edit_hours" class="col s12" ng-change="changeColor('edit-hours')"
+                        <select id="edit_hours" class="col s12 browser-default" ng-change="changeColor('edit-hours')"
                                 ng-model="personToEdit.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
