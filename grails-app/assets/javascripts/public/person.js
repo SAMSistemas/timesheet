@@ -30,6 +30,7 @@ angular.module('myApp')
         $scope.createForm = null;
         $scope.editForm = null;
 
+        $scope.work_hours = [4,6,8];
         $scope.work_positions = [];
 
         $http.get('/person/all').then(function (response) {
@@ -50,10 +51,11 @@ angular.module('myApp')
                 lastname: "",
                 username: "",
                 password: "",
+                work_hours: "",
                 work_position: "",
                 enabled: true
             };
-            $scope.person = {name: "", lastname: "", username: "", password: "", work_position: "", enabled: false};
+            $scope.person = {name: "", lastname: "", username: "", password: "", work_hours: "", work_position: "", enabled: false};
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {

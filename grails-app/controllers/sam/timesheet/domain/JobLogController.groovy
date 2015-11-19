@@ -46,18 +46,6 @@ class JobLogController {
             ne('task_type',TaskType.findByName("Asignacion"))
         }
 
-        if(result.isEmpty()) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                code = response.status
-                error = "No hay joblogs para la persona "+paramsJSON.username
-            }
-
-            return
-        }
-
         render result as JSON
 
     }
