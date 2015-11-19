@@ -16,6 +16,10 @@
         display: inline;
     }
 
+    #hours, #edit_hours {
+        display: inline;
+    }
+
     .label-name {
         color: #009688 !important;
         font-size: 120% !important;
@@ -188,10 +192,10 @@
                 </div>
 
                 %{--Hours Field--}%
-                <div id="create-person" class="row align-center">
+                <div id="create-hours" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Horas</label>
-                        <select id="hours" class="col s12" ng-change="changeColor('create-person')"
+                        <select id="hours" class="col s12" ng-change="changeColor('create-hours')"
                                 ng-model="personToCreate.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
@@ -292,11 +296,11 @@
                 </div>
 
                 %{--Hours Field--}%
-                <div id="edit-person" class="row align-center">
+                <div id="edit-hours" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Horas</label>
-                        <select id="edit_hours" class="col s12" ng-change="changeColor('edit-person')"
-                                ng-model="personToCreate.work_hours"
+                        <select id="edit_hours" class="col s12" ng-change="changeColor('edit-hours')"
+                                ng-model="personToEdit.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
                             <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                         </select>
