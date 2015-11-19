@@ -63,7 +63,7 @@
             <div class="nav-wrapper">
                 <a class="brand-logo">Timesheet</a>
                 <ul id="nav-botton-ul" class="right hide-on-med-and-down">
-                    <li id="nav-botton-li"><a href="/logout" class="waves-effect waves-light btn"
+                    <li id="nav-botton-li"><a href class="waves-effect waves-light btn"
                                               ng-click="logOut()">Cerrar Sesión</a></li>
                 </ul>
             </div>

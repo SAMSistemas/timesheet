@@ -16,7 +16,7 @@
 
     .login-card {
         background-color: white;
-        height: 600px;
+        height: 650px;
         width: 500px;
         margin-top: 20px;
     }
@@ -57,11 +57,19 @@
                         <img class="responsive-img" src="assets/account_box.png" width="145px;" height="145px;">
                     </div>
 
-                    <form class="col s12" name="loginForm" action="/login" method="post" novalidate>
+                    <div class="row">
+                        <div class="input-field col s12 center-align">
+                            <span class="has-error">{{errorMsg}}</span>
+                        </div>
+                    </div>
+
+                    <form class="col s12" name="loginForm" ng-submit="login()" novalidate>
+
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">accessibility</i>
-                                <input id="username" type="text" name="username" maxlength="15" ng-model="user" required>
+                                <input id="username" type="text" name="username" maxlength="15" ng-model="user"
+                                       required>
                                 <label for="username">Usuario</label>
                             </div>
                         </div>
@@ -71,14 +79,18 @@
                                 <i class="material-icons prefix">vpn_key</i>
                                 <input id="password" type="password" name="password" maxlength="8"
                                        ng-pattern="/[a-zA-Z]{8}/" ng-model="pass" required>
-                                <label for="password" ng-class="{'has-error': loginForm.password.$error.pattern}">Contraseña <span ng-show="loginForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
+                                <label for="password"
+                                       ng-class="{'has-error': loginForm.password.$error.pattern}">Contraseña <span
+                                        ng-show="loginForm.password.$error.pattern"
+                                        class="has-error">debe ser de ocho letras</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="row center-align">
                             <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid" ng-click="storeData()">Iniciar sesión</button>
+                                <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid"
+                                        ng-click="storeData()">Iniciar sesión</button>
                             </div>
                         </div>
                     </form>
