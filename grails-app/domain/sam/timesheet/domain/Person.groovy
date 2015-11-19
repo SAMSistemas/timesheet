@@ -17,7 +17,7 @@ class Person {
     static constraints = {
         name blank: false, nullable: false, maxSize: 30
         lastname blank: false, nullable: false, maxSize: 30
-        username blank: false, nullable: false, unique: true, maxSize: 15
+        username blank: false, nullable: false, unique: true, maxSize: 25
         password blank: false, nullable: false, matches: "[a-zA-Z]{8}"
         work_hours blank: false, nullable: false, range: 4.step(10,2,{})
         picture nullable: true

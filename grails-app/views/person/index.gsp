@@ -155,7 +155,7 @@
                 %{--Username Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="username" name="username" type="text" maxlength="15"
+                        <input id="username" name="username" type="text" maxlength="25"
                                ng-model="personToCreate.username" required
                                available
                                url-to-check="/person/existsUsername/">
@@ -258,7 +258,7 @@
                 %{--Username Field--}%
                 <div class="row align-center">
                     <div class="input-field-modal col s12">
-                        <input id="edit_username" name="username" type="text" maxlength="15"
+                        <input id="edit_username" name="username" type="text" maxlength="25"
                                ng-model="personToEdit.username"
                                ng-model="personToEdit.username" required available original-value="person.username"
                                url-to-check="/person/existsUsername/">
