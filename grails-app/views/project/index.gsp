@@ -127,7 +127,7 @@
                 <div id="create-project" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Cliente </label>
-                        <select id="clientSelect" class="col s12" ng-change="changeColor('create-project')" ng-model="clientSelected"
+                        <select id="clientSelect" class="col s12 browser-default" ng-change="changeColor('create-project')" ng-model="clientSelected"
                                 ng-options="client.name for client in enabledClients track by client.name">
                             <option value="" disabled selected> ~ Elija un cliente ~</option>
                         </select>
@@ -204,7 +204,7 @@
                 <div id="edit-project" class="row align-center">
                     <div class="input-field-modal col s12">
                         <label class="label-name left">Cliente </label>
-                        <select id="projectSelect" class="col s12" ng-change="changeColor('edit-project')" ng-model="clientSelected"
+                        <select id="projectSelect" class="col s12 browser-default" ng-change="changeColor('edit-project')" ng-model="clientSelected"
                                 ng-options="client.name for client in clients track by client.name">
                             <option value="" disabled> ~ Elija un cliente ~</option>
                         </select>
