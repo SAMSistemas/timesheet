@@ -30,7 +30,7 @@ angular.module('myApp')
                 },
                 dayClick: function (date, event) {
                     $scope.eventToCreate.id = null;
-                    $scope.eventToCreate.title = event.title;
+                    $scope.eventToCreate.title = "";
                     $scope.eventToCreate.start = date.format();
                     $scope.$apply();
 
@@ -55,9 +55,9 @@ angular.module('myApp')
             });
         });
 
-        $scope.create = function (holidayToCreate) {
+        $scope.create = function () {
 
-            $http.post('/holiday/create', holidayToCreate).then(function (response) {
+            $http.post('/holiday/create', $scope.eventToCreate).then(function (response) {
                 $scope.eventToCreate.id = response.data.id;
                 $scope.addEventSource($scope.eventToCreate);
             }, function () {

@@ -2,6 +2,8 @@
 * This is a manifest file that'll be compiled into person.css, which will include all the files listed below.
 *
 *= require vendor/fullcalendar.min.css
+*= require shared/button.css
+*= require shared/has-error.css
 *= require shared/modal.css
 *= require_self
 */

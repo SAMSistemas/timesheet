@@ -17,67 +17,79 @@
 
     <!--Create Modal-->
     <div id="create_modal" class="modal modal-medium">
-        <div class="modal-content">
+        <form name="createForm" ng-submit="create()" novalidate>
+            <div class="modal-content">
 
-            %{--Title--}%
-            <h2 class="card-title modal-card-title">Crear feriado</h2>
+                %{--Title--}%
+                <h2 class="card-title modal-card-title">Crear feriado</h2>
 
-            %{--Name Field--}%
-            <div class="row align-center">
-                <div class="modal-input-field col s12">
-                    <input id="create_name" type="text" ng-model="eventToCreate.title">
-                    <label for="create_name">Nombre</label>
+                %{--Name Field--}%
+                <div class="row align-center">
+                    <div class="modal-input-field col s12">
+                        <input id="create_name" type="text" name="name" ng-model="eventToCreate.title" required>
+                        <label ng-class="{'has-error': createForm.name.$invalid}">Nombre
+                            <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            %{--Date Field--}%
-            <div class="row align-center">
-                <div class="modal-input-field col s12">
-                    <input id="create_date" type="text" ng-model="eventToCreate.start" disabled>
-                    <label for="create_date">Fecha</label>
+                %{--Date Field--}%
+                <div class="row align-center">
+                    <div class="modal-input-field col s12">
+                        <input id="create_date" type="text" ng-model="eventToCreate.start" disabled>
+                        <label for="create_date">Fecha</label>
+                    </div>
                 </div>
-            </div>
 
-            %{--Button Row--}%
-            <div class="modal-footer">
-                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(eventToCreate)">Guardar</a>
-                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
-            </div>
+                %{--Button Row--}%
+                <div class="modal-footer">
+                    <button class="modal-action modal-close waves-effect btn-flat transparent-green"
+                            ng-class="{'has-error': createForm.$invalid}"
+                            ng-disabled="createForm.$invalid">Guardar</button>
+                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                </div>
 
-        </div>
+            </div>
+        </form>
     </div>
 
     <!--Edit Modal-->
     <div id="edit_modal" class="modal modal-medium">
-        <div class="modal-content">
+        <form name="editForm" ng-submit="update()" novalidate>
+            <div class="modal-content">
 
-            %{--Title--}%
-            <h2 class="card-title modal-card-title">Editar feriado</h2>
+                %{--Title--}%
+                <h2 class="card-title modal-card-title">Editar feriado</h2>
 
-            %{--Name Field--}%
-            <div class="row align-center">
-                <div class="modal-input-field col s12">
-                    <input id="edit_name" type="text" ng-model="eventToUpdate.title">
-                    <label for="edit_name">Nombre</label>
+                %{--Name Field--}%
+                <div class="row align-center">
+                    <div class="modal-input-field col s12">
+                        <input id="edit_name" type="text" name="name" ng-model="eventToUpdate.title" required>
+                        <label ng-class="{'has-error': editForm.name.$invalid}">Nombre
+                            <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            %{--Date Field--}%
-            <div class="row align-center">
-                <div class="modal-input-field col s12">
-                    <input id="edit_date" type="text" ng-model="eventToUpdate.start" disabled>
-                    <label for="edit_date">Fecha</label>
+                %{--Date Field--}%
+                <div class="row align-center">
+                    <div class="modal-input-field col s12">
+                        <input id="edit_date" type="text" ng-model="eventToUpdate.start" disabled>
+                        <label for="edit_date">Fecha</label>
+                    </div>
                 </div>
-            </div>
 
-            %{--Button Row--}%
-            <div class="modal-footer">
-                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete()">Eliminar</a>
-                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="update()">Guardar</a>
-                <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
-            </div>
+                %{--Button Row--}%
+                <div class="modal-footer">
+                    <button class="modal-action modal-close waves-effect btn-flat transparent-green"
+                            ng-class="{'has-error': editForm.$invalid}"
+                            ng-disabled="editForm.$invalid">Editar</button>
+                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green"
+                       ng-click="delete()">Eliminar</a>
+                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                </div>
 
-        </div>
+            </div>
     </div>
 
 </div>
