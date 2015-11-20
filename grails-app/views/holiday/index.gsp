@@ -39,7 +39,7 @@
             </div>
 
             %{--Button Row--}%
-            <div class="modal-footer" style="padding-right: 6px;">
+            <div class="modal-footer">
                 <a href class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="create(eventToCreate)">Guardar</a>
                 <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
             </div>
@@ -71,7 +71,7 @@
             </div>
 
             %{--Button Row--}%
-            <div class="modal-footer" style="padding-right: 6px;">
+            <div class="modal-footer">
                 <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="delete()">Eliminar</a>
                 <a href class=" modal-action modal-close waves-effect waves-teal btn-flat"  ng-click="update()">Guardar</a>
                 <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>

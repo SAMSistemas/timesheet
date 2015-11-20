@@ -7,3 +7,36 @@
 *= require shared/modal.css
 *= require_self
 */
+
+.select-modal input.select-dropdown {
+    color: #757575 !important;
+    border-color: #bdbdbd !important;
+    margin-bottom: 30px !important;
+    line-height: 3rem !important;
+}
+
+.select-modal span.caret {
+    top: 7px !important;
+    color: #757575 !important;
+}
+
+.combodate select {
+    display: inline;
+    text-align: center;
+    color: #009688;
+    width: 20% !important;
+}
+
+.label-name {
+    color: #009688 !important;
+    font-size: 120% !important;
+    padding-right: 40px;
+}
+
+#clientSelect {
+    display: inline;
+}
+
+#projectSelect {
+    display: inline;
+}

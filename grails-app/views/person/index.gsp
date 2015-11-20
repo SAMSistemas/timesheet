@@ -7,32 +7,6 @@
 
     <asset:stylesheet src="public/person.css"/>
 
-    <style>
-    #positionCreateSelect {
-        display: inline;
-    }
-
-    #positionEditSelect {
-        display: inline;
-    }
-
-    #hours, #edit_hours {
-        display: inline;
-    }
-
-    .label-name {
-        color: #009688 !important;
-        font-size: 120% !important;
-        padding-right: 40px;
-    }
-    /* To center the edit button */
-    .btn-edit-padding {
-        padding: 0px 5px;
-    }
-    .btn i {
-        margin-right: 0 !important;
-    }
-    </style>
 </head>
 
 <body>
@@ -42,7 +16,7 @@
     <h3 class="card-title">Lista de Personas</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
-            class="material-icons left" style="padding-right: 15px;">person_add</i>Crear</a>
+            class="material-icons left" >person_add</i>Crear</a>
 
     <table class="responsive-table striped centered">
 

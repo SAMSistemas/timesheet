@@ -9,3 +9,25 @@
 *= require shared/modal.css
 *= require_self
 */
+
+#positionCreateSelect {
+    display: inline;
+}
+
+#positionEditSelect {
+    display: inline;
+}
+
+#hours, #edit_hours {
+    display: inline;
+}
+
+.label-name {
+    color: #009688 !important;
+    font-size: 120% !important;
+    padding-right: 40px;
+}
+
+.btn-edit-padding {
+    padding: 0px 5px; /* To center the edit button */
+}
