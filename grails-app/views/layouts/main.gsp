@@ -18,9 +18,9 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="mainController" ng-init="searchName()">
+<body ng-app="myApp" ng-controller="mainController" >
 
-<header>
+<header ng-controller="loginController">
 
     <nav class="fixed blue darken-3">
         <div class="container">
@@ -28,7 +28,7 @@
                 <a class="brand-logo">Timesheet</a>
                 <ul id="nav-botton-ul" class="right hide-on-med-and-down">
                     <li id="nav-botton-li"><a href class="waves-effect waves-light btn"
-                                              ng-click="logOut()">Cerrar Sesión</a></li>
+                                              ng-click="logout()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -41,13 +41,13 @@
 
 
     <ul id="side-nav" class="side-nav fixed" >
-        <li class="user-panel li-no-hover" ng-controller="loginController">
+        <li class="user-panel li-no-hover" >
             <div class="user-info">
                 <div class="row user-picture-padding">
                     <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
                 </div>
 
-                <div class="row user-data-padding">
+                <div class="row user-data-padding" >
                     <span class="white-text truncate">{{ name }}</span>
                     <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
                 </div>
@@ -74,7 +74,7 @@
                     class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
-            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger" ng-click="clean()"><i
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger" ng-click="mainCtrl.clean()"><i
                     class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
