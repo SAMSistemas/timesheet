@@ -53,6 +53,7 @@ angular.module('myApp')
         $scope.clean = function () {
             $scope.clientSelected = null;
             $scope.projectSelected = null;
+            $scope.projects = [];
             $scope.fromDateSelected = new Date();
             $scope.toDateSelected = new Date();
         };

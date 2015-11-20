@@ -18,7 +18,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="loginController" ng-init="searchName()">
+<body ng-app="myApp" ng-controller="mainController" ng-init="searchName()">
 
 <header>
 
@@ -40,8 +40,8 @@
     </div>
 
 
-    <ul id="side-nav" class="side-nav fixed">
-        <li class="user-panel li-no-hover">
+    <ul id="side-nav" class="side-nav fixed" >
+        <li class="user-panel li-no-hover" ng-controller="loginController">
             <div class="user-info">
                 <div class="row user-picture-padding">
                     <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
@@ -74,7 +74,7 @@
                     class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
-            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"><i
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger" ng-click="clean()"><i
                     class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
@@ -85,7 +85,7 @@
 
 </header>
 
-<div ng-controller="mainController" id="report-modal" class="modal modal-large">
+<div id="report-modal" class="modal modal-large">
     <div class="modal-content">
         <h2 class="card-title modal-card-title">Reporte de horas</h2>
 
