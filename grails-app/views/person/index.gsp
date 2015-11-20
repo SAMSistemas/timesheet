@@ -5,7 +5,7 @@
     <g:set var="entityName" value="${message(code: 'person.label', default: 'Personas')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 
-    <asset:stylesheet src="public/table.css"/>
+    <asset:stylesheet src="public/person.css"/>
 
     <style>
     #positionCreateSelect {

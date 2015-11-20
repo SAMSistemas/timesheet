@@ -11,7 +11,7 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <asset:stylesheet src="application.css"/>
+    <asset:stylesheet src="public/main.css"/>
     <asset:javascript src="application.js"/>
 
     <g:layoutHead/>

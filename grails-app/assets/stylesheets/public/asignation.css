@@ -1,3 +1,11 @@
+/*
+* This is a manifest file that'll be compiled into joblog.css, which will include all the files listed below.
+*
+*= require shared/button.css
+*= require shared/has-error.css
+*= require_self
+*/
+
 select {
     display: inherit;
 }

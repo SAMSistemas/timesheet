@@ -1,3 +1,10 @@
+/*
+* This is a manifest file that'll be compiled into person.css, which will include all the files listed below.
+*
+*= require vendor/fullcalendar.min.css
+*= require shared/modal.css
+*= require_self
+*/
 
 h2 {
     font-size: 2rem !important;

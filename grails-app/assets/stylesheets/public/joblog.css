@@ -1,0 +1,11 @@
+/*
+* This is a manifest file that'll be compiled into joblog.css, which will include all the files listed below.
+*
+*= require shared/table.css
+*= require shared/utils.css
+*= require shared/status-select.css
+*= require shared/button.css
+*= require shared/has-error.css
+*= require shared/modal.css
+*= require_self
+*/
