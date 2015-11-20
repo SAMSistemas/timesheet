@@ -6,9 +6,9 @@
 *= require_self
 */
 
-select {
-    display: inherit;
-}
+/*select {*/
+    /*display: inherit;*/
+/*}*/
 
 .div-wrapper {
     padding: 30px 25px 30px 25px;
