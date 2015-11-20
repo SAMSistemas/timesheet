@@ -1,12 +1,12 @@
-.dropdown-content li{
+.select-status .dropdown-content li{
     text-align: center !important;
 }
 
-.select-wrapper {
+.select-status.select-wrapper {
     height: 100% !important;
 }
 
-.select-wrapper span.caret {
+.select-status.select-wrapper span.caret {
     color: white;
     position: absolute;
     right: 0px;
@@ -16,7 +16,7 @@
     line-height: 31px !important;
 }
 
-.select-wrapper input.select-dropdown {
+.select-status.select-wrapper input.select-dropdown {
     color: white !important;
     border-color: transparent !important;
     margin: 0 !important;

@@ -11,12 +11,11 @@
 .select-modal input.select-dropdown {
     color: #757575 !important;
     border-color: #bdbdbd !important;
-    margin-bottom: 30px !important;
     line-height: 3rem !important;
+    text-align: center;
 }
 
 .select-modal span.caret {
-    top: 7px !important;
     color: #757575 !important;
 }
 
