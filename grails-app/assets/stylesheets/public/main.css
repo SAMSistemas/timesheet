@@ -2,11 +2,30 @@
 * This is a manifest file that'll be compiled into main.css, which will include all the files listed below.
 *
 *= require vendor/materialize.min.css
-*= require shared/main.css
 *= require shared/navbar.css
 *= require shared/modal.css
 *= require_self
 */
+
+body {
+    background-color: #e0e0e0;
+}
+
+header, section {
+    padding-left: 240px;
+}
+
+li.li-no-hover:hover {
+    background-color: #009688;
+}
+
+.container {
+    width: 95%;
+}
+
+.card-content-padding {
+    padding: 0 20px 0 20px !important;
+}
 
 .select-modal input.select-dropdown {
     color: #757575 !important;
@@ -32,4 +51,47 @@
 
 #projectSelect {
     display: inline;
+}
+
+#report-modal .row {
+    margin-bottom: 10px;
+}
+
+.card-title {
+    color: #009688 !important;
+    font-size: 180% !important;
+}
+
+*::-moz-placeholder {
+    color: #666666;
+}
+
+.label-radioButton{
+    color: #009688 !important;
+    font-size: 80% !important;
+}
+
+.modal{
+    max-height: 90% !important;
+}
+
+@media only screen and (max-width: 990px) {
+
+    header, section {
+        padding-left: 0;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .brand-logo {
+        line-height: 56px;
+    }
+
+    a.button-collapse.top-nav {
+        height: 56px;
+        line-height: 56px;
+    }
+
 }
