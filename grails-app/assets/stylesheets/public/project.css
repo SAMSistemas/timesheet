@@ -5,15 +5,15 @@
 *= require shared/utils.css
 *= require shared/status-select.css
 *= require shared/button.css
-*= require shared/has-error.css
 *= require shared/modal.css
+*= require shared/has-error.css
 *= require_self
 */
 
 .select-modal input.select-dropdown {
     color: #757575 !important;
     border-color: #bdbdbd !important;
-    margin-bottom: 30px !important;
+    /*margin-bottom: 30px !important;*/
     line-height: 3rem !important;
 }
 

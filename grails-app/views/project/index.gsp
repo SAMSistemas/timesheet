@@ -13,7 +13,7 @@
 
 <div ng-controller="projectController">
 
-    <h3 class="card-title">Lista de Projectos</h3>
+    <h3 class="card-title">Lista de Proyectos</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">add</i>Crear</a>
@@ -93,16 +93,20 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title modal-card-title">Crear projecto</h2>
+                <h2 class="card-title modal-card-title">Crear proyecto</h2>
 
                 %{--Client Select--}%
-                <div id="create-project" class="row align-center">
+                <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Cliente </label>
-                        <select id="clientSelect" class="col s12 browser-default" ng-change="changeColor('create-project')" ng-model="clientSelected"
-                                ng-options="client.name for client in enabledClients track by client.name">
-                            <option value="" disabled selected> ~ Elija un cliente ~</option>
+                        <select class="col s12 browser-default" name="client"
+                                ng-model="clientSelected"
+                                ng-options="client.name for client in enabledClients track by client.name" required>
+                            <option value="" disabled selected>~ Elija un cliente ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left"
+                               ng-class="{'has-error': createForm.client.$invalid}">Cliente <span
+                                ng-show="createForm.client.$error.required"
+                                class="has-error">es obligatorio</span></label>
                     </div>
                 </div>
 
@@ -135,11 +139,10 @@
                 %{--Date Field--}%
                 <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Fecha Inicio </label>
-                        <div class="row">
-                            <span id="dateComboCreate" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
-                            ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
-                        </div>
+                        <span id="dateComboCreate" ng-combo-date-picker="exp" ng-model="dateSelected"
+                              ng-months="{{ months }}"
+                              ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        <label class="modal-label modal-label-date left">Fecha Inicio</label>
                     </div>
                 </div>
 
@@ -173,13 +176,14 @@
                 <h2 class="card-title modal-card-title">Editar projecto</h2>
 
                 %{--Client Select--}%
-                <div id="edit-project" class="row align-center">
+                <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Cliente </label>
-                        <select id="projectSelect" class="col s12 browser-default" ng-change="changeColor('edit-project')" ng-model="clientSelected"
+                        <select class="col s12 browser-default"
+                                ng-model="clientSelected"
                                 ng-options="client.name for client in clients track by client.name">
-                            <option value="" disabled> ~ Elija un cliente ~</option>
+                            <option value="" disabled>~ Elija un cliente ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left">Cliente</label>
                     </div>
                 </div>
 
@@ -189,8 +193,10 @@
                         <input id="edit_name" name="project_name" type="text" maxlength="50"
                                ng-model="projectToEdit.project_name" required available
                                original-value="project.project_name" url-to-check="/project/existsName/">
-                        <label for="edit_name" ng-class="{'has-error': editForm.project_name.$invalid}">Nombre de proyecto
-                            <span ng-show="editForm.project_name.$error.required" class="has-error">es obligatorio</span>
+                        <label for="edit_name"
+                               ng-class="{'has-error': editForm.project_name.$invalid}">Nombre de proyecto
+                            <span ng-show="editForm.project_name.$error.required"
+                                  class="has-error">es obligatorio</span>
                             <span ng-show="editForm.project_name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -212,11 +218,9 @@
                 %{--Date Field--}%
                 <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Fecha Inicio </label>
-                        <div class="row">
-                            <span id="dateComboEdit" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
-                                  ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
-                        </div>
+                        <span id="dateComboEdit" ng-combo-date-picker="exp" ng-model="dateSelected"
+                              ng-months="{{ months }}" ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        <label class="modal-label modal-label-date left">Fecha Inicio</label>
                     </div>
                 </div>
 

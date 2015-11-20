@@ -5,7 +5,7 @@
 *= require shared/utils.css
 *= require shared/status-select.css
 *= require shared/button.css
-*= require shared/has-error.css
 *= require shared/modal.css
+*= require shared/has-error.css
 *= require_self
 */

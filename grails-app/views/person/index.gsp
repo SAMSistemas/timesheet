@@ -16,7 +16,7 @@
     <h3 class="card-title">Lista de Personas</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
-            class="material-icons left" >person_add</i>Crear</a>
+            class="material-icons left">person_add</i>Crear</a>
 
     <table class="responsive-table striped centered">
 
@@ -154,26 +154,33 @@
                 </div>
 
                 %{--Work Position Select--}%
-                <div id="create-person" class="row align-center">
+                <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Posición</label>
-                        <select id="positionCreateSelect" class="col s12 browser-default" ng-change="changeColor('create-person')"
+                        <select class="col s12 browser-default" name="position"
                                 ng-model="personToCreate.work_position"
-                                ng-options="work_position.description as work_position.description for work_position in work_positions" required>
-                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                                ng-options="work_position.description as work_position.description for work_position in work_positions"
+                                required>
+                            <option value="" disabled selected>~ Elegí una posición ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left"
+                               ng-class="{'has-error': createForm.position.$invalid}">Posición <span
+                                ng-show="createForm.position.$error.required"
+                                class="has-error">es obligatoria</span></label>
                     </div>
                 </div>
 
                 %{--Hours Field--}%
-                <div id="create-hours" class="row align-center">
+                <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Horas</label>
-                        <select id="hours" class="col s12 browser-default" ng-change="changeColor('create-hours')"
+                        <select class="col s12 browser-default" name="workHours"
                                 ng-model="personToCreate.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
-                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                            <option value="" disabled selected>~ Elegí una hora ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left"
+                               ng-class="{'has-error': createForm.workHours.$invalid}">Horas <span
+                                ng-show="createForm.workHours.$error.required"
+                                class="has-error">es obligatoria</span></label>
                     </div>
                 </div>
 
@@ -259,25 +266,24 @@
                 </div>
 
                 %{--Work Position Select--}%
-                <div id="edit-person" class="row align-center">
+                <div class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Posición</label>
-                        <select id="positionEditSelect" class="col s12 browser-default" ng-change="changeColor('edit-person')"
-                                ng-model="personToEdit.work_position"
-                                ng-options="work_position.description as work_position.description for work_position in work_positions" required>
+                        <select class="col s12 browser-default" ng-model="personToEdit.work_position"
+                                ng-options="work_position.description as work_position.description for work_position in work_positions">
+                            <option value="" disabled selected>~ Elegí una posición ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left">Position</label>
                     </div>
                 </div>
 
                 %{--Hours Field--}%
                 <div id="edit-hours" class="row align-center">
                     <div class="modal-input-field col s12">
-                        <label class="modal-label left">Horas</label>
-                        <select id="edit_hours" class="col s12 browser-default" ng-change="changeColor('edit-hours')"
-                                ng-model="personToEdit.work_hours"
-                                ng-options="work_hour for work_hour in work_hours" required>
-                            <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
+                        <select id="edit_hours" class="col s12 browser-default" ng-model="personToEdit.work_hours"
+                                ng-options="work_hour for work_hour in work_hours">
+                            <option value="" disabled selected>~ Elegí una hora ~</option>
                         </select>
+                        <label class="modal-label modal-label-select left">Horas</label>
                     </div>
                 </div>
 

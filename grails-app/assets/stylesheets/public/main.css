@@ -45,34 +45,9 @@ li.li-no-hover:hover {
     width: 20% !important;
 }
 
-#clientSelect {
-    display: inline;
-}
-
-#projectSelect {
-    display: inline;
-}
-
-#report-modal .row {
-    margin-bottom: 10px;
-}
-
 .card-title {
     color: #009688 !important;
     font-size: 180% !important;
-}
-
-*::-moz-placeholder {
-    color: #666666;
-}
-
-.label-radioButton{
-    color: #009688 !important;
-    font-size: 80% !important;
-}
-
-.modal{
-    max-height: 90% !important;
 }
 
 @media only screen and (max-width: 990px) {

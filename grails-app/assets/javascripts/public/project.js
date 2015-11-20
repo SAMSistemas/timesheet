@@ -28,8 +28,7 @@ angular.module('myApp')
         $scope.project = null;
 
         $scope.enabledClients = [];
-        $scope.clients = [];
-        $scope.clientSelected = {};
+        $scope.clientSelected = null;
 
         $scope.createForm = null;
         $scope.editForm = null;
@@ -37,12 +36,6 @@ angular.module('myApp')
         $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
         $scope.dateSelected = new Date();
-
-        $http.get('/client/all').then(function (response) {
-            $scope.clients = response.data;
-        }, function () {
-
-        });
 
         $http.get('/client/allEnabled').then(function (response) {
             $scope.enabledClients = response.data;
@@ -57,7 +50,7 @@ angular.module('myApp')
         });
 
         $scope.new = function () {
-            $scope.clientSelected = {};
+            $scope.clientSelected = "";
             $scope.projectToCreate = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: true};
             $scope.project = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: false};
 
@@ -96,6 +89,7 @@ angular.module('myApp')
 
         $scope.edit = function (project) {
 
+            $scope.clientSelected = {};
             $scope.clientSelected.name = project.client_name;
             $scope.parseDate(project.start_date);
 

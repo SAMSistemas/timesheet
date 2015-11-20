@@ -7,11 +7,15 @@ span.has-error {
     font-size: 0.8rem;
 }
 
+a.has-error {
+    color: grey !important;
+}
+
 button.has-error {
-    color: grey;
+    color: grey !important;
 }
 
 button.has-error.transparent-green:hover {
-    color: grey;
-    background-color: #FAFAFA;
+    color: grey !important;
+    background-color: #FAFAFA !important;
 }

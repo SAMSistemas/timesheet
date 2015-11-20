@@ -18,7 +18,7 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="mainController" >
+<body ng-app="myApp" ng-controller="mainController">
 
 <header ng-controller="loginController">
 
@@ -40,14 +40,14 @@
     </div>
 
 
-    <ul id="side-nav" class="side-nav fixed" >
-        <li class="user-panel li-no-hover" >
+    <ul id="side-nav" class="side-nav fixed">
+        <li class="user-panel li-no-hover">
             <div class="user-info">
                 <div class="row user-picture-padding">
                     <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
                 </div>
 
-                <div class="row user-data-padding" >
+                <div class="row user-data-padding">
                     <span class="white-text truncate">{{ name }}</span>
                     <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
                 </div>
@@ -74,7 +74,8 @@
                     class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
-            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger" ng-click="mainCtrl.clean()"><i
+            <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"
+               ng-click="mainCtrl.clean()"><i
                     class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
@@ -92,51 +93,43 @@
         %{--Client Select--}%
         <div class="row align-center">
             <div class="modal-input-field col s12">
-                <label class="modal-label">Cliente</label>
                 <select id="clientSelect" class="col s12 browser-default" ng-model="clientSelected"
                         ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
-
+                <label class="modal-label modal-label-select">Cliente</label>
             </div>
         </div>
 
         %{--Projects Select--}%
         <div class="row align-center">
             <div class="modal-input-field col s12">
-                <label class="modal-label">Proyecto</label>
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
                 <select id="projectSelect" class="col s12 browser-default" ng-model="projectSelected"
                         ng-options="project.project_name for project in projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                 </select>
-
+                <label class="modal-label modal-label-select">Proyecto</label>
             </div>
         </div>
 
         %{--From Date Selection--}%
         <div class="row align-center">
             <div class="modal-input-field col s12">
-                <label class="modal-label left">Desde</label>
-
-                <div class="row"> 
-                    <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
-                          ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
-                    %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
-                </div>
+                <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
+                      ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
+                %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
+                <label class="modal-label modal-label-date left">Desde</label>
             </div>
         </div>
 
         %{--To Date Selection--}%
         <div class="row align-center">
             <div class="modal-input-field col s12">
-                <label class="modal-label left">Hasta</label>
-
-                <div class="row">
-                    <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
-                          ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
-                    %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
-                </div>
+                <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
+                      ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
+                %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
+                <label class="modal-label modal-label-date left">Hasta</label>
             </div>
         </div>
 
@@ -144,7 +137,8 @@
         <div class="row align-center">
             <div class="modal-input-field col s12">
                 <input class="with-gap" name="group1" type="radio" id="test3"/>
-                <label for="test3" class="label-radioButton">Reporte de horas por proyecto</label>
+                <label for="test3"
+                       class="modal-label modal-label-radioButton">Reporte de horas por proyecto</label>
             </div>
         </div>
 

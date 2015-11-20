@@ -1,3 +1,11 @@
+.modal {
+    max-height: 80% !important;
+}
+
+.modal .row {
+    width: 100%;
+}
+
 .modal-medium {
     width: 400px;
 }
@@ -27,7 +35,16 @@
 }
 
 .modal-label {
-    color: #009688 !important;
-    font-size: 120% !important;
-    width: 100%
+}
+
+.modal-label-select {
+    margin-top: 15px;
+}
+
+.modal-label-date {
+    margin-top: 5px;
+}
+
+.modal-label-radioButton {
+    color: #009688;
 }
