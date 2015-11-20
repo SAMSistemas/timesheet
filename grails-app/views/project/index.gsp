@@ -97,8 +97,8 @@
 
                 %{--Client Select--}%
                 <div id="create-project" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Cliente </label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Cliente </label>
                         <select id="clientSelect" class="col s12 browser-default" ng-change="changeColor('create-project')" ng-model="clientSelected"
                                 ng-options="client.name for client in enabledClients track by client.name">
                             <option value="" disabled selected> ~ Elija un cliente ~</option>
@@ -108,7 +108,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="name" name="name" type="text" maxlength="50" ng-model="projectToCreate.project_name"
                                required available
                                url-to-check="/project/existsName/">
@@ -121,7 +121,7 @@
 
                 %{--Short Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="sname" name="sname" type="text" maxlength="10" ng-model="projectToCreate.short_name"
                                required
                                available url-to-check="/project/existsSName/">
@@ -134,8 +134,8 @@
 
                 %{--Date Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Fecha Inicio </label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Fecha Inicio </label>
                         <div class="row">
                             <span id="dateComboCreate" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
                             ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
@@ -145,7 +145,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="projectToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
@@ -174,8 +174,8 @@
 
                 %{--Client Select--}%
                 <div id="edit-project" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Cliente </label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Cliente </label>
                         <select id="projectSelect" class="col s12 browser-default" ng-change="changeColor('edit-project')" ng-model="clientSelected"
                                 ng-options="client.name for client in clients track by client.name">
                             <option value="" disabled> ~ Elija un cliente ~</option>
@@ -185,7 +185,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_name" name="project_name" type="text" maxlength="50"
                                ng-model="projectToEdit.project_name" required available
                                original-value="project.project_name" url-to-check="/project/existsName/">
@@ -198,7 +198,7 @@
 
                 %{--Short Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_sname" name="sname" type="text" maxlength="10"
                                ng-model="projectToEdit.short_name" required available
                                original-value="project.short_name" url-to-check="/project/existsSName/">
@@ -211,8 +211,8 @@
 
                 %{--Date Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Fecha Inicio </label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Fecha Inicio </label>
                         <div class="row">
                             <span id="dateComboEdit" ng-combo-date-picker="exp" ng-model="dateSelected" ng-months="{{ months }}"
                                   ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
@@ -222,7 +222,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="projectToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>

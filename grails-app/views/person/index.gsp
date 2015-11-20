@@ -106,7 +106,7 @@
 
                 %{--Name Field --}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="personToCreate.name"
                                required/>
                         <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre
@@ -117,7 +117,7 @@
 
                 %{--Lastname Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="lastname" name="lastname" type="text" maxlength="30"
                                ng-model="personToCreate.lastname" required>
                         <label for="lastname" ng-class="{'has-error': createForm.lastname.$invalid}">Apellido
@@ -128,7 +128,7 @@
 
                 %{--Username Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="username" name="username" type="text" maxlength="25"
                                ng-model="personToCreate.username" required
                                available
@@ -142,7 +142,7 @@
 
                 %{--Password Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="password" name="password" type="text" maxlength="8"
                                ng-model="personToCreate.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label for="password" ng-class="{'has-error': createForm.password.$invalid}">Contraseña
@@ -155,8 +155,8 @@
 
                 %{--Work Position Select--}%
                 <div id="create-person" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Posición</label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Posición</label>
                         <select id="positionCreateSelect" class="col s12 browser-default" ng-change="changeColor('create-person')"
                                 ng-model="personToCreate.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
@@ -167,8 +167,8 @@
 
                 %{--Hours Field--}%
                 <div id="create-hours" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Horas</label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Horas</label>
                         <select id="hours" class="col s12 browser-default" ng-change="changeColor('create-hours')"
                                 ng-model="personToCreate.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
@@ -179,7 +179,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="personToCreate.enabled"
                                checked="checked">
                         <label for="enable">Habilitado</label>
@@ -209,7 +209,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="personToEdit.name"
                                required>
                         <label for="edit_name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
@@ -220,7 +220,7 @@
 
                 %{--Lastname Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_lastname" name="lastname" type="text" maxlength="30"
                                ng-model="personToEdit.lastname" required>
                         <label for="edit_lastname" ng-class="{'has-error': editForm.lastname.$invalid}">Apellido
@@ -231,7 +231,7 @@
 
                 %{--Username Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_username" name="username" type="text" maxlength="25"
                                ng-model="personToEdit.username"
                                ng-model="personToEdit.username" required available original-value="person.username"
@@ -246,7 +246,7 @@
 
                 %{--Password Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_password" name="password" type="text" maxlength="8"
                                ng-model="personToEdit.password"
                                ng-model="personToEdit.password" ng-pattern="/[a-zA-Z]{8}/" required>
@@ -260,8 +260,8 @@
 
                 %{--Work Position Select--}%
                 <div id="edit-person" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Posición</label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Posición</label>
                         <select id="positionEditSelect" class="col s12 browser-default" ng-change="changeColor('edit-person')"
                                 ng-model="personToEdit.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in work_positions" required>
@@ -271,8 +271,8 @@
 
                 %{--Hours Field--}%
                 <div id="edit-hours" class="row align-center">
-                    <div class="input-field-modal col s12">
-                        <label class="label-name left">Horas</label>
+                    <div class="modal-input-field col s12">
+                        <label class="modal-label left">Horas</label>
                         <select id="edit_hours" class="col s12 browser-default" ng-change="changeColor('edit-hours')"
                                 ng-model="personToEdit.work_hours"
                                 ng-options="work_hour for work_hour in work_hours" required>
@@ -283,7 +283,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="personToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>

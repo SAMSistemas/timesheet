@@ -24,7 +24,7 @@
 
             %{--Name Field--}%
             <div class="row align-center">
-                <div class="input-field-modal col s12">
+                <div class="modal-input-field col s12">
                     <input id="create_name" type="text" ng-model="eventToCreate.title">
                     <label for="create_name">Nombre</label>
                 </div>
@@ -32,7 +32,7 @@
 
             %{--Date Field--}%
             <div class="row align-center">
-                <div class="input-field-modal col s12">
+                <div class="modal-input-field col s12">
                     <input id="create_date" type="text" ng-model="eventToCreate.start" disabled>
                     <label for="create_date">Fecha</label>
                 </div>
@@ -56,7 +56,7 @@
 
             %{--Name Field--}%
             <div class="row align-center">
-                <div class="input-field-modal col s12">
+                <div class="modal-input-field col s12">
                     <input id="edit_name" type="text" ng-model="eventToUpdate.title">
                     <label for="edit_name">Nombre</label>
                 </div>
@@ -64,7 +64,7 @@
 
             %{--Date Field--}%
             <div class="row align-center">
-                <div class="input-field-modal col s12">
+                <div class="modal-input-field col s12">
                     <input id="edit_date" type="text" ng-model="eventToUpdate.start" disabled>
                     <label for="edit_date">Fecha</label>
                 </div>

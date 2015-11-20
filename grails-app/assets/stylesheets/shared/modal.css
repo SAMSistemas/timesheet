@@ -22,6 +22,12 @@
     margin: 0;
 }
 
-.input-field-modal {
-    width: 100%;
+.modal-input-field {
+    width: 100% !important;
+}
+
+.modal-label {
+    color: #009688 !important;
+    font-size: 120% !important;
+    width: 100%
 }

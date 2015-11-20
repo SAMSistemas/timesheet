@@ -91,8 +91,8 @@
 
         %{--Client Select--}%
         <div class="row align-center">
-            <div class="input-field-modal col s12">
-                <label class="label-name">Cliente</label>
+            <div class="modal-input-field col s12">
+                <label class="modal-label">Cliente</label>
                 <select id="clientSelect" class="col s12 browser-default" ng-model="clientSelected"
                         ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
@@ -103,8 +103,8 @@
 
         %{--Projects Select--}%
         <div class="row align-center">
-            <div class="input-field-modal col s12">
-                <label class="label-name">Proyecto</label>
+            <div class="modal-input-field col s12">
+                <label class="modal-label">Proyecto</label>
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
                 <select id="projectSelect" class="col s12 browser-default" ng-model="projectSelected"
                         ng-options="project.project_name for project in projects">
@@ -116,10 +116,10 @@
 
         %{--From Date Selection--}%
         <div class="row align-center">
-            <div class="input-field-modal col s12">
-                <label class="label-name left">Desde</label>
+            <div class="modal-input-field col s12">
+                <label class="modal-label left">Desde</label>
 
-                <div class="row">
+                <div class="row"> 
                     <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
                           ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
                     %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
@@ -129,8 +129,8 @@
 
         %{--To Date Selection--}%
         <div class="row align-center">
-            <div class="input-field-modal col s12">
-                <label class="label-name left">Hasta</label>
+            <div class="modal-input-field col s12">
+                <label class="modal-label left">Hasta</label>
 
                 <div class="row">
                     <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
@@ -142,7 +142,7 @@
 
         %{--Radio Buttons--}%
         <div class="row align-center">
-            <div class="input-field-modal col s12">
+            <div class="modal-input-field col s12">
                 <input class="with-gap" name="group1" type="radio" id="test3"/>
                 <label for="test3" class="label-radioButton">Reporte de horas por proyecto</label>
             </div>

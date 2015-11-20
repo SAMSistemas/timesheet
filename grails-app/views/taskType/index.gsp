@@ -78,7 +78,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="taskTypeToCreate.name"
                                required available
                                url-to-check="/taskType/existsName/">
@@ -91,7 +91,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="taskTypeToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
@@ -120,7 +120,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="taskTypeToEdit.name"
                                required available
                                original-value="taskType.name" url-to-check="/taskType/existsName/">
@@ -133,7 +133,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="taskTypeToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>

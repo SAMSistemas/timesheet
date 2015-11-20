@@ -82,7 +82,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="name" name="name" type="text" maxlength="30" ng-model="clientToCreate.name" required
                                available
                                url-to-check="/client/existsName/">
@@ -95,7 +95,7 @@
 
                 %{--Short Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="sname" name="sname" type="text" maxlength="5" ng-model="clientToCreate.short_name"
                                required
                                available
@@ -109,7 +109,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="enable" type="checkbox" class="filled-in" ng-model="clientToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
@@ -138,7 +138,7 @@
 
                 %{--Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_name" name="name" type="text" maxlength="30" ng-model="clientToEdit.name"
                                required available
                                original-value="client.name" url-to-check="/client/existsName/">
@@ -151,7 +151,7 @@
 
                 %{--Short Name Field--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_sname" name="sname" type="text" maxlength="5" ng-model="clientToEdit.short_name"
                                ng-model="clientToEdit.short_name" required available
                                original-value="client.short_name" url-to-check="/client/existsSName/">
@@ -164,7 +164,7 @@
 
                 %{--Enabled Checkbox--}%
                 <div class="row align-center">
-                    <div class="input-field-modal col s12">
+                    <div class="modal-input-field col s12">
                         <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
