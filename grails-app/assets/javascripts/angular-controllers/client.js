@@ -25,9 +25,8 @@ app.controller('clientController', function ($scope, $http) {
 
         $scope.new = function () {
             $scope.clientToCreate = {name: "", short_name: "", enabled: true};
-            $scope.client = {name: "", short_name: "", enabled: false};
 
-            // To clear the errors from previos create forms
+            // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
                 $scope.createForm.name.$setValidity('available', true);
                 $scope.createForm.sname.$setValidity('available', true);
@@ -48,7 +47,7 @@ app.controller('clientController', function ($scope, $http) {
             $scope.clientToEdit = angular.copy(client);
             $scope.client = client;
 
-            // To clear the errors from previos edit forms
+            // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
                 $scope.createForm.name.$setValidity('available', true);
                 $scope.createForm.sname.$setValidity('available', true);

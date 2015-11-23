@@ -25,9 +25,8 @@ app.controller('taskTypeController', function ($scope, $http) {
 
         $scope.new = function () {
             $scope.taskTypeToCreate = {name: "", enabled: true};
-            $scope.taskType = {name: "", enabled: false};
 
-            // To clear the errors from previos create forms
+            // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
                 $scope.createForm.name.$setValidity('available', true);
             }
@@ -47,7 +46,7 @@ app.controller('taskTypeController', function ($scope, $http) {
             $scope.taskTypeToEdit = angular.copy(taskType);
             $scope.taskType = taskType;
 
-            // To clear the errors from previos edit forms
+            // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
                 $scope.editForm.name.$setValidity('available', true);
             }

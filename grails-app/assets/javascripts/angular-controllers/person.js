@@ -42,7 +42,6 @@ app.controller('personController', function ($scope, $http) {
                 work_position: "",
                 enabled: true
             };
-            $scope.person = {name: "", lastname: "", username: "", password: "", work_hours: "", work_position: "", enabled: false};
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
@@ -64,7 +63,7 @@ app.controller('personController', function ($scope, $http) {
             $scope.personToEdit = angular.copy(person);
             $scope.person = person;
 
-            // To clear the errors from previos edit forms
+            // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
                 $scope.editForm.username.$setValidity('available', true);
             }

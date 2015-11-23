@@ -39,7 +39,6 @@ app.controller('projectController', function ($scope, $http) {
         $scope.new = function () {
             $scope.clientSelected = "";
             $scope.projectToCreate = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: true};
-            $scope.project = {client_name: "", project_name: "", short_name: "", start_date: "", enabled: false};
 
             // To clear the errors from previous create forms
             if ($scope.createForm !== null) {
