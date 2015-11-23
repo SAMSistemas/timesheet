@@ -24,8 +24,8 @@
                 <h2 class="card-title modal-card-title">Crear feriado</h2>
 
                 %{--Name Field--}%
-                <div class="row align-center">
-                    <div class="modal-input-field col s12">
+                <div class="row">
+                    <div class="col s12">
                         <input id="create_name" type="text" name="name" ng-model="eventToCreate.title" required>
                         <label ng-class="{'has-error': createForm.name.$invalid}">Nombre
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
@@ -34,8 +34,8 @@
                 </div>
 
                 %{--Date Field--}%
-                <div class="row align-center">
-                    <div class="modal-input-field col s12">
+                <div class="row">
+                    <div class="col s12">
                         <input id="create_date" type="text" ng-model="eventToCreate.start" disabled>
                         <label for="create_date">Fecha</label>
                     </div>
@@ -61,8 +61,8 @@
                 <h2 class="card-title modal-card-title">Editar feriado</h2>
 
                 %{--Name Field--}%
-                <div class="row align-center">
-                    <div class="modal-input-field col s12">
+                <div class="row">
+                    <div class="col s12">
                         <input id="edit_name" type="text" name="name" ng-model="eventToUpdate.title" required>
                         <label ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
@@ -71,8 +71,8 @@
                 </div>
 
                 %{--Date Field--}%
-                <div class="row align-center">
-                    <div class="modal-input-field col s12">
+                <div class="row">
+                    <div class="col s12">
                         <input id="edit_date" type="text" ng-model="eventToUpdate.start" disabled>
                         <label for="edit_date">Fecha</label>
                     </div>

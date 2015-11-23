@@ -18,7 +18,10 @@ class ProjectController {
                 for (p in Project.list()) {
                     project (
                             id: p.id,
-                            client_name: p.client.name,
+                            client: [
+                                    name: p.client.name,
+                                    enabled: p.client.enabled
+                            ],
                             project_name: p.name,
                             short_name: p.short_name,
                             start_date: p.start_date.format("dd-MM-yyyy"),

@@ -91,8 +91,8 @@
         <h2 class="card-title modal-card-title">Reporte de horas</h2>
 
         %{--Client Select--}%
-        <div class="row align-center">
-            <div class="modal-input-field col s12">
+        <div class="row">
+            <div class="col s12">
                 <select id="clientSelect" class="col s12 browser-default" ng-model="clientSelected"
                         ng-change="changeClient()" ng-options="client.name for client in clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
@@ -102,8 +102,8 @@
         </div>
 
         %{--Projects Select--}%
-        <div class="row align-center">
-            <div class="modal-input-field col s12">
+        <div class="row">
+            <div class="col s12">
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
                 <select id="projectSelect" class="col s12 browser-default" ng-model="projectSelected"
                         ng-options="project.project_name for project in projects">
@@ -114,8 +114,8 @@
         </div>
 
         %{--From Date Selection--}%
-        <div class="row align-center">
-            <div class="modal-input-field col s12">
+        <div class="row">
+            <div class="col s12">
                 <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
                       ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
                 %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
@@ -124,8 +124,8 @@
         </div>
 
         %{--To Date Selection--}%
-        <div class="row align-center">
-            <div class="modal-input-field col s12">
+        <div class="row">
+            <div class="col s12">
                 <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
                       ng-min-date="2010-01-01" ng-max-date="2015-12-31"></span>
                 %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
@@ -134,8 +134,8 @@
         </div>
 
         %{--Radio Buttons--}%
-        <div class="row align-center">
-            <div class="modal-input-field col s12">
+        <div class="row">
+            <div class="col s12">
                 <input class="with-gap" name="group1" type="radio" id="test3"/>
                 <label for="test3"
                        class="modal-label modal-label-radioButton">Reporte de horas por proyecto</label>
