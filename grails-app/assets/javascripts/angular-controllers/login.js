@@ -1,5 +1,7 @@
-angular.module('myApp')
-    .controller('loginController', function ($scope, $http, $window) {
+//= require default
+//= require_self
+
+app.controller('loginController', function ($scope, $http, $window) {
 
         $scope.user = "";
         $scope.pass = "";

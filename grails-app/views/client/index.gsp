@@ -185,7 +185,7 @@
 
 </div>
 
-<asset:javascript src="public/client.js"/>
+<asset:javascript src="angular-controllers/client.js"/>
 
 </body>
 </html>

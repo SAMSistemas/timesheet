@@ -1,5 +1,7 @@
-angular.module('myApp')
-    .controller('mainController', function ($scope, $http) {
+//= require default
+//= require_self
+
+app.controller('mainController', function ($scope, $http) {
 
         $scope.clients = [];
         $scope.projects = [];

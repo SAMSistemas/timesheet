@@ -94,7 +94,7 @@
 
 </div>
 
-<asset:javascript src="public/holiday.js"/>
+<asset:javascript src="angular-controllers/holiday.js"/>
 
 </body>
 </html>

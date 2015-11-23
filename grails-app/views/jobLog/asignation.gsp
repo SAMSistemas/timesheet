@@ -60,7 +60,7 @@
 
 </div>
 
-<asset:javascript src="public/asignation.js"/>
+<asset:javascript src="angular-controllers/asignation.js"/>
 
 </body>
 </html>

@@ -73,7 +73,7 @@
 </div>
 
 <asset:javascript src="application.js"></asset:javascript>
-<asset:javascript src="public/login.js"></asset:javascript>
+<asset:javascript src="angular-controllers/login.js"></asset:javascript>
 
 </body>
 </html>

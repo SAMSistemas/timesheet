@@ -1,5 +1,7 @@
-angular.module('myApp')
-    .controller('holidayController', function ($scope, $http) {
+//= require default
+//= require_self
+
+app.controller('holidayController', function ($scope, $http) {
 
         $scope.eventToCreate = {};
         $scope.eventToUpdate = {};

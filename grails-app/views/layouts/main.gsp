@@ -162,8 +162,8 @@
     $(".button-collapse").sideNav();
 </script>
 
-<asset:javascript src="public/main.js"/>
-<asset:javascript src="public/login.js"/>
+<asset:javascript src="angular-controllers/main.js"/>
+<asset:javascript src="angular-controllers/login.js"/>
 
 </body>
 </html>

@@ -247,7 +247,7 @@
 
 </div>
 
-<asset:javascript src="public/project.js"/>
+<asset:javascript src="angular-controllers/project.js"/>
 
 </body>
 </html>

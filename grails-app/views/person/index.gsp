@@ -310,7 +310,7 @@
 
 </div>
 
-<asset:javascript src="public/person.js"/>
+<asset:javascript src="angular-controllers/person.js"/>
 
 </body>
 </html>

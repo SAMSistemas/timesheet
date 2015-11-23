@@ -1,3 +1,6 @@
+//= require default
+//= require_self
+
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 var observer = new MutationObserver(function () {
@@ -14,8 +17,7 @@ observer.observe(document.querySelector('#table-body'), {
     characterDataOldValue: false
 });
 
-angular.module('myApp')
-    .controller('personController', function ($scope, $http) {
+app.controller('personController', function ($scope, $http) {
 
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false;  // set the default sort order
