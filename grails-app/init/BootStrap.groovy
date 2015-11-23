@@ -1,6 +1,4 @@
 import org.springframework.web.context.support.WebApplicationContextUtils
-import sam.timesheet.domain.Person
-import sam.timesheet.domain.WorkPosition
 
 class BootStrap {
 

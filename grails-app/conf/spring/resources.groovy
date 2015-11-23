@@ -1,5 +1,5 @@
-import sam.timesheet.domain.CustomObjectMarshallers
-import sam.timesheet.domain.FieldErrorMarshaller
+import sam.timesheet.CustomObjectMarshallers
+import sam.timesheet.FieldErrorMarshaller
 
 // Place your Spring DSL code here
 beans = {
