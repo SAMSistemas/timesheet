@@ -1,18 +1,9 @@
-.btn-flat {
-    padding: 0 20px 0 20px;
-}
-
-.btn-flat.transparent-green, .btn.transparent-green {
-    background-color: transparent;
-    color: #009688;
-}
-
-.btn-flat.transparent-green:hover, .btn.transparent-green:hover {
-    color: white;
+.teal-text.teal-hover:hover {
+    color: white !important;
     background-color: #009688;
 }
 
-.btn-padding {
+.btn-create-padding {
     padding-left: 20px;
     padding-right: 25px;
 }

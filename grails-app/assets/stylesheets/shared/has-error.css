@@ -6,16 +6,3 @@ span.has-error {
     color: red !important;
     font-size: 0.8rem;
 }
-
-a.has-error {
-    color: grey !important;
-}
-
-button.has-error {
-    color: grey !important;
-}
-
-button.has-error.transparent-green:hover {
-    color: grey !important;
-    background-color: #FAFAFA !important;
-}

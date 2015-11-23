@@ -49,8 +49,8 @@ app.controller('clientController', function ($scope, $http) {
 
             // To clear the errors from previous edit forms
             if ($scope.editForm !== null) {
-                $scope.createForm.name.$setValidity('available', true);
-                $scope.createForm.sname.$setValidity('available', true);
+                $scope.editForm.name.$setValidity('available', true);
+                $scope.editForm.sname.$setValidity('available', true);
             }
         };
 

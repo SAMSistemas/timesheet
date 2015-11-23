@@ -43,10 +43,9 @@
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect btn-flat transparent-green"
-                            ng-class="{'has-error': createForm.$invalid}"
-                            ng-disabled="createForm.$invalid">Guardar</button>
-                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                    <button class="btn-flat disabled" ng-disabled="createForm.$invalid"
+                            ng-class="{'modal-action modal-close teal-text teal-hover': createForm.$valid}">Guardar</button>
+                    <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
                 </div>
 
             </div>
@@ -81,12 +80,11 @@
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect btn-flat transparent-green"
-                            ng-class="{'has-error': editForm.$invalid}"
-                            ng-disabled="editForm.$invalid">Editar</button>
-                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green"
+                    <button class="btn-flat disabled" ng-disabled="editForm.$invalid"
+                            ng-class="{'modal-action modal-close teal-text teal-hover': editForm.$valid}">Guardar</button>
+                    <a href class="modal-action modal-close btn-flat teal-text teal-hover"
                        ng-click="delete()">Eliminar</a>
-                    <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                    <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
                 </div>
 
             </div>

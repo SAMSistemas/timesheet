@@ -15,7 +15,7 @@
 
     <h3 class="card-title">Lista de Personas</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">person_add</i>Crear</a>
 
     <table class="responsive-table striped centered">
@@ -34,22 +34,16 @@
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
-                <div class="input-field white teal-text">
-                    <input-field-text ng-id="search_name" ng-model="search.name"
-                                      ng-placeholder="Ingrese Nombre"></input-field-text>
-                </div>
+                <input-field-text ng-id="search_name" ng-model="search.name"
+                                  ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <div class="input-field white teal-text">
-                    <input-field-text ng-id="search_lastname" ng-model="search.lastname"
-                                      ng-placeholder="Ingrese Apellido"></input-field-text>
-                </div>
+                <input-field-text ng-id="search_lastname" ng-model="search.lastname"
+                                  ng-placeholder="Ingrese Apellido"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <div class="input-field white teal-text">
-                    <input-field-text ng-id="search_username" ng-model="search.username"
-                                      ng-placeholder="Ingrese Usuario"></input-field-text>
-                </div>
+                <input-field-text ng-id="search_username" ng-model="search.username"
+                                  ng-placeholder="Ingrese Usuario"></input-field-text>
             </th>
             <th class="th-filter-padding width-20">
                 <input-field-text ng-id="search_position" ng-model="search.work_position"
@@ -60,9 +54,7 @@
                                   ng-placeholder="Ingrese Horas"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <div class="input-field">
-                    <select-status ng-model="status"></select-status>
-                </div>
+                <select-status ng-model="status"></select-status>
             </th>
             <th class="th-filter-padding width-5"></th>
         </tr>
@@ -87,7 +79,7 @@
             </td>
             <td class="width-5">
                 <a href="#edit-modal" ng-click="edit(person)"
-                   class="waves-effect waves-light btn btn-edit-padding transparent-green z-depth-0 modal-trigger"><i
+                   class="waves-effect btn-flat btn-edit-padding teal-text teal-hover z-depth-0 modal-trigger"><i
                         class="material-icons center icon-margin">mode_edit</i></a>
             </td>
         </tr>
@@ -197,10 +189,9 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="createForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': createForm.$invalid}">Guardar</button>
-                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                <button class="btn-flat disabled" ng-disabled="createForm.$invalid"
+                        ng-class="{'modal-action modal-close teal-text teal-hover': createForm.$valid}">Guardar</button>
+                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
         </form>
@@ -299,10 +290,9 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="editForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': editForm.$invalid}">Guardar</button>
-                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                <button class="btn-flat disabled" ng-disabled="editForm.$invalid"
+                        ng-class="{'modal-action modal-close teal-text teal-hover': editForm.$valid}">Guardar</button>
+                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
         </form>

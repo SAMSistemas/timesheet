@@ -15,7 +15,7 @@
 
     <h3 class="card-title">Lista de Tipos de Tarea</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-padding modal-trigger" ng-click="new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">note_add</i>Crear</a>
 
     <table class="responsive-table striped centered">
@@ -30,15 +30,11 @@
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-10"></th>
             <th class="th-filter-padding width-40">
-                <div class="input-field white teal-text">
-                    <input-field-text ng-id="search_name" ng-model="search.name"
-                                      ng-placeholder="Ingrese Nombre"></input-field-text>
-                </div>
+                <input-field-text ng-id="search_name" ng-model="search.name"
+                                  ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding width-25">
-                <div class="input-field">
-                    <select-status ng-model="status"></select-status>
-                </div>
+                <select-status ng-model="status"></select-status>
             </th>
             <th class="th-filter-padding width-25"></th>
         </tr>
@@ -59,7 +55,7 @@
             </td>
             <td class="width-25">
                 <a href="#edit-modal" ng-click="edit(taskType)"
-                   class="waves-effect waves-light btn btn-edit-padding transparent-green z-depth-0 modal-trigger"><i
+                   class="waves-effect btn-flat btn-edit-padding teal-text teal-hover z-depth-0 modal-trigger"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
             </td>
         </tr>
@@ -101,10 +97,9 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="createForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': createForm.$invalid}">Guardar</button>
-                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                <button class="btn-flat disabled" ng-disabled="createForm.$invalid"
+                        ng-class="{'modal-action modal-close teal-text teal-hover': createForm.$valid}">Guardar</button>
+                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
         </form>
@@ -126,7 +121,7 @@
                                original-value="taskType.name" url-to-check="/taskType/existsName/">
                         <label for="edit_name" ng-class="{'has-error': editForm.name.$invalid}">Nombre
                             <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.name.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="editForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -143,10 +138,9 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button ng-disabled="editForm.$invalid"
-                        class="modal-action modal-close waves-effect btn-flat transparent-green"
-                        ng-class="{'has-error': editForm.$invalid}">Guardar</button>
-                <a href class="modal-action modal-close waves-effect btn-flat transparent-green">Cancelar</a>
+                <button class="btn-flat disabled" ng-disabled="editForm.$invalid"
+                        ng-class="{'modal-action modal-close teal-text teal-hover': editForm.$valid}">Guardar</button>
+                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
         </form>
@@ -154,7 +148,7 @@
 
 </div>
 
-<asset:javascript src="public/tasktype.js"/>
+<asset:javascript src="angular-controllers/tasktype.js"/>
 
 </body>
 </html>

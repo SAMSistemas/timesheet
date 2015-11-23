@@ -145,8 +145,9 @@
     </div>
 
     <div class="modal-footer modal-footer-padding">
-        <a href class=" modal-action modal-close waves-effect waves-teal btn-flat" ng-click="export()">Exportar</a>
-        <a href class=" modal-action modal-close waves-effect waves-teal btn-flat">Cancelar</a>
+        <a href class="modal-action modal-close btn-flat teal-text teal-hover"
+           ng-click="export()">Exportar</a>
+        <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
     </div>
 </div>
 
