@@ -41,16 +41,14 @@
 
 
     <ul id="side-nav" class="side-nav fixed">
-        <li class="user-panel li-no-hover">
-            <div class="user-info">
-                <div class="row user-picture-padding">
-                    <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
-                </div>
+        <li class="teal waves-teal">
+            <div class="row user-picture-padding">
+                <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
+            </div>
 
-                <div class="row user-data-padding">
-                    <span class="white-text truncate">{{ name }}</span>
-                    <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
-                </div>
+            <div class="row user-data-padding">
+                <span class="white-text truncate">{{ name }}</span>
+                <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
             </div>
         </li>
         <li>
