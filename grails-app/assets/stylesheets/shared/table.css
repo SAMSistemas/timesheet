@@ -34,6 +34,11 @@
     line-height: 30px !important;
 }
 
+.material-icons-line-heigth {
+    height: 50px;
+    line-height: 50px !important;
+}
+
 /** Styles to make the table content scrollable **/
 thead, tbody, tr, td, th {
     display: block;

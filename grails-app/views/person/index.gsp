@@ -138,8 +138,7 @@
                                ng-model="personToCreate.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label ng-class="{'has-error': createForm.password.$invalid}">Contraseña
                             <span ng-show="createForm.password.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="createForm.password.$error.pattern"
-                                  class="has-error">debe ser de ocho letras</span>
+                            <span ng-show="createForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>
@@ -153,9 +152,9 @@
                             <option value="" disabled selected>~ Elegí una posición ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
-                               ng-class="{'has-error': createForm.position.$invalid}">Posición <span
-                                ng-show="createForm.position.$error.required"
-                                class="has-error">es obligatoria</span></label>
+                               ng-class="{'has-error': createForm.position.$invalid}">Posición
+                            <span ng-show="createForm.position.$error.required" class="has-error">es obligatoria</span>
+                        </label>
                     </div>
                 </div>
 
@@ -167,9 +166,9 @@
                             <option value="" disabled selected>~ Elegí una hora ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
-                               ng-class="{'has-error': createForm.workHours.$invalid}">Horas <span
-                                ng-show="createForm.workHours.$error.required"
-                                class="has-error">es obligatoria</span></label>
+                               ng-class="{'has-error': createForm.workHours.$invalid}">Horas
+                            <span ng-show="createForm.workHours.$error.required" class="has-error">es obligatoria</span>
+                        </label>
                     </div>
                 </div>
 
@@ -232,8 +231,7 @@
                                url-to-check="/person/existsUsername/">
                         <label ng-class="{'has-error': editForm.username.$invalid}">Usuario
                             <span ng-show="editForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="editForm.username.$error.available"
-                                  class="has-error">ya existe</span>
+                            <span ng-show="editForm.username.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -245,8 +243,7 @@
                                ng-model="personToEdit.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label ng-class="{'has-error': editForm.password.$invalid}">Contraseña
                             <span ng-show="editForm.password.$invalid" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.password.$error.pattern"
-                                  class="has-error">debe ser de ocho letras</span>
+                            <span ng-show="createForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>

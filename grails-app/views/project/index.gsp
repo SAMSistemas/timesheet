@@ -97,9 +97,9 @@
                             <option value="" disabled selected>~ Elija un cliente ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
-                               ng-class="{'has-error': createForm.client.$invalid}">Cliente <span
-                                ng-show="createForm.client.$error.required"
-                                class="has-error">es obligatorio</span></label>
+                               ng-class="{'has-error': createForm.client.$invalid}">Cliente
+                            <span ng-show="createForm.client.$error.required" class="has-error">es obligatorio</span>
+                        </label>
                     </div>
                 </div>
 
@@ -182,8 +182,7 @@
                                ng-model="projectToEdit.project_name" required available
                                original-value="project.project_name" url-to-check="/project/existsName/">
                         <label ng-class="{'has-error': editForm.project_name.$invalid}">Nombre de proyecto
-                            <span ng-show="editForm.project_name.$error.required"
-                                  class="has-error">es obligatorio</span>
+                            <span ng-show="editForm.project_name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="editForm.project_name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>

@@ -27,16 +27,16 @@ li.li-no-hover:hover {
     padding: 0 20px 0 20px !important;
 }
 
-.select-modal input.select-dropdown {
-    color: #757575 !important;
-    border-color: #bdbdbd !important;
-    line-height: 3rem !important;
-    text-align: center;
-}
+/*.select-modal input.select-dropdown {*/
+    /*color: #757575 !important;*/
+    /*border-color: #bdbdbd !important;*/
+    /*line-height: 3rem !important;*/
+    /*text-align: center;*/
+/*}*/
 
-.select-modal span.caret {
-    color: #757575 !important;
-}
+/*.select-modal span.caret {*/
+    /*color: #757575 !important;*/
+/*}*/
 
 .combodate select {
     display: inline;

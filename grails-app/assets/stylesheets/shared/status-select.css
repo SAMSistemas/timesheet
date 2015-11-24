@@ -1,5 +1,5 @@
 .select-status .dropdown-content li{
-    text-align: center !important;
+    text-align: center !important; /* to center the elements in the select */
 }
 
 .select-status.select-wrapper {
@@ -18,9 +18,8 @@
 
 .select-status.select-wrapper input.select-dropdown {
     color: white !important;
-    border-color: transparent !important;
-    margin: 0 !important;
-    text-align: center !important;
-    height: 100% !important;
-    line-height: 100% !important;
+    border-color: transparent !important; /* to remove the bottom border */
+    text-align: center !important; /* to center the text horizontally */
+    height: 100% !important; /* to center the text vertically */
+    line-height: 100% !important; /* to center the text vertically */
 }
