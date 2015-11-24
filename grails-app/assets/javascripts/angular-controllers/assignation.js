@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('asignationController', function ($scope, $http) {
+app.controller('assignationController', function ($scope, $http) {
 
     $scope.clients = [];
     $scope.projects = [];
@@ -41,7 +41,7 @@ app.controller('asignationController', function ($scope, $http) {
             project: $scope.projectSelected.project_name
         };
 
-        $http.post('/jobLog/asign', jobLog).then(function (response) {
+        $http.post('/jobLog/assign', jobLog).then(function (response) {
             if (response.status === 200) {
                 $scope.confirmation = "Se asigno la persona al proyecto";
                 $scope.personSelected = null;

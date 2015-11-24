@@ -40,8 +40,8 @@ app.controller('mainController', function ($scope, $http) {
             };
 
 
-            $http.post('/jobLog/projectForHour/', filters).then(function (response) {
-                window.location.href = '/jobLog/projectForHour/';
+            $http.post('/jobLog/projectForHour', filters).then(function (response) {
+                window.location.href = '/jobLog/projectForHour';
                 $scope.clean();
             }, function () {
                 $scope.clean();
