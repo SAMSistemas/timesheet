@@ -16,7 +16,7 @@ class JobLogController {
 
     ReportService reportService
 
-    static allowedMethods = [all: "GET", create: "POST", asign: "POST", all: "POST"]
+    static allowedMethods = [all: "POST", create: "POST", asign: "POST"]
 
     def all() {
 
