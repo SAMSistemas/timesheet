@@ -70,7 +70,7 @@
             </td>
             <td class="width-15">
                 <a href class="btn-flat btn-edit-padding z-depth-0 disabled" ng-show="!project.client.enabled"><i
-                    class="material-icons left icon-margin">mode_edit</i>Editar</a>
+                        class="material-icons left icon-margin">mode_edit</i>Editar</a>
                 <a href="#edit-modal" ng-click="edit(project)" ng-show="project.client.enabled"
                    class="waves-effect btn-flat btn-edit-padding z-depth-0 teal-text teal-hover modal-trigger"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
@@ -106,9 +106,9 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="name" name="name" type="text" maxlength="50" ng-model="projectToCreate.project_name"
+                        <input name="name" type="text" maxlength="50" ng-model="projectToCreate.project_name"
                                required available url-to-check="/project/existsName/">
-                        <label for="name" ng-class="{'has-error': createForm.name.$invalid}">Nombre de proyecto
+                        <label ng-class="{'has-error': createForm.name.$invalid}">Nombre de proyecto
                             <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="createForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
@@ -118,9 +118,9 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="sname" name="sname" type="text" maxlength="10" ng-model="projectToCreate.short_name"
+                        <input name="sname" type="text" maxlength="10" ng-model="projectToCreate.short_name"
                                required available url-to-check="/project/existsSName/">
-                        <label for="sname" ng-class="{'has-error': createForm.sname.$invalid}">Sigla
+                        <label ng-class="{'has-error': createForm.sname.$invalid}">Sigla
                             <span ng-show="createForm.sname.$error.required" class="has-error">es obligatoria</span>
                             <span ng-show="createForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
@@ -178,11 +178,10 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_name" name="project_name" type="text" maxlength="50"
+                        <input name="project_name" type="text" maxlength="50"
                                ng-model="projectToEdit.project_name" required available
                                original-value="project.project_name" url-to-check="/project/existsName/">
-                        <label for="edit_name"
-                               ng-class="{'has-error': editForm.project_name.$invalid}">Nombre de proyecto
+                        <label ng-class="{'has-error': editForm.project_name.$invalid}">Nombre de proyecto
                             <span ng-show="editForm.project_name.$error.required"
                                   class="has-error">es obligatorio</span>
                             <span ng-show="editForm.project_name.$error.available" class="has-error">ya existe</span>
@@ -193,10 +192,10 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_sname" name="sname" type="text" maxlength="10"
+                        <input name="sname" type="text" maxlength="10"
                                ng-model="projectToEdit.short_name" required available
                                original-value="project.short_name" url-to-check="/project/existsSName/">
-                        <label for="edit_sname" ng-class="{'has-error': editForm.sname.$invalid}">Sigla
+                        <label ng-class="{'has-error': editForm.sname.$invalid}">Sigla
                             <span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="editForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
