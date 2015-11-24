@@ -43,8 +43,8 @@
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="btn-flat disabled" ng-disabled="createForm.$invalid"
-                            ng-class="{'modal-action modal-close teal-text teal-hover': createForm.$valid}">Guardar</button>
+                    <button class="modal-action modal-close btn-flat disabled" ng-disabled="createForm.$invalid"
+                            ng-class="{'teal-text teal-hover': createForm.$valid}">Guardar</button>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
                 </div>
 
@@ -80,8 +80,8 @@
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="btn-flat disabled" ng-disabled="editForm.$invalid"
-                            ng-class="{'modal-action modal-close teal-text teal-hover': editForm.$valid}">Guardar</button>
+                    <button class="modal-action modal-close btn-flat disabled" ng-disabled="editForm.$invalid"
+                            ng-class="{'teal-text teal-hover': editForm.$valid}">Guardar</button>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover"
                        ng-click="delete()">Eliminar</a>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
