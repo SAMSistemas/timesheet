@@ -88,7 +88,7 @@
 
 <div id="report-modal" class="modal modal-large">
     <div class="modal-content">
-        <h2 class="card-title teal-text modal-card-title teal-text">Reporte de horas</h2>
+        <h2 class="card-title teal-text modal-card-title">Reporte de horas</h2>
 
         %{--Client Select--}%
         <div class="row">

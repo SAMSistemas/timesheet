@@ -70,7 +70,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title teal-text">Crear tipo de tarea</h2>
+                <h2 class="card-title teal-text modal-card-title">Crear tipo de tarea</h2>
 
                 %{--Name Field--}%
                 <div class="row">
@@ -110,7 +110,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title teal-text">Editar tipo de tarea</h2>
+                <h2 class="card-title teal-text modal-card-title">Editar tipo de tarea</h2>
 
                 %{--Name Field--}%
                 <div class="row">

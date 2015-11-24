@@ -21,7 +21,7 @@
             <div class="modal-content">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title teal-text">Crear feriado</h2>
+                <h2 class="card-title teal-text modal-card-title">Crear feriado</h2>
 
                 %{--Name Field--}%
                 <div class="row">
@@ -58,7 +58,7 @@
             <div class="modal-content">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title teal-text">Editar feriado</h2>
+                <h2 class="card-title teal-text modal-card-title">Editar feriado</h2>
 
                 %{--Name Field--}%
                 <div class="row">
