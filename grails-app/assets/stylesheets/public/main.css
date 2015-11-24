@@ -1,7 +1,7 @@
 /*
 * This is a manifest file that'll be compiled into main.css, which will include all the files listed below.
 *
-*= require vendor/materialize.min.css
+*= require vendor/materialize.css
 *= require shared/navbar.css
 *= require shared/modal.css
 *= require_self
