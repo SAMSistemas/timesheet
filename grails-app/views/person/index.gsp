@@ -13,7 +13,7 @@
 
 <div ng-controller="personController">
 
-    <h3 class="card-title">Lista de Personas</h3>
+    <h3 class="card-title teal-text">Lista de Personas</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">person_add</i>Crear</a>
@@ -94,7 +94,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title Field--}%
-                <h2 class="card-title modal-card-title">Crear persona</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Crear persona</h2>
 
                 %{--Name Field --}%
                 <div class="row">
@@ -200,7 +200,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title Field--}%
-                <h2 class="card-title modal-card-title">Editar persona</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Editar persona</h2>
 
                 %{--Name Field--}%
                 <div class="row">

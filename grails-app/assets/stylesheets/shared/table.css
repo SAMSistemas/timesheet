@@ -52,6 +52,10 @@ tbody {
     width: calc(100% - 14px);
 }
 
+thead {
+    border-bottom: 0px !important;
+}
+
 tbody td, thead th {
     width: 20%;
     float: left;
@@ -59,8 +63,4 @@ tbody td, thead th {
     line-height: 50px;
     padding: 0px;
     font-size: 14px;
-}
-
-thead th {
-    height: 50px;
 }

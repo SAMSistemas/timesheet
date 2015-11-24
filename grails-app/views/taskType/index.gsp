@@ -13,7 +13,7 @@
 
 <div ng-controller="taskTypeController">
 
-    <h3 class="card-title">Lista de Tipos de Tarea</h3>
+    <h3 class="card-title teal-text">Lista de Tipos de Tarea</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">note_add</i>Crear</a>
@@ -70,7 +70,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title modal-card-title">Crear tipo de tarea</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Crear tipo de tarea</h2>
 
                 %{--Name Field--}%
                 <div class="row">
@@ -110,7 +110,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title modal-card-title">Editar tipo de tarea</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Editar tipo de tarea</h2>
 
                 %{--Name Field--}%
                 <div class="row">

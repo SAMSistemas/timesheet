@@ -13,7 +13,7 @@
 
 <div ng-controller="projectController">
 
-    <h3 class="card-title">Lista de Proyectos</h3>
+    <h3 class="card-title teal-text">Lista de Proyectos</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
             class="material-icons left">add</i>Crear</a>
@@ -87,7 +87,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title modal-card-title">Crear proyecto</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Crear proyecto</h2>
 
                 %{--Client Select--}%
                 <div class="row">
@@ -162,7 +162,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title modal-card-title">Editar projecto</h2>
+                <h2 class="card-title teal-text modal-card-title teal-text">Editar projecto</h2>
 
                 %{--Client Select--}%
                 <div class="row">

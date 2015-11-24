@@ -12,7 +12,7 @@
 
 <div ng-controller="asignationController">
 
-    <h3 class="card-title">Asignación de Personas a Proyectos</h3>
+    <h3 class="card-title teal-text">Asignación de Personas a Proyectos</h3>
 
     <form name="myForm">
 
