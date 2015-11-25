@@ -4,13 +4,13 @@
     <meta name="layout" content="main"/>
     <title>Asignar</title>
 
-    <asset:stylesheet href="public/asignation.css"></asset:stylesheet>
+    <asset:stylesheet href="public/assignation.css"></asset:stylesheet>
 
 </head>
 
 <body>
 
-<div ng-controller="asignationController">
+<div ng-controller="assignationController">
 
     <h3 class="card-title teal-text">Asignación de Personas a Proyectos</h3>
 
@@ -60,7 +60,7 @@
 
 </div>
 
-<asset:javascript src="angular-controllers/asignation.js"/>
+<asset:javascript src="angular-controllers/assignation.js"/>
 
 </body>
 </html>

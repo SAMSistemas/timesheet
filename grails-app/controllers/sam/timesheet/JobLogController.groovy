@@ -16,7 +16,7 @@ class JobLogController {
 
     ReportService reportService
 
-    static allowedMethods = [all: "GET", create: "POST", asign: "POST", all: "POST"]
+    static allowedMethods = [all: "POST", create: "POST", assign: "POST"]
 
     def all() {
 
@@ -51,12 +51,12 @@ class JobLogController {
         respond JobLog.list(params), model:[jobLogCount: JobLog.count()]
     }
 
-    def asignation() {
+    def assignation() {
         return
     }
 
     @Transactional
-    def asign() {
+    def assign() {
 
         def paramsJSON = request.JSON
 
