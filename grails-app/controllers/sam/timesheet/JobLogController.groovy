@@ -80,7 +80,7 @@ class JobLogController {
 
         jobLog.save(flush: true)
 
-        render jobLog
+        render jobLog as JSON
 
     }
 
