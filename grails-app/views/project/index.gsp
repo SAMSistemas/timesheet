@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'project.label', default: 'Projectos')}"/>
+    <g:set var="entityName" value="${message(code: 'project.label', default: 'Proyectos')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 
     <asset:stylesheet src="public/project.css"/>

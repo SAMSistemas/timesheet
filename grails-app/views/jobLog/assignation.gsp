@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Asignar</title>
+    <title>Asignación de Personas</title>
 
     <asset:stylesheet href="public/assignation.css"></asset:stylesheet>
 

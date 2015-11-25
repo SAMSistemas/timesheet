@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Login</title>
-
+    <title>Ingreso al Timesheet</title>
+    <link rel="shortcut icon" href="assets/favicon.ico">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <asset:stylesheet src="public/login.css"></asset:stylesheet>
