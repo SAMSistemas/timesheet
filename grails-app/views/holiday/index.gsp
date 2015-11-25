@@ -53,7 +53,7 @@
     </div>
 
     <!--Edit Modal-->
-    <div id="edit_modal" class="modal modal-medium">
+    <div id="edit_modal" class="modal modal-large">
         <form name="editForm" ng-submit="update()" novalidate>
             <div class="modal-content">
 
