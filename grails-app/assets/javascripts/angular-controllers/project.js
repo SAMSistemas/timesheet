@@ -77,7 +77,7 @@ app.controller('projectController', function ($scope, $http) {
         $scope.edit = function (project) {
 
             $scope.clientSelected = {};
-            $scope.clientSelected.name = project.client_name;
+            $scope.clientSelected.name = project.client.name;
             $scope.parseDate(project.start_date);
 
             $scope.projectToEdit = angular.copy(project);
@@ -98,6 +98,7 @@ app.controller('projectController', function ($scope, $http) {
 
         $scope.update = function () {
             $scope.projectToEdit.client_name = $scope.clientSelected.name;
+            $scope.projectToEdit.client.name = $scope.clientSelected.name;
 
             $scope.generateEditStringDate($scope.dateSelected);
 
