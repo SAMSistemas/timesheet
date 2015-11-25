@@ -34,7 +34,8 @@ app.controller('taskTypeController', function ($scope, $http) {
 
         $scope.create = function () {
             if ($scope.createForm.$valid) {
-                $http.post('/taskType/create', $scope.taskTypeToCreate).then(function () {
+                $http.post('/taskType/create', $scope.taskTypeToCreate).then(function (response) {
+                    $scope.taskTypeToCreate.id = response.data.id;
                     $scope.addToTable($scope.taskTypes, $scope.taskTypeToCreate);
                 }, function () {
 

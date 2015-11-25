@@ -35,7 +35,8 @@ app.controller('clientController', function ($scope, $http) {
 
         $scope.create = function () {
             if ($scope.createForm.$valid) {
-                $http.post('/client/create', $scope.clientToCreate).then(function () {
+                $http.post('/client/create', $scope.clientToCreate).then(function (response) {
+                    $scope.clientToCreate.id = response.data.id;
                     $scope.addToTable($scope.clients, $scope.clientToCreate);
                 }, function () {
 

@@ -55,7 +55,8 @@ app.controller('projectController', function ($scope, $http) {
             $scope.generateCreateStringDate($scope.dateSelected);
 
             if ($scope.createForm.$valid) {
-                $http.post('/project/create', $scope.projectToCreate).then(function () {
+                $http.post('/project/create', $scope.projectToCreate).then(function (response) {
+                    $scope.projectToCreate.id = response.data.id;
                     $scope.addToTable($scope.projects, $scope.projectToCreate);
                 }, function () {
 
