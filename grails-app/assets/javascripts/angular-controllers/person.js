@@ -51,7 +51,8 @@ app.controller('personController', function ($scope, $http) {
 
         $scope.create = function () {
             if ($scope.createForm.$valid) {
-                $http.post('/person/create', $scope.personToCreate).then(function () {
+                $http.post('/person/create', $scope.personToCreate).then(function (response) {
+                    $scope.personToCreate.id = response.data.id;
                     $scope.addToTable($scope.people, $scope.personToCreate);
                 }, function () {
 
@@ -70,9 +71,11 @@ app.controller('personController', function ($scope, $http) {
         };
 
         $scope.update = function () {
+            console.log($scope.personToEdit);
             if ($scope.editForm.$valid) {
                 $http.put('/person/update', $scope.personToEdit).then(function () {
                     $scope.updateInTable($scope.people, $scope.personToEdit);
+                    console.log($scope.people);
                 }, function () {
 
                 });
