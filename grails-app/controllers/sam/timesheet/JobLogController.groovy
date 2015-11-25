@@ -131,17 +131,20 @@ class JobLogController {
         ArrayList<JobLog> resultData = new ArrayList<JobLog>()
         resultData = JobLog.findAllByProjectAndDateBetween(filters.project,filters.dateFrom,filters.dateTo)
 
-        FileOutputStream file = reportService.makeReport(resultData,filters)
+        if(resultData.size() != 0 ){
 
-        Path path = Paths.get("C:/tmp/report.pdf");
-        byte[] data = Files.readAllBytes(path);
+            FileOutputStream file = reportService.makeReport(resultData,filters)
 
+            Path path = Paths.get("C:/tmp/report.pdf");
+            byte[] data = Files.readAllBytes(path);
 
-        response.setContentType("application/pdf")
-        response.setHeader("Content-disposition", "attachment; filename=report.pdf")
-        response.setContentLength(data.length)
-        response.getOutputStream().write(data)
-
+            response.setContentType("application/pdf")
+            response.setHeader("Content-disposition", "attachment; filename=report.pdf")
+            response.setContentLength(data.length)
+            response.getOutputStream().write(data)
+        }else{
+            response.status = 404
+        }
     }
 
     def formatDate(dateInString) {

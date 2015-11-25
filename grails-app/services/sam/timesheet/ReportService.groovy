@@ -169,7 +169,7 @@ class ReportService {
                 table.addCell(dateCell)
                 log.info("CELL DATE CREATED!")
 
-                PdfPCell taskCell = new PdfPCell(new Phrase(jLog.task_type.name))
+                PdfPCell taskCell = new PdfPCell(new Phrase(jLog.task_type.name,fontObs))
                 table.addCell(taskCell)
                 log.info("CELL TASK CREATED!")
 

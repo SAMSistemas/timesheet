@@ -69,3 +69,8 @@ li.li-no-hover:hover {
     }
 
 }
+
+.toast{
+    color: white !important;
+    background-color: #009688 !important;
+}

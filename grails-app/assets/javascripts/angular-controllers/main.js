@@ -44,12 +44,10 @@ app.controller('mainController', function ($scope, $http) {
                 window.location.href = '/jobLog/projectForHour';
                 $scope.clean();
             }, function () {
+                var $toast = $('<span>No se encontraron datos para los par&aacute;metros ingresados</span>');
+                Materialize.toast($toast, 4000,'rounded');
                 $scope.clean();
             });
-            //}else{
-            //$scope.showDateError();
-            //alert("fecha incorrecta!");
-            //}
         };
 
         $scope.clean = function () {
