@@ -6,6 +6,8 @@ class JobLog {
     String hours
     String solicitude
     String observation
+    Integer date_month
+    Integer date_year
 
     static belongsTo = [project: Project, person: Person, task_type: TaskType]
 
