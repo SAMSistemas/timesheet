@@ -162,6 +162,47 @@ class JobLogController {
 
     }
 
+    @Transactional
+    def update() {
+
+        def paramsJSON = request.JSON
+
+        def jobLogToUpdate = JobLog.findById(paramsJSON.get("id"))
+
+        if (jobLogToUpdate == null) {
+
+            response.status = 404
+
+            render(contentType: "application/json") {
+                error = "El proyecto no existe"
+            }
+
+            return
+        }
+
+        jobLogToUpdate.project = Project.findById(paramsJSON.get("id_project"))
+        jobLogToUpdate.person = Person.findById(paramsJSON.get("id_person"))
+        jobLogToUpdate.task_type = TaskType.findById(paramsJSON.get("id_tasktype"))
+        jobLogToUpdate.hours = paramsJSON.get("hours")
+        jobLogToUpdate.date = formatDate(paramsJSON.get("work_date"))
+        jobLogToUpdate.solicitude = paramsJSON.get("solicitude_number")
+        jobLogToUpdate.observation = paramsJSON.get("observations")
+
+        if (!jobLogToUpdate.validate()) {
+
+            response.status = 422
+
+            render jobLogToUpdate.errors.fieldErrors as JSON
+
+            return
+        }
+
+        jobLogToUpdate.save flush: true
+
+        render jobLogToUpdate as JSON
+
+    }
+
 
     class FilterHsForProject{
         def client
