@@ -27,7 +27,7 @@ class ReportService {
     int TABLE_COLUMNS = 8
     public static final String SAM_IMAGE = "grails-app/assets/images/LogoSamSistemas_transp.gif";
 
-    def headers = ["Fecha","Tarea","Persona","Solicitud","Observacion","Horas"]
+    def headers = ["Fecha","Tarea","Persona","Solicitud","Observación","Horas"]
 
     def makeReport(ArrayList<JobLog> listJL, filters)throws IOException, DocumentException {
             // step 1
@@ -40,7 +40,7 @@ class ReportService {
 
             def dateCreated = new Date()
             LocalTime now = LocalTime.now();
-            pageFooter.setFooter("Fecha de impresi�n:"+dateCreated.format("dd-MM-yyyy")+"     Hora:"+now.getHour()+":"+now.getMinute());
+            pageFooter.setFooter("Fecha de impresión:"+dateCreated.format("dd-MM-yyyy")+"     Hora:"+now.getHour()+":"+now.getMinute());
 
             writer.setPageEvent(pageFooter);
             // step 3
@@ -143,7 +143,7 @@ class ReportService {
         table.getDefaultCell().setBackgroundColor(BaseColor.LIGHT_GRAY);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         for (String title:headers){
-            if (title=="Observacion"){
+            if (title=="Observación"){
                 PdfPCell obsCell = new PdfPCell(new Phrase(title))
                 obsCell.setColspan(3)
                 obsCell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -165,7 +165,7 @@ class ReportService {
             log.info("ROW CREATED!")
 
 
-                PdfPCell dateCell = new PdfPCell(new Phrase(jLog.date.format("dd-MM-yyyy")))
+                PdfPCell dateCell = new PdfPCell(new Phrase(jLog.date.format("dd-MM-yyyy"),fontObs))
                 table.addCell(dateCell)
                 log.info("CELL DATE CREATED!")
 
@@ -231,7 +231,7 @@ class ReportService {
                 table.addCell(footer);
                 table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
 
-                table.addCell(String.format("P�gina %d de", writer.getPageNumber()));
+                table.addCell(String.format("Página %d de", writer.getPageNumber()));
 
                 PdfPCell cell = new PdfPCell(Image.getInstance(total));
 
