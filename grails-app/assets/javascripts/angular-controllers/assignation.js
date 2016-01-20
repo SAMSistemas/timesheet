@@ -22,6 +22,7 @@ app.controller('assignationController', function ($scope, $http) {
     $scope.changeClient = function () {
         $http.get('/project/allEnabledByClient/' + $scope.clientSelected.name).then(function (response) {
             $scope.projects = response.data;
+            $scope.confirmation = "";
         }, function () {
 
         });
@@ -30,6 +31,7 @@ app.controller('assignationController', function ($scope, $http) {
     $scope.changeProject = function () {
         $http.get('/person/allEnabledAndAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
             $scope.people = response.data;
+            $scope.confirmation = "";
         }, function () {
 
         });
