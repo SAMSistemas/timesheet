@@ -129,13 +129,13 @@ class JobLogController {
         }
 
         ArrayList<JobLog> resultData = new ArrayList<JobLog>()
-        resultData = JobLog.findAllByProjectAndDateBetween(filters.project,filters.dateFrom,filters.dateTo)
+        resultData = JobLog.findAllByProjectAndDateBetweenAndHoursNotEqual(filters.project,filters.dateFrom,filters.dateTo,"0")
 
         if(resultData.size() != 0 ){
 
             FileOutputStream file = reportService.makeReport(resultData,filters)
 
-            Path path = Paths.get("C:/tmp/report.pdf");
+            Path path = Paths.get("C:\\tmp\\report.pdf");
             byte[] data = Files.readAllBytes(path);
 
             response.setContentType("application/pdf")
