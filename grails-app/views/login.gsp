@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">accessibility</i>
-                            <input id="username" type="text" name="username" maxlength="15" ng-model="user"
+                            <input id="username" type="text" name="username" maxlength="25" ng-model="user"
                                    required>
                             <label for="username">Usuario</label>
                         </div>
