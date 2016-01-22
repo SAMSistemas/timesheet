@@ -15,10 +15,11 @@
     border-color: #bdbdbd !important;
     /*margin-bottom: 30px !important;*/
     line-height: 3rem !important;
+    text-align: center;
 }
 
 .select-modal span.caret {
-    top: 7px !important;
+    /*top: 7px !important;*/
     color: #757575 !important;
 }
 
@@ -27,4 +28,12 @@
     text-align: center;
     color: #009688;
     width: 20% !important;
+}
+
+ul.dropdown-content {
+    max-height: 150px !important;
+}
+
+ul.dropdown-content li span {
+    text-align: center !important;
 }

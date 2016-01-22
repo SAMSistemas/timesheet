@@ -116,7 +116,7 @@
         <div class="row">
             <div class="col s12">
                 <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
-                      ng-min-date="2010-01-01" ng-max-date="2016-12-31"></span>
+                      ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
                 %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
                 <label class="modal-label modal-label-date left">Desde</label>
             </div>
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col s12">
                 <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
-                      ng-min-date="2010-01-01" ng-max-date="2016-12-31"></span>
+                      ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
                 %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
                 <label class="modal-label modal-label-date left">Hasta</label>
             </div>
