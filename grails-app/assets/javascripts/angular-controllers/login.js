@@ -13,7 +13,8 @@ app.controller('loginController', function ($scope, $http, $window) {
                 sessionStorage.setItem("name", "");
                 $window.location.href = '/';
             }, function () {
-                $scope.errorMsg = "El usuario y/o la contraseña son incorrectos"
+                $scope.errorMsg = "El usuario y/o la contraseña son incorrectos";
+                $('.login-card').css("height", "620px");
             });
         };
 
