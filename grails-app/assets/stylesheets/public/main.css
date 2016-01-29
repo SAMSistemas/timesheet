@@ -1,7 +1,7 @@
 /*
 * This is a manifest file that'll be compiled into main.css, which will include all the files listed below.
 *
-*= require vendor/materialize.css
+*= require vendor/materialize-0.97.5.min.css
 *= require shared/navbar.css
 *= require shared/modal.css
 *= require_self
@@ -24,7 +24,7 @@ li.li-no-hover:hover {
 }
 
 .card-content-padding {
-    padding: 0 20px 0 20px !important;
+    padding: 5px 20px 5px 20px !important;
 }
 
 /*.select-modal input.select-dropdown {*/

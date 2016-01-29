@@ -44,12 +44,12 @@
     <ul id="side-nav" class="side-nav fixed">
         <li class="teal waves-teal">
             <div class="row user-picture-padding">
-                <img class="responsive-img left" src="/assets/account_circle.png" height="75px" width="75px">
+                <img class="user-picture responsive-img left" src="/assets/account_circle.png">
             </div>
 
             <div class="row user-data-padding">
-                <span class="white-text truncate">{{ name }}</span>
-                <span class="white-text truncate">{{ user }}@samsistemas.com.ar</span>
+                <span class="user-info white-text truncate">{{ name }}</span>
+                <span class="user-info white-text truncate">{{ user }}@samsistemas.com.ar</span>
             </div>
         </li>
         <li>

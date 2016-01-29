@@ -1,7 +1,7 @@
 a.button-collapse.top-nav {
     position: absolute;
     height: 64px;
-    top: 0px;
+    top: 0;
     padding-left: 2%;
     color: #FFF;
     font-size: 32px;
@@ -33,6 +33,14 @@ a.button-collapse.top-nav {
 }
 
 .user-info {
+    height: 27px !important;
+    line-height: 27px;
+    vertical-align: middle;
+}
+
+.user-picture {
+    height: 75px;
+    width: 75px;
 }
 
 .user-picture-padding {
@@ -40,5 +48,5 @@ a.button-collapse.top-nav {
 }
 
 .user-data-padding {
-    padding: 10px 40px 10px 15px;
+    padding: 10px 15px 10px 15px;
 }

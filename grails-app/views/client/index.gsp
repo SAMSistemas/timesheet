@@ -16,7 +16,7 @@
     <h3 class="card-title teal-text">Lista de Clientes</h3>
 
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
-            class="material-icons left">person_add</i>Crear</a>
+            class="material-icons left">enhanced_encryption</i>Crear</a>
 
     <table class="responsive-table striped centered">
 
