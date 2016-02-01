@@ -2,154 +2,130 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('projectController', function ($scope, $http) {
+app.controller('projectController', function ($http) {
 
-        $scope.sortType = 'name'; // set the default sort type
-        $scope.sortReverse = false;  // set the default sort order
-        $scope.search = '';     // set the default search/filter term
-        $scope.status = 'all';
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.projects = [];
-        $scope.projectToCreate = null;
-        $scope.projectToEdit = null;
-        $scope.project = null;
+        vm.sortType = 'name'; // set the default sort type
+        vm.sortReverse = false;  // set the default sort order
+        vm.search = {client:"", project_name:"", short_name:""};     // set the default search/filter term
+        vm.status = 'all';
 
-        $scope.enabledClients = [];
-        $scope.clientSelected = null;
+        vm.projects = [];
+        vm.projectToCreate = null;
+        vm.projectToEdit = null;
+        vm.project = null;
 
-        $scope.createForm = null;
-        $scope.editForm = null;
+        vm.enabledClients = [];
+        vm.clientSelected = null;
 
-        $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
+        vm.createForm = null;
+        vm.editForm = null;
 
-        $scope.dateSelected = new Date();
+        vm.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
+
+        vm.dateSelected = new Date();
+
+    /*-----------------------------------------------------------------------------------------------------------*/
+
+        /* API Functions */
 
         $http.get('/client/allEnabled').then(function (response) {
-            $scope.enabledClients = response.data;
+            vm.enabledClients = response.data;
         }, function () {
 
         });
 
         $http.get('/project/all').then(function (response) {
-            $scope.projects = response.data;
+            vm.projects = response.data;
         }, function () {
 
         });
 
-        $scope.new = function () {
-            $scope.clientSelected = "";
-            $scope.projectToCreate = {client_name: "", client: {name: "", enabled: true}, project_name: "", short_name: "", start_date: "", enabled: true};
+        /* CRUD Functions */
+
+        vm.new = function () {
+            vm.clientSelected = "";
+            vm.projectToCreate = {client_name: "", client: {name: "", enabled: true}, project_name: "", short_name: "", start_date: "", enabled: true};
 
             // To clear the errors from previous create forms
-            if ($scope.createForm !== null) {
-                $scope.createForm.project_name.$setValidity('available', true);
-                $scope.createForm.sname.$setValidity('available', true);
+            if (vm.createForm !== null) {
+                vm.createForm.project_name.$setValidity('available', true);
+                vm.createForm.sname.$setValidity('available', true);
             }
         };
 
-        $scope.create = function () {
+        vm.create = function () {
 
-            $scope.projectToCreate.client_name = $scope.clientSelected.name;
-            $scope.projectToCreate.client.name = $scope.clientSelected.name;
+            vm.projectToCreate.client_name = vm.clientSelected.name;
+            vm.projectToCreate.client.name = vm.clientSelected.name;
 
-            $scope.generateCreateStringDate($scope.dateSelected);
+            vm.generateCreateStringDate(vm.dateSelected);
 
-            if ($scope.createForm.$valid) {
-                $http.post('/project/create', $scope.projectToCreate).then(function (response) {
-                    $scope.projectToCreate.id = response.data.id;
-                    $scope.addToTable($scope.projects, $scope.projectToCreate);
+            if (vm.createForm.$valid) {
+                $http.post('/project/create', vm.projectToCreate).then(function (response) {
+                    vm.projectToCreate.id = response.data.id;
+                    vm.addToTable(vm.projects, vm.projectToCreate);
                 }, function () {
 
                 });
             }
 
-            $scope.clientSelected = {};
+            vm.clientSelected = {};
         };
 
-        $scope.generateCreateStringDate = function (date) {
-            var day = date.getDate();
-            var monthIndex = date.getMonth();
-            var month = monthIndex + 1;
-            var year = date.getFullYear();
-            $scope.projectToCreate.start_date = day + '-' + month + '-' + year;
+        vm.edit = function (project) {
 
-        };
+            vm.clientSelected = {};
+            vm.clientSelected.name = project.client.name;
+            vm.parseDate(project.start_date);
 
-        $scope.edit = function (project) {
-
-            $scope.clientSelected = {};
-            $scope.clientSelected.name = project.client.name;
-            $scope.parseDate(project.start_date);
-
-            $scope.projectToEdit = angular.copy(project);
-            $scope.project = project;
+            vm.projectToEdit = angular.copy(project);
+            vm.project = project;
 
             // To clear the errors from previous edit forms
-            if ($scope.editForm !== null) {
-                $scope.editForm.project_name.$setValidity('available', true);
-                $scope.editForm.sname.$setValidity('available', true);
+            if (vm.editForm !== null) {
+                vm.editForm.project_name.$setValidity('available', true);
+                vm.editForm.sname.$setValidity('available', true);
             }
 
         };
 
-        $scope.parseDate = function (date) {
-            var date_array = date.split('-');
-            $scope.dateSelected = new Date(date_array[2], date_array[1] - 1, date_array[0]);
-        };
+        vm.update = function () {
+            vm.projectToEdit.client_name = vm.clientSelected.name;
+            vm.projectToEdit.client.name = vm.clientSelected.name;
 
-        $scope.update = function () {
-            $scope.projectToEdit.client_name = $scope.clientSelected.name;
-            $scope.projectToEdit.client.name = $scope.clientSelected.name;
+            vm.generateEditStringDate(vm.dateSelected);
 
-            $scope.generateEditStringDate($scope.dateSelected);
-
-            if ($scope.editForm.$valid) {
-                $http.put('/project/update', $scope.projectToEdit).then(function () {
-                    $scope.updateInTable($scope.projects, $scope.projectToEdit);
+            if (vm.editForm.$valid) {
+                $http.put('/project/update', vm.projectToEdit).then(function () {
+                    vm.updateInTable(vm.projects, vm.projectToEdit);
                 }, function () {
 
                 });
             }
 
-            $scope.clientSelected = {};
+            vm.clientSelected = {};
         };
 
-        $scope.generateEditStringDate = function (date) {
-            var day = date.getDate();
-            var monthIndex = date.getMonth();
-            var month = monthIndex + 1;
-            var year = date.getFullYear();
 
-            $scope.projectToEdit.start_date = day + '-' + month + '-' + year;
+        /* Filter functions */
+
+        vm.reverseOrder = function (sortType) {
+            vm.sortType = sortType;
+            vm.sortReverse = !vm.sortReverse
         };
 
-        $scope.reverseOrder = function (sortType) {
-            $scope.sortType = sortType;
-            $scope.sortReverse = !$scope.sortReverse
-        };
-
-        $scope.startsWith = function (actual, expected) {
+        vm.startsWith = function (actual, expected) {
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addToTable = function (items, item) {
-            items.push(item);
-        };
-
-        $scope.updateInTable = function (items, item) {
-            for (var i = 0; i < items.length; i++)
-                if (items[i].id === item.id)
-                    items[i] = item;
-        };
-
-        $scope.changeColor = function (divId) {
-            $("#" + divId).css("cssText", " color: #009688 !important;");
-        };
 
         /* Filter clients by enabled */
 
-        $scope.filter = function(clients) {
+        vm.filter = function(clients) {
             var result = {};
             angular.forEach(clients, function(client, key) {
                 if (!client.enabled) {
@@ -160,9 +136,9 @@ app.controller('projectController', function ($scope, $http) {
             return result;
         };
 
-        $scope.isEnabled = function(client_name) {
+        vm.isEnabled = function(client_name) {
 
-            $scope.enabledClients.forEach(function(client){
+            vm.enabledClients.forEach(function(client){
                 console.log(client_name);
                 console.log(client.name);
                 if(!client.name.localeCompare(client_name)) {
@@ -170,6 +146,45 @@ app.controller('projectController', function ($scope, $http) {
                 }
             });
             return false;
+        };
+
+        /* Utils */
+
+        vm.parseDate = function (date) {
+            var date_array = date.split('-');
+            vm.dateSelected = new Date(date_array[2], date_array[1] - 1, date_array[0]);
+        };
+
+        vm.generateCreateStringDate = function (date) {
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var month = monthIndex + 1;
+            var year = date.getFullYear();
+            vm.projectToCreate.start_date = day + '-' + month + '-' + year;
+
+        };
+
+        vm.generateEditStringDate = function (date) {
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var month = monthIndex + 1;
+            var year = date.getFullYear();
+
+            vm.projectToEdit.start_date = day + '-' + month + '-' + year;
+        };
+
+        vm.addToTable = function (items, item) {
+            items.push(item);
+        };
+
+        vm.updateInTable = function (items, item) {
+            for (var i = 0; i < items.length; i++)
+                if (items[i].id === item.id)
+                    items[i] = item;
+        };
+
+        vm.changeColor = function (divId) {
+            $("#" + divId).css("cssText", " color: #009688 !important;");
         };
 
     });
