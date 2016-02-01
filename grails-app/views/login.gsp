@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="assets/favicon.ico">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <asset:stylesheet src="public/login.css"></asset:stylesheet>
+    <asset:stylesheet src="public/login.css"/>
 
 </head>
 
@@ -72,8 +72,8 @@
     </div>
 </div>
 
-<asset:javascript src="application.js"></asset:javascript>
-<asset:javascript src="angular-controllers/login.js"></asset:javascript>
+<asset:javascript src="application.js"/>
+<asset:javascript src="angular-controllers/login.js"/>
 
 </body>
 </html>

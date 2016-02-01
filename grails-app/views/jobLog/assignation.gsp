@@ -4,7 +4,7 @@
     <meta name="layout" content="main"/>
     <title>Asignación de Personas</title>
 
-    <asset:stylesheet href="public/assignation.css"></asset:stylesheet>
+    <asset:stylesheet src="public/assignation.css"/>
 
 </head>
 
