@@ -2,82 +2,85 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('taskTypeController', function ($scope, $http) {
+app.controller('taskTypeController', function ($http) {
 
-        $scope.sortType = 'name'; // set the default sort type
-        $scope.sortReverse = false;  // set the default sort order
-        $scope.search = '';     // set the default search/filter term
-        $scope.status = 'all';
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.taskTypes = [];
-        $scope.taskTypeToCreate = null;
-        $scope.taskTypeToEdit = null;
-        $scope.taskType = null;
+        vm.sortType = 'name'; // set the default sort type
+        vm.sortReverse = false;  // set the default sort order
+        vm.search = '';     // set the default search/filter term
+        vm.status = 'all';
 
-        $scope.createForm = null;
-        $scope.editForm = null;
+        vm.taskTypes = [];
+        vm.taskTypeToCreate = null;
+        vm.taskTypeToEdit = null;
+        vm.taskType = null;
+
+        vm.createForm = null;
+        vm.editForm = null;
 
         $http.get('/taskType/all').then(function (response) {
-            $scope.taskTypes = response.data;
+            vm.taskTypes = response.data;
         }, function () {
 
         });
 
-        $scope.new = function () {
-            $scope.taskTypeToCreate = {name: "", enabled: true};
+        vm.new = function () {
+            vm.taskTypeToCreate = {name: "", enabled: true};
 
             // To clear the errors from previous create forms
-            if ($scope.createForm !== null) {
-                $scope.createForm.name.$setValidity('available', true);
+            if (vm.createForm !== null) {
+                vm.createForm.name.$setValidity('available', true);
             }
         };
 
-        $scope.create = function () {
-            if ($scope.createForm.$valid) {
-                $http.post('/taskType/create', $scope.taskTypeToCreate).then(function (response) {
-                    $scope.taskTypeToCreate.id = response.data.id;
-                    $scope.addToTable($scope.taskTypes, $scope.taskTypeToCreate);
+        vm.create = function () {
+            if (vm.createForm.$valid) {
+                $http.post('/taskType/create', vm.taskTypeToCreate).then(function (response) {
+                    vm.taskTypeToCreate.id = response.data.id;
+                    vm.addToTable(vm.taskTypes, vm.taskTypeToCreate);
                 }, function () {
 
                 });
             }
         };
 
-        $scope.edit = function (taskType) {
-            $scope.taskTypeToEdit = angular.copy(taskType);
-            $scope.taskType = taskType;
+        vm.edit = function (taskType) {
+            vm.taskTypeToEdit = angular.copy(taskType);
+            vm.taskType = taskType;
 
             // To clear the errors from previous edit forms
-            if ($scope.editForm !== null) {
-                $scope.editForm.name.$setValidity('available', true);
+            if (vm.editForm !== null) {
+                vm.editForm.name.$setValidity('available', true);
             }
         };
 
-        $scope.update = function () {
-            if ($scope.editForm.$valid) {
-                $http.put('/taskType/update', $scope.taskTypeToEdit).then(function () {
-                    $scope.updateInTable($scope.taskTypes, $scope.taskTypeToEdit);
+        vm.update = function () {
+            if (vm.editForm.$valid) {
+                $http.put('/taskType/update', vm.taskTypeToEdit).then(function () {
+                    vm.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
                 }, function () {
 
                 });
             }
         };
 
-        $scope.reverseOrder = function (sortType) {
-            $scope.sortType = sortType;
-            $scope.sortReverse = !$scope.sortReverse
+        vm.reverseOrder = function (sortType) {
+            vm.sortType = sortType;
+            vm.sortReverse = !vm.sortReverse
         };
 
-        $scope.startsWith = function (actual, expected) {
+        vm.startsWith = function (actual, expected) {
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addToTable = function (items, item) {
+        vm.addToTable = function (items, item) {
             items.push(item);
         };
 
-        $scope.updateInTable = function (items, item) {
+        vm.updateInTable = function (items, item) {
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
