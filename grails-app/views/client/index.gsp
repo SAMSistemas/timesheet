@@ -11,11 +11,11 @@
 
 <body>
 
-<div ng-controller="clientController">
+<div ng-controller="clientController as clientCtrl">
 
     <h3 class="card-title teal-text">Lista de Clientes</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="clientCtrl.new()"><i
             class="material-icons left">enhanced_encryption</i>Crear</a>
 
     <table class="responsive-table striped centered">
@@ -23,30 +23,31 @@
         <thead>
         <tr class="tr-header-width-and-height">
             <th></th>
-            <th><a href ng-click="reverseOrder(name)">Nombre del cliente</a></th>
-            <th><a href ng-click="reverseOrder(short_name)">Sigla del cliente</a></th>
-            <th><a href ng-click="reverseOrder(enabled)">Habilitado</a></th>
+            <th><a href ng-click="clientCtrl.reverseOrder(name)">Nombre del cliente</a></th>
+            <th><a href ng-click="clientCtrl.reverseOrder(short_name)">Sigla del cliente</a></th>
+            <th><a href ng-click="clientCtrl.reverseOrder(enabled)">Habilitado</a></th>
             <th></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding"></th>
             <th class="th-filter-padding">
-                <input-field-text ng-id="search_name" ng-model="search.name"
+                <input-field-text ng-id="search_name" ng-model="clientCtrl.search.name"
                                   ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding">
-                <input-field-text ng-id="search_sname" ng-model="search.short_name"
+                <input-field-text ng-id="search_sname" ng-model="clientCtrl.search.short_name"
                                   ng-placeholder="Ingrese Sigla"></input-field-text>
             </th>
             <th class="th-filter-padding">
-                <select-status ng-model="status"></select-status>
+                <select-status ng-model="clientCtrl.status"></select-status>
             </th>
             <th class="th-filter-padding"></th>
         </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clients | orderBy:sortType:sortReverse | filter:search:startsWith | filterByStatus:status"
+        <tr ng-repeat="client in clientCtrl.clients | orderBy:clientCtrl.sortType:clientCtrl.sortReverse |
+        filter:clientCtrl.search:clientCtrl.startsWith | filterByStatus:clientCtrl.status"
             class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td class="truncate">{{ client.name }}</td>
@@ -60,7 +61,7 @@
                 </div>
             </td>
             <td>
-                <a href="#edit-modal" ng-click="edit(client)"
+                <a href="#edit-modal" ng-click="clientCtrl.edit(client)"
                    class="waves-effect waves-light btn-flat btn-edit-padding teal-text teal-hover z-depth-0 modal-trigger"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
             </td>
@@ -72,7 +73,7 @@
 
     <!--Create Modal-->
     <div id="create-modal" class="modal modal-large">
-        <form name="createForm" ng-submit="create()" novalidate>
+        <form name="clientCtrl.createForm" ng-submit="clientCtrl.create()" novalidate>
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
@@ -81,11 +82,11 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="name" type="text" maxlength="30" ng-model="clientToCreate.name" required
+                        <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToCreate.name" required
                                available url-to-check="/client/existsName/">
-                        <label ng-class="{'has-error': createForm.name.$invalid}">Nombre
-                            <span ng-show="createForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="createForm.name.$error.available" class="has-error">ya existe</span>
+                        <label ng-class="{'has-error': clientCtrl.createForm.name.$invalid}">Nombre
+                            <span ng-show="clientCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="clientCtrl.createForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -93,11 +94,11 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="sname" type="text" maxlength="5" ng-model="clientToCreate.short_name"
+                        <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToCreate.short_name"
                                required available url-to-check="/client/existsSName/">
-                        <label ng-class="{'has-error': createForm.sname.$invalid}">Sigla
-                            <span ng-show="createForm.sname.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="createForm.sname.$error.available" class="has-error">ya existe</span>
+                        <label ng-class="{'has-error': clientCtrl.createForm.sname.$invalid}">Sigla
+                            <span ng-show="clientCtrl.createForm.sname.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="clientCtrl.createForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="clientToCreate.enabled">
+                        <input id="enable" type="checkbox" class="filled-in" ng-model="clientCtrl.clientToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -114,8 +115,8 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="createForm.$invalid"
-                        ng-class="{'teal-text teal-hover': createForm.$valid}">Guardar</button>
+                <button class="modal-action modal-close btn-flat disabled" ng-disabled="clientCtrl.createForm.$invalid"
+                        ng-class="{'teal-text teal-hover': clientCtrl.createForm.$valid}">Guardar</button>
                 <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
@@ -124,7 +125,7 @@
 
     <!--Edit Modal-->
     <div id="edit-modal" class="modal modal-large">
-        <form name="editForm" ng-submit="update()" novalidate>
+        <form name="clientCtrl.editForm" ng-submit="clientCtrl.update()" novalidate>
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
@@ -133,11 +134,11 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="name" type="text" maxlength="30" ng-model="clientToEdit.name"
-                               required available original-value="client.name" url-to-check="/client/existsName/">
-                        <label ng-class="{'has-error': editForm.name.$invalid}">Nombre
-                            <span ng-show="editForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="editForm.name.$error.available" class="has-error">ya existe</span>
+                        <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToEdit.name"
+                               required available original-value="clientCtrl.client.name" url-to-check="/client/existsName/">
+                        <label ng-class="{'has-error': clientCtrl.editForm.name.$invalid}">Nombre
+                            <span ng-show="clientCtrl.editForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="clientCtrl.editForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -145,12 +146,12 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="sname" type="text" maxlength="5" ng-model="clientToEdit.short_name"
-                               ng-model="clientToEdit.short_name" required available
-                               original-value="client.short_name" url-to-check="/client/existsSName/">
-                        <label ng-class="{'has-error': editForm.sname.$invalid}">Sigla
-                            <span ng-show="editForm.sname.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="editForm.sname.$error.available" class="has-error">ya existe</span>
+                        <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToEdit.short_name"
+                               ng-model="clientCtrl.clientToEdit.short_name" required available
+                               original-value="clientCtrl.client.short_name" url-to-check="/client/existsSName/">
+                        <label ng-class="{'has-error': clientCtrl.editForm.sname.$invalid}">Sigla
+                            <span ng-show="clientCtrl.editForm.sname.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="clientCtrl.editForm.sname.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -158,7 +159,7 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientToEdit.enabled">
+                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="clientCtrl.clientToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>
@@ -167,8 +168,8 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="editForm.$invalid"
-                        ng-class="{'teal-text teal-hover': editForm.$valid}">Guardar</button>
+                <button class="modal-action modal-close btn-flat disabled" ng-disabled="clientCtrl.editForm.$invalid"
+                        ng-class="{'teal-text teal-hover': clientCtrl.editForm.$valid}">Guardar</button>
                 <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 
