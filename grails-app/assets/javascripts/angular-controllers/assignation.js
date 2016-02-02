@@ -1,60 +1,65 @@
 //= require default
 //= require_self
 
-app.controller('assignationController', function ($scope, $http) {
+app.controller('assignationController', function ($http) {
 
-    $scope.clients = [];
-    $scope.projects = [];
-    $scope.people = [];
+    /** Capturing controller instance **/
+    var vm = this;
 
-    $scope.clientSelected = null;
-    $scope.projectSelected = null;
-    $scope.personSelected = null;
+    vm.clients = [];
+    vm.projects = [];
+    vm.people = [];
 
-    $scope.confirmation = "";
+    vm.clientSelected = null;
+    vm.projectSelected = null;
+    vm.personSelected = null;
+
+    vm.confirmation = "";
+
+    vm.form = null;
 
     $http.get('/client/allEnabled').then(function (response) {
-        $scope.clients = response.data;
+        vm.clients = response.data;
     }, function () {
 
     });
 
-    $scope.changeClient = function () {
-        $http.get('/project/allEnabledByClient/' + $scope.clientSelected.name).then(function (response) {
-            $scope.projects = response.data;
-            $scope.confirmation = "";
+    vm.changeClient = function () {
+        $http.get('/project/allEnabledByClient/' + vm.clientSelected.name).then(function (response) {
+            vm.projects = response.data;
+            vm.confirmation = "";
         }, function () {
 
         });
     };
 
-    $scope.changeProject = function () {
-        $http.get('/person/allEnabledAndAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
-            $scope.people = response.data;
-            $scope.confirmation = "";
+    vm.changeProject = function () {
+        $http.get('/person/allEnabledAndAvailableForProject/' + vm.projectSelected.project_name).then(function (response) {
+            vm.people = response.data;
+            vm.confirmation = "";
         }, function () {
 
         });
     };
 
-    $scope.submit = function () {
+    vm.submit = function () {
         var jobLog = {
-            person: $scope.personSelected.name,
-            project: $scope.projectSelected.project_name
+            person: vm.personSelected.name,
+            project: vm.projectSelected.project_name
         };
 
         $http.post('/jobLog/assign', jobLog).then(function (response) {
             if (response.status === 200) {
-                $scope.confirmation = "Se asigno la persona al proyecto";
-                $scope.personSelected = null;
-                $http.get('/person/allEnabledAndAvailableForProject/' + $scope.projectSelected.project_name).then(function (response) {
-                    $scope.people = response.data;
+                vm.confirmation = "Se asigno la persona al proyecto";
+                vm.personSelected = null;
+                $http.get('/person/allEnabledAndAvailableForProject/' + vm.projectSelected.project_name).then(function (response) {
+                    vm.people = response.data;
                 }, function () {
 
                 });
             }
             else
-                $scope.confirmation = "Fallo la asignacion";
+                vm.confirmation = "Fallo la asignacion";
         }, function () {
 
         });
