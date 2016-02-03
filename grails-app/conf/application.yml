@@ -13,6 +13,9 @@ spring:
         template:
             check-template-location: false
 
+server:
+    port: 9001
+
 ---
 grails:
     mime:
