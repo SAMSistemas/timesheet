@@ -3,62 +3,65 @@
 
 app.controller('mainController', function ($scope, $http) {
 
-        $scope.clients = [];
-        $scope.projects = [];
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.clientSelected = null;
-        $scope.projectSelected = null;
-        $scope.fromDateSelected = new Date();
-        $scope.toDateSelected = new Date();
-        $scope.max = new Date();
+        vm.clients = [];
+        vm.projects = [];
 
-        $scope.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
+        vm.clientSelected = null;
+        vm.projectSelected = null;
+        vm.fromDateSelected = new Date();
+        vm.toDateSelected = new Date();
+        vm.max = new Date();
+
+        vm.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
         $http.get('/client/all').then(function (response) {
             $('select').material_select();
             $('.modal-trigger').not('.modal-trigger-applied').leanModal();
             $('.modal-trigger').addClass('modal-trigger-applied');
-            $scope.clients = response.data;
+            vm.clients = response.data;
         });
 
-        $scope.changeClient = function () {
-            $http.get('/project/allEnabledByClient/' + $scope.clientSelected.name).then(function (response) {
-                $scope.projects = response.data;
+        vm.changeClient = function () {
+            $http.get('/project/allEnabledByClient/' + vm.clientSelected.name).then(function (response) {
+                vm.projects = response.data;
             }, function () {
 
             });
         };
 
-        $scope.export = function () {
-            var flag = $scope.verifyDates();
+        vm.export = function () {
+            var flag = vm.verifyDates();
             //if(flag){
             var filters = {
-                clientName: $scope.clientSelected,
-                projectName: $scope.projectSelected,
-                dateFrom: $scope.dateToString($scope.fromDateSelected),
-                dateTo: $scope.dateToString($scope.toDateSelected)
+                clientName: vm.clientSelected,
+                projectName: vm.projectSelected,
+                dateFrom: vm.dateToString(vm.fromDateSelected),
+                dateTo: vm.dateToString(vm.toDateSelected)
             };
 
 
             $http.post('/jobLog/projectForHour', filters).then(function (response) {
                 window.location.href = '/jobLog/projectForHour';
-                $scope.clean();
+                vm.clean();
             }, function () {
                 var $toast = $('<span>No se encontraron datos para los par&aacute;metros ingresados</span>');
                 Materialize.toast($toast, 4000,'rounded');
-                $scope.clean();
+                vm.clean();
             });
         };
 
-        $scope.clean = function () {
-            $scope.clientSelected = null;
-            $scope.projectSelected = null;
-            $scope.projects = [];
-            $scope.fromDateSelected = new Date();
-            $scope.toDateSelected = new Date();
+        vm.clean = function () {
+            vm.clientSelected = null;
+            vm.projectSelected = null;
+            vm.projects = [];
+            vm.fromDateSelected = new Date();
+            vm.toDateSelected = new Date();
         };
 
-        $scope.dateToString = function (date) {
+        vm.dateToString = function (date) {
 
             var day = date.getDate();
             var monthIndex = date.getMonth();
@@ -68,13 +71,13 @@ app.controller('mainController', function ($scope, $http) {
 
         };
 
-        $scope.verifyDates = function () {
-            var dayFrom = $scope.fromDateSelected.getDate();
-            var dayTo = $scope.toDateSelected.getDate();
+        vm.verifyDates = function () {
+            var dayFrom = vm.fromDateSelected.getDate();
+            var dayTo = vm.toDateSelected.getDate();
             var flag = false;
 
-            var monthFrom = $scope.fromDateSelected.getMonth();
-            var monthTo = $scope.toDateSelected.getMonth();
+            var monthFrom = vm.fromDateSelected.getMonth();
+            var monthTo = vm.toDateSelected.getMonth();
 
             if (monthFrom > monthTo) {
             } else if (monthFrom == monthTo) {
@@ -86,7 +89,7 @@ app.controller('mainController', function ($scope, $http) {
             return flag
         };
 
-        $scope.showDateError = function () {
+        vm.showDateError = function () {
             $('#errorDate').show();
         }
 

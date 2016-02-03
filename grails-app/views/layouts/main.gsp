@@ -19,9 +19,9 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="mainController">
+<body ng-app="myApp" ng-controller="mainController as mainCtrl">
 
-<header ng-controller="loginController">
+<header ng-controller="loginController as loginCtrl">
 
     <nav class="fixed blue darken-3">
         <div class="container">
@@ -29,7 +29,7 @@
                 <a class="brand-logo">Timesheet</a>
                 <ul id="nav-botton-ul" class="right hide-on-med-and-down">
                     <li id="nav-botton-li"><a href class="waves-effect waves-light btn"
-                                              ng-click="logout()">Cerrar Sesión</a></li>
+                                              ng-click="loginCtrl.logout()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -48,38 +48,38 @@
             </div>
 
             <div class="row user-data-padding">
-                <span class="user-info white-text truncate">{{ name }}</span>
-                <span class="user-info white-text truncate">{{ user }}@samsistemas.com.ar</span>
+                <span class="user-info white-text truncate">{{ loginCtrl.name }}</span>
+                <span class="user-info white-text truncate">{{ loginCtrl.user }}@samsistemas.com.ar</span>
             </div>
         </li>
         <li>
-            <a href="/person" class="waves-effect waves-teal btn-flat"><i class="material-icons left">people</i>Personal
-            </a>
+            <a href="/person" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">people</i>Personal</a>
         </li>
         <li>
-            <a href="/client" class="waves-effect waves-teal btn-flat"><i
-                    class="material-icons left">business</i>Clientes</a>
+            <a href="/client" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">business</i>Clientes</a>
         </li>
         <li>
-            <a href="/project" class="waves-effect waves-teal btn-flat"><i class="material-icons left">work</i>Proyectos
-            </a>
+            <a href="/project" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">work</i>Proyectos</a>
         </li>
         <li>
-            <a href="/taskType" class="waves-effect waves-teal btn-flat"><i
-                    class="material-icons left">assignment</i>Tipo de Tarea</a>
+            <a href="/taskType" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">assignment</i>Tipo de Tarea</a>
         </li>
         <li>
-            <a href="/jobLog/assignation" class="waves-effect waves-teal btn-flat"><i
-                    class="material-icons left">today</i>Asignar</a>
+            <a href="/jobLog/assignation" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">today</i>Asignar</a>
         </li>
         <li>
             <a id="modalTrigger" href="#report-modal" class="waves-effect waves-teal btn-flat modal-trigger"
-               ng-click="mainCtrl.clean()"><i
-                    class="material-icons left">book</i>Reportes</a>
+               ng-click="mainCtrl.clean()">
+                <i class="material-icons left">book</i>Reportes</a>
         </li>
         <li>
-            <a href="/holiday" class="waves-effect waves-teal btn-flat"><i class="material-icons left">today</i>Feriados
-            </a>
+            <a href="/holiday" class="waves-effect waves-teal btn-flat">
+                <i class="material-icons left">today</i>Feriados</a>
         </li>
     </ul>
 
@@ -92,8 +92,8 @@
         %{--Client Select--}%
         <div class="row">
             <div class="col s12">
-                <select id="clientSelect" class="col s12 browser-default" ng-model="clientSelected"
-                        ng-change="changeClient()" ng-options="client.name for client in clients">
+                <select id="clientSelect" class="col s12 browser-default" ng-model="mainCtrl.clientSelected"
+                        ng-change="mainCtrl.changeClient()" ng-options="client.name for client in mainCtrl.clients">
                     <option value="" selected>- Elegí una de las siguientes opciones -</option>
                 </select>
                 <label class="modal-label modal-label-select">Cliente</label>
@@ -104,8 +104,8 @@
         <div class="row">
             <div class="col s12">
                 %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
-                <select id="projectSelect" class="col s12 browser-default" ng-model="projectSelected"
-                        ng-options="project.project_name for project in projects">
+                <select id="projectSelect" class="col s12 browser-default" ng-model="mainCtrl.projectSelected"
+                        ng-options="project.project_name for project in mainCtrl.projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                 </select>
                 <label class="modal-label modal-label-select">Proyecto</label>
@@ -115,8 +115,8 @@
         %{--From Date Selection--}%
         <div class="row">
             <div class="col s12">
-                <span id="dateFrom" ng-combo-date-picker="exp" ng-model="fromDateSelected" ng-months="{{ months }}"
-                      ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
+                <span id="dateFrom" ng-combo-date-picker="exp" ng-model="mainCtrl.fromDateSelected"
+                      ng-months="{{ mainCtrl.months }}"  ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
                 %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
                 <label class="modal-label modal-label-date left">Desde</label>
             </div>
@@ -125,8 +125,8 @@
         %{--To Date Selection--}%
         <div class="row">
             <div class="col s12">
-                <span id="dateTo" ng-combo-date-picker="exp" ng-model="toDateSelected" ng-months="{{ months }}"
-                      ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
+                <span id="dateTo" ng-combo-date-picker="exp" ng-model="mainCtrl.toDateSelected"
+                      ng-months="{{ mainCtrl.months }}" ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
                 %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
                 <label class="modal-label modal-label-date left">Hasta</label>
             </div>
@@ -145,7 +145,7 @@
 
     <div class="modal-footer modal-footer-padding">
         <a href class="modal-action modal-close btn-flat teal-text teal-hover"
-           ng-click="export()">Exportar</a>
+           ng-click="mainCtrl.export()">Exportar</a>
         <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
     </div>
 </div>
