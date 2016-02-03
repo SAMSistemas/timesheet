@@ -156,40 +156,27 @@ class ReportService {
 
         table.getDefaultCell().setBackgroundColor(null);
 
-
-
-        log.info("LISTA DE DATOS------------>"+dataTable.size())
-
         for(JobLog jLog: dataTable){
-
-            log.info("ROW CREATED!")
-
 
                 PdfPCell dateCell = new PdfPCell(new Phrase(jLog.date.format("dd-MM-yyyy"),fontObs))
                 table.addCell(dateCell)
-                log.info("CELL DATE CREATED!")
 
                 PdfPCell taskCell = new PdfPCell(new Phrase(jLog.task_type.name,fontObs))
                 table.addCell(taskCell)
-                log.info("CELL TASK CREATED!")
 
                 PdfPCell personCell = new PdfPCell(new Phrase(jLog.person.name +" "+jLog.person.lastname,fontObs))
                 table.addCell(personCell)
-                log.info("CELL PERSON CREATED!")
 
                 PdfPCell solicCell = new PdfPCell(new Phrase(jLog.solicitude))
                 table.addCell(solicCell)
-                log.info("CELL SOLICITUDE CREATED!")
 
                 PdfPCell obsCell = new PdfPCell(new Phrase(jLog.observation,fontObs))
                 obsCell.setColspan(3)
                 table.addCell(obsCell)
-                log.info("CELL OBSERVATION CREATED!")
 
                 PdfPCell hourCell = new PdfPCell(new Phrase(jLog.hours))
                 hourCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(hourCell)
-                log.info("CELL HOURS CREATED!")
 
                 hourCounter = hourCounter + Float.valueOf(jLog.hours)
         }
