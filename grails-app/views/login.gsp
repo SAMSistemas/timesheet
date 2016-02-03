@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-app="myApp" ng-controller="loginController">
+<div ng-app="myApp" ng-controller="loginController as loginCtrl">
     <!-- Login Card -->
     <div class="row">
         <div class="card login-card z-depth-2">
@@ -28,18 +28,18 @@
                 %{--Error Message--}%
                 <div class="row">
                     <div class="input-field col s12 center-align">
-                        <span class="has-error">{{errorMsg}}</span>
+                        <span class="has-error">{{loginCtrl.errorMsg}}</span>
                     </div>
                 </div>
 
                 %{--Form--}%
-                <form class="col s12" name="loginForm" ng-submit="login()" novalidate>
+                <form class="col s12" name="loginForm" ng-submit="loginCtrl.login()" novalidate>
 
                     %{--Username--}%
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">accessibility</i>
-                            <input id="username" type="text" name="username" maxlength="25" ng-model="user"
+                            <input id="username" type="text" name="username" maxlength="25" ng-model="loginCtrl.user"
                                    required>
                             <label for="username">Usuario</label>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">vpn_key</i>
                             <input id="password" type="password" name="password" maxlength="8"
-                                   ng-pattern="/[a-zA-Z]{8}/" ng-model="pass" required>
+                                   ng-pattern="/[a-zA-Z]{8}/" ng-model="loginCtrl.pass" required>
                             <label for="password"
                                    ng-class="{'has-error': loginForm.password.$error.pattern}">Contraseña <span
                                     ng-show="loginForm.password.$error.pattern"
@@ -63,7 +63,7 @@
                     <div class="row center-align">
                         <div class="input-field col s12">
                             <button class="btn waves-effect waves-light" ng-disabled="loginForm.$invalid"
-                                    ng-click="storeData()">Iniciar sesión</button>
+                                    ng-click="loginCtrl.storeData()">Iniciar sesión</button>
                         </div>
                     </div>
                 </form>

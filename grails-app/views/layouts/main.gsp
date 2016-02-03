@@ -103,7 +103,6 @@
         %{--Projects Select--}%
         <div class="row">
             <div class="col s12">
-                %{--<select id="projectSelect" class="select-modal" ng-model="projectSelected" ng-options="project.project_name for project in projects" >--}%
                 <select id="projectSelect" class="col s12 browser-default" ng-model="mainCtrl.projectSelected"
                         ng-options="project.project_name for project in mainCtrl.projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
@@ -117,7 +116,6 @@
             <div class="col s12">
                 <span id="dateFrom" ng-combo-date-picker="exp" ng-model="mainCtrl.fromDateSelected"
                       ng-months="{{ mainCtrl.months }}"  ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
-                %{--<span id="errorDate" class="has-error">La fecha es 'desde' es mayor a la fecha 'hasta'</span>--}%
                 <label class="modal-label modal-label-date left">Desde</label>
             </div>
         </div>
@@ -127,7 +125,6 @@
             <div class="col s12">
                 <span id="dateTo" ng-combo-date-picker="exp" ng-model="mainCtrl.toDateSelected"
                       ng-months="{{ mainCtrl.months }}" ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
-                %{--<span ng-show="editForm.sname.$error.required" class="has-error">es obligatorio</span>--}%
                 <label class="modal-label modal-label-date left">Hasta</label>
             </div>
         </div>

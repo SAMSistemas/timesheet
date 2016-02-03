@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('mainController', function ($scope, $http) {
+app.controller('mainController', function ($http) {
 
         /** Capturing controller instance **/
         var vm = this;
