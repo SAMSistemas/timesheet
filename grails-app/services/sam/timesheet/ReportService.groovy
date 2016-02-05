@@ -33,7 +33,7 @@ class ReportService {
             // step 1
             Document document = new Document(PageSize.A4,36, 36, 54, 64)
             // step 2
-            FileOutputStream file = new FileOutputStream("C:\\tmp\\report.pdf")
+            FileOutputStream file = new FileOutputStream("E:\\Desarrollo\\SAM_Apps\\Timesheet\\Reports\\report.pdf")
             PdfWriter writer = PdfWriter.getInstance(document,file )
 
             Footer pageFooter = new Footer()
