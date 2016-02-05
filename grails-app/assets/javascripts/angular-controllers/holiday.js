@@ -3,15 +3,21 @@
 
 app.controller('holidayController', function ($scope, $http) {
 
-        $scope.eventToCreate = {};
-        $scope.eventToUpdate = {};
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.events_array = [];
-        $scope.new_event_source = [];
+        vm.eventToCreate = {};
+        vm.eventToUpdate = {};
+
+        vm.events_array = [];
+        vm.new_event_source = [];
+
+        vm.createForm = null;
+        vm.editForm = null;
 
         $http.get('/holiday/all').then(function (response) {
 
-            $scope.events_array = response.data;
+            vm.events_array = response.data;
 
             $('#calendar').fullCalendar({
                 height: 500,
@@ -31,25 +37,25 @@ app.controller('holidayController', function ($scope, $http) {
                     dow: [1, 2, 3, 4, 5]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
                 },
                 dayClick: function (date, event) {
-                    $scope.eventToCreate.id = null;
-                    $scope.eventToCreate.title = "";
-                    $scope.eventToCreate.start = date.format();
+                    vm.eventToCreate.id = null;
+                    vm.eventToCreate.title = "";
+                    vm.eventToCreate.start = date.format();
                     $scope.$apply();
 
                     $('#create_modal').openModal();
 
                 },
                 eventLimit: true, // allow "more" link when too many events
-                events: $scope.events_array,
+                events: vm.events_array,
                 eventColor: '#009688',
                 eventClick: function (calEvent) {
 
                     var event_id = calEvent.id;
-                    var events = $scope.findEventById(event_id);
+                    var events = vm.findEventById(event_id);
 
-                    $scope.eventToUpdate.id = events[0].id;
-                    $scope.eventToUpdate.title = events[0].title;
-                    $scope.eventToUpdate.start = events[0].start.format();
+                    vm.eventToUpdate.id = events[0].id;
+                    vm.eventToUpdate.title = events[0].title;
+                    vm.eventToUpdate.start = events[0].start.format();
                     $scope.$apply();
 
                     $('#edit_modal').openModal();
@@ -57,42 +63,42 @@ app.controller('holidayController', function ($scope, $http) {
             });
         });
 
-        $scope.create = function () {
+        vm.create = function () {
 
-            $http.post('/holiday/create', $scope.eventToCreate).then(function (response) {
-                $scope.eventToCreate.id = response.data.id;
-                $scope.addEventSource($scope.eventToCreate);
+            $http.post('/holiday/create', vm.eventToCreate).then(function (response) {
+                vm.eventToCreate.id = response.data.id;
+                vm.addEventSource(vm.eventToCreate);
             }, function () {
 
             });
 
         };
 
-        $scope.update = function () {
+        vm.update = function () {
 
             //Remove previous event from calendar
-            $scope.removeEvent($scope.eventToUpdate);
+            vm.removeEvent(vm.eventToUpdate);
 
-            $http.put('/holiday/update', $scope.eventToUpdate);
+            $http.put('/holiday/update', vm.eventToUpdate);
 
             //Add new event source to calendar to render it
-            $scope.addEventSource($scope.eventToUpdate);
+            vm.addEventSource(vm.eventToUpdate);
 
         };
 
-        $scope.delete = function () {
+        vm.delete = function () {
 
-            $http.delete('/holiday/delete/' + $scope.eventToUpdate.id);
+            $http.delete('/holiday/delete/' + vm.eventToUpdate.id);
 
             //Remove event from calendar
-            $scope.removeEvent($scope.eventToUpdate);
+            vm.removeEvent(vm.eventToUpdate);
         };
 
         /** Utils **/
 
             // Search for an event
 
-        $scope.searchEvent = function (nameKey, myArray) {
+        vm.searchEvent = function (nameKey, myArray) {
             for (var i = 0; i < myArray.length; i++) {
                 if (myArray[i].title === nameKey) {
                     return i;
@@ -100,7 +106,7 @@ app.controller('holidayController', function ($scope, $http) {
             }
         };
 
-        $scope.findEventById = function (id) {
+        vm.findEventById = function (id) {
             return $('#calendar').fullCalendar('clientEvents', function (evt) {
                 return evt.id == id;
             });
@@ -108,24 +114,24 @@ app.controller('holidayController', function ($scope, $http) {
 
         //Add calendar event source to render view
 
-        $scope.addEventSource = function (event) {
-            $scope.new_array = [];
-            $scope.new_array.push(event);
-            $('#calendar').fullCalendar('addEventSource', $scope.new_array);
+        vm.addEventSource = function (event) {
+            vm.new_array = [];
+            vm.new_array.push(event);
+            $('#calendar').fullCalendar('addEventSource', vm.new_array);
         };
 
 
         //Remove calendar event source to render view
 
-        $scope.removeEventSource = function (event) {
-            $scope.new_array = [];
-            $scope.new_array.push(event);
-            $('#calendar').fullCalendar('removeEventSource', $scope.new_array);
+        vm.removeEventSource = function (event) {
+            vm.new_array = [];
+            vm.new_array.push(event);
+            $('#calendar').fullCalendar('removeEventSource', vm.new_array);
         };
 
 
         //Remove event from calendar
-        $scope.removeEvent = function (event) {
+        vm.removeEvent = function (event) {
             $('#calendar').fullCalendar('removeEvents', event.id);
         }
 

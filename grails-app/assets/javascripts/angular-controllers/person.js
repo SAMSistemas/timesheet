@@ -2,38 +2,41 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('personController', function ($scope, $http) {
+app.controller('personController', function ($http) {
 
-        $scope.sortType = 'name'; // set the default sort type
-        $scope.sortReverse = false;  // set the default sort order
-        $scope.search = '';     // set the default search/filter term
-        $scope.status = 'all';
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.people = [];
-        $scope.personToCreate = null;
-        $scope.personToEdit = null;
-        $scope.person = null;
+        vm.sortType = 'name'; // set the default sort type
+        vm.sortReverse = false;  // set the default sort order
+        vm.search = '';     // set the default search/filter term
+        vm.status = 'all';
 
-        $scope.createForm = null;
-        $scope.editForm = null;
+        vm.people = [];
+        vm.personToCreate = null;
+        vm.personToEdit = null;
+        vm.person = null;
 
-        $scope.work_hours = [4,6,8];
-        $scope.work_positions = [];
+        vm.createForm = null;
+        vm.editForm = null;
+
+        vm.work_hours = [4,6,8];
+        vm.work_positions = [];
 
         $http.get('/person/all').then(function (response) {
-            $scope.people = response.data;
+            vm.people = response.data;
         }, function () {
 
         });
 
         $http.get('/workPosition/all').then(function (response) {
-            $scope.work_positions = response.data;
+            vm.work_positions = response.data;
         }, function () {
 
         });
 
-        $scope.new = function () {
-            $scope.personToCreate = {
+        vm.new = function () {
+            vm.personToCreate = {
                 name: "",
                 lastname: "",
                 username: "",
@@ -44,65 +47,63 @@ app.controller('personController', function ($scope, $http) {
             };
 
             // To clear the errors from previous create forms
-            if ($scope.createForm !== null) {
-                $scope.createForm.username.$setValidity('available', true);
+            if (vm.createForm !== null) {
+                vm.createForm.username.$setValidity('available', true);
             }
         };
 
-        $scope.create = function () {
-            if ($scope.createForm.$valid) {
-                $http.post('/person/create', $scope.personToCreate).then(function (response) {
-                    $scope.personToCreate.id = response.data.id;
-                    $scope.addToTable($scope.people, $scope.personToCreate);
+        vm.create = function () {
+            if (vm.createForm.$valid) {
+                $http.post('/person/create', vm.personToCreate).then(function (response) {
+                    vm.personToCreate.id = response.data.id;
+                    vm.addToTable(vm.people, vm.personToCreate);
                 }, function () {
 
                 });
             }
         };
 
-        $scope.edit = function (person) {
-            $scope.personToEdit = angular.copy(person);
-            $scope.person = person;
+        vm.edit = function (person) {
+            vm.personToEdit = angular.copy(person);
+            vm.person = person;
 
             // To clear the errors from previous edit forms
-            if ($scope.editForm !== null) {
-                $scope.editForm.username.$setValidity('available', true);
+            if (vm.editForm !== null) {
+                vm.editForm.username.$setValidity('available', true);
             }
         };
 
-        $scope.update = function () {
-            console.log($scope.personToEdit);
-            if ($scope.editForm.$valid) {
-                $http.put('/person/update', $scope.personToEdit).then(function () {
-                    $scope.updateInTable($scope.people, $scope.personToEdit);
-                    console.log($scope.people);
+        vm.update = function () {
+            if (vm.editForm.$valid) {
+                $http.put('/person/update', vm.personToEdit).then(function () {
+                    vm.updateInTable(vm.people, vm.personToEdit);
                 }, function () {
 
                 });
             }
         };
 
-        $scope.reverseOrder = function (sortType) {
-            $scope.sortType = sortType;
-            $scope.sortReverse = !$scope.sortReverse
+        vm.reverseOrder = function (sortType) {
+            vm.sortType = sortType;
+            vm.sortReverse = !vm.sortReverse
         };
 
-        $scope.startsWith = function (actual, expected) {
+        vm.startsWith = function (actual, expected) {
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        $scope.addToTable = function (items, item) {
+        vm.addToTable = function (items, item) {
             items.push(item);
         };
 
-        $scope.updateInTable = function (items, item) {
+        vm.updateInTable = function (items, item) {
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
         };
 
-        $scope.changeColor = function (divId) {
+        vm.changeColor = function (divId) {
             $("#" + divId).css("cssText", " color: #009688 !important;");
         };
 

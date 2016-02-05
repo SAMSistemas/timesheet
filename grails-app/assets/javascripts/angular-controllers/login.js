@@ -1,23 +1,27 @@
 //= require default
 //= require_self
 
-app.controller('loginController', function ($scope, $http, $window) {
+app.controller('loginController', function ($http, $window) {
 
-        $scope.user = "";
-        $scope.pass = "";
-        $scope.name = "";
+        /** Capturing controller instance **/
+        var vm = this;
 
-        $scope.login = function () {
-            $http.post('/login?username=' + $scope.user + "&password=" + $scope.pass).then(function () {
-                sessionStorage.setItem("username", $scope.user);
+        vm.user = "";
+        vm.pass = "";
+        vm.name = "";
+
+        vm.login = function () {
+            $http.post('/login?username=' + vm.user + "&password=" + vm.pass).then(function () {
+                sessionStorage.setItem("username", vm.user);
                 sessionStorage.setItem("name", "");
                 $window.location.href = '/';
             }, function () {
-                $scope.errorMsg = "El usuario y/o la contraseña son incorrectos"
+                vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
+                $('.login-card').css("height", "620px");
             });
         };
 
-        $scope.logout = function () {
+        vm.logout = function () {
             $http.post("/login").then(function () {
             }, function () {
                 $window.location.href = '/login';
@@ -29,25 +33,25 @@ app.controller('loginController', function ($scope, $http, $window) {
             sessionStorage.removeItem("name");
         };
 
-        $scope.searchName = function () {
+        vm.searchName = function () {
 
-            $scope.user = sessionStorage.getItem("username");
+            vm.user = sessionStorage.getItem("username");
 
             if (sessionStorage.getItem("name") == "") {
-                $http.get('/person/show/' + $scope.user).then(function (response) {
+                $http.get('/person/show/' + vm.user).then(function (response) {
                     var user = response.data;
-                    $scope.name = user.name + ' ' + user.lastname;
-                    sessionStorage.setItem("name", $scope.name);
-                    console.log($scope.name);
+                    vm.name = user.name + ' ' + user.lastname;
+                    sessionStorage.setItem("name", vm.name);
+                    console.log(vm.name);
                 }, function () {
-                    console.log($scope.name);
+                    console.log(vm.name);
                 });
             }
 
-            $scope.name = sessionStorage.getItem("name");
+            vm.name = sessionStorage.getItem("name");
 
         };
 
-        $scope.searchName();
+        vm.searchName();
 
     });

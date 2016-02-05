@@ -80,78 +80,70 @@ endpoints:
     jmx:
         unique-names: true
 
-#dataSource:
-#    pooled: true
-#    dbCreate: update
-#    jmxExport: true
-#    url: jdbc:mysql://10.0.0.3:3306/cargahoras
-#    driverClassName: com.mysql.jdbc.Driver
-#    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#    username: admin
-#    password: maipu$671
-#    properties:
-#        jmxEnabled: true
-#        initialSize: 5
-#        maxActive: 50
-#        minIdle: 5
-#        maxIdle: 25
-#        maxWait: 10000
-#        maxAge: 600000
-#        timeBetweenEvictionRunsMillis: 5000
-#        minEvictableIdleTimeMillis: 60000
-#        validationQuery: SELECT 1
-#        validationQueryTimeout: 3
-#        validationInterval: 15000
-#        testOnBorrow: true
-#        testWhileIdle: true
-#        testOnReturn: false
-#        jdbcInterceptors: ConnectionState;StatementCache(max=200)
-#        defaultTransactionIsolation: 2
-
 environments:
     development:
+#        dataSource:
+#            dbCreate: create-drop
+#            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
         dataSource:
              pooled: true
              dbCreate: update
              jmxExport: true
-             url: jdbc:mysql://10.0.0.3:3306/cargahoras
+             url: jdbc:mysql://10.0.0.3:3306/cargahoras_dev
              driverClassName: com.mysql.jdbc.Driver
              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
              username: admin
              password: maipu$671
              properties:
-                 jmxEnabled: true
-                 initialSize: 5
-                 maxActive: 50
-                 minIdle: 5
-                 maxIdle: 25
-                 maxWait: 10000
-                 maxAge: 600000
-                 timeBetweenEvictionRunsMillis: 5000
-                 minEvictableIdleTimeMillis: 60000
-                 validationQuery: SELECT 1
-                 validationQueryTimeout: 3
-                 validationInterval: 15000
-                 testOnBorrow: true
-                 testWhileIdle: true
-                 testOnReturn: false
-                 jdbcInterceptors: ConnectionState;StatementCache(max=200)
-                 defaultTransactionIsolation: 2
-#    test:
-#        dataSource:
-#            dbCreate: update
-##           url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-#            url: jdbc:mysql://localhost:3306/my_database
-#            driverClassName: com.mysql.jdbc.Driver
-#            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#            username: timesheet-test
-#            password: timesheet-test
+                  jmxEnabled: true
+                  initialSize: 5
+                  maxActive: 50
+                  minIdle: 5
+                  maxIdle: 25
+                  maxWait: 10000
+                  maxAge: 600000
+                  timeBetweenEvictionRunsMillis: 5000
+                  minEvictableIdleTimeMillis: 60000
+                  validationQuery: SELECT 1
+                  validationQueryTimeout: 3
+                  validationInterval: 15000
+                  testOnBorrow: true
+                  testWhileIdle: true
+                  testOnReturn: false
+                  jdbcInterceptors: ConnectionState;StatementCache(max=200)
+                  defaultTransactionIsolation: 2
+    test:
+        dataSource:
+            dbCreate: update
+            url: jdbc:mysql://localhost:3306/cargahoras_test
+            driverClassName: com.mysql.jdbc.Driver
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            username: admin
+            password: maipu$671
+            properties:
+                  jmxEnabled: true
+                  initialSize: 5
+                  maxActive: 50
+                  minIdle: 5
+                  maxIdle: 25
+                  maxWait: 10000
+                  maxAge: 600000
+                  timeBetweenEvictionRunsMillis: 5000
+                  minEvictableIdleTimeMillis: 60000
+                  validationQuery: SELECT 1
+                  validationQueryTimeout: 3
+                  validationInterval: 15000
+                  testOnBorrow: true
+                  testWhileIdle: true
+                  testOnReturn: false
+                  jdbcInterceptors: ConnectionState;StatementCache(max=200)
+                  defaultTransactionIsolation: 2
     production:
         dataSource:
             pooled: true
             dbCreate: update
             jmxExport: true
-            url: jdbc:mysql://10.0.0.3:3306/cargahoras
+            url: jdbc:mysql://10.0.0.3:3306/cargahoras_prod
             driverClassName: com.mysql.jdbc.Driver
             dialect: org.hibernate.dialect.MySQL5InnoDBDialect
             username: admin
