@@ -33,7 +33,7 @@
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_client" ng-model="projectCtrl.search.client"
+                <input-field-text ng-id="search_client" ng-model="projectCtrl.search.client.name"
                                   ng-placeholder="Ingrese Cliente"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
