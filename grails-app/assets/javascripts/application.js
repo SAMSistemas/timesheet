@@ -12,6 +12,7 @@
 //= require_self
 //= require_tree angular-directives
 //= require_tree angular-filters
+//= require_tree angular-services
 
 if (typeof jQuery !== 'undefined') {
     (function($) {
@@ -25,5 +26,6 @@ if (typeof jQuery !== 'undefined') {
 
 angular.module('directives', []);
 angular.module('filters', []);
-angular.module('myApp', ['directives', 'filters', 'ngComboDatePicker']);
+angular.module('services', []);
+angular.module('myApp', ['directives', 'filters', 'services', 'ngComboDatePicker']);
 
