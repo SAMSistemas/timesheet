@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('clientController', function ($http) {
+app.controller('clientController', function ($http, clientService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -20,11 +20,29 @@ app.controller('clientController', function ($http) {
         vm.createForm = null;
         vm.editForm = null;
 
-        $http.get('/client/all').then(function (response) {
-            vm.clients = response.data;
-        }, function () {
 
-        });
+        /** Callback Handlers **/
+        function getSuccess(response) {
+            vm.clients = response.data;
+        }
+
+        function createSuccess(response) {
+            vm.clientToCreate.id = response.data.id;
+            vm.addToTable(vm.clients, vm.clientToCreate);
+        }
+
+        function updateSuccess() {
+            vm.updateInTable(vm.clients, vm.clientToEdit);
+        }
+
+        function callbackError() {
+            //Nothing yet
+        }
+
+
+        /** Client ABM **/
+
+        clientService.getClients(getSuccess, callbackError);
 
         vm.new = function () {
             vm.clientToCreate = {name: "", short_name: "", enabled: true};
@@ -38,12 +56,7 @@ app.controller('clientController', function ($http) {
 
         vm.create = function () {
             if (vm.createForm.$valid) {
-                $http.post('/client/create', vm.clientToCreate).then(function (response) {
-                    vm.clientToCreate.id = response.data.id;
-                    vm.addToTable(vm.clients, vm.clientToCreate);
-                }, function () {
-
-                });
+                clientService.createClient(vm.clientToCreate, createSuccess, callbackError);
             }
         };
 
@@ -60,13 +73,12 @@ app.controller('clientController', function ($http) {
 
         vm.update = function () {
             if (vm.editForm.$valid) {
-                $http.put('/client/update', vm.clientToEdit).then(function () {
-                    vm.updateInTable(vm.clients, vm.clientToEdit);
-                }, function () {
-
-                });
+                clientService.updateClient(vm.clientToEdit, updateSuccess, callbackError);
             }
         };
+
+
+        /** Utils **/
 
         vm.reverseOrder = function (sortType) {
             vm.sortType = sortType;
