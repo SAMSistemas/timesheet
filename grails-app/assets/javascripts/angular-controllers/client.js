@@ -22,6 +22,7 @@ app.controller('clientController', function ($http, clientService) {
 
 
         /** Callback Handlers **/
+
         function getSuccess(response) {
             vm.clients = response.data;
         }

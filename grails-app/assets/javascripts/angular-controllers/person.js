@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('personController', function ($http) {
+app.controller('personController', function ($http, personService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -23,11 +23,30 @@ app.controller('personController', function ($http) {
         vm.work_hours = [4,6,8];
         vm.work_positions = [];
 
-        $http.get('/person/all').then(function (response) {
-            vm.people = response.data;
-        }, function () {
 
-        });
+
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.people = response.data;
+        }
+
+        function createSuccess(response) {
+            vm.personToCreate.id = response.data.id;
+            vm.addToTable(vm.people, vm.personToCreate);
+        }
+
+        function updateSuccess() {
+            vm.updateInTable(vm.people, vm.personToEdit);
+        }
+
+        function callbackError() {
+            //Nothing yet
+        }
+
+        /** Person ABM **/
+
+        personService.getPeople(getSuccess, callbackError);
 
         $http.get('/workPosition/all').then(function (response) {
             vm.work_positions = response.data;
@@ -54,12 +73,7 @@ app.controller('personController', function ($http) {
 
         vm.create = function () {
             if (vm.createForm.$valid) {
-                $http.post('/person/create', vm.personToCreate).then(function (response) {
-                    vm.personToCreate.id = response.data.id;
-                    vm.addToTable(vm.people, vm.personToCreate);
-                }, function () {
-
-                });
+                personService.createPerson(vm.personToCreate, createSuccess, callbackError);
             }
         };
 
@@ -75,13 +89,13 @@ app.controller('personController', function ($http) {
 
         vm.update = function () {
             if (vm.editForm.$valid) {
-                $http.put('/person/update', vm.personToEdit).then(function () {
-                    vm.updateInTable(vm.people, vm.personToEdit);
-                }, function () {
-
-                });
+                personService.updatePerson(vm.personToEdit, updateSuccess, callbackError);
             }
         };
+
+
+
+        /** Utils **/
 
         vm.reverseOrder = function (sortType) {
             vm.sortType = sortType;
