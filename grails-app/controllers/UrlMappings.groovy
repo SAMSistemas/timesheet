@@ -6,7 +6,8 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-
+        "/taskType"(view: "/taskType/index")
+        "/taskTypes"(resources: "taskType", excludes: ["delete"])
         "/workPositions"(resources: "workPosition", excludes: ["save", "update", "delete"])
 
         "/"(view:"/index")
