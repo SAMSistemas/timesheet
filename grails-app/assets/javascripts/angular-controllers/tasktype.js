@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('taskTypeController', function (taskTypeService) {
+app.controller('taskTypeController', function (taskTypeService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -29,17 +29,17 @@ app.controller('taskTypeController', function (taskTypeService) {
 
         function createSuccess(response) {
             vm.taskTypeToCreate.id = response.data.id;
-            vm.addToTable(vm.taskTypes, vm.taskTypeToCreate);
-            vm.writeToLog(response, 'created');
+            utilsService.addToTable(vm.taskTypes, vm.taskTypeToCreate);
+            utilsService.writeToLog(response, 'created');
         }
 
         function updateSuccess(response) {
-            vm.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
-            vm.writeToLog(response, 'updated');
+            utilsService.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
+            utilsService.writeToLog(response, 'updated');
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
 
@@ -79,7 +79,7 @@ app.controller('taskTypeController', function (taskTypeService) {
         };
 
 
-        /** Utils **/
+        /** Table Ordering & Filtering **/
 
         vm.reverseOrder = function (sortType) {
             vm.sortType = sortType;
@@ -89,28 +89,6 @@ app.controller('taskTypeController', function (taskTypeService) {
         vm.startsWith = function (actual, expected) {
             var lowerStr = (actual + "").toLowerCase();
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
-        };
-
-        vm.addToTable = function (items, item) {
-            items.push(item);
-        };
-
-        vm.updateInTable = function (items, item) {
-            for (var i = 0; i < items.length; i++)
-                if (items[i].id === item.id)
-                    items[i] = item;
-        };
-
-        //Write result message to console
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
         };
 
     });

@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('assignationController', function (clientService, projectService, personService, jobLogService) {
+app.controller('assignationController', function (clientService, projectService, personService, jobLogService, utilsService) {
 
     /** Capturing controller instance **/
     var vm = this;
@@ -44,11 +44,11 @@ app.controller('assignationController', function (clientService, projectService,
         else
             vm.confirmation = "Fallo la asignacion";
 
-        vm.writeToLog(response, 'success');
+        utilsService.writeToLog(response, 'success');
     }
 
     function callbackError(response) {
-        vm.writeToLog(response, 'error');
+        utilsService.writeToLog(response, 'error');
     }
 
 
@@ -74,21 +74,5 @@ app.controller('assignationController', function (clientService, projectService,
         jobLogService.assignJobLog(jobLog, assignJobLogSuccess, callbackError);
 
     };
-
-
-    /** Utils **/
-
-    //Write result message to console
-    vm.writeToLog = function(response, result){
-
-        var resultMessage = {
-            result: result,
-            status: response.status,
-            data: response.data
-        };
-
-        console.log(JSON.stringify(resultMessage));
-    };
-
 
 });

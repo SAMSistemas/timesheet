@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('personController', function (personService, workPositionService) {
+app.controller('personController', function (personService, workPositionService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -33,13 +33,13 @@ app.controller('personController', function (personService, workPositionService)
 
         function createSuccess(response) {
             vm.personToCreate.id = response.data.id;
-            vm.addToTable(vm.people, vm.personToCreate);
-            vm.writeToLog(response, 'created');
+            utilsService.addToTable(vm.people, vm.personToCreate);
+            utilsService.writeToLog(response, 'created');
         }
 
         function updateSuccess(response) {
-            vm.updateInTable(vm.people, vm.personToEdit);
-            vm.writeToLog(response, 'updated');
+            utilsService.updateInTable(vm.people, vm.personToEdit);
+            utilsService.writeToLog(response, 'updated');
         }
 
         function getWorkPositionSuccess(response) {
@@ -47,7 +47,7 @@ app.controller('personController', function (personService, workPositionService)
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
         /** Person ABM **/
@@ -97,7 +97,7 @@ app.controller('personController', function (personService, workPositionService)
 
 
 
-        /** Utils **/
+        /** Table Ordering & Filtering **/
 
         vm.reverseOrder = function (sortType) {
             vm.sortType = sortType;
@@ -109,30 +109,5 @@ app.controller('personController', function (personService, workPositionService)
             return lowerStr.indexOf(expected.toLowerCase()) === 0;
         };
 
-        vm.addToTable = function (items, item) {
-            items.push(item);
-        };
-
-        vm.updateInTable = function (items, item) {
-            for (var i = 0; i < items.length; i++)
-                if (items[i].id === item.id)
-                    items[i] = item;
-        };
-
-        vm.changeColor = function (divId) {
-            $("#" + divId).css("cssText", " color: #009688 !important;");
-        };
-
-        //Write result message to console
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
-        };
 
     });

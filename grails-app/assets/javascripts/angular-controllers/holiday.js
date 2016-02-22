@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('holidayController', function ($scope, holidayService) {
+app.controller('holidayController', function ($scope, holidayService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -26,19 +26,19 @@ app.controller('holidayController', function ($scope, holidayService) {
         function createSuccess(response) {
             vm.eventToCreate.id = response.data.id;
             vm.addEventSource(vm.eventToCreate);
-            vm.writeToLog(response, 'created');
+            utilsService.writeToLog(response, 'created');
         }
 
         function updateSuccess(response) {
-            vm.writeToLog(response, 'updated');
+            utilsService.writeToLog(response, 'updated');
         }
 
         function deleteSuccess(response) {
-            vm.writeToLog(response, 'deleted');
+            utilsService.writeToLog(response, 'deleted');
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
 
@@ -160,18 +160,6 @@ app.controller('holidayController', function ($scope, holidayService) {
         //Remove event from calendar
         vm.removeEvent = function (event) {
             $('#calendar').fullCalendar('removeEvents', event.id);
-        };
-
-        //Write result message to console
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
         };
 
     });
