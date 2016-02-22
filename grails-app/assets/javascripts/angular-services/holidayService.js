@@ -17,8 +17,8 @@ function holidayService($http) {
         $http.put('/holiday/update', eventToEdit).then(callbackSuccess, callbackFailure);
     };
 
-    vm.deleteHoliday = function(callbackSuccess, callbackFailure){
-        $http.delete('/holiday/delete/' + vm.eventToUpdate.id).then(callbackSuccess,callbackFailure);
+    vm.deleteHoliday = function(eventToDelete, callbackSuccess, callbackFailure){
+        $http.delete('/holiday/delete/' + eventToDelete).then(callbackSuccess,callbackFailure);
     };
 
 }

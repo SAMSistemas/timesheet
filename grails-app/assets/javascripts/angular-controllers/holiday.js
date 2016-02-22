@@ -21,6 +21,7 @@ app.controller('holidayController', function ($scope, holidayService, utilsServi
         function getSuccess(response) {
             vm.events_array = response.data;
             vm.initCalendar();
+
         }
 
         function createSuccess(response) {
@@ -67,7 +68,7 @@ app.controller('holidayController', function ($scope, holidayService, utilsServi
 
         vm.delete = function () {
 
-            holidayService.deleteHoliday(deleteSuccess, callbackError);
+            holidayService.deleteHoliday(vm.eventToUpdate.id, deleteSuccess, callbackError);
 
             //Remove event from calendar
             vm.removeEvent(vm.eventToUpdate);
