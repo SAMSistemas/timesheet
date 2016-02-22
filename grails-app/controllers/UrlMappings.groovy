@@ -7,6 +7,9 @@ class UrlMappings {
             }
         }
 
+        "/client"(view: "/client/index")
+        "/clients"(resources: "client", excludes: ["delete"])
+
         "/holiday"(view: "/holiday/index")
         "/holidays"(resources: "holiday")
 
