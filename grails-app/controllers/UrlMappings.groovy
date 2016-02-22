@@ -6,8 +6,13 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+
+        "/holiday"(view: "/holiday/index")
+        "/holidays"(resources: "holiday")
+
         "/taskType"(view: "/taskType/index")
         "/taskTypes"(resources: "taskType", excludes: ["delete"])
+
         "/workPositions"(resources: "workPosition", excludes: ["save", "update", "delete"])
 
         "/"(view:"/index")
