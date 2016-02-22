@@ -99,7 +99,7 @@ app.controller('holidayController', function ($scope, holidayService) {
                 dayClick: function (date, event) {
                     vm.eventToCreate.id = null;
                     vm.eventToCreate.title = "";
-                    vm.eventToCreate.start = date.format();
+                    vm.eventToCreate.date = date.format();
                     $scope.$apply();
 
                     $('#create_modal').openModal();
@@ -115,7 +115,7 @@ app.controller('holidayController', function ($scope, holidayService) {
 
                     vm.eventToUpdate.id = events[0].id;
                     vm.eventToUpdate.title = events[0].title;
-                    vm.eventToUpdate.start = events[0].start.format();
+                    vm.eventToUpdate.date = events[0].date;
                     $scope.$apply();
 
                     $('#edit_modal').openModal();

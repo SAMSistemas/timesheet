@@ -36,7 +36,7 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="create_date" type="text" ng-value="holidayCtrl.eventToCreate.start | date: 'dd-MM-yyyy'" disabled>
+                        <input id="create_date" type="text" ng-value="holidayCtrl.eventToCreate.date | date: 'dd-MM-yyyy'" disabled>
                         <label for="create_date">Fecha</label>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_date" type="text" ng-value="holidayCtrl.eventToUpdate.start | date: 'dd-MM-yyyy'" disabled>
+                        <input id="edit_date" type="text" ng-value="holidayCtrl.eventToUpdate.date | date: 'dd-MM-yyyy'" disabled>
                         <label for="edit_date">Fecha</label>
                     </div>
                 </div>
