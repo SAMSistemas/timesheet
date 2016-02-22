@@ -30,7 +30,7 @@ app.controller('loginController', function ($window, loginService, personService
         }
 
         function showPersonSuccess(response) {
-            var user = response.data;
+            var user = response.data[0];
             vm.name = user.name + ' ' + user.lastname;
             sessionStorage.setItem("name", vm.name);
             vm.writeToLog(response, 'success');

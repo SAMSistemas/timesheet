@@ -124,7 +124,7 @@
                     <div class="col s12">
                         <input name="username" type="text" maxlength="25"
                                ng-model="personCtrl.personToCreate.username" required available
-                               url-to-check="/person/existsUsername/">
+                               url-to-check="/people?username=">
                         <label ng-class="{'has-error': personCtrl.createForm.username.$invalid}">Usuario
                             <span ng-show="personCtrl.createForm.username.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="personCtrl.createForm.username.$error.available" class="has-error">ya existe</span>
@@ -229,7 +229,7 @@
                     <div class="col s12">
                         <input name="username" type="text" maxlength="25"
                                ng-model="personCtrl.personToEdit.username" required available original-value="personCtrl.person.username"
-                               url-to-check="/person/existsUsername/">
+                               url-to-check="/people?username=">
                         <label ng-class="{'has-error': personCtrl.editForm.username.$invalid}">Usuario
                             <span ng-show="personCtrl.editForm.username.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="personCtrl.editForm.username.$error.available" class="has-error">ya existe</span>
