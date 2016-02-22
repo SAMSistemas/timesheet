@@ -10,23 +10,22 @@ angular.module('directives')
             },
             link: function (scope, elem, attr, ctrl) {
                 elem.on('blur', function () {
-                    // get the value of the input
-                    var viewValue = ctrl.$viewValue;
+                    var viewValue = ctrl.$viewValue; // get the value of the input
 
-                    // check if the value is equal to the value before the edition
-                    if (scope.originalValue !== viewValue) {
+                    if (scope.originalValue !== viewValue && viewValue !== "") {
+                        // check if the value isn't equal to the value before the edition and it isn't empty
                         $http.get(scope.urlToCheck + viewValue).then(
                             function (response) {
-                                if (response.data["exists"] === "true") { // if it exists, it set the validity to false
-                                    ctrl.$setValidity('available', false);
-                                } else {
+                                if (response.data.length === 0) { // if it doesn't exists, it set the validity to true
                                     ctrl.$setValidity('available', true);
+                                } else { // if it does then it is set to false
+                                    ctrl.$setValidity('available', false);
                                 }
                             },
-                            function () {
+                            function () { // if there is an error, it set the validity to false
                                 ctrl.$setValidity('available', false);
                             });
-                    } else { // if it is equal, it's ok
+                    } else { // if it's the same or it's empty, it's ok
                         ctrl.$setValidity('available', true);
                         scope.$apply();
                     }
