@@ -17,4 +17,8 @@ function clientService($http) {
         $http.put('/client/update', clientToEdit).then(callbackSuccess, callbackFailure);
     };
 
+    vm.getEnabledClients = function(callbackSuccess, callbackFailure){
+        $http.get('/client/allEnabled').then(callbackSuccess,callbackFailure);
+    };
+
 }

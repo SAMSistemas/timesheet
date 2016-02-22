@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('personController', function ($http, personService) {
+app.controller('personController', function (personService, workPositionService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -34,25 +34,27 @@ app.controller('personController', function ($http, personService) {
         function createSuccess(response) {
             vm.personToCreate.id = response.data.id;
             vm.addToTable(vm.people, vm.personToCreate);
+            vm.writeToLog(response, 'created');
         }
 
-        function updateSuccess() {
+        function updateSuccess(response) {
             vm.updateInTable(vm.people, vm.personToEdit);
+            vm.writeToLog(response, 'updated');
         }
 
-        function callbackError() {
-            //Nothing yet
+        function getWorkPositionSuccess(response) {
+            vm.work_positions = response.data;
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
         }
 
         /** Person ABM **/
 
         personService.getPeople(getSuccess, callbackError);
 
-        $http.get('/workPosition/all').then(function (response) {
-            vm.work_positions = response.data;
-        }, function () {
-
-        });
+        workPositionService.getWorkPositions(getWorkPositionSuccess, callbackError);
 
         vm.new = function () {
             vm.personToCreate = {
@@ -119,6 +121,18 @@ app.controller('personController', function ($http, personService) {
 
         vm.changeColor = function (divId) {
             $("#" + divId).css("cssText", " color: #009688 !important;");
+        };
+
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
         };
 
     });

@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('assignationController', function ($http) {
+app.controller('assignationController', function (clientService, projectService, personService, jobLogService) {
 
     /** Capturing controller instance **/
     var vm = this;
@@ -18,28 +18,51 @@ app.controller('assignationController', function ($http) {
 
     vm.form = null;
 
-    $http.get('/client/allEnabled').then(function (response) {
-        vm.clients = response.data;
-    }, function () {
+    /** Callback Handlers **/
 
-    });
+    function getClientsSuccess(response) {
+        vm.clients = response.data;
+    }
+
+    function changeClientSuccess(response) {
+        vm.projects = response.data;
+        vm.confirmation = "";
+    }
+
+    function changeProjectSuccess(response) {
+        vm.people = response.data;
+        vm.confirmation = "";
+    }
+
+    function assignJobLogSuccess(response) {
+
+        if (response.status === 200) {
+            vm.confirmation = "Se asigno la persona al proyecto";
+            vm.personSelected = null;
+            personService.getPersonAvailableForProject(vm.projectSelected.project_name, changeProjectSuccess, callbackError);
+        }
+        else
+            vm.confirmation = "Fallo la asignacion";
+
+        vm.writeToLog(response, 'success');
+    }
+
+    function callbackError(response) {
+        vm.writeToLog(response, 'error');
+    }
+
+
+    /** Controller Functions **/
+
+    clientService.getEnabledClients(getClientsSuccess, callbackError);
+
 
     vm.changeClient = function () {
-        $http.get('/project/allEnabledByClient/' + vm.clientSelected.name).then(function (response) {
-            vm.projects = response.data;
-            vm.confirmation = "";
-        }, function () {
-
-        });
+        projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
     };
 
     vm.changeProject = function () {
-        $http.get('/person/allEnabledAndAvailableForProject/' + vm.projectSelected.project_name).then(function (response) {
-            vm.people = response.data;
-            vm.confirmation = "";
-        }, function () {
-
-        });
+        personService.getPersonAvailableForProject(vm.projectSelected.project_name, changeProjectSuccess, callbackError);
     };
 
     vm.submit = function () {
@@ -48,21 +71,24 @@ app.controller('assignationController', function ($http) {
             project: vm.projectSelected.project_name
         };
 
-        $http.post('/jobLog/assign', jobLog).then(function (response) {
-            if (response.status === 200) {
-                vm.confirmation = "Se asigno la persona al proyecto";
-                vm.personSelected = null;
-                $http.get('/person/allEnabledAndAvailableForProject/' + vm.projectSelected.project_name).then(function (response) {
-                    vm.people = response.data;
-                }, function () {
+        jobLogService.assignJobLog(jobLog, assignJobLogSuccess, callbackError);
 
-                });
-            }
-            else
-                vm.confirmation = "Fallo la asignacion";
-        }, function () {
-
-        });
     };
+
+
+    /** Utils **/
+
+    //Write result message to console
+    vm.writeToLog = function(response, result){
+
+        var resultMessage = {
+            result: result,
+            status: response.status,
+            data: response.data
+        };
+
+        console.log(JSON.stringify(resultMessage));
+    };
+
 
 });

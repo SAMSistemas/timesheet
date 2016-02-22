@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('clientController', function ($http, clientService) {
+app.controller('clientController', function (clientService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -30,14 +30,16 @@ app.controller('clientController', function ($http, clientService) {
         function createSuccess(response) {
             vm.clientToCreate.id = response.data.id;
             vm.addToTable(vm.clients, vm.clientToCreate);
+            vm.writeToLog(response, 'created');
         }
 
-        function updateSuccess() {
+        function updateSuccess(response) {
             vm.updateInTable(vm.clients, vm.clientToEdit);
+            vm.writeToLog(response, 'updated');
         }
 
-        function callbackError() {
-            //Nothing yet
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
         }
 
 
@@ -99,6 +101,18 @@ app.controller('clientController', function ($http, clientService) {
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
+        };
+
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
         };
 
     });

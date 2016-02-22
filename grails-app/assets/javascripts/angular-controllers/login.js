@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('loginController', function ($http, $window) {
+app.controller('loginController', function ($window, loginService, personService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -10,24 +10,46 @@ app.controller('loginController', function ($http, $window) {
         vm.pass = "";
         vm.name = "";
 
+
+        /** Callback Handlers **/
+
+        function loginSuccess() {
+            sessionStorage.setItem("username", vm.user);
+            sessionStorage.setItem("name", "");
+            $window.location.href = '/';
+        }
+
+        function logOutSuccess() {
+            $window.location.href = '/login';
+        }
+
+        function logInError(response) {
+            vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
+            $('.login-card').css("height", "620px");
+            callbackError(response);
+        }
+
+        function showPersonSuccess(response) {
+            var user = response.data;
+            vm.name = user.name + ' ' + user.lastname;
+            sessionStorage.setItem("name", vm.name);
+            vm.writeToLog(response, 'success');
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
+        }
+
+
+        /** Controllers Functions **/
+
         vm.login = function () {
-            $http.post('/login?username=' + vm.user + "&password=" + vm.pass).then(function () {
-                sessionStorage.setItem("username", vm.user);
-                sessionStorage.setItem("name", "");
-                $window.location.href = '/';
-            }, function () {
-                vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
-                $('.login-card').css("height", "620px");
-            });
+            loginService.postUserData(vm.user, vm.pass, loginSuccess, logInError);
         };
 
         vm.logout = function () {
-            $http.post("/login").then(function () {
-            }, function () {
-                $window.location.href = '/login';
-            }, function () {
 
-            });
+            loginService.closeSession(logOutSuccess, callbackError);
 
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("name");
@@ -38,14 +60,7 @@ app.controller('loginController', function ($http, $window) {
             vm.user = sessionStorage.getItem("username");
 
             if (sessionStorage.getItem("name") == "") {
-                $http.get('/person/show/' + vm.user).then(function (response) {
-                    var user = response.data;
-                    vm.name = user.name + ' ' + user.lastname;
-                    sessionStorage.setItem("name", vm.name);
-                    console.log(vm.name);
-                }, function () {
-                    console.log(vm.name);
-                });
+                personService.showPerson(vm.user, showPersonSuccess, callbackError);
             }
 
             vm.name = sessionStorage.getItem("name");
@@ -53,5 +68,19 @@ app.controller('loginController', function ($http, $window) {
         };
 
         vm.searchName();
+
+
+        /** Utils **/
+
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
+        };
 
     });

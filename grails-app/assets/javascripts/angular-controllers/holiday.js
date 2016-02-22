@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('holidayController', function ($scope, $http) {
+app.controller('holidayController', function ($scope, holidayService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -15,9 +15,69 @@ app.controller('holidayController', function ($scope, $http) {
         vm.createForm = null;
         vm.editForm = null;
 
-        $http.get('/holiday/all').then(function (response) {
 
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
             vm.events_array = response.data;
+            vm.initCalendar();
+        }
+
+        function createSuccess(response) {
+            vm.eventToCreate.id = response.data.id;
+            vm.addEventSource(vm.eventToCreate);
+            vm.writeToLog(response, 'created');
+        }
+
+        function updateSuccess(response) {
+            vm.writeToLog(response, 'updated');
+        }
+
+        function deleteSuccess(response) {
+            vm.writeToLog(response, 'deleted');
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
+        }
+
+
+        /** Holiday ABM **/
+
+        holidayService.getHolidays(getSuccess, callbackError);
+
+
+        vm.create = function () {
+
+            holidayService.createHoliday(vm.eventToCreate, createSuccess, callbackError);
+
+        };
+
+        vm.update = function () {
+
+            //Remove previous event from calendar
+            vm.removeEvent(vm.eventToUpdate);
+
+            holidayService.updateHoliday(vm.eventToUpdate, updateSuccess, callbackError);
+
+            //Add new event source to calendar to render it
+            vm.addEventSource(vm.eventToUpdate);
+
+        };
+
+        vm.delete = function () {
+
+            holidayService.deleteHoliday(deleteSuccess, callbackError);
+
+            //Remove event from calendar
+            vm.removeEvent(vm.eventToUpdate);
+        };
+
+        /** Utils **/
+
+        //Init Calendar
+
+        vm.initCalendar = function() {
 
             $('#calendar').fullCalendar({
                 height: 500,
@@ -61,42 +121,9 @@ app.controller('holidayController', function ($scope, $http) {
                     $('#edit_modal').openModal();
                 }
             });
-        });
-
-        vm.create = function () {
-
-            $http.post('/holiday/create', vm.eventToCreate).then(function (response) {
-                vm.eventToCreate.id = response.data.id;
-                vm.addEventSource(vm.eventToCreate);
-            }, function () {
-
-            });
-
         };
 
-        vm.update = function () {
-
-            //Remove previous event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-
-            $http.put('/holiday/update', vm.eventToUpdate);
-
-            //Add new event source to calendar to render it
-            vm.addEventSource(vm.eventToUpdate);
-
-        };
-
-        vm.delete = function () {
-
-            $http.delete('/holiday/delete/' + vm.eventToUpdate.id);
-
-            //Remove event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-        };
-
-        /** Utils **/
-
-            // Search for an event
+        // Search for an event
 
         vm.searchEvent = function (nameKey, myArray) {
             for (var i = 0; i < myArray.length; i++) {
@@ -133,6 +160,18 @@ app.controller('holidayController', function ($scope, $http) {
         //Remove event from calendar
         vm.removeEvent = function (event) {
             $('#calendar').fullCalendar('removeEvents', event.id);
-        }
+        };
+
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
+        };
 
     });

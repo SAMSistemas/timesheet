@@ -1,13 +1,15 @@
 //= require default
 //= require_self
 
-app.controller('mainController', function ($http) {
+app.controller('mainController', function (clientService, projectService, jobLogService) {
 
         /** Capturing controller instance **/
         var vm = this;
 
         vm.clients = [];
         vm.projects = [];
+
+        vm.reportURI = '/jobLog/projectForHour';
 
         vm.clientSelected = null;
         vm.projectSelected = null;
@@ -17,19 +19,43 @@ app.controller('mainController', function ($http) {
 
         vm.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
-        $http.get('/client/all').then(function (response) {
+
+        /** Callback Handlers **/
+
+        function getClientsSuccess(response) {
             $('select').material_select();
             $('.modal-trigger').not('.modal-trigger-applied').leanModal();
             $('.modal-trigger').addClass('modal-trigger-applied');
             vm.clients = response.data;
-        });
+        }
+
+        function getProjectsByClientSuccess(response) {
+            vm.projects = response.data;
+        }
+
+        function reportSuccess() {
+            window.location.href = vm.reportURI;
+            vm.clean();
+        }
+
+        function reportFailure(response) {
+            var $toast = $('<span>No se encontraron datos para los par&aacute;metros ingresados</span>');
+            Materialize.toast($toast, 4000,'rounded');
+            vm.clean();
+            callbackError(response);
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
+        }
+
+
+        /** Controller Functions **/
+
+        clientService.getClients(getClientsSuccess, callbackError);
 
         vm.changeClient = function () {
-            $http.get('/project/allEnabledByClient/' + vm.clientSelected.name).then(function (response) {
-                vm.projects = response.data;
-            }, function () {
-
-            });
+            projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
         };
 
         vm.export = function () {
@@ -42,16 +68,12 @@ app.controller('mainController', function ($http) {
                 dateTo: vm.dateToString(vm.toDateSelected)
             };
 
+            jobLogService.filterDataToReport(vm.reportURI, filters, reportSuccess, reportFailure);
 
-            $http.post('/jobLog/projectForHour', filters).then(function (response) {
-                window.location.href = '/jobLog/projectForHour';
-                vm.clean();
-            }, function () {
-                var $toast = $('<span>No se encontraron datos para los par&aacute;metros ingresados</span>');
-                Materialize.toast($toast, 4000,'rounded');
-                vm.clean();
-            });
         };
+
+
+        /** Utils **/
 
         vm.clean = function () {
             vm.clientSelected = null;
@@ -91,9 +113,22 @@ app.controller('mainController', function ($http) {
 
         vm.showDateError = function () {
             $('#errorDate').show();
-        }
+        };
 
-    });
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
+        };
+
+
+});
 
 
 

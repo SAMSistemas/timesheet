@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('projectController', function ($http) {
+app.controller('projectController', function (projectService, clientService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -29,21 +29,37 @@ app.controller('projectController', function ($http) {
 
     /*-----------------------------------------------------------------------------------------------------------*/
 
-        /* API Functions */
+        /** Callback Handlers **/
 
-        $http.get('/client/allEnabled').then(function (response) {
-            vm.enabledClients = response.data;
-        }, function () {
-
-        });
-
-        $http.get('/project/all').then(function (response) {
+        function getSuccess(response) {
             vm.projects = response.data;
-        }, function () {
+        }
 
-        });
+        function createSuccess(response) {
+            vm.projectToCreate.id = response.data.id;
+            vm.addToTable(vm.projects, vm.projectToCreate);
+            vm.writeToLog(response, 'created');
+        }
 
-        /* CRUD Functions */
+        function updateSuccess(response) {
+            vm.updateInTable(vm.projects, vm.projectToEdit);
+            vm.writeToLog(response, 'updated');
+        }
+
+        function getEnabledSuccess(response) {
+            vm.enabledClients = response.data;
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
+        }
+
+
+        /** Project ABM **/
+
+        clientService.getEnabledClients(getEnabledSuccess, callbackError);
+
+        projectService.getProjects(getSuccess, callbackError);
 
         vm.new = function () {
             vm.clientSelected = "";
@@ -64,12 +80,7 @@ app.controller('projectController', function ($http) {
             vm.generateCreateStringDate(vm.dateSelected);
 
             if (vm.createForm.$valid) {
-                $http.post('/project/create', vm.projectToCreate).then(function (response) {
-                    vm.projectToCreate.id = response.data.id;
-                    vm.addToTable(vm.projects, vm.projectToCreate);
-                }, function () {
-
-                });
+                projectService.createProject(vm.projectToCreate, createSuccess, callbackError);
             }
 
             vm.clientSelected = {};
@@ -99,11 +110,7 @@ app.controller('projectController', function ($http) {
             vm.generateEditStringDate(vm.dateSelected);
 
             if (vm.editForm.$valid) {
-                $http.put('/project/update', vm.projectToEdit).then(function () {
-                    vm.updateInTable(vm.projects, vm.projectToEdit);
-                }, function () {
-
-                });
+                projectService.updateProject(vm.projectToEdit, updateSuccess, callbackError);
             }
 
             vm.clientSelected = {};
@@ -148,7 +155,7 @@ app.controller('projectController', function ($http) {
             return false;
         };
 
-        /* Utils */
+        /** Utils **/
 
         vm.parseDate = function (date) {
             var date_array = date.split('-');
@@ -185,6 +192,18 @@ app.controller('projectController', function ($http) {
 
         vm.changeColor = function (divId) {
             $("#" + divId).css("cssText", " color: #009688 !important;");
+        };
+
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
         };
 
     });

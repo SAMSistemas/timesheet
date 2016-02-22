@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('taskTypeController', function ($http) {
+app.controller('taskTypeController', function (taskTypeService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -20,11 +20,32 @@ app.controller('taskTypeController', function ($http) {
         vm.createForm = null;
         vm.editForm = null;
 
-        $http.get('/taskType/all').then(function (response) {
-            vm.taskTypes = response.data;
-        }, function () {
 
-        });
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.taskTypes = response.data;
+        }
+
+        function createSuccess(response) {
+            vm.taskTypeToCreate.id = response.data.id;
+            vm.addToTable(vm.taskTypes, vm.taskTypeToCreate);
+            vm.writeToLog(response, 'created');
+        }
+
+        function updateSuccess(response) {
+            vm.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
+            vm.writeToLog(response, 'updated');
+        }
+
+        function callbackError(response) {
+            vm.writeToLog(response, 'error');
+        }
+
+
+        /** TaskType ABM **/
+
+        taskTypeService.getTaskTypes(getSuccess, callbackError);
 
         vm.new = function () {
             vm.taskTypeToCreate = {name: "", enabled: true};
@@ -37,12 +58,7 @@ app.controller('taskTypeController', function ($http) {
 
         vm.create = function () {
             if (vm.createForm.$valid) {
-                $http.post('/taskType/create', vm.taskTypeToCreate).then(function (response) {
-                    vm.taskTypeToCreate.id = response.data.id;
-                    vm.addToTable(vm.taskTypes, vm.taskTypeToCreate);
-                }, function () {
-
-                });
+                taskTypeService.createTaskType(vm.taskTypeToCreate, createSuccess, callbackError);
             }
         };
 
@@ -58,13 +74,12 @@ app.controller('taskTypeController', function ($http) {
 
         vm.update = function () {
             if (vm.editForm.$valid) {
-                $http.put('/taskType/update', vm.taskTypeToEdit).then(function () {
-                    vm.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
-                }, function () {
-
-                });
+                taskTypeService.updateTaskType(vm.taskTypeToEdit, updateSuccess, callbackError);
             }
         };
+
+
+        /** Utils **/
 
         vm.reverseOrder = function (sortType) {
             vm.sortType = sortType;
@@ -84,6 +99,18 @@ app.controller('taskTypeController', function ($http) {
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
+        };
+
+        //Write result message to console
+        vm.writeToLog = function(response, result){
+
+            var resultMessage = {
+                result: result,
+                status: response.status,
+                data: response.data
+            };
+
+            console.log(JSON.stringify(resultMessage));
         };
 
     });
