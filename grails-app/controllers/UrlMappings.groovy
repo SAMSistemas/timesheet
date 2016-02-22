@@ -7,6 +7,8 @@ class UrlMappings {
             }
         }
 
+        "/workPositions"(resources: "workPosition", excludes: ["save", "update", "delete"])
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
