@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToCreate.name" required
-                               available url-to-check="/client/existsName/">
+                               available url-to-check="/clients?name=">
                         <label ng-class="{'has-error': clientCtrl.createForm.name.$invalid}">Nombre
                             <span ng-show="clientCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="clientCtrl.createForm.name.$error.available" class="has-error">ya existe</span>
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToCreate.short_name"
-                               required available url-to-check="/client/existsSName/">
+                               required available url-to-check="/clients?short_name=">
                         <label ng-class="{'has-error': clientCtrl.createForm.sname.$invalid}">Sigla
                             <span ng-show="clientCtrl.createForm.sname.$error.required" class="has-error">es obligatoria</span>
                             <span ng-show="clientCtrl.createForm.sname.$error.available" class="has-error">ya existe</span>
@@ -135,7 +135,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToEdit.name"
-                               required available original-value="clientCtrl.client.name" url-to-check="/client/existsName/">
+                               required available original-value="clientCtrl.client.name" url-to-check="/clients?name=">
                         <label ng-class="{'has-error': clientCtrl.editForm.name.$invalid}">Nombre
                             <span ng-show="clientCtrl.editForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="clientCtrl.editForm.name.$error.available" class="has-error">ya existe</span>
@@ -148,7 +148,7 @@
                     <div class="col s12">
                         <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToEdit.short_name"
                                ng-model="clientCtrl.clientToEdit.short_name" required available
-                               original-value="clientCtrl.client.short_name" url-to-check="/client/existsSName/">
+                               original-value="clientCtrl.client.short_name" url-to-check="/clients?short_name=">
                         <label ng-class="{'has-error': clientCtrl.editForm.sname.$invalid}">Sigla
                             <span ng-show="clientCtrl.editForm.sname.$error.required" class="has-error">es obligatoria</span>
                             <span ng-show="clientCtrl.editForm.sname.$error.available" class="has-error">ya existe</span>
