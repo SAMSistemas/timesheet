@@ -1,0 +1,8 @@
+import sam.timesheet.Client
+
+model {
+	Iterable<Client> clientList
+}
+
+json tmpl.client(clientList ?: [])
+

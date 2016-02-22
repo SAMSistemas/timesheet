@@ -1,0 +1,12 @@
+import sam.timesheet.Client
+
+model {
+	Client client
+}
+
+json {
+    id client.id
+    name client.name
+    short_name client.short_name
+    enabled client.enabled
+}
