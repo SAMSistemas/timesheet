@@ -1,0 +1,12 @@
+import sam.timesheet.Holiday
+import java.text.SimpleDateFormat
+
+model {
+	Holiday holiday
+}
+
+json {
+    id holiday.id
+	title holiday.title
+    date new SimpleDateFormat("yyyy-MM-dd").format(holiday.date)
+}

@@ -1,0 +1,7 @@
+import sam.timesheet.Holiday
+
+model {
+	Holiday holiday
+}
+
+json tmpl.holiday(holiday)

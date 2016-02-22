@@ -1,0 +1,8 @@
+import sam.timesheet.Holiday
+
+model {
+	Iterable<Holiday> holidayList
+}
+
+json tmpl.holiday(holidayList ?: [])
+
