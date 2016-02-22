@@ -1,116 +1,37 @@
 package sam.timesheet
 
-import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.rest.RestfulController
 
-@Transactional(readOnly = true)
-class TaskTypeController {
+class TaskTypeController extends RestfulController {
 
-    static allowedMethods = [all: "GET", show: "GET", existsName: "GET", create: "POST", update: "PUT"]
+    static responseFormats = ['json']
 
-    def index() {}
-
-    def all() {
-        render TaskType.list() as JSON
+    TaskTypeController() {
+        super(TaskType)
     }
 
-    def show() {
+    @Override
+    def index() {
+        def filters = [:]
 
-        def taskType = TaskType.findById(params.id)
+        if (params.name)
+            filters.put("name", params.name)
 
-        if (taskType == null) {
+        if (params.enabled)
+            filters.put("enabled", Boolean.parseBoolean(params.enabled))
 
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "El tipo de tarea no existe"
-            }
-
-            return
-        }
-
-        render taskType as JSON
-
+        if (filters.isEmpty())
+            respond TaskType.list()
+        else
+            respond TaskType.findAllWhere(filters)
     }
 
-    def existsName() {
-
-        def taskType = TaskType.findByName(params.id)
-
-        if (taskType == null) {
-            render(status: 200, contentType: "application/json") {
-                exists = "false"
-            }
-
-            return
-        }
-
-        render(status: 200, contentType: "application/json") {
-            exists = "true"
-        }
-    }
-
-    @Transactional
-    def create() {
-
-        def paramsJSON = request.JSON
-
-        def newTaskTypeParams = [
-                name: paramsJSON.get("name"),
-                enabled: paramsJSON.get("enabled")
-        ]
-
-        def newTaskType = new TaskType(newTaskTypeParams)
-
-        if (!newTaskType.validate()) {
-
-            response.status = 422
-
-            render newTaskType.errors.fieldErrors as JSON
-
-            return
-        }
-
-        newTaskType.save flush: true
-
-        render newTaskType as JSON
-
-    }
-
-    @Transactional
-    def update() {
-
-        def paramsJSON = request.JSON
-
-        def taskTypeToUpdate = TaskType.findById(paramsJSON.get("id"))
-
-        if (taskTypeToUpdate == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "El tipo de tarea no existe"
-            }
-
-            return
-        }
-
-        taskTypeToUpdate.name = paramsJSON.get("name")
-        taskTypeToUpdate.enabled = paramsJSON.get("enabled")
-
-        if (!taskTypeToUpdate.validate()) {
-
-            response.status = 422
-
-            render taskTypeToUpdate.errors.fieldErrors as JSON
-
-            return
-        }
-
-        taskTypeToUpdate.save flush: true
-
-        render taskTypeToUpdate as JSON
-
+    @Override
+    protected Object queryForResource(Serializable query) {
+        if (query.toString().isNumber())
+            TaskType.findById(query)
+        else
+            TaskType.findByName(query)
     }
 
 }
