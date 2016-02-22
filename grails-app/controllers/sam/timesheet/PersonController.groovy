@@ -1,208 +1,77 @@
 package sam.timesheet
 
-import grails.converters.JSON
-import grails.transaction.Transactional
+import grails.rest.RestfulController
 
-@Transactional(readOnly = true)
-class PersonController {
+class PersonController extends RestfulController {
 
-    static allowedMethods = [all: "GET", show: "GET", allEnabledAndAvailableForProject: "GET", create: "POST", update: "PUT"]
+    static responseFormats = ['json']
 
-    def index() {}
-
-    def all() {
-        render(contentType: "application/json") {
-            array {
-                for (p in Person.list()) {
-                    person (
-                            id: p.id,
-                            name: p.name,
-                            lastname: p.lastname,
-                            username: p.username,
-                            password: p.password,
-                            work_hours: p.work_hours,
-                            work_position: p.work_position.description,
-                            enabled: p.enabled
-                    )
-                }
-            }
-        }
+    PersonController() {
+        super(Person)
     }
 
-    def show() {
+    @Override
+    def index() {
 
-        def person = Person.findByUsername(params.id)
-
-        if (person == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "La persona no existe"
-            }
-
+        if (params.availableFor) {
+            respond Person.findAll("from Person as p where (select COUNT(*) from JobLog as j where j.person.id = p.id AND j.task_type.name = ? AND j.project.name = ?) = 0 AND p.enabled = true", ["Asignacion", params.availableFor])
             return
         }
 
-        if(!person.enabled) {
+        def filters = [:]
 
-            response.status = 404
+        if (params.name)
+            filters.put("name", params.name)
 
-            render(contentType: "application/json") {
-                code = response.status
-                error = "La persona " + person.username + " no esta habilitada"
-            }
+        if (params.lastname)
+            filters.put("lastname", params.lastname)
 
-            return
-        }
+        if (params.username)
+            filters.put("username", params.username)
 
-        render(contentType: "application/json") {[
-                id: person.id,
-                name: person.name,
-                lastname: person.lastname,
-                work_hours: person.work_hours,
-                work_position: [
-                    id: person.work_position.id,
-                    description: person.work_position.description,
-                ],
-                task_types: array {
-                    for (t in TaskType_x_WorkPosition.findAllByWork_position(person.work_position)) {
-                        if(t.task_type.enabled) {
-                            tasktype(
-                                    id: t.task_type.id,
-                                    name: t.task_type.name,
-                                    enabled: t.task_type.enabled
-                            )
-                        }
-                    }
-                }
-        ]}
+        if (params.enabled)
+            filters.put("enabled", Boolean.parseBoolean(params.enabled))
+
+        if (filters.isEmpty())
+            respond Person.list()
+        else
+            respond Person.findAllWhere(filters)
     }
 
-    def allEnabledAndAvailableForProject() {
-
-        def project = Project.findByName(params.id)
-
-        def taskType = TaskType.findByName("Asignacion")
-
-        def jobLogForProject = JobLog.findAllByProjectAndTask_type(project, taskType)
-
-        def people = Person.findAllByEnabled(true)
-
-        def results = []
-
-        for (p in people) {
-            if (!isAssigned(jobLogForProject, p)) {
-                results.add(p)
-            }
-        }
-
-        render(contentType: "application/json") {
-            array {
-                for (p in results) {
-                    person name: p.name
-                }
-            }
-        }
-    }
-
-    def isAssigned(joblogs, person) {
-        for (j in joblogs) {
-            if (person.name == j.person.name) {
-                return true
-            }
-        }
-        return false
-    }
-
-    def existsUsername() {
-
-        def person = Person.findByUsername(params.id)
-
-        if (person == null) {
-            render(status: 200, contentType: "application/json") {
-                exists = "false"
-            }
-
-            return
-        }
-
-        render(status: 200, contentType: "application/json") {
-            exists = "true"
-        }
-    }
-
-    @Transactional
-    def create() {
-
+    @Override
+    protected getObjectToBind() {
         def paramsJSON = request.JSON
+        def params = [:]
 
-        def newPersonParams = [
-                name: paramsJSON.get("name"),
-                lastname: paramsJSON.get("lastname"),
-                username: paramsJSON.get("username"),
-                password: paramsJSON.get("password"),
-                work_hours: paramsJSON.get("work_hours"),
-                work_position: WorkPosition.findByDescription(paramsJSON.get("work_position")),
-                enabled: paramsJSON.get("enabled")
-        ]
+        if (paramsJSON.name)
+            params.put("name", paramsJSON.name)
 
-        def newPerson = new Person(newPersonParams)
+        if (paramsJSON.lastname)
+            params.put("lastname", paramsJSON.lastname)
 
-        if (!newPerson.validate()) {
+        if (paramsJSON.username)
+            params.put("username", paramsJSON.username)
 
-            response.status = 422
+        if (paramsJSON.password)
+            params.put("password", paramsJSON.password)
 
-            render newPerson.errors.fieldErrors as JSON
+        if (paramsJSON.work_hours)
+            params.put("work_hours", paramsJSON.work_hours)
 
-            return
-        }
+        if (paramsJSON.work_position)
+            params.put("work_position", WorkPosition.findByDescription(paramsJSON.work_position))
 
-        newPerson.save flush: true
+        if (paramsJSON.enabled)
+            params.put("enabled", paramsJSON.enabled)
 
-        render newPerson as JSON
-
+        params
     }
 
-    @Transactional
-    def update() {
-
-        def paramsJSON = request.JSON
-
-        def personToUpdate = Person.findById(paramsJSON.get("id"))
-
-        if (personToUpdate == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "La persona no existe"
-            }
-
-            return
-        }
-
-        personToUpdate.name = paramsJSON.get("name")
-        personToUpdate.lastname = paramsJSON.get("lastname")
-        personToUpdate.username = paramsJSON.get("username")
-        personToUpdate.password = paramsJSON.get("password")
-        personToUpdate.work_hours = paramsJSON.get("work_hours")
-        personToUpdate.work_position = WorkPosition.findByDescription(paramsJSON.get("work_position"))
-        personToUpdate.enabled = paramsJSON.get("enabled")
-
-        if (!personToUpdate.validate()) {
-
-            response.status = 422
-
-            render personToUpdate.errors.fieldErrors as JSON
-
-            return
-        }
-
-        personToUpdate.save flush: true
-
-        render personToUpdate as JSON
-
+    @Override
+    protected Object queryForResource(Serializable query) {
+        if (query.toString().isNumber())
+            Person.findById(query)
+        else
+            Person.findByUsername(query)
     }
-
 }
