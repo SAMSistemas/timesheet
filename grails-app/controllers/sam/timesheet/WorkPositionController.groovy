@@ -1,34 +1,13 @@
 package sam.timesheet
 
-import grails.converters.JSON
+import grails.rest.RestfulController
 
-class WorkPositionController {
+class WorkPositionController extends RestfulController {
 
-    static allowedMethods = [all: "GET", show: "GET"]
+    static responseFormats = ['json']
 
-    def index() {}
-
-    def all() {
-        render WorkPosition.list() as JSON
+    WorkPositionController() {
+        super(WorkPosition)
     }
 
-
-    def show() {
-
-        def work_position = WorkPosition.findById(params.id)
-
-        if (work_position == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "La ocupación no existe"
-            }
-
-            return
-        }
-
-        render work_position as JSON
-
-    }
 }
