@@ -6,19 +6,19 @@ function clientService($http) {
     var vm = this;
 
     vm.getClients = function(callbackSuccess, callbackFailure){
-        $http.get('/client/all').then(callbackSuccess, callbackFailure);
+        $http.get('/clients').then(callbackSuccess, callbackFailure);
     };
 
     vm.createClient = function(clientToCreate,callbackSuccess, callbackFailure){
-        $http.post('/client/create', clientToCreate).then(callbackSuccess, callbackFailure);
+        $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
     };
 
     vm.updateClient = function(clientToEdit, callbackSuccess, callbackFailure){
-        $http.put('/client/update', clientToEdit).then(callbackSuccess, callbackFailure);
+        $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
     };
 
     vm.getEnabledClients = function(callbackSuccess, callbackFailure){
-        $http.get('/client/allEnabled').then(callbackSuccess,callbackFailure);
+        $http.get('/clients?enabled=true').then(callbackSuccess,callbackFailure);
     };
 
 }
