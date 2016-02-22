@@ -1,0 +1,7 @@
+import sam.timesheet.TaskType
+
+model {
+	TaskType taskType
+}
+
+json g.render(taskType)

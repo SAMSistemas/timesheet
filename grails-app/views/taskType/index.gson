@@ -1,0 +1,8 @@
+import sam.timesheet.TaskType
+
+model {
+	Iterable<TaskType> taskTypeList
+}
+
+json tmpl.taskType(taskTypeList ?: [])
+
