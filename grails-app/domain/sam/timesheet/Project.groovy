@@ -14,6 +14,8 @@ class Project {
     static constraints = {
         name blank: false, nullable: false, unique: 'client', maxSize: 50
         short_name blank: false, nullable: false, unique: 'client', maxSize: 10
+        start_date nullable: false
+        enabled nullable: false
     }
 
     String toString(){

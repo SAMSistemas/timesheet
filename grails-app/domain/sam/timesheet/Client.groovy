@@ -11,6 +11,7 @@ class Client {
     static constraints = {
         name blank: false, nullable: false, unique: true, maxSize: 30
         short_name blank: false, nullable: false, unique: true, maxSize: 5
+        enabled nullable: false
     }
 
     String toString(){

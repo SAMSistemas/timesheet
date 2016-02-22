@@ -21,9 +21,10 @@ class Person {
         password blank: false, nullable: false, matches: "[a-zA-Z]{8}"
         work_hours nullable: false, range: 4.step(10,2,{})
         picture nullable: true
+        enabled nullable: false
     }
 
     String toString(){
-        return username + lastname
+        return username
     }
 }

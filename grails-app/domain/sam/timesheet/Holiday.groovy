@@ -2,11 +2,11 @@ package sam.timesheet
 
 class Holiday {
 
-    String description
-    Date holiday_date
+    String title
+    Date date
 
     static constraints = {
-        description unique: true, nullable: false, blank: false
-        holiday_date nullable: false
+        title blank: false, nullable: false, unique: true, maxSize: 40
+        date nullable: false
     }
 }
