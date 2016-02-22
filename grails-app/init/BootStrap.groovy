@@ -35,9 +35,9 @@ class BootStrap {
                 def fede = new Person(name: "Federico", lastname: "Catinello", username: "fcatinello", password: "AAAAAAAA", work_hours: "6", work_position: desarrollador, enabled: true).save flush: true
                 def joni = new Person(name: "Jonatan", lastname: "Salas", username: "jsalas", password: "AAAAAAAA", work_hours: "6", work_position: lider, enabled: true).save flush: true
 
-                new Holiday(title: "Carnaval", start: formatDate("2016-02-08")).save flush: true
-                new Holiday(title: "Navidad", start: formatDate("2016-12-25")).save flush: true
-                new Holiday(title: "Año Nuevo", start: formatDate("2016-01-01")).save flush: true
+                new Holiday(title: "Carnaval", date: formatDate("2016-02-08")).save flush: true
+                new Holiday(title: "Navidad", date: formatDate("2016-12-25")).save flush: true
+                new Holiday(title: "Año Nuevo", date: formatDate("2016-01-01")).save flush: true
 
                 new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: asignacion, person: santi).save flush: true
                 new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: asignacion, person: fede).save flush: true
@@ -54,7 +54,7 @@ class BootStrap {
 
     def formatDate(String dateInString) {
         try {
-            new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault()).parse(dateInString)
+            new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateInString)
         } catch (ParseException e) {
             e.printStackTrace();
         }
