@@ -1,0 +1,7 @@
+import sam.timesheet.Person
+
+model {
+	Person person
+}
+
+json tmpl.person(person)

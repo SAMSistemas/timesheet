@@ -1,0 +1,15 @@
+import sam.timesheet.Person
+
+model {
+	Person person
+}
+
+json {
+	id person.id
+	name person.name
+	lastname person.lastname
+	username person.username
+	work_hours person.work_hours
+	work_position person.work_position.description
+	enabled person.enabled
+}
