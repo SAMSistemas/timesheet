@@ -6,6 +6,6 @@ function workPositionService($http) {
     var vm = this;
 
     vm.getWorkPositions = function(callbackSuccess, callbackFailure){
-        $http.get('/workPosition/all').then(callbackSuccess, callbackFailure);
+        $http.get('/workPositions').then(callbackSuccess, callbackFailure);
     };
 }
