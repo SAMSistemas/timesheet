@@ -1,20 +1,32 @@
 <!doctype html>
 <html>
     <head>
+
+        <title>Error 500</title>
         <meta name="layout" content="main">
 
         <link rel="shortcut icon" href="assets/favicon.ico">
 
         <asset:stylesheet src="public/font.css"/>
+        <asset:stylesheet src="shared/errors.css"/>
 
     </head>
     <body>
 
-    <div >
+    <div>
 
-        <h1 class="card-title center teal-text">Error en el servidor</h1>
+        <h3 class="card-title center teal-text">500 - Error en el servidor</h3>
+
+        <br>
+        <br>
+        <br>
 
 
+        <img class="error-image-500" src="assets/error-500.png" alt="Error 500">
+
+        <br>
+        <br>
+        <br>
 
     </div>
 

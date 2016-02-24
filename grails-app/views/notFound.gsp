@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 <head>
+
+    <title>Error 404</title>
     <meta name="layout" content="main">
 
     <link rel="shortcut icon" href="assets/favicon.ico">
@@ -13,9 +15,17 @@
 <body>
     <div>
 
-        <h1 class="card-title center teal-text">Error - Pagina no encontrada</h1>
+        <h3 class="card-title center teal-text">404 - Página no encontrada</h3>
 
-        <img class="error-image" src="assets/error-404.jpg" alt="Error 404">
+        <br>
+        <br>
+        <br>
+
+        <img class="error-image-404" src="assets/error-404.jpg" alt="Error 404">
+
+        <br>
+        <br>
+        <br>
 
     </div>
 

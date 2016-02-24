@@ -108,10 +108,16 @@ h2 {
     padding-bottom: 5px;
 }
 
-.error-image {
+.error-image-404 {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width:440px;
     height:230px;
+}
+
+.error-image-500 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
