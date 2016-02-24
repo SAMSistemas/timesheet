@@ -4,12 +4,15 @@
         <meta name="layout" content="main"/>
         <title>Bienvenido al Timesheet</title>
 
-        <asset:stylesheet src="public/index.css"/>
+        <asset:stylesheet src="public/font.css"/>
+
     </head>
 
-    <body ng-app="myApp" ng-controller="loginController">
+    <body ng-controller="loginController as loginCtrl">
 
-        <h1 class="center title">Bienvenido al Timesheet {{ name }}</h1>
+        <h1 class="center title teal-text">Bienvenido al Timesheet {{ loginCtrl.name }}</h1>
+
+        <div></div>
 
 
     <div></div>
