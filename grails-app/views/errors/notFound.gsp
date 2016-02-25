@@ -21,7 +21,7 @@
         <br>
         <br>
 
-        <img class="error-image-404" src="assets/error-404.jpg" alt="Error 404">
+        <img class="error-image-404 error-image-common" src="assets/error-404.jpg" alt="Error 404">
 
         <br>
         <br>

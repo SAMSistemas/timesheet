@@ -22,7 +22,7 @@
         <br>
 
 
-        <img class="error-image-500" src="assets/error-500.png" alt="Error 500">
+        <img class="error-image-common" src="assets/error-500.png" alt="Error 500">
 
         <br>
         <br>

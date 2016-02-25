@@ -109,14 +109,11 @@ h2 {
 }
 
 .error-image-404 {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     width:440px;
     height:230px;
 }
 
-.error-image-500 {
+.error-image-common {
     display: block;
     margin-left: auto;
     margin-right: auto;
