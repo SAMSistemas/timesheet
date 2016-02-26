@@ -69,7 +69,7 @@
                 <i class="material-icons left">assignment</i>Tipo de Tarea</a>
         </li>
         <li>
-            <a href="/jobLog/assignation" class="waves-effect waves-teal btn-flat">
+            <a href="/projects/assignation" class="waves-effect waves-teal btn-flat">
                 <i class="material-icons left">today</i>Asignar</a>
         </li>
         <li>

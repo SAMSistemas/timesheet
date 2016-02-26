@@ -10,7 +10,7 @@ function jobLogService($http) {
     };
 
     vm.assignJobLog = function(jobLog, callbackSuccess, callbackFailure){
-        $http.post('/jobLog/assign', jobLog).then(callbackSuccess, callbackFailure);
+        $http.post('/projects/' + jobLog.project.id + '/assign', jobLog).then(callbackSuccess, callbackFailure);
     };
 
 }

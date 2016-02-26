@@ -35,16 +35,15 @@ app.controller('assignationController', function (clientService, projectService,
     }
 
     function assignJobLogSuccess(response) {
-
-        if (response.status === 200) {
-            vm.confirmation = "Se asigno la persona al proyecto";
-            vm.personSelected = null;
-            personService.getPersonAvailableForProject(vm.projectSelected.project_name, changeProjectSuccess, callbackError);
-        }
-        else
-            vm.confirmation = "Fallo la asignacion";
-
+        vm.confirmation = "Se asigno la persona al proyecto";
+        vm.personSelected = null;
+        personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, assignJobLogError);
         vm.writeToLog(response, 'success');
+    }
+
+    function assignJobLogError(response) {
+        vm.confirmation = "Fallo la asignacion";
+        vm.writeToLog(response, 'error');
     }
 
     function callbackError(response) {
@@ -62,16 +61,18 @@ app.controller('assignationController', function (clientService, projectService,
     };
 
     vm.changeProject = function () {
-        personService.getPersonAvailableForProject(vm.projectSelected.project_name, changeProjectSuccess, callbackError);
+        personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, callbackError);
     };
 
     vm.submit = function () {
         var jobLog = {
             person: vm.personSelected.name,
-            project: vm.projectSelected.project_name
+            project: {
+                id: vm.projectSelected.id
+            }
         };
 
-        jobLogService.assignJobLog(jobLog, assignJobLogSuccess, callbackError);
+        jobLogService.assignJobLog(jobLog, assignJobLogSuccess, assignJobLogError);
 
     };
 

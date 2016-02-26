@@ -94,15 +94,9 @@ class ProjectController extends RestfulController {
 
     @Transactional
     def assign() {
-        def person = null
-
-        if (request.JSON.person_id) {
-            person = Person.get(request.JSON.person_id)
-        }
-
         def jobLog = new JobLog()
         jobLog.project = Project.findById(params.id)
-        jobLog.person = person
+        jobLog.person = Person.findByName(request.JSON.person)
         jobLog.task_type = TaskType.findByName("Asignacion")
         jobLog.date = new Date()
         jobLog.hours = "0"

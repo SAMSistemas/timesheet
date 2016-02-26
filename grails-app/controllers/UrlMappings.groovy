@@ -12,6 +12,7 @@ class UrlMappings {
 
         "/project"(view: "/project/index")
         "/projects"(resources: "project", excludes: ["delete"])
+        "/projects/assignation"(view: "/project/assignation")
         "/projects/$id/assign"(controller: "project", action: "assign")
 
         "/person"(view: "/person/index")

@@ -6,8 +6,6 @@ class JobLog {
     String hours
     String solicitude
     String observation
-    Integer date_month
-    Integer date_year
 
     static belongsTo = [project: Project, person: Person, task_type: TaskType]
 
@@ -17,11 +15,5 @@ class JobLog {
         observation blank: true, nullable: false, maxSize: 100
         solicitude blank: false, nullable: false, maxSize: 6
     }
-
-    static mapping = {
-        date_month formula: 'MONTH(DATE)'
-        date_year formula: 'YEAR(DATE)'
-    }
-
 
 }

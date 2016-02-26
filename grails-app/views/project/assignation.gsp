@@ -31,7 +31,7 @@
             <h6 class="col s6 label">Proyectos habilitados</h6>
 
             <select name="projectSelect" class="col s6 browser-default" ng-change="assignCtrl.changeProject()"
-                    ng-model="assignCtrl.projectSelected" ng-options="project.project_name for project in assignCtrl.projects"
+                    ng-model="assignCtrl.projectSelected" ng-options="project.name for project in assignCtrl.projects"
                     ng-disabled="assignCtrl.form.clientSelect.$error.required" required>
                 <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
             </select>
