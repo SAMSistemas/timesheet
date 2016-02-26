@@ -17,6 +17,8 @@ class UrlMappings {
         "/person"(view: "/person/index")
         "/people"(resources: "person", excludes: ["delete"])
 
+        "/jobLogs"(resources: "jobLog", excludes: ["delete"])
+
         "/holiday"(view: "/holiday/index")
         "/holidays"(resources: "holiday")
 
