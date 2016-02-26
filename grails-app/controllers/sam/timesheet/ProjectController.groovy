@@ -1,232 +1,135 @@
 package sam.timesheet
 
-import grails.converters.JSON
+import grails.rest.RestfulController
 import grails.transaction.Transactional
+import grails.web.http.HttpHeaders
+
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
+import static org.springframework.http.HttpStatus.CREATED
+
 @Transactional(readOnly = true)
-class ProjectController {
+class ProjectController extends RestfulController {
 
-    static allowedMethods = [all: "GET", allEnabledByClient: "GET", allByUsername: "GET", show: "GET", existsName: "GET", existsSName: "GET", create: "POST", update: "PUT"]
+    static allowedMethods = [save: "POST", update: "PUT", patch: "PATCH", delete: "DELETE", assign: "POST"]
 
-    def index() {}
+    static responseFormats = ['json']
 
-    def all() {
-        render(contentType: "application/json") {
-            array {
-                for (p in Project.list()) {
-                    project (
-                            id: p.id,
-                            client: [
-                                    name: p.client.name,
-                                    enabled: p.client.enabled
-                            ],
-                            project_name: p.name,
-                            short_name: p.short_name,
-                            start_date: p.start_date.format("dd-MM-yyyy"),
-                            enabled: p.enabled
-                    )
-                }
-            }
-        }
+    ProjectController() {
+        super(Project)
     }
 
-    def allEnabledByClient() {
+    @Override
+    def index() {
 
-        def client = Client.findByName(params.id)
-
-        render(contentType: "application/json") {
-            array {
-                for (p in Project.findAllWhere(client: client, enabled: true)) {
-                    project (
-                            id: p.id,
-                            client_name: p.client.name,
-                            project_name: p.name,
-                            short_name: p.short_name,
-                            start_date: p.start_date.format("dd-MM-yyyy"),
-                            enabled: p.enabled
-                    )
-                }
-            }
-        }
-    }
-
-    def allByUsername() {
-
-        def person = Person.findByUsername(params.id)
-
-        if(!person.enabled) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                code = response.status
-                error = "La persona "+person.username+" no esta habilitada"
-            }
-        }
-
-        render(contentType: "application/json") {
-            array {
-                for (j in JobLog.findAllWhere(person: person, task_type: TaskType.findByName("Asignacion"))) {
-                    def p = j.project
-
-                    if(p.enabled) {
-                        project(
-                                id: p.id,
-                                name: p.name,
-                                short_name: p.short_name,
-                                start_date: p.start_date.format("dd-MM-yyyy"),
-                                enabled: p.enabled,
-                                client: [
-                                        id        : p.client.id,
-                                        name      : p.client.name,
-                                        short_name: p.client.short_name,
-                                        enabled   : p.client.enabled
-                                ]
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    def show() {
-
-        def project = Project.findById(params.id)
-
-        if (project == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "El cliente no existe"
-            }
-
+        if (params.username) {
+            if (params.enabled)
+                respond Project.findAll("from Project p where (select COUNT(*) from JobLog j where p.id = j.id AND j.task_type.name = ? AND j.person.username = ?) = 1 AND p.enabled = ?", ["Asignacion", params.username, params.enabled])
+            else
+                respond Project.findAll("from Project p where (select COUNT(*) from JobLog j where p.id = j.id AND j.task_type.name = ? AND j.person.username = ?) = 1", ["Asignacion", params.username])
             return
         }
 
-        render project as JSON
+        def filters = [:]
 
+        if (params.name)
+            filters.put("name", params.name)
+
+        if (params.short_name)
+            filters.put("short_name", params.short_name)
+
+        if (params.enabled)
+            filters.put("enabled", Boolean.parseBoolean(params.enabled))
+
+        if (params.clientId) {
+            def client = Client.findById(params.clientId)
+            filters.put("client", client)
+        }
+
+        if (filters.isEmpty())
+            respond Project.list()
+        else
+            respond Project.findAllWhere(filters)
     }
 
-    def existsName() {
+    @Override
+    protected getObjectToBind() {
+        def paramsJSON = request.JSON
+        def params = [:]
 
-        def project = Project.findByName(params.id)
+        if (paramsJSON.client_name)
+            params.put("client", Client.findByName(paramsJSON.client_name))
 
-        if (project == null) {
-            render(status: 200, contentType: "application/json") {
-                exists = "false"
-            }
+        if (paramsJSON.name)
+            params.put("name", paramsJSON.name)
 
-            return
-        }
+        if (paramsJSON.short_name)
+            params.put("short_name", paramsJSON.short_name)
 
-        render(status: 200, contentType: "application/json") {
-            exists = "true"
-        }
+        if (paramsJSON.start_date)
+            params.put("start_date", formatDate(paramsJSON.start_date))
+
+        if (paramsJSON.enabled)
+            params.put("enabled", paramsJSON.enabled)
+
+        params
     }
 
-    def existsSName() {
-
-        def project = Project.findByShort_name(params.id)
-
-        if (project == null) {
-            render(status: 200, contentType: "application/json") {
-                exists = "false"
-            }
-
-            return
-        }
-
-        render(status: 200, contentType: "application/json") {
-            exists = "true"
-        }
+    @Override
+    protected Object queryForResource(Serializable query) {
+        if (query.toString().isNumber())
+            Project.findById(query)
+        else
+            Project.findByName(query)
     }
 
-    def formatDate(dateInString) {
-
-        def formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-
+    def formatDate(String dateInString) {
         try {
-
-            def date = formatter.parse(dateInString)
-            return  date
-
+            new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(dateInString)
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
-
     @Transactional
-    def create() {
+    def assign() {
+        def person = null
 
-        def paramsJSON = request.JSON
+        if (request.JSON.person_id) {
+            person = Person.get(request.JSON.person_id)
+        }
 
-        def newProjectParams = [
-                client: Client.findByName(paramsJSON.get("client_name")),
-                name: paramsJSON.get("project_name"),
-                short_name: paramsJSON.get("short_name"),
-                start_date: formatDate(paramsJSON.get("start_date")),
-                enabled: paramsJSON.get("enabled")
-        ]
+        def jobLog = new JobLog()
+        jobLog.project = Project.findById(params.id)
+        jobLog.person = person
+        jobLog.task_type = TaskType.findByName("Asignacion")
+        jobLog.date = new Date()
+        jobLog.hours = "0"
+        jobLog.observation = ""
+        jobLog.solicitude = 0
 
-        def newProject = new Project(newProjectParams)
+        jobLog.validate()
 
-        if (!newProject.validate()) {
-
-            response.status = 422
-
-            render newProject.errors.fieldErrors as JSON
-
+        if (jobLog.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond jobLog.errors, view:'create' // STATUS CODE 422
             return
         }
 
-        newProject.save flush: true
+        saveResource jobLog
 
-        render newProject as JSON
-
-    }
-
-    @Transactional
-    def update() {
-
-        def paramsJSON = request.JSON
-
-        def projectToUpdate = Project.findById(paramsJSON.get("id"))
-
-        if (projectToUpdate == null) {
-
-            response.status = 404
-
-            render(contentType: "application/json") {
-                error = "El proyecto no existe"
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: "${resourceName}.label".toString(), default: resourceClassName), jobLog.id])
+                redirect jobLog
             }
-
-            return
+            '*' {
+                response.addHeader(HttpHeaders.LOCATION,
+                        grailsLinkGenerator.link( resource: this.controllerName, action: 'show',id: jobLog.id, absolute: true,
+                                namespace: hasProperty('namespace') ? this.namespace : null ))
+                respond jobLog, [status: CREATED]
+            }
         }
-
-        projectToUpdate.client = Client.findByName(paramsJSON.get("client_name"))
-        projectToUpdate.name = paramsJSON.get("project_name")
-        projectToUpdate.short_name = paramsJSON.get("short_name")
-        projectToUpdate.start_date = formatDate(paramsJSON.get("start_date"))
-        projectToUpdate.enabled = paramsJSON.get("enabled")
-
-        if (!projectToUpdate.validate()) {
-
-            response.status = 422
-
-            render projectToUpdate.errors.fieldErrors as JSON
-
-            return
-        }
-
-        projectToUpdate.save flush: true
-
-        render projectToUpdate as JSON
-
     }
-
 }
