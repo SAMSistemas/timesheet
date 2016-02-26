@@ -10,7 +10,7 @@ function projectService($http) {
     };
 
     vm.getEnabledProjectsByClient = function(clientName, callbackSuccess, callbackFailure){
-        $http.get('/projects?enabled=true&client=' + clientName).then(callbackSuccess, callbackFailure);
+        $http.get('/projects?enabled=true&client_name=' + clientName).then(callbackSuccess, callbackFailure);
     };
 
     vm.createProject = function(projectToCreate,callbackSuccess, callbackFailure){

@@ -42,8 +42,8 @@ class ProjectController extends RestfulController {
         if (params.enabled)
             filters.put("enabled", Boolean.parseBoolean(params.enabled))
 
-        if (params.clientId) {
-            def client = Client.findById(params.clientId)
+        if (params.client_name) {
+            def client = Client.findByName(params.client_name)
             filters.put("client", client)
         }
 

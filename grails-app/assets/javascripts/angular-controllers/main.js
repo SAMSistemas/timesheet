@@ -9,7 +9,7 @@ app.controller('mainController', function (clientService, projectService, jobLog
         vm.clients = [];
         vm.projects = [];
 
-        vm.reportURI = '/jobLog/projectForHour';
+        vm.reportURI = '/jobLogs/projectForHour';
 
         vm.clientSelected = null;
         vm.projectSelected = null;
@@ -62,8 +62,8 @@ app.controller('mainController', function (clientService, projectService, jobLog
             var flag = vm.verifyDates();
             //if(flag){
             var filters = {
-                clientName: vm.clientSelected,
-                projectName: vm.projectSelected,
+                clientName: vm.clientSelected.name,
+                projectName: vm.projectSelected.name,
                 dateFrom: vm.dateToString(vm.fromDateSelected),
                 dateTo: vm.dateToString(vm.toDateSelected)
             };
@@ -89,7 +89,7 @@ app.controller('mainController', function (clientService, projectService, jobLog
             var monthIndex = date.getMonth();
             var month = monthIndex + 1;
             var year = date.getFullYear();
-            return day + '-' + month + '-' + year;
+            return year + '-' + month + '-' + day;
 
         };
 

@@ -42,6 +42,8 @@ class BootStrap {
                 new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: asignacion, person: santi).save flush: true
                 new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: asignacion, person: fede).save flush: true
                 new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: asignacion, person: joni).save flush: true
+
+                new JobLog(date: formatDate("2016-02-10"), hours: 6, solicitude: "10000", observation: "Bla", project: timesheet, task_type: analisis, person: joni).save flush: true
             }
         }
 

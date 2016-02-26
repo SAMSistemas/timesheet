@@ -33,7 +33,8 @@ class ReportService {
             // step 1
             Document document = new Document(PageSize.A4,36, 36, 54, 64)
             // step 2
-            FileOutputStream file = new FileOutputStream("E:\\Desarrollo\\SAM_Apps\\Timesheet\\Reports\\report.pdf")
+//            FileOutputStream file = new FileOutputStream("E:\\Desarrollo\\SAM_Apps\\Timesheet\\Reports\\report.pdf")
+            FileOutputStream file = new FileOutputStream("report.pdf")
             PdfWriter writer = PdfWriter.getInstance(document,file )
 
             Footer pageFooter = new Footer()
@@ -83,7 +84,7 @@ class ReportService {
         table.addCell(reportTitleCell)
 
         //Filter Report Client Label
-        Phrase clientLabel = new Phrase("Cliente: "+filters.client.name,fontLabel);
+        Phrase clientLabel = new Phrase("Cliente: " + filters.client.name, fontLabel);
         PdfPCell clientLabelCell = new PdfPCell(clientLabel)
         clientLabelCell.setHorizontalAlignment(Element.ALIGN_LEFT);
         clientLabelCell.setBorderColor(BaseColor.LIGHT_GRAY)

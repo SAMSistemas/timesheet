@@ -104,7 +104,7 @@
         <div class="row">
             <div class="col s12">
                 <select id="projectSelect" class="col s12 browser-default" ng-model="mainCtrl.projectSelected"
-                        ng-options="project.project_name for project in mainCtrl.projects">
+                        ng-options="project.name for project in mainCtrl.projects">
                     <option value="" disabled selected>- Elegí una de las siguientes opciones -</option>
                 </select>
                 <label class="modal-label modal-label-select">Proyecto</label>
