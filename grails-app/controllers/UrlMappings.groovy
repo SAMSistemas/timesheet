@@ -10,6 +10,10 @@ class UrlMappings {
         "/client"(view: "/client/index")
         "/clients"(resources: "client", excludes: ["delete"])
 
+        "/project"(view: "/project/index")
+        "/projects"(resources: "project", excludes: ["delete"])
+        "/projects/$id/assign"(controller: "project", action: "assign")
+
         "/person"(view: "/person/index")
         "/people"(resources: "person", excludes: ["delete"])
 
