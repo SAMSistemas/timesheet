@@ -1,0 +1,26 @@
+import sam.timesheet.JobLog
+import java.text.SimpleDateFormat
+
+model {
+	JobLog jobLog
+}
+
+json {
+	id jobLog.id
+	date new SimpleDateFormat("dd-MM-yyyy").format(jobLog.date)
+	hours jobLog.hours
+	solicitude jobLog.solicitude
+	observation jobLog.observation
+	project {
+	    id jobLog.project.id
+	    name jobLog.project.name
+	}
+	person {
+	    id jobLog.person.id
+	    name jobLog.person.name
+	}
+	task_type {
+	    id jobLog.task_type.id
+	    description jobLog.task_type.name
+	}
+}

@@ -1,0 +1,7 @@
+import sam.timesheet.JobLog
+
+model {
+	JobLog jobLog
+}
+
+json tmpl.jobLog(jobLog)

@@ -1,0 +1,8 @@
+import sam.timesheet.JobLog
+
+model {
+	Iterable<JobLog> jobLogList
+}
+
+json tmpl.jobLog(jobLogList ?: [])
+
