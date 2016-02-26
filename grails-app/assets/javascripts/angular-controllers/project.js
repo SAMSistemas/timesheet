@@ -36,13 +36,12 @@ app.controller('projectController', function (projectService, clientService) {
         }
 
         function createSuccess(response) {
-            vm.projectToCreate.id = response.data.id;
-            vm.addToTable(vm.projects, vm.projectToCreate);
+            vm.addToTable(vm.projects, response.data);
             vm.writeToLog(response, 'created');
         }
 
         function updateSuccess(response) {
-            vm.updateInTable(vm.projects, vm.projectToEdit);
+            vm.updateInTable(vm.projects, response.data);
             vm.writeToLog(response, 'updated');
         }
 
@@ -75,9 +74,8 @@ app.controller('projectController', function (projectService, clientService) {
         vm.create = function () {
 
             vm.projectToCreate.client_name = vm.clientSelected.name;
-            vm.projectToCreate.client.name = vm.clientSelected.name;
 
-            vm.generateCreateStringDate(vm.dateSelected);
+            vm.projectToCreate.start_date = vm.generateCreateStringDate(vm.dateSelected);
 
             if (vm.createForm.$valid) {
                 projectService.createProject(vm.projectToCreate, createSuccess, callbackError);
@@ -105,9 +103,8 @@ app.controller('projectController', function (projectService, clientService) {
 
         vm.update = function () {
             vm.projectToEdit.client_name = vm.clientSelected.name;
-            vm.projectToEdit.client.name = vm.clientSelected.name;
 
-            vm.generateEditStringDate(vm.dateSelected);
+            vm.projectToEdit.start_date = vm.generateEditStringDate(vm.dateSelected);
 
             if (vm.editForm.$valid) {
                 projectService.updateProject(vm.projectToEdit, updateSuccess, callbackError);
@@ -167,7 +164,7 @@ app.controller('projectController', function (projectService, clientService) {
             var monthIndex = date.getMonth();
             var month = monthIndex + 1;
             var year = date.getFullYear();
-            vm.projectToCreate.start_date = day + '-' + month + '-' + year;
+            return day + '-' + month + '-' + year;
 
         };
 
@@ -176,8 +173,7 @@ app.controller('projectController', function (projectService, clientService) {
             var monthIndex = date.getMonth();
             var month = monthIndex + 1;
             var year = date.getFullYear();
-
-            vm.projectToEdit.start_date = day + '-' + month + '-' + year;
+            return day + '-' + month + '-' + year;
         };
 
         vm.addToTable = function (items, item) {

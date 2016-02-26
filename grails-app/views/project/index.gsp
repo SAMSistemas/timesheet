@@ -58,7 +58,7 @@
             class="tr-body-width-and-height">
             <td class="width-5"><i class="material-icons center material-icons-line-heigth">work</i></td>
             <td class="width-15 truncate">{{ project.client.name }}</td>
-            <td class="width-15 truncate">{{ project.project_name }}</td>
+            <td class="width-15 truncate">{{ project.name }}</td>
             <td class="width-15 truncate">{{ project.short_name }}</td>
             <td class="width-15 truncate">{{ project.start_date | date: 'dd-MM-yyyy'}}</td>
             <td class="width-20">
@@ -107,8 +107,8 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="name" type="text" maxlength="50" ng-model="projectCtrl.projectToCreate.project_name"
-                               required available url-to-check="/project/existsName/">
+                        <input name="name" type="text" maxlength="50" ng-model="projectCtrl.projectToCreate.name"
+                               required available url-to-check="/projects?name=">
                         <label ng-class="{'has-error': projectCtrl.createForm.name.$invalid}">Nombre de proyecto
                             <span ng-show="projectCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="projectCtrl.createForm.name.$error.available" class="has-error">ya existe</span>
@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="sname" type="text" maxlength="10" ng-model="projectCtrl.projectToCreate.short_name"
-                               required available url-to-check="/project/existsSName/">
+                               required available url-to-check="/projects?short_name=">
                         <label ng-class="{'has-error': projectCtrl.createForm.sname.$invalid}">Sigla
                             <span ng-show="projectCtrl.createForm.sname.$error.required" class="has-error">es obligatoria</span>
                             <span ng-show="projectCtrl.createForm.sname.$error.available" class="has-error">ya existe</span>
@@ -180,8 +180,8 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="project_name" type="text" maxlength="50"
-                               ng-model="projectCtrl.projectToEdit.project_name" required available
-                               original-value="projectCtrl.project.project_name" url-to-check="/project/existsName/">
+                               ng-model="projectCtrl.projectToEdit.name" required available
+                               original-value="projectCtrl.project.name" url-to-check="/projects?name=">
                         <label ng-class="{'has-error': projectCtrl.editForm.project_name.$invalid}">Nombre de proyecto
                             <span ng-show="projectCtrl.editForm.project_name.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="projectCtrl.editForm.project_name.$error.available" class="has-error">ya existe</span>
@@ -194,7 +194,7 @@
                     <div class="col s12">
                         <input name="sname" type="text" maxlength="10"
                                ng-model="projectCtrl.projectToEdit.short_name" required available
-                               original-value="projectCtrl.project.short_name" url-to-check="/project/existsSName/">
+                               original-value="projectCtrl.project.short_name" url-to-check="/projects?short_name=">
                         <label ng-class="{'has-error': projectCtrl.editForm.sname.$invalid}">Sigla
                             <span ng-show="projectCtrl.editForm.sname.$error.required" class="has-error">es obligatorio</span>
                             <span ng-show="projectCtrl.editForm.sname.$error.available" class="has-error">ya existe</span>
