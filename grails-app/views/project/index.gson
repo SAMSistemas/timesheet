@@ -1,0 +1,8 @@
+import sam.timesheet.Project
+
+model {
+	Iterable<Project> projectList
+}
+
+json tmpl.project(projectList ?: [])
+

@@ -1,0 +1,19 @@
+import sam.timesheet.Project
+import java.text.SimpleDateFormat
+
+model {
+	Project project
+}
+
+json {
+    id project.id
+    name project.name
+    short_name project.short_name
+    start_date new SimpleDateFormat("yyyy-MM-dd").format(project.start_date)
+    enabled project.enabled
+    client {
+        name project.client.name
+        short_name project.client.short_name
+        enabled project.client.enabled
+    }
+}

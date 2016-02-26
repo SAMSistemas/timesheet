@@ -1,0 +1,7 @@
+import sam.timesheet.Project
+
+model {
+	Project project
+}
+
+json tmpl.project(project)
