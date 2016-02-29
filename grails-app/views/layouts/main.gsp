@@ -21,9 +21,9 @@
 
 <body ng-app="myApp" ng-controller="MainController as mainCtrl">
 
-<header ng-controller="LoginController as loginCtrl">
+<header>
 
-    <nav class="fixed blue darken-3">
+    <nav class="fixed blue darken-3" ng-controller="LoginController as loginCtrl">
         <div class="container">
             <div class="nav-wrapper">
                 <a class="brand-logo">Timesheet</a>
@@ -47,9 +47,9 @@
                 <img class="user-picture responsive-img left" src="/assets/account_circle.png">
             </div>
 
-            <div class="row user-data-padding">
-                <span class="user-info white-text truncate">{{ loginCtrl.name }}</span>
-                <span class="user-info white-text truncate">{{ loginCtrl.user }}@samsistemas.com.ar</span>
+            <div class="row user-data-padding" ng-controller="SessionInfoController as sessionInfoCtrl">
+                <span class="user-info white-text truncate">{{ sessionInfoCtrl.name }}</span>
+                <span class="user-info white-text truncate">{{ sessionInfoCtrl.user }}@samsistemas.com.ar</span>
             </div>
         </li>
         <li>
@@ -161,6 +161,7 @@
 
 <asset:javascript src="angular-controllers/main.js"/>
 <asset:javascript src="angular-controllers/login.js"/>
+<asset:javascript src="angular-controllers/session-info.js"/>
 
 </body>
 </html>

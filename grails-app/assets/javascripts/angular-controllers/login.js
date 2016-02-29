@@ -5,21 +5,17 @@
         .module('myApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$window', 'loginService', 'personService', 'utilsService'];
+    LoginController.$inject = ['$window', 'loginService', 'utilsService'];
 
-    function LoginController($window, loginService, personService, utilsService) {
+    function LoginController($window, loginService, utilsService) {
 
         var vm = this;
 
         vm.user = "";
         vm.pass = "";
-        vm.name = "";
 
         vm.login = login;
         vm.logout = logout;
-        vm.searchName = searchName;
-
-        searchName();
 
 
         /** Controllers Functions **/
@@ -32,15 +28,6 @@
             loginService.logout(logOutSuccess, callbackError);
         };
 
-        function searchName() {
-            vm.user = sessionStorage.getItem("username");
-
-            if (sessionStorage.getItem("name") == "") {
-                personService.show(vm.user, showPersonSuccess, callbackError);
-            } else {
-                vm.name = sessionStorage.getItem("name");
-            }
-        };
 
         /** Callback Handlers **/
 
@@ -60,12 +47,6 @@
             vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
             $('.login-card').css("height", "620px");
             callbackError(response);
-        }
-
-        function showPersonSuccess(response) {
-            var user = response.data[0];
-            vm.name = user.name + ' ' + user.lastname;
-            sessionStorage.setItem("name", vm.name);
         }
 
         function callbackError(response) {
