@@ -1,19 +1,23 @@
-angular
-    .module('services')
-    .service('loginService', loginService);
+(function() {
+    'use strict';
 
-loginService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('loginService', loginService);
 
-function loginService($http) {
+    loginService.$inject = ['$http'];
 
-    var vm = this;
+    function loginService($http) {
 
-    vm.postUserData = function (username, password, callbackSuccess, callbackFailure) {
-        $http.post('/login?username=' + username + "&password=" + password).then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.closeSession = function (callbackSuccess, callbackFailure) {
-        $http.post("/login").then(callbackSuccess, callbackFailure);
-    };
+        vm.postUserData = function (username, password, callbackSuccess, callbackFailure) {
+            $http.post('/login?username=' + username + "&password=" + password).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.closeSession = function (callbackSuccess, callbackFailure) {
+            $http.post("/login").then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

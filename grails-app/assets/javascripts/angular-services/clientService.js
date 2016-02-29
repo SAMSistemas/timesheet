@@ -1,27 +1,31 @@
-angular
-    .module('services')
-    .service('clientService', clientService);
+(function() {
+    'use strict';
 
-clientService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('clientService', clientService);
 
-function clientService($http) {
+    clientService.$inject = ['$http'];
 
-    var vm = this;
+    function clientService($http) {
 
-    vm.getClients = function (callbackSuccess, callbackFailure) {
-        $http.get('/clients').then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.createClient = function (clientToCreate, callbackSuccess, callbackFailure) {
-        $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
-    };
+        vm.getClients = function (callbackSuccess, callbackFailure) {
+            $http.get('/clients').then(callbackSuccess, callbackFailure);
+        };
 
-    vm.updateClient = function (clientToEdit, callbackSuccess, callbackFailure) {
-        $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
-    };
+        vm.createClient = function (clientToCreate, callbackSuccess, callbackFailure) {
+            $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
+        };
 
-    vm.getEnabledClients = function (callbackSuccess, callbackFailure) {
-        $http.get('/clients?enabled=true').then(callbackSuccess, callbackFailure);
-    };
+        vm.updateClient = function (clientToEdit, callbackSuccess, callbackFailure) {
+            $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.getEnabledClients = function (callbackSuccess, callbackFailure) {
+            $http.get('/clients?enabled=true').then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

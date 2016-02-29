@@ -1,19 +1,23 @@
-angular
-    .module('services')
-    .service('jobLogService', jobLogService);
+(function() {
+    'use strict';
 
-jobLogService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('jobLogService', jobLogService);
 
-function jobLogService($http) {
+    jobLogService.$inject = ['$http'];
 
-    var vm = this;
+    function jobLogService($http) {
 
-    vm.filterDataToReport = function (uri, filters, callbackSuccess, callbackFailure) {
-        $http.post(uri, filters).then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.assignJobLog = function (jobLog, callbackSuccess, callbackFailure) {
-        $http.post('/projects/' + jobLog.project.id + '/assign', jobLog).then(callbackSuccess, callbackFailure);
-    };
+        vm.filterDataToReport = function (uri, filters, callbackSuccess, callbackFailure) {
+            $http.post(uri, filters).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.assignJobLog = function (jobLog, callbackSuccess, callbackFailure) {
+            $http.post('/projects/' + jobLog.project.id + '/assign', jobLog).then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

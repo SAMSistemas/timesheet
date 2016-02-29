@@ -1,27 +1,31 @@
-angular
-    .module('services')
-    .service('holidayService', holidayService);
+(function() {
+    'use strict';
 
-holidayService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('holidayService', holidayService);
 
-function holidayService($http) {
+    holidayService.$inject = ['$http'];
 
-    var vm = this;
+    function holidayService($http) {
 
-    vm.getHolidays = function (callbackSuccess, callbackFailure) {
-        $http.get('/holidays').then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.createHoliday = function (eventToCreate, callbackSuccess, callbackFailure) {
-        $http.post('/holidays', eventToCreate).then(callbackSuccess, callbackFailure);
-    };
+        vm.getHolidays = function (callbackSuccess, callbackFailure) {
+            $http.get('/holidays').then(callbackSuccess, callbackFailure);
+        };
 
-    vm.updateHoliday = function (eventToEdit, callbackSuccess, callbackFailure) {
-        $http.put('/holidays/' + eventToEdit.id, eventToEdit).then(callbackSuccess, callbackFailure);
-    };
+        vm.createHoliday = function (eventToCreate, callbackSuccess, callbackFailure) {
+            $http.post('/holidays', eventToCreate).then(callbackSuccess, callbackFailure);
+        };
 
-    vm.deleteHoliday = function (callbackSuccess, callbackFailure) {
-        $http.delete('/holidays/' + vm.eventToUpdate.id).then(callbackSuccess, callbackFailure);
-    };
+        vm.updateHoliday = function (eventToEdit, callbackSuccess, callbackFailure) {
+            $http.put('/holidays/' + eventToEdit.id, eventToEdit).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.deleteHoliday = function (callbackSuccess, callbackFailure) {
+            $http.delete('/holidays/' + vm.eventToUpdate.id).then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

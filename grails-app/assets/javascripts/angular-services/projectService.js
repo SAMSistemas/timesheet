@@ -1,27 +1,31 @@
-angular
-    .module('services')
-    .service('projectService', projectService);
+(function() {
+    'use strict';
 
-projectService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('projectService', projectService);
 
-function projectService($http) {
+    projectService.$inject = ['$http'];
 
-    var vm = this;
+    function projectService($http) {
 
-    vm.getProjects = function (callbackSuccess, callbackFailure) {
-        $http.get('/projects').then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.getEnabledProjectsByClient = function (clientName, callbackSuccess, callbackFailure) {
-        $http.get('/projects?enabled=true&client_name=' + clientName).then(callbackSuccess, callbackFailure);
-    };
+        vm.getProjects = function (callbackSuccess, callbackFailure) {
+            $http.get('/projects').then(callbackSuccess, callbackFailure);
+        };
 
-    vm.createProject = function (projectToCreate, callbackSuccess, callbackFailure) {
-        $http.post('/projects', projectToCreate).then(callbackSuccess, callbackFailure);
-    };
+        vm.getEnabledProjectsByClient = function (clientName, callbackSuccess, callbackFailure) {
+            $http.get('/projects?enabled=true&client_name=' + clientName).then(callbackSuccess, callbackFailure);
+        };
 
-    vm.updateProject = function (projectToEdit, callbackSuccess, callbackFailure) {
-        $http.put('/projects/' + projectToEdit.id, projectToEdit).then(callbackSuccess, callbackFailure);
-    };
+        vm.createProject = function (projectToCreate, callbackSuccess, callbackFailure) {
+            $http.post('/projects', projectToCreate).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.updateProject = function (projectToEdit, callbackSuccess, callbackFailure) {
+            $http.put('/projects/' + projectToEdit.id, projectToEdit).then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

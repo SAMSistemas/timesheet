@@ -1,25 +1,29 @@
-angular
-    .module('filters')
-    .filter('filterByStatus', filterByStatus);
+(function() {
+    'use strict';
 
-function filterByStatus() {
-    return function (items, status) {
-        var filtered = [];
+    angular
+        .module('filters')
+        .filter('filterByStatus', filterByStatus);
 
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
+    function filterByStatus() {
+        return function (items, status) {
+            var filtered = [];
 
-            if (status === 'all') {
-                filtered.push(item);
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+
+                if (status === 'all') {
+                    filtered.push(item);
+                }
+                if (status === 'enabled' && item.enabled === true) {
+                    filtered.push(item);
+                }
+                if (status === 'disabled' && item.enabled === false) {
+                    filtered.push(item);
+                }
             }
-            if (status === 'enabled' && item.enabled === true) {
-                filtered.push(item);
-            }
-            if (status === 'disabled' && item.enabled === false) {
-                filtered.push(item);
-            }
+
+            return filtered;
         }
-
-        return filtered;
     }
-}
+})();

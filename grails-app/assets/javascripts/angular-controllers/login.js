@@ -1,75 +1,79 @@
-angular
-    .module('myApp')
-    .controller('LoginController', LoginController);
+(function() {
+    'use strict';
 
-LoginController.$inject = ['$window', 'loginService', 'personService', 'utilsService'];
+    angular
+        .module('myApp')
+        .controller('LoginController', LoginController);
 
-function LoginController($window, loginService, personService, utilsService) {
+    LoginController.$inject = ['$window', 'loginService', 'personService', 'utilsService'];
 
-    /** Capturing controller instance **/
-    var vm = this;
+    function LoginController($window, loginService, personService, utilsService) {
 
-    vm.user = "";
-    vm.pass = "";
-    vm.name = "";
+        /** Capturing controller instance **/
+        var vm = this;
 
-
-    /** Callback Handlers **/
-
-    function loginSuccess() {
-        sessionStorage.setItem("username", vm.user);
-        sessionStorage.setItem("name", "");
-        $window.location.href = '/';
-    }
-
-    function logOutSuccess() {
-        $window.location.href = '/login';
-    }
-
-    function logInError(response) {
-        vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
-        $('.login-card').css("height", "620px");
-        callbackError(response);
-    }
-
-    function showPersonSuccess(response) {
-        var user = response.data[0];
-        vm.name = user.name + ' ' + user.lastname;
-        sessionStorage.setItem("name", vm.name);
-        utilsService.writeToLog(response, 'success');
-    }
-
-    function callbackError(response) {
-        utilsService.writeToLog(response, 'error');
-    }
+        vm.user = "";
+        vm.pass = "";
+        vm.name = "";
 
 
-    /** Controllers Functions **/
+        /** Callback Handlers **/
 
-    vm.login = function () {
-        loginService.postUserData(vm.user, vm.pass, loginSuccess, logInError);
-    };
-
-    vm.logout = function () {
-
-        loginService.closeSession(logOutSuccess, callbackError);
-
-        sessionStorage.removeItem("username");
-        sessionStorage.removeItem("name");
-    };
-
-    vm.searchName = function () {
-
-        vm.user = sessionStorage.getItem("username");
-
-        if (sessionStorage.getItem("name") == "") {
-            personService.showPerson(vm.user, showPersonSuccess, callbackError);
+        function loginSuccess() {
+            sessionStorage.setItem("username", vm.user);
+            sessionStorage.setItem("name", "");
+            $window.location.href = '/';
         }
 
-        vm.name = sessionStorage.getItem("name");
+        function logOutSuccess() {
+            $window.location.href = '/login';
+        }
 
-    };
+        function logInError(response) {
+            vm.errorMsg = "El usuario y/o la contraseña son incorrectos";
+            $('.login-card').css("height", "620px");
+            callbackError(response);
+        }
 
-    vm.searchName();
+        function showPersonSuccess(response) {
+            var user = response.data[0];
+            vm.name = user.name + ' ' + user.lastname;
+            sessionStorage.setItem("name", vm.name);
+            utilsService.writeToLog(response, 'success');
+        }
 
-}
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
+        }
+
+
+        /** Controllers Functions **/
+
+        vm.login = function () {
+            loginService.postUserData(vm.user, vm.pass, loginSuccess, logInError);
+        };
+
+        vm.logout = function () {
+
+            loginService.closeSession(logOutSuccess, callbackError);
+
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("name");
+        };
+
+        vm.searchName = function () {
+
+            vm.user = sessionStorage.getItem("username");
+
+            if (sessionStorage.getItem("name") == "") {
+                personService.showPerson(vm.user, showPersonSuccess, callbackError);
+            }
+
+            vm.name = sessionStorage.getItem("name");
+
+        };
+
+        vm.searchName();
+
+    }
+})();

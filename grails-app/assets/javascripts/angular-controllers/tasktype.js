@@ -1,98 +1,102 @@
 //= require shared/table-body-observer
 
-angular
-    .module('myApp')
-    .controller('TaskTypeController', TaskTypeController);
+(function() {
+    'use strict';
 
-TaskTypeController.$inject = ['taskTypeService', 'utilsService'];
+    angular
+        .module('myApp')
+        .controller('TaskTypeController', TaskTypeController);
 
-function TaskTypeController(taskTypeService, utilsService) {
+    TaskTypeController.$inject = ['taskTypeService', 'utilsService'];
 
-    /** Capturing controller instance **/
-    var vm = this;
+    function TaskTypeController(taskTypeService, utilsService) {
 
-    vm.sortType = 'name'; // set the default sort type
-    vm.sortReverse = false;  // set the default sort order
-    vm.search = '';     // set the default search/filter term
-    vm.status = 'all';
+        /** Capturing controller instance **/
+        var vm = this;
 
-    vm.taskTypes = [];
-    vm.taskTypeToCreate = null;
-    vm.taskTypeToEdit = null;
-    vm.taskType = null;
+        vm.sortType = 'name'; // set the default sort type
+        vm.sortReverse = false;  // set the default sort order
+        vm.search = '';     // set the default search/filter term
+        vm.status = 'all';
 
-    vm.createForm = null;
-    vm.editForm = null;
+        vm.taskTypes = [];
+        vm.taskTypeToCreate = null;
+        vm.taskTypeToEdit = null;
+        vm.taskType = null;
 
-
-    /** Callback Handlers **/
-
-    function getSuccess(response) {
-        vm.taskTypes = response.data;
-    }
-
-    function createSuccess(response) {
-        vm.taskTypeToCreate.id = response.data.id;
-        utilsService.addToTable(vm.taskTypes, vm.taskTypeToCreate);
-        utilsService.writeToLog(response, 'created');
-    }
-
-    function updateSuccess(response) {
-        utilsService.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
-        utilsService.writeToLog(response, 'updated');
-    }
-
-    function callbackError(response) {
-        utilsService.writeToLog(response, 'error');
-    }
+        vm.createForm = null;
+        vm.editForm = null;
 
 
-    /** TaskType ABM **/
+        /** Callback Handlers **/
 
-    taskTypeService.getTaskTypes(getSuccess, callbackError);
-
-    vm.new = function () {
-        vm.taskTypeToCreate = {name: "", enabled: true};
-
-        // To clear the errors from previous create forms
-        if (vm.createForm !== null) {
-            vm.createForm.name.$setValidity('available', true);
+        function getSuccess(response) {
+            vm.taskTypes = response.data;
         }
-    };
 
-    vm.create = function () {
-        if (vm.createForm.$valid) {
-            taskTypeService.createTaskType(vm.taskTypeToCreate, createSuccess, callbackError);
+        function createSuccess(response) {
+            vm.taskTypeToCreate.id = response.data.id;
+            utilsService.addToTable(vm.taskTypes, vm.taskTypeToCreate);
+            utilsService.writeToLog(response, 'created');
         }
-    };
 
-    vm.edit = function (taskType) {
-        vm.taskTypeToEdit = angular.copy(taskType);
-        vm.taskType = taskType;
-
-        // To clear the errors from previous edit forms
-        if (vm.editForm !== null) {
-            vm.editForm.name.$setValidity('available', true);
+        function updateSuccess(response) {
+            utilsService.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
+            utilsService.writeToLog(response, 'updated');
         }
-    };
 
-    vm.update = function () {
-        if (vm.editForm.$valid) {
-            taskTypeService.updateTaskType(vm.taskTypeToEdit, updateSuccess, callbackError);
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
         }
-    };
 
 
-    /** Table Ordering & Filtering **/
+        /** TaskType ABM **/
 
-    vm.reverseOrder = function (sortType) {
-        vm.sortType = sortType;
-        vm.sortReverse = !vm.sortReverse
-    };
+        taskTypeService.getTaskTypes(getSuccess, callbackError);
 
-    vm.startsWith = function (actual, expected) {
-        var lowerStr = (actual + "").toLowerCase();
-        return lowerStr.indexOf(expected.toLowerCase()) === 0;
-    };
+        vm.new = function () {
+            vm.taskTypeToCreate = {name: "", enabled: true};
 
-}
+            // To clear the errors from previous create forms
+            if (vm.createForm !== null) {
+                vm.createForm.name.$setValidity('available', true);
+            }
+        };
+
+        vm.create = function () {
+            if (vm.createForm.$valid) {
+                taskTypeService.createTaskType(vm.taskTypeToCreate, createSuccess, callbackError);
+            }
+        };
+
+        vm.edit = function (taskType) {
+            vm.taskTypeToEdit = angular.copy(taskType);
+            vm.taskType = taskType;
+
+            // To clear the errors from previous edit forms
+            if (vm.editForm !== null) {
+                vm.editForm.name.$setValidity('available', true);
+            }
+        };
+
+        vm.update = function () {
+            if (vm.editForm.$valid) {
+                taskTypeService.updateTaskType(vm.taskTypeToEdit, updateSuccess, callbackError);
+            }
+        };
+
+
+        /** Table Ordering & Filtering **/
+
+        vm.reverseOrder = function (sortType) {
+            vm.sortType = sortType;
+            vm.sortReverse = !vm.sortReverse
+        };
+
+        vm.startsWith = function (actual, expected) {
+            var lowerStr = (actual + "").toLowerCase();
+            return lowerStr.indexOf(expected.toLowerCase()) === 0;
+        };
+
+    }
+})();

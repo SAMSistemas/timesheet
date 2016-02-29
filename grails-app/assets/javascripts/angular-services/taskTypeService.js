@@ -1,23 +1,27 @@
-angular
-    .module('services')
-    .service('taskTypeService', taskTypeService);
+(function() {
+    'use strict';
 
-taskTypeService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('taskTypeService', taskTypeService);
 
-function taskTypeService($http) {
+    taskTypeService.$inject = ['$http'];
 
-    var vm = this;
+    function taskTypeService($http) {
 
-    vm.getTaskTypes = function (callbackSuccess, callbackFailure) {
-        $http.get('/taskTypes').then(callbackSuccess, callbackFailure);
-    };
+        var vm = this;
 
-    vm.createTaskType = function (taskTypeToCreate, callbackSuccess, callbackFailure) {
-        $http.post('/taskTypes', taskTypeToCreate).then(callbackSuccess, callbackFailure);
-    };
+        vm.getTaskTypes = function (callbackSuccess, callbackFailure) {
+            $http.get('/taskTypes').then(callbackSuccess, callbackFailure);
+        };
 
-    vm.updateTaskType = function (taskTypeToEdit, callbackSuccess, callbackFailure) {
-        $http.put('/taskTypes/' + taskTypeToEdit.id, taskTypeToEdit).then(callbackSuccess, callbackFailure);
-    };
+        vm.createTaskType = function (taskTypeToCreate, callbackSuccess, callbackFailure) {
+            $http.post('/taskTypes', taskTypeToCreate).then(callbackSuccess, callbackFailure);
+        };
 
-}
+        vm.updateTaskType = function (taskTypeToEdit, callbackSuccess, callbackFailure) {
+            $http.put('/taskTypes/' + taskTypeToEdit.id, taskTypeToEdit).then(callbackSuccess, callbackFailure);
+        };
+
+    }
+})();

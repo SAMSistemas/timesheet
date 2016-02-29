@@ -1,14 +1,18 @@
-angular
-    .module('services')
-    .service('workPositionService', workPositionService);
+(function() {
+    'use strict';
 
-workPositionService.$inject = ['$http'];
+    angular
+        .module('services')
+        .service('workPositionService', workPositionService);
 
-function workPositionService($http) {
+    workPositionService.$inject = ['$http'];
 
-    var vm = this;
+    function workPositionService($http) {
 
-    vm.getWorkPositions = function (callbackSuccess, callbackFailure) {
-        $http.get('/workPositions').then(callbackSuccess, callbackFailure);
-    };
-}
+        var vm = this;
+
+        vm.getWorkPositions = function (callbackSuccess, callbackFailure) {
+            $http.get('/workPositions').then(callbackSuccess, callbackFailure);
+        };
+    }
+})();
