@@ -40,14 +40,11 @@
         }
 
         function createSuccess(response) {
-            vm.clientToCreate.id = response.data.id;
-            utilsService.addToTable(vm.clients, vm.clientToCreate);
-            utilsService.writeToLog(response, 'created');
+            utilsService.addToTable(vm.clients, response.data);
         }
 
         function updateSuccess(response) {
-            utilsService.updateInTable(vm.clients, vm.clientToEdit);
-            utilsService.writeToLog(response, 'updated');
+            utilsService.updateInTable(vm.clients, response.data);
         }
 
         function callbackError(response) {

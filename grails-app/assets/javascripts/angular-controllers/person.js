@@ -43,14 +43,11 @@
         }
 
         function createSuccess(response) {
-            vm.personToCreate.id = response.data.id;
-            utilsService.addToTable(vm.people, vm.personToCreate);
-            utilsService.writeToLog(response, 'created');
+            utilsService.addToTable(vm.people, response.data);
         }
 
         function updateSuccess(response) {
-            utilsService.updateInTable(vm.people, vm.personToEdit);
-            utilsService.writeToLog(response, 'updated');
+            utilsService.updateInTable(vm.people, response.data);
         }
 
         function getWorkPositionSuccess(response) {

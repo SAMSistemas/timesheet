@@ -48,12 +48,10 @@
 
         function createSuccess(response) {
             vm.addToTable(vm.projects, response.data);
-            vm.writeToLog(response, 'created');
         }
 
         function updateSuccess(response) {
             vm.updateInTable(vm.projects, response.data);
-            vm.writeToLog(response, 'updated');
         }
 
         function getEnabledSuccess(response) {

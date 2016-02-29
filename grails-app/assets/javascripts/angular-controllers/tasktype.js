@@ -40,14 +40,11 @@
         }
 
         function createSuccess(response) {
-            vm.taskTypeToCreate.id = response.data.id;
-            utilsService.addToTable(vm.taskTypes, vm.taskTypeToCreate);
-            utilsService.writeToLog(response, 'created');
+            utilsService.addToTable(vm.taskTypes, response.data);
         }
 
         function updateSuccess(response) {
-            utilsService.updateInTable(vm.taskTypes, vm.taskTypeToEdit);
-            utilsService.writeToLog(response, 'updated');
+            utilsService.updateInTable(vm.taskTypes, response.data);
         }
 
         function callbackError(response) {
