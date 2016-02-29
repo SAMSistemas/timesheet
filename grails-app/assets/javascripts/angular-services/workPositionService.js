@@ -11,9 +11,9 @@
 
         var vm = this;
 
-        vm.getWorkPositions = getWorkPositions;
+        vm.get = get;
 
-        function getWorkPositions(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/workPositions').then(callbackSuccess, callbackFailure);
         };
     }

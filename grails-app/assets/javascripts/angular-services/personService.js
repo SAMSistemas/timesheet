@@ -11,13 +11,13 @@
 
         var vm = this;
 
-        vm.showPerson = showPerson;
+        vm.show = show;
         vm.getPersonAvailableForProject = getPersonAvailableForProject;
-        vm.getPeople = getPeople;
-        vm.createPerson = createPerson;
-        vm.updatePerson = updatePerson;
+        vm.get = get;
+        vm.create = create;
+        vm.update = update;
 
-        function showPerson(username, callbackSuccess, callbackFailure) {
+        function show(username, callbackSuccess, callbackFailure) {
             $http.get('/people?username=' + username).then(callbackSuccess, callbackFailure);
         };
 
@@ -25,15 +25,15 @@
             $http.get('/people?availableFor=' + projectName).then(callbackSuccess, callbackFailure);
         };
 
-        function getPeople(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/people').then(callbackSuccess, callbackFailure);
         };
 
-        function createPerson(personToCreate, callbackSuccess, callbackFailure) {
+        function create(personToCreate, callbackSuccess, callbackFailure) {
             $http.post('/people', personToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        function updatePerson(personToEdit, callbackSuccess, callbackFailure) {
+        function update(personToEdit, callbackSuccess, callbackFailure) {
             $http.put('/people/' + personToEdit.id, personToEdit).then(callbackSuccess, callbackFailure);
         };
 

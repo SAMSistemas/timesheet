@@ -67,7 +67,7 @@
             vm.user = sessionStorage.getItem("username");
 
             if (sessionStorage.getItem("name") == "") {
-                personService.showPerson(vm.user, showPersonSuccess, callbackError);
+                personService.show(vm.user, showPersonSuccess, callbackError);
             }
 
             vm.name = sessionStorage.getItem("name");

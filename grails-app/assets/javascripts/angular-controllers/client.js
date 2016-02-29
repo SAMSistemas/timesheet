@@ -57,7 +57,7 @@
 
         /** Client ABM **/
 
-        clientService.getClients(getSuccess, callbackError);
+        clientService.get(getSuccess, callbackError);
 
         function openCreate() {
             vm.clientToCreate = {name: "", short_name: "", enabled: true};
@@ -71,7 +71,7 @@
 
         function create() {
             if (vm.createForm.$valid) {
-                clientService.createClient(vm.clientToCreate, createSuccess, callbackError);
+                clientService.create(vm.clientToCreate, createSuccess, callbackError);
             }
         };
 
@@ -88,7 +88,7 @@
 
         function update() {
             if (vm.editForm.$valid) {
-                clientService.updateClient(vm.clientToEdit, updateSuccess, callbackError);
+                clientService.update(vm.clientToEdit, updateSuccess, callbackError);
             }
         };
 

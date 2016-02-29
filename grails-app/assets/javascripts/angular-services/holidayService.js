@@ -11,20 +11,20 @@
 
         var vm = this;
 
-        vm.getHolidays = getHolidays;
-        vm.createHoliday = createHoliday;
-        vm.updateHoliday = updateHoliday;
-        vm.deleteHoliday = deleteHoliday;
+        vm.get = get;
+        vm.create = create;
+        vm.update = update;
+        vm.delete = deleteHoliday;
 
-        function getHolidays(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/holidays').then(callbackSuccess, callbackFailure);
         };
 
-        function createHoliday(eventToCreate, callbackSuccess, callbackFailure) {
+        function create(eventToCreate, callbackSuccess, callbackFailure) {
             $http.post('/holidays', eventToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        function updateHoliday(eventToEdit, callbackSuccess, callbackFailure) {
+        function update(eventToEdit, callbackSuccess, callbackFailure) {
             $http.put('/holidays/' + eventToEdit.id, eventToEdit).then(callbackSuccess, callbackFailure);
         };
 

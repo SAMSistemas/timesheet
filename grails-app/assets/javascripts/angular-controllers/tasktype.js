@@ -57,7 +57,7 @@
 
         /** TaskType ABM **/
 
-        taskTypeService.getTaskTypes(getSuccess, callbackError);
+        taskTypeService.get(getSuccess, callbackError);
 
         function openCreate() {
             vm.taskTypeToCreate = {name: "", enabled: true};
@@ -70,7 +70,7 @@
 
         function create() {
             if (vm.createForm.$valid) {
-                taskTypeService.createTaskType(vm.taskTypeToCreate, createSuccess, callbackError);
+                taskTypeService.create(vm.taskTypeToCreate, createSuccess, callbackError);
             }
         };
 
@@ -86,7 +86,7 @@
 
         function update() {
             if (vm.editForm.$valid) {
-                taskTypeService.updateTaskType(vm.taskTypeToEdit, updateSuccess, callbackError);
+                taskTypeService.update(vm.taskTypeToEdit, updateSuccess, callbackError);
             }
         };
 

@@ -67,9 +67,9 @@
 
         /** Project ABM **/
 
-        clientService.getEnabledClients(getEnabledSuccess, callbackError);
+        clientService.getEnabled(getEnabledSuccess, callbackError);
 
-        projectService.getProjects(getSuccess, callbackError);
+        projectService.get(getSuccess, callbackError);
 
         function openCreate() {
             vm.clientSelected = "";
@@ -94,7 +94,7 @@
             vm.projectToCreate.start_date = vm.generateCreateStringDate(vm.dateSelected);
 
             if (vm.createForm.$valid) {
-                projectService.createProject(vm.projectToCreate, createSuccess, callbackError);
+                projectService.create(vm.projectToCreate, createSuccess, callbackError);
             }
 
             vm.clientSelected = {};
@@ -121,7 +121,7 @@
             vm.projectToEdit.start_date = vm.generateEditStringDate(vm.dateSelected);
 
             if (vm.editForm.$valid) {
-                projectService.updateProject(vm.projectToEdit, updateSuccess, callbackError);
+                projectService.update(vm.projectToEdit, updateSuccess, callbackError);
             }
 
             vm.clientSelected = {};

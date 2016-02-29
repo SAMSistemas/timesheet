@@ -64,9 +64,9 @@
 
         /** Person ABM **/
 
-        personService.getPeople(getSuccess, callbackError);
+        personService.get(getSuccess, callbackError);
 
-        workPositionService.getWorkPositions(getWorkPositionSuccess, callbackError);
+        workPositionService.get(getWorkPositionSuccess, callbackError);
 
         function openCreate() {
             vm.personToCreate = {
@@ -87,7 +87,7 @@
 
         function create() {
             if (vm.createForm.$valid) {
-                personService.createPerson(vm.personToCreate, createSuccess, callbackError);
+                personService.create(vm.personToCreate, createSuccess, callbackError);
             }
         };
 
@@ -103,7 +103,7 @@
 
         function update() {
             if (vm.editForm.$valid) {
-                personService.updatePerson(vm.personToEdit, updateSuccess, callbackError);
+                personService.update(vm.personToEdit, updateSuccess, callbackError);
             }
         };
 

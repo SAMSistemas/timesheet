@@ -11,12 +11,12 @@
 
         var vm = this;
 
-        vm.getProjects = getProjects;
+        vm.get = get;
         vm.getEnabledProjectsByClient = getEnabledProjectsByClient;
-        vm.createProject = createProject;
-        vm.updateProject = updateProject;
+        vm.create = create;
+        vm.update = update;
 
-        function getProjects(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/projects').then(callbackSuccess, callbackFailure);
         };
 
@@ -24,11 +24,11 @@
             $http.get('/projects?enabled=true&client_name=' + clientName).then(callbackSuccess, callbackFailure);
         };
 
-        function createProject(projectToCreate, callbackSuccess, callbackFailure) {
+        function create(projectToCreate, callbackSuccess, callbackFailure) {
             $http.post('/projects', projectToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        function updateProject(projectToEdit, callbackSuccess, callbackFailure) {
+        function update(projectToEdit, callbackSuccess, callbackFailure) {
             $http.put('/projects/' + projectToEdit.id, projectToEdit).then(callbackSuccess, callbackFailure);
         };
 

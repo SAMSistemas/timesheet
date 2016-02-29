@@ -55,17 +55,17 @@
 
         /** Holiday ABM **/
 
-        holidayService.getHolidays(getSuccess, callbackError);
+        holidayService.get(getSuccess, callbackError);
 
         function create() {
-            holidayService.createHoliday(vm.eventToCreate, createSuccess, callbackError);
+            holidayService.create(vm.eventToCreate, createSuccess, callbackError);
         };
 
         function update() {
             //Remove previous event from calendar
             vm.removeEvent(vm.eventToUpdate);
 
-            holidayService.updateHoliday(vm.eventToUpdate, updateSuccess, callbackError);
+            holidayService.update(vm.eventToUpdate, updateSuccess, callbackError);
 
             //Add new event source to calendar to render it
             vm.addEventSource(vm.eventToUpdate);
@@ -73,7 +73,7 @@
         };
 
         function deleteHoliday() {
-            holidayService.deleteHoliday(vm.eventToUpdate.id, deleteSuccess, callbackError);
+            holidayService.delete(vm.eventToUpdate.id, deleteSuccess, callbackError);
 
             //Remove event from calendar
             vm.removeEvent(vm.eventToUpdate);

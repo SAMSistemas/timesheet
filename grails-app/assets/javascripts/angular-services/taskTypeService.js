@@ -11,19 +11,19 @@
 
         var vm = this;
 
-        vm.getTaskTypes = getTaskTypes;
-        vm.createTaskType = createTaskType;
-        vm.updateTaskType = updateTaskType;
+        vm.get = get;
+        vm.create = create;
+        vm.update = update;
 
-        function getTaskTypes(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/taskTypes').then(callbackSuccess, callbackFailure);
         };
 
-        function createTaskType(taskTypeToCreate, callbackSuccess, callbackFailure) {
+        function create(taskTypeToCreate, callbackSuccess, callbackFailure) {
             $http.post('/taskTypes', taskTypeToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        function updateTaskType(taskTypeToEdit, callbackSuccess, callbackFailure) {
+        function update(taskTypeToEdit, callbackSuccess, callbackFailure) {
             $http.put('/taskTypes/' + taskTypeToEdit.id, taskTypeToEdit).then(callbackSuccess, callbackFailure);
         };
 

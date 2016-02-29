@@ -11,24 +11,24 @@
 
         var vm = this;
 
-        vm.getClients = getClients;
-        vm.getEnabledClients = getEnabledClients;
-        vm.createClient = createClient;
-        vm.updateClient = updateClient;
+        vm.get = get;
+        vm.getEnabled = getEnabled;
+        vm.create = create;
+        vm.update = update;
 
-        function getClients(callbackSuccess, callbackFailure) {
+        function get(callbackSuccess, callbackFailure) {
             $http.get('/clients').then(callbackSuccess, callbackFailure);
         };
 
-        function getEnabledClients(callbackSuccess, callbackFailure) {
+        function getEnabled(callbackSuccess, callbackFailure) {
             $http.get('/clients?enabled=true').then(callbackSuccess, callbackFailure);
         };
 
-        function createClient(clientToCreate, callbackSuccess, callbackFailure) {
+        function create(clientToCreate, callbackSuccess, callbackFailure) {
             $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        function updateClient(clientToEdit, callbackSuccess, callbackFailure) {
+        function update(clientToEdit, callbackSuccess, callbackFailure) {
             $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
         };
 

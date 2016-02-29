@@ -63,7 +63,7 @@
 
         /** Controller Functions **/
 
-        clientService.getEnabledClients(getClientsSuccess, callbackError);
+        clientService.getEnabled(getClientsSuccess, callbackError);
 
         function changeClient() {
             projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
