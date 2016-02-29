@@ -74,7 +74,7 @@ function MainController($window, clientService, projectService, jobLogService, u
 
     };
 
-
+    
     /** Utils **/
 
     vm.clean = function () {
