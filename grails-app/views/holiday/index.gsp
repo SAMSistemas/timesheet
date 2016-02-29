@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-controller="holidayController as holidayCtrl">
+<div ng-controller="HolidayController as holidayCtrl">
 
     <div id='calendar'></div>
 

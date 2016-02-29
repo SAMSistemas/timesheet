@@ -1,27 +1,32 @@
-angular.module('directives')
-    .directive('inputFieldText', function ($timeout) {
-        return {
-            restrict: 'AE',
-            scope: {
-                ngModel: '=',
-                ngPlaceholder: '@',
-                ngId: '@'
-            },
-            link: function (scope, elem, attr) {
-                $timeout(function () {
-                    // http://stackoverflow.com/questions/19733723/angularjs-dynamic-form-field-id-with-a-directive-not-working
+angular
+    .module('directives')
+    .directive('inputFieldText', inputFieldText);
 
-                    var input = elem.find("#" + attr.ngId);
+inputFieldText.$inject = ['$timeout'];
 
-                    input.on('focus', function () {
-                        input.attr('placeholder', '');
-                    });
+function inputFieldText($timeout) {
+    return {
+        restrict: 'AE',
+        scope: {
+            ngModel: '=',
+            ngPlaceholder: '@',
+            ngId: '@'
+        },
+        link: function (scope, elem, attr) {
+            $timeout(function () {
+                // http://stackoverflow.com/questions/19733723/angularjs-dynamic-form-field-id-with-a-directive-not-working
 
-                    input.on('blur', function () {
-                        input.attr('placeholder', attr.ngPlaceholder);
-                    });
+                var input = elem.find("#" + attr.ngId);
+
+                input.on('focus', function () {
+                    input.attr('placeholder', '');
                 });
-            },
-            templateUrl: '/assets/input-field-text.html'
-        };
-    });
+
+                input.on('blur', function () {
+                    input.attr('placeholder', attr.ngPlaceholder);
+                });
+            });
+        },
+        templateUrl: '/assets/input-field-text.html'
+    };
+}

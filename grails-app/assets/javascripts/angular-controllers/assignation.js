@@ -1,7 +1,10 @@
-//= require default
-//= require_self
+angular
+    .module('myApp')
+    .controller('AssignationController', AssignationController);
 
-app.controller('assignationController', function (clientService, projectService, personService, jobLogService, utilsService) {
+AssignationController.$inject = ['clientService', 'projectService', 'personService', 'jobLogService', 'utilsService'];
+
+function AssignationController(clientService, projectService, personService, jobLogService, utilsService) {
 
     /** Capturing controller instance **/
     var vm = this;
@@ -17,6 +20,7 @@ app.controller('assignationController', function (clientService, projectService,
     vm.confirmation = "";
 
     vm.form = null;
+
 
     /** Callback Handlers **/
 
@@ -34,16 +38,15 @@ app.controller('assignationController', function (clientService, projectService,
         vm.confirmation = "";
     }
 
-    function assignJobLogSuccess(response) {
+    function assignJobLogSuccess() {
         vm.confirmation = "Se asigno la persona al proyecto";
         vm.personSelected = null;
         personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, assignJobLogError);
-        vm.writeToLog(response, 'success');
     }
 
     function assignJobLogError(response) {
         vm.confirmation = "Fallo la asignacion";
-        vm.writeToLog(response, 'error');
+        utilsService.writeToLog(response, 'error');
     }
 
     function callbackError(response) {
@@ -54,7 +57,6 @@ app.controller('assignationController', function (clientService, projectService,
     /** Controller Functions **/
 
     clientService.getEnabledClients(getClientsSuccess, callbackError);
-
 
     vm.changeClient = function () {
         projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
@@ -73,7 +75,6 @@ app.controller('assignationController', function (clientService, projectService,
         };
 
         jobLogService.assignJobLog(jobLog, assignJobLogSuccess, assignJobLogError);
-
     };
 
-});
+}

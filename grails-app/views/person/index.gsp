@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-controller="personController as personCtrl">
+<div ng-controller="PersonController as personCtrl">
 
     <h3 class="card-title teal-text">Lista de Personas</h3>
 

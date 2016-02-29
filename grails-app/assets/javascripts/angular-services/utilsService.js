@@ -1,12 +1,13 @@
-angular.module('services')
+angular
+    .module('services')
     .service('utilsService', utilsService);
 
-function utilsService(){
+function utilsService() {
 
     var vm = this;
 
     //Write result message to console
-    vm.writeToLog = function(response, result){
+    vm.writeToLog = function (response, result) {
 
         var resultMessage = {
             result: result,

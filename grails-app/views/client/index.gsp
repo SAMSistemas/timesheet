@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-controller="clientController as clientCtrl">
+<div ng-controller="ClientController as clientCtrl">
 
     <h3 class="card-title teal-text">Lista de Clientes</h3>
 
