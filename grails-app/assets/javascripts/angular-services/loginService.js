@@ -11,14 +11,14 @@
 
         var vm = this;
 
-        vm.postUserData = postUserData;
-        vm.closeSession = closeSession;
+        vm.login = login;
+        vm.logout = logout;
 
-        function postUserData(username, password, callbackSuccess, callbackFailure) {
+        function login(username, password, callbackSuccess, callbackFailure) {
             $http.post('/login?username=' + username + "&password=" + password).then(callbackSuccess, callbackFailure);
         };
 
-        function closeSession(callbackSuccess, callbackFailure) {
+        function logout(callbackSuccess, callbackFailure) {
             $http.post("/login").then(callbackSuccess, callbackFailure);
         };
 

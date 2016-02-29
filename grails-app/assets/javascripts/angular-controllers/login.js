@@ -42,7 +42,6 @@
             var user = response.data[0];
             vm.name = user.name + ' ' + user.lastname;
             sessionStorage.setItem("name", vm.name);
-            utilsService.writeToLog(response, 'success');
         }
 
         function callbackError(response) {
@@ -53,11 +52,11 @@
         /** Controllers Functions **/
 
         function login() {
-            loginService.postUserData(vm.user, vm.pass, loginSuccess, logInError);
+            loginService.login(vm.user, vm.pass, loginSuccess, logInError);
         };
 
         function logout() {
-            loginService.closeSession(logOutSuccess, callbackError);
+            loginService.logout(logOutSuccess, callbackError);
 
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("name");
