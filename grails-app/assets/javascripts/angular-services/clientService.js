@@ -11,21 +11,27 @@
 
         var vm = this;
 
-        vm.getClients = function (callbackSuccess, callbackFailure) {
+        vm.getClients = getClients;
+        vm.getEnabledClients = getEnabledClients;
+        vm.createClient = createClient;
+        vm.updateClient = updateClient;
+
+        function getClients(callbackSuccess, callbackFailure) {
             $http.get('/clients').then(callbackSuccess, callbackFailure);
         };
 
-        vm.createClient = function (clientToCreate, callbackSuccess, callbackFailure) {
-            $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
-        };
-
-        vm.updateClient = function (clientToEdit, callbackSuccess, callbackFailure) {
-            $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
-        };
-
-        vm.getEnabledClients = function (callbackSuccess, callbackFailure) {
+        function getEnabledClients(callbackSuccess, callbackFailure) {
             $http.get('/clients?enabled=true').then(callbackSuccess, callbackFailure);
         };
 
+        function createClient(clientToCreate, callbackSuccess, callbackFailure) {
+            $http.post('/clients', clientToCreate).then(callbackSuccess, callbackFailure);
+        };
+
+        function updateClient(clientToEdit, callbackSuccess, callbackFailure) {
+            $http.put('/clients/' + clientToEdit.id, clientToEdit).then(callbackSuccess, callbackFailure);
+        };
+
     }
+
 })();

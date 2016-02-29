@@ -27,6 +27,11 @@
         vm.createForm = null;
         vm.editForm = null;
 
+        vm.new = openCreate;
+        vm.create = create;
+        vm.edit = openUpdate;
+        vm.update = update;
+
 
         /** Callback Handlers **/
 
@@ -54,7 +59,7 @@
 
         clientService.getClients(getSuccess, callbackError);
 
-        vm.new = function () {
+        function openCreate() {
             vm.clientToCreate = {name: "", short_name: "", enabled: true};
 
             // To clear the errors from previous create forms
@@ -64,13 +69,13 @@
             }
         };
 
-        vm.create = function () {
+        function create() {
             if (vm.createForm.$valid) {
                 clientService.createClient(vm.clientToCreate, createSuccess, callbackError);
             }
         };
 
-        vm.edit = function (client) {
+        function openUpdate(client) {
             vm.clientToEdit = angular.copy(client);
             vm.client = client;
 
@@ -81,7 +86,7 @@
             }
         };
 
-        vm.update = function () {
+        function update() {
             if (vm.editForm.$valid) {
                 clientService.updateClient(vm.clientToEdit, updateSuccess, callbackError);
             }
@@ -101,4 +106,5 @@
         };
 
     }
+
 })();

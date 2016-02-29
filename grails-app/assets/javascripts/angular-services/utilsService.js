@@ -9,8 +9,14 @@
 
         var vm = this;
 
+        vm.writeToLog = writeToLog;
+        vm.addToTable = addToTable;
+        vm.updateInTable = updateInTable;
+        vm.dateToString = dateToString;
+        vm.changeColor = changeColor;
+
         //Write result message to console
-        vm.writeToLog = function (response, result) {
+        function writeToLog(response, result) {
 
             var resultMessage = {
                 result: result,
@@ -22,31 +28,31 @@
         };
 
         //Add element in table
-        vm.addToTable = function (items, item) {
+        function addToTable(items, item) {
             items.push(item);
         };
 
         //Update element in table
-        vm.updateInTable = function (items, item) {
+        function updateInTable(items, item) {
             for (var i = 0; i < items.length; i++)
                 if (items[i].id === item.id)
                     items[i] = item;
         };
 
         //Parse date into string
-        vm.dateToString = function (date) {
-
+        function dateToString(date) {
             var day = date.getDate();
             var monthIndex = date.getMonth();
             var month = monthIndex + 1;
             var year = date.getFullYear();
             return day + '-' + month + '-' + year;
-
         };
 
         // Change div element color
-        vm.changeColor = function (divId) {
+        function changeColor(divId) {
             $("#" + divId).css("cssText", " color: #009688 !important;");
         };
+
     }
+
 })();

@@ -11,13 +11,17 @@
 
         var vm = this;
 
-        vm.filterDataToReport = function (uri, filters, callbackSuccess, callbackFailure) {
+        vm.filterDataToReport = filterDataToReport;
+        vm.assignJobLog = assignJobLog;
+
+        function filterDataToReport(uri, filters, callbackSuccess, callbackFailure) {
             $http.post(uri, filters).then(callbackSuccess, callbackFailure);
         };
 
-        vm.assignJobLog = function (jobLog, callbackSuccess, callbackFailure) {
+        function assignJobLog(jobLog, callbackSuccess, callbackFailure) {
             $http.post('/projects/' + jobLog.project.id + '/assign', jobLog).then(callbackSuccess, callbackFailure);
         };
 
     }
+
 })();

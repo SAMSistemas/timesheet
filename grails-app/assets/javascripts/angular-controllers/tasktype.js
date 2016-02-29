@@ -27,6 +27,11 @@
         vm.createForm = null;
         vm.editForm = null;
 
+        vm.new = openCreate;
+        vm.create = create;
+        vm.edit = openUpdate;
+        vm.update = update;
+
 
         /** Callback Handlers **/
 
@@ -54,7 +59,7 @@
 
         taskTypeService.getTaskTypes(getSuccess, callbackError);
 
-        vm.new = function () {
+        function openCreate() {
             vm.taskTypeToCreate = {name: "", enabled: true};
 
             // To clear the errors from previous create forms
@@ -63,13 +68,13 @@
             }
         };
 
-        vm.create = function () {
+        function create() {
             if (vm.createForm.$valid) {
                 taskTypeService.createTaskType(vm.taskTypeToCreate, createSuccess, callbackError);
             }
         };
 
-        vm.edit = function (taskType) {
+        function openUpdate(taskType) {
             vm.taskTypeToEdit = angular.copy(taskType);
             vm.taskType = taskType;
 
@@ -79,7 +84,7 @@
             }
         };
 
-        vm.update = function () {
+        function update() {
             if (vm.editForm.$valid) {
                 taskTypeService.updateTaskType(vm.taskTypeToEdit, updateSuccess, callbackError);
             }
@@ -99,4 +104,5 @@
         };
 
     }
+
 })();

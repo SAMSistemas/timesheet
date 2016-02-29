@@ -34,6 +34,11 @@
 
         vm.dateSelected = new Date();
 
+        vm.new = openCreate;
+        vm.create = create;
+        vm.edit = openUpdate;
+        vm.update = update;
+
 
         /** Callback Handlers **/
 
@@ -66,7 +71,7 @@
 
         projectService.getProjects(getSuccess, callbackError);
 
-        vm.new = function () {
+        function openCreate() {
             vm.clientSelected = "";
             vm.projectToCreate = {
                 client_name: "",
@@ -84,7 +89,7 @@
             }
         };
 
-        vm.create = function () {
+        function create() {
             vm.projectToCreate.client_name = vm.clientSelected.name;
             vm.projectToCreate.start_date = vm.generateCreateStringDate(vm.dateSelected);
 
@@ -95,7 +100,7 @@
             vm.clientSelected = {};
         };
 
-        vm.edit = function (project) {
+        function openUpdate(project) {
             vm.clientSelected = {};
             vm.clientSelected.name = project.client.name;
             vm.parseDate(project.start_date);
@@ -111,7 +116,7 @@
 
         };
 
-        vm.update = function () {
+        function update() {
             vm.projectToEdit.client_name = vm.clientSelected.name;
             vm.projectToEdit.start_date = vm.generateEditStringDate(vm.dateSelected);
 
@@ -187,4 +192,5 @@
         };
 
     }
+
 })();

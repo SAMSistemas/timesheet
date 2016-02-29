@@ -24,6 +24,10 @@
 
         vm.form = null;
 
+        vm.changeClient = changeClient;
+        vm.changeProject = changeProject;
+        vm.submit = submit;
+
 
         /** Callback Handlers **/
 
@@ -61,15 +65,15 @@
 
         clientService.getEnabledClients(getClientsSuccess, callbackError);
 
-        vm.changeClient = function () {
+        function changeClient() {
             projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
         };
 
-        vm.changeProject = function () {
+        function changeProject() {
             personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, callbackError);
         };
 
-        vm.submit = function () {
+        function submit() {
             var jobLog = {
                 person: vm.personSelected.name,
                 project: {
@@ -81,4 +85,5 @@
         };
 
     }
+
 })();

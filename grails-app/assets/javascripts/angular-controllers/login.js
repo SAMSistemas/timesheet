@@ -16,6 +16,9 @@
         vm.pass = "";
         vm.name = "";
 
+        vm.login = login;
+        vm.logout = logout;
+        vm.searchName = searchName;
 
         /** Callback Handlers **/
 
@@ -49,20 +52,18 @@
 
         /** Controllers Functions **/
 
-        vm.login = function () {
+        function login() {
             loginService.postUserData(vm.user, vm.pass, loginSuccess, logInError);
         };
 
-        vm.logout = function () {
-
+        function logout() {
             loginService.closeSession(logOutSuccess, callbackError);
 
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("name");
         };
 
-        vm.searchName = function () {
-
+        function searchName() {
             vm.user = sessionStorage.getItem("username");
 
             if (sessionStorage.getItem("name") == "") {
@@ -70,10 +71,10 @@
             }
 
             vm.name = sessionStorage.getItem("name");
-
         };
 
-        vm.searchName();
+        searchName();
 
     }
+
 })();

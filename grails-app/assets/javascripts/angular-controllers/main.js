@@ -25,6 +25,9 @@
 
         vm.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
 
+        vm.changeClient = changeClient;
+        vm.export = exportFile;
+
 
         /** Callback Handlers **/
 
@@ -59,11 +62,11 @@
 
         clientService.getClients(getClientsSuccess, callbackError);
 
-        vm.changeClient = function () {
+        function changeClient() {
             projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
         };
 
-        vm.export = function () {
+        function exportFile() {
             var flag = vm.verifyDates();
             //if(flag){
             var filters = {
@@ -121,6 +124,7 @@
         };
 
     }
+
 })();
 
 

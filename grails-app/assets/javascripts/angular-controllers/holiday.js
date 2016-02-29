@@ -21,6 +21,10 @@
         vm.createForm = null;
         vm.editForm = null;
 
+        vm.create = create;
+        vm.update = update;
+        vm.delete = deleteHoliday;
+
 
         /** Callback Handlers **/
 
@@ -53,11 +57,11 @@
 
         holidayService.getHolidays(getSuccess, callbackError);
 
-        vm.create = function () {
+        function create() {
             holidayService.createHoliday(vm.eventToCreate, createSuccess, callbackError);
         };
 
-        vm.update = function () {
+        function update() {
             //Remove previous event from calendar
             vm.removeEvent(vm.eventToUpdate);
 
@@ -68,7 +72,7 @@
 
         };
 
-        vm.delete = function () {
+        function deleteHoliday() {
             holidayService.deleteHoliday(vm.eventToUpdate.id, deleteSuccess, callbackError);
 
             //Remove event from calendar
@@ -161,4 +165,5 @@
         };
 
     }
+
 })();

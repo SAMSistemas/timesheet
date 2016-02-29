@@ -11,21 +11,27 @@
 
         var vm = this;
 
-        vm.getHolidays = function (callbackSuccess, callbackFailure) {
+        vm.getHolidays = getHolidays;
+        vm.createHoliday = createHoliday;
+        vm.updateHoliday = updateHoliday;
+        vm.deleteHoliday = deleteHoliday;
+
+        function getHolidays(callbackSuccess, callbackFailure) {
             $http.get('/holidays').then(callbackSuccess, callbackFailure);
         };
 
-        vm.createHoliday = function (eventToCreate, callbackSuccess, callbackFailure) {
+        function createHoliday(eventToCreate, callbackSuccess, callbackFailure) {
             $http.post('/holidays', eventToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        vm.updateHoliday = function (eventToEdit, callbackSuccess, callbackFailure) {
+        function updateHoliday(eventToEdit, callbackSuccess, callbackFailure) {
             $http.put('/holidays/' + eventToEdit.id, eventToEdit).then(callbackSuccess, callbackFailure);
         };
 
-        vm.deleteHoliday = function (callbackSuccess, callbackFailure) {
+        function deleteHoliday(callbackSuccess, callbackFailure) {
             $http.delete('/holidays/' + vm.eventToUpdate.id).then(callbackSuccess, callbackFailure);
         };
 
     }
+
 })();

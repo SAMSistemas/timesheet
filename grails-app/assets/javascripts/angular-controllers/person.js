@@ -30,6 +30,11 @@
         vm.work_hours = [4, 6, 8];
         vm.work_positions = [];
 
+        vm.new = openCreate;
+        vm.create = create;
+        vm.edit = openUpdate;
+        vm.update = update;
+
 
         /** Callback Handlers **/
 
@@ -63,7 +68,7 @@
 
         workPositionService.getWorkPositions(getWorkPositionSuccess, callbackError);
 
-        vm.new = function () {
+        function openCreate() {
             vm.personToCreate = {
                 name: "",
                 lastname: "",
@@ -80,13 +85,13 @@
             }
         };
 
-        vm.create = function () {
+        function create() {
             if (vm.createForm.$valid) {
                 personService.createPerson(vm.personToCreate, createSuccess, callbackError);
             }
         };
 
-        vm.edit = function (person) {
+        function openUpdate(person) {
             vm.personToEdit = angular.copy(person);
             vm.person = person;
 
@@ -96,7 +101,7 @@
             }
         };
 
-        vm.update = function () {
+        function update() {
             if (vm.editForm.$valid) {
                 personService.updatePerson(vm.personToEdit, updateSuccess, callbackError);
             }
@@ -116,4 +121,5 @@
         };
 
     }
+
 })();

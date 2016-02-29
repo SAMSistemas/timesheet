@@ -11,17 +11,22 @@
 
         var vm = this;
 
-        vm.getTaskTypes = function (callbackSuccess, callbackFailure) {
+        vm.getTaskTypes = getTaskTypes;
+        vm.createTaskType = createTaskType;
+        vm.updateTaskType = updateTaskType;
+
+        function getTaskTypes(callbackSuccess, callbackFailure) {
             $http.get('/taskTypes').then(callbackSuccess, callbackFailure);
         };
 
-        vm.createTaskType = function (taskTypeToCreate, callbackSuccess, callbackFailure) {
+        function createTaskType(taskTypeToCreate, callbackSuccess, callbackFailure) {
             $http.post('/taskTypes', taskTypeToCreate).then(callbackSuccess, callbackFailure);
         };
 
-        vm.updateTaskType = function (taskTypeToEdit, callbackSuccess, callbackFailure) {
+        function updateTaskType(taskTypeToEdit, callbackSuccess, callbackFailure) {
             $http.put('/taskTypes/' + taskTypeToEdit.id, taskTypeToEdit).then(callbackSuccess, callbackFailure);
         };
 
     }
+
 })();
