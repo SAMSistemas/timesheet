@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-controller="projectController as projectCtrl">
+<div ng-controller="ProjectController as projectCtrl">
 
     <h3 class="card-title teal-text">Lista de Proyectos</h3>
 

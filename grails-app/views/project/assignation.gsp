@@ -10,7 +10,7 @@
 
 <body>
 
-<div ng-controller="assignationController as assignCtrl">
+<div ng-controller="AssignationController as assignCtrl">
 
     <h3 class="card-title teal-text">Asignación de Personas a Proyectos</h3>
 

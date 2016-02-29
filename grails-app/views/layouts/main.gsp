@@ -19,9 +19,9 @@
 
 </head>
 
-<body ng-app="myApp" ng-controller="mainController as mainCtrl">
+<body ng-app="myApp" ng-controller="MainController as mainCtrl">
 
-<header ng-controller="loginController as loginCtrl">
+<header ng-controller="LoginController as loginCtrl">
 
     <nav class="fixed blue darken-3">
         <div class="container">

@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-controller="taskTypeController as taskCtrl">
+<div ng-controller="TaskTypeController as taskCtrl">
 
     <h3 class="card-title teal-text">Lista de Tipos de Tarea</h3>
 
