@@ -8,7 +8,7 @@
 
     </head>
 
-    <body ng-controller="loginController as loginCtrl">
+    <body ng-controller="LoginController as loginCtrl">
 
         <h1 class="center title teal-text">Bienvenido al Timesheet {{ loginCtrl.name }}</h1>
 

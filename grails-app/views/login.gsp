@@ -11,7 +11,7 @@
 
 <body>
 
-<div ng-app="myApp" ng-controller="loginController as loginCtrl">
+<div ng-app="myApp" ng-controller="LoginController as loginCtrl">
     <!-- Login Card -->
     <div class="row">
         <div class="card login-card z-depth-2">
