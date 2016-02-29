@@ -52,7 +52,7 @@ app.controller('mainController', function ($window, clientService, projectServic
 
         /** Controller Functions **/
 
-        cientService.getClients(getClientsSuccess, callbackError);
+        clientService.getClients(getClientsSuccess, callbackError);
 
         vm.changeClient = function () {
             projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
