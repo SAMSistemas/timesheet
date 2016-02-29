@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('loginController', function ($window, loginService, personService) {
+app.controller('loginController', function ($window, loginService, personService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -33,11 +33,11 @@ app.controller('loginController', function ($window, loginService, personService
             var user = response.data[0];
             vm.name = user.name + ' ' + user.lastname;
             sessionStorage.setItem("name", vm.name);
-            vm.writeToLog(response, 'success');
+            utilsService.writeToLog(response, 'success');
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
 
@@ -68,19 +68,5 @@ app.controller('loginController', function ($window, loginService, personService
         };
 
         vm.searchName();
-
-
-        /** Utils **/
-
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
-        };
 
     });

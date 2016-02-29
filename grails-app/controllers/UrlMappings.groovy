@@ -30,8 +30,10 @@ class UrlMappings {
         "/workPositions"(resources: "workPosition", excludes: ["save", "update", "delete"])
 
         "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
+
+        "404"(view: "/errors/notFound")
+        "422"(view: "/errors/entityError")
+        "500"(view: "/errors/serverError")
 
         "/login"(view:"/login")
     }

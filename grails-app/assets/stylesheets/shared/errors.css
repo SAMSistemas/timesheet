@@ -107,3 +107,14 @@ h2 {
 .snippet .line:last-child .lineNumber {
     padding-bottom: 5px;
 }
+
+.error-image-404 {
+    width:440px;
+    height:230px;
+}
+
+.error-image-common {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

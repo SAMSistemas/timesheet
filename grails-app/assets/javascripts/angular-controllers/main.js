@@ -1,7 +1,7 @@
 //= require default
 //= require_self
 
-app.controller('mainController', function (clientService, projectService, jobLogService) {
+app.controller('mainController', function ($window, clientService, projectService, jobLogService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -34,7 +34,7 @@ app.controller('mainController', function (clientService, projectService, jobLog
         }
 
         function reportSuccess() {
-            window.location.href = vm.reportURI;
+            $window.location.href = vm.reportURI;
             vm.clean();
         }
 
@@ -46,13 +46,13 @@ app.controller('mainController', function (clientService, projectService, jobLog
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
 
         /** Controller Functions **/
 
-        clientService.getClients(getClientsSuccess, callbackError);
+        cientService.getClients(getClientsSuccess, callbackError);
 
         vm.changeClient = function () {
             projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
@@ -113,18 +113,6 @@ app.controller('mainController', function (clientService, projectService, jobLog
 
         vm.showDateError = function () {
             $('#errorDate').show();
-        };
-
-        //Write result message to console
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
         };
 
 

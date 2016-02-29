@@ -2,7 +2,7 @@
 //= require shared/table-body-observer
 //= require_self
 
-app.controller('projectController', function (projectService, clientService) {
+app.controller('projectController', function (projectService, clientService, utilsService) {
 
         /** Capturing controller instance **/
         var vm = this;
@@ -50,7 +50,7 @@ app.controller('projectController', function (projectService, clientService) {
         }
 
         function callbackError(response) {
-            vm.writeToLog(response, 'error');
+            utilsService.writeToLog(response, 'error');
         }
 
 
@@ -176,30 +176,5 @@ app.controller('projectController', function (projectService, clientService) {
             return day + '-' + month + '-' + year;
         };
 
-        vm.addToTable = function (items, item) {
-            items.push(item);
-        };
-
-        vm.updateInTable = function (items, item) {
-            for (var i = 0; i < items.length; i++)
-                if (items[i].id === item.id)
-                    items[i] = item;
-        };
-
-        vm.changeColor = function (divId) {
-            $("#" + divId).css("cssText", " color: #009688 !important;");
-        };
-
-        //Write result message to console
-        vm.writeToLog = function(response, result){
-
-            var resultMessage = {
-                result: result,
-                status: response.status,
-                data: response.data
-            };
-
-            console.log(JSON.stringify(resultMessage));
-        };
 
     });
