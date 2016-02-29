@@ -12,7 +12,7 @@
         var vm = this;
 
         vm.show = show;
-        vm.getPersonAvailableForProject = getPersonAvailableForProject;
+        vm.getAvailablePeopleForProject = getAvailablePeopleForProject;
         vm.get = get;
         vm.create = create;
         vm.update = update;
@@ -21,7 +21,7 @@
             $http.get('/people?username=' + username).then(callbackSuccess, callbackFailure);
         };
 
-        function getPersonAvailableForProject(projectName, callbackSuccess, callbackFailure) {
+        function getAvailablePeopleForProject(projectName, callbackSuccess, callbackFailure) {
             $http.get('/people?availableFor=' + projectName).then(callbackSuccess, callbackFailure);
         };
 

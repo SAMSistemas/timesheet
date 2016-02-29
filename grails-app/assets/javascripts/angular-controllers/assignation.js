@@ -9,7 +9,6 @@
 
     function AssignationController(clientService, projectService, personService, jobLogService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.clients = [];
@@ -27,6 +26,30 @@
         vm.changeClient = changeClient;
         vm.changeProject = changeProject;
         vm.submit = submit;
+
+        clientService.getEnabled(getClientsSuccess, callbackError);
+
+
+        /** Controller Functions **/
+
+        function changeClient() {
+            projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
+        };
+
+        function changeProject() {
+            personService.getAvailablePeopleForProject(vm.projectSelected.name, changeProjectSuccess, callbackError);
+        };
+
+        function submit() {
+            var jobLog = {
+                person: vm.personSelected.name,
+                project: {
+                    id: vm.projectSelected.id
+                }
+            };
+
+            jobLogService.assignJobLog(jobLog, assignJobLogSuccess, assignJobLogError);
+        };
 
 
         /** Callback Handlers **/
@@ -48,7 +71,7 @@
         function assignJobLogSuccess() {
             vm.confirmation = "Se asigno la persona al proyecto";
             vm.personSelected = null;
-            personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, assignJobLogError);
+            personService.getAvailablePeopleForProject(vm.projectSelected.name, changeProjectSuccess, assignJobLogError);
         }
 
         function assignJobLogError(response) {
@@ -59,30 +82,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-
-        /** Controller Functions **/
-
-        clientService.getEnabled(getClientsSuccess, callbackError);
-
-        function changeClient() {
-            projectService.getEnabledProjectsByClient(vm.clientSelected.name, changeClientSuccess, callbackError);
-        };
-
-        function changeProject() {
-            personService.getPersonAvailableForProject(vm.projectSelected.name, changeProjectSuccess, callbackError);
-        };
-
-        function submit() {
-            var jobLog = {
-                person: vm.personSelected.name,
-                project: {
-                    id: vm.projectSelected.id
-                }
-            };
-
-            jobLogService.assignJobLog(jobLog, assignJobLogSuccess, assignJobLogError);
-        };
 
     }
 

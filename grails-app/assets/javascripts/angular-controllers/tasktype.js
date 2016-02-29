@@ -11,7 +11,6 @@
 
     function TaskTypeController(taskTypeService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.sortType = 'name'; // set the default sort type
@@ -32,29 +31,10 @@
         vm.edit = openUpdate;
         vm.update = update;
 
-
-        /** Callback Handlers **/
-
-        function getSuccess(response) {
-            vm.taskTypes = response.data;
-        }
-
-        function createSuccess(response) {
-            utilsService.addToTable(vm.taskTypes, response.data);
-        }
-
-        function updateSuccess(response) {
-            utilsService.updateInTable(vm.taskTypes, response.data);
-        }
-
-        function callbackError(response) {
-            utilsService.writeToLog(response, 'error');
-        }
-
-
-        /** TaskType ABM **/
-
         taskTypeService.get(getSuccess, callbackError);
+
+
+        /** Controller Functions **/
 
         function openCreate() {
             vm.taskTypeToCreate = {name: "", enabled: true};
@@ -86,6 +66,25 @@
                 taskTypeService.update(vm.taskTypeToEdit, updateSuccess, callbackError);
             }
         };
+
+
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.taskTypes = response.data;
+        }
+
+        function createSuccess(response) {
+            utilsService.addToTable(vm.taskTypes, response.data);
+        }
+
+        function updateSuccess(response) {
+            utilsService.updateInTable(vm.taskTypes, response.data);
+        }
+
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
+        }
 
 
         /** Table Ordering & Filtering **/

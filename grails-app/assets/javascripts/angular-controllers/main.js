@@ -9,7 +9,6 @@
 
     function MainController($window, clientService, projectService, jobLogService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.clients = [];
@@ -27,6 +26,29 @@
 
         vm.changeClient = changeClient;
         vm.export = exportFile;
+
+        clientService.get(getClientsSuccess, callbackError);
+
+
+        /** Controller Functions **/
+
+        function changeClient() {
+            projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
+        };
+
+        function exportFile() {
+            var flag = vm.verifyDates();
+            //if(flag){
+            var filters = {
+                clientName: vm.clientSelected.name,
+                projectName: vm.projectSelected.name,
+                dateFrom: vm.dateToString(vm.fromDateSelected),
+                dateTo: vm.dateToString(vm.toDateSelected)
+            };
+
+            jobLogService.filterDataToReport(vm.reportURI, filters, reportSuccess, reportFailure);
+
+        };
 
 
         /** Callback Handlers **/
@@ -57,28 +79,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-        /** Controller Functions **/
-
-        clientService.get(getClientsSuccess, callbackError);
-
-        function changeClient() {
-            projectService.getEnabledProjectsByClient(vm.clientSelected.name, getProjectsByClientSuccess, callbackError);
-        };
-
-        function exportFile() {
-            var flag = vm.verifyDates();
-            //if(flag){
-            var filters = {
-                clientName: vm.clientSelected.name,
-                projectName: vm.projectSelected.name,
-                dateFrom: vm.dateToString(vm.fromDateSelected),
-                dateTo: vm.dateToString(vm.toDateSelected)
-            };
-
-            jobLogService.filterDataToReport(vm.reportURI, filters, reportSuccess, reportFailure);
-
-        };
 
 
         /** Utils **/

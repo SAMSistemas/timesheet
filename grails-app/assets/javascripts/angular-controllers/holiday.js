@@ -9,7 +9,6 @@
 
     function HolidayController($scope, holidayService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.eventToCreate = {};
@@ -24,6 +23,33 @@
         vm.create = create;
         vm.update = update;
         vm.delete = deleteHoliday;
+
+        holidayService.get(getSuccess, callbackError);
+
+
+        /** Controller Functions **/
+
+        function create() {
+            holidayService.create(vm.eventToCreate, createSuccess, callbackError);
+        };
+
+        function update() {
+            //Remove previous event from calendar
+            vm.removeEvent(vm.eventToUpdate);
+
+            holidayService.update(vm.eventToUpdate, updateSuccess, callbackError);
+
+            //Add new event source to calendar to render it
+            vm.addEventSource(vm.eventToUpdate);
+
+        };
+
+        function deleteHoliday() {
+            holidayService.delete(vm.eventToUpdate.id, deleteSuccess, callbackError);
+
+            //Remove event from calendar
+            vm.removeEvent(vm.eventToUpdate);
+        };
 
 
         /** Callback Handlers **/
@@ -51,33 +77,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-
-        /** Holiday ABM **/
-
-        holidayService.get(getSuccess, callbackError);
-
-        function create() {
-            holidayService.create(vm.eventToCreate, createSuccess, callbackError);
-        };
-
-        function update() {
-            //Remove previous event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-
-            holidayService.update(vm.eventToUpdate, updateSuccess, callbackError);
-
-            //Add new event source to calendar to render it
-            vm.addEventSource(vm.eventToUpdate);
-
-        };
-
-        function deleteHoliday() {
-            holidayService.delete(vm.eventToUpdate.id, deleteSuccess, callbackError);
-
-            //Remove event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-        };
 
 
         /** Utils **/

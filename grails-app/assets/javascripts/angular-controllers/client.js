@@ -11,7 +11,6 @@
 
     function ClientController(clientService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.sortType = 'name'; // set the default sort type
@@ -32,29 +31,10 @@
         vm.edit = openUpdate;
         vm.update = update;
 
-
-        /** Callback Handlers **/
-
-        function getSuccess(response) {
-            vm.clients = response.data;
-        }
-
-        function createSuccess(response) {
-            utilsService.addToTable(vm.clients, response.data);
-        }
-
-        function updateSuccess(response) {
-            utilsService.updateInTable(vm.clients, response.data);
-        }
-
-        function callbackError(response) {
-            utilsService.writeToLog(response, 'error');
-        }
-
-
-        /** Client ABM **/
-
         clientService.get(getSuccess, callbackError);
+
+
+        /** Controller Functions **/
 
         function openCreate() {
             vm.clientToCreate = {name: "", short_name: "", enabled: true};
@@ -88,6 +68,24 @@
                 clientService.update(vm.clientToEdit, updateSuccess, callbackError);
             }
         };
+
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.clients = response.data;
+        }
+
+        function createSuccess(response) {
+            utilsService.addToTable(vm.clients, response.data);
+        }
+
+        function updateSuccess(response) {
+            utilsService.updateInTable(vm.clients, response.data);
+        }
+
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
+        }
 
 
         /** Table Ordering & Filtering **/

@@ -9,7 +9,6 @@
 
     function LoginController($window, loginService, personService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.user = "";
@@ -20,6 +19,29 @@
         vm.logout = logout;
         vm.searchName = searchName;
 
+        searchName();
+
+
+        /** Controllers Functions **/
+
+        function login() {
+            loginService.login(vm.user, vm.pass, loginSuccess, logInError);
+        };
+
+        function logout() {
+            loginService.logout(logOutSuccess, callbackError);
+        };
+
+        function searchName() {
+            vm.user = sessionStorage.getItem("username");
+
+            if (sessionStorage.getItem("name") == "") {
+                personService.show(vm.user, showPersonSuccess, callbackError);
+            } else {
+                vm.name = sessionStorage.getItem("name");
+            }
+        };
+
         /** Callback Handlers **/
 
         function loginSuccess() {
@@ -29,6 +51,8 @@
         }
 
         function logOutSuccess() {
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("name");
             $window.location.href = '/login';
         }
 
@@ -47,32 +71,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-
-        /** Controllers Functions **/
-
-        function login() {
-            loginService.login(vm.user, vm.pass, loginSuccess, logInError);
-        };
-
-        function logout() {
-            loginService.logout(logOutSuccess, callbackError);
-
-            sessionStorage.removeItem("username");
-            sessionStorage.removeItem("name");
-        };
-
-        function searchName() {
-            vm.user = sessionStorage.getItem("username");
-
-            if (sessionStorage.getItem("name") == "") {
-                personService.show(vm.user, showPersonSuccess, callbackError);
-            }
-
-            vm.name = sessionStorage.getItem("name");
-        };
-
-        searchName();
 
     }
 

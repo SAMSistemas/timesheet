@@ -11,7 +11,6 @@
 
     function PersonController(personService, workPositionService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.sortType = 'name'; // set the default sort type
@@ -35,35 +34,12 @@
         vm.edit = openUpdate;
         vm.update = update;
 
-
-        /** Callback Handlers **/
-
-        function getSuccess(response) {
-            vm.people = response.data;
-        }
-
-        function createSuccess(response) {
-            utilsService.addToTable(vm.people, response.data);
-        }
-
-        function updateSuccess(response) {
-            utilsService.updateInTable(vm.people, response.data);
-        }
-
-        function getWorkPositionSuccess(response) {
-            vm.work_positions = response.data;
-        }
-
-        function callbackError(response) {
-            utilsService.writeToLog(response, 'error');
-        }
-
-
-        /** Person ABM **/
-
         personService.get(getSuccess, callbackError);
 
         workPositionService.get(getWorkPositionSuccess, callbackError);
+
+
+        /** Controller Functions **/
 
         function openCreate() {
             vm.personToCreate = {
@@ -103,6 +79,29 @@
                 personService.update(vm.personToEdit, updateSuccess, callbackError);
             }
         };
+
+
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.people = response.data;
+        }
+
+        function createSuccess(response) {
+            utilsService.addToTable(vm.people, response.data);
+        }
+
+        function updateSuccess(response) {
+            utilsService.updateInTable(vm.people, response.data);
+        }
+
+        function getWorkPositionSuccess(response) {
+            vm.work_positions = response.data;
+        }
+
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
+        }
 
 
         /** Table Ordering & Filtering **/

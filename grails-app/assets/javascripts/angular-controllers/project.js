@@ -11,7 +11,6 @@
 
     function ProjectController(projectService, clientService, utilsService) {
 
-        /** Capturing controller instance **/
         var vm = this;
 
         vm.sortType = 'name'; // set the default sort type
@@ -39,35 +38,12 @@
         vm.edit = openUpdate;
         vm.update = update;
 
-
-        /** Callback Handlers **/
-
-        function getSuccess(response) {
-            vm.projects = response.data;
-        }
-
-        function createSuccess(response) {
-            vm.addToTable(vm.projects, response.data);
-        }
-
-        function updateSuccess(response) {
-            vm.updateInTable(vm.projects, response.data);
-        }
-
-        function getEnabledSuccess(response) {
-            vm.enabledClients = response.data;
-        }
-
-        function callbackError(response) {
-            utilsService.writeToLog(response, 'error');
-        }
-
-
-        /** Project ABM **/
-
         clientService.getEnabled(getEnabledSuccess, callbackError);
 
         projectService.get(getSuccess, callbackError);
+
+
+        /** Controller Functions **/
 
         function openCreate() {
             vm.clientSelected = "";
@@ -124,6 +100,29 @@
 
             vm.clientSelected = {};
         };
+
+
+        /** Callback Handlers **/
+
+        function getSuccess(response) {
+            vm.projects = response.data;
+        }
+
+        function createSuccess(response) {
+            vm.addToTable(vm.projects, response.data);
+        }
+
+        function updateSuccess(response) {
+            vm.updateInTable(vm.projects, response.data);
+        }
+
+        function getEnabledSuccess(response) {
+            vm.enabledClients = response.data;
+        }
+
+        function callbackError(response) {
+            utilsService.writeToLog(response, 'error');
+        }
 
 
         /* Filter functions */
