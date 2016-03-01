@@ -7,17 +7,15 @@
         .module('myApp')
         .controller('TsTableController', TsTableController);
 
-    TsTableController.$inject = ['projectService', 'clientService', 'utilsService'];
-
     function TsTableController() {
 
         var vm = this;
 
-        vm.sortType = 'name'; // set the default sort type
-        vm.sortReverse = false;  // set the default sort order
-        vm.search = {client: "", project_name: "", short_name: ""};     // set the default search/filter term
-        vm.status = 'all';
-
+        vm.sortType = '';           // set the default sort type
+        vm.sortReverse = false;     // set the default sort order
+        vm.search = {};             // set the default search/filter term
+        vm.status = 'all';          // set the default status filter
+        
 
         /* Filter functions */
 
