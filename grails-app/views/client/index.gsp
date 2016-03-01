@@ -18,36 +18,36 @@
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="clientCtrl.new()"><i
             class="material-icons left">enhanced_encryption</i>Crear</a>
 
-    <table class="responsive-table striped centered">
+    <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
 
         <thead>
         <tr class="tr-header-width-and-height">
             <th></th>
-            <th><a href ng-click="clientCtrl.reverseOrder(name)">Nombre del cliente</a></th>
-            <th><a href ng-click="clientCtrl.reverseOrder(short_name)">Sigla del cliente</a></th>
-            <th><a href ng-click="clientCtrl.reverseOrder(enabled)">Habilitado</a></th>
+            <th><a href ng-click="tableCtrl.reverseOrder(name)">Nombre del cliente</a></th>
+            <th><a href ng-click="tableCtrl.reverseOrder(short_name)">Sigla del cliente</a></th>
+            <th><a href ng-click="tableCtrl.reverseOrder(enabled)">Habilitado</a></th>
             <th></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding"></th>
             <th class="th-filter-padding">
-                <input-field-text ng-id="search_name" ng-model="clientCtrl.search.name"
+                <input-field-text ng-id="search_name" ng-model="tableCtrl.search.name"
                                   ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding">
-                <input-field-text ng-id="search_sname" ng-model="clientCtrl.search.short_name"
+                <input-field-text ng-id="search_sname" ng-model="tableCtrl.search.short_name"
                                   ng-placeholder="Ingrese Sigla"></input-field-text>
             </th>
             <th class="th-filter-padding">
-                <select-status ng-model="clientCtrl.status"></select-status>
+                <select-status ng-model="tableCtrl.status"></select-status>
             </th>
             <th class="th-filter-padding"></th>
         </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="client in clientCtrl.clients | orderBy:clientCtrl.sortType:clientCtrl.sortReverse |
-        filter:clientCtrl.search:clientCtrl.startsWith | filterByStatus:clientCtrl.status"
+        <tr ng-repeat="client in clientCtrl.clients | orderBy:tableCtrl.sortType:tableCtrl.sortReverse |
+        filter:tableCtrl.search:tableCtrl.startsWith | filterByStatus:tableCtrl.status"
             class="tr-body-width-and-height">
             <td><i class="material-icons center material-icons-line-heigth">business</i></td>
             <td class="truncate">{{ client.name }}</td>
@@ -179,6 +179,7 @@
 </div>
 
 <asset:javascript src="angular-controllers/client.js"/>
+<asset:javascript src="angular-controllers/ts-table.js"/>
 
 </body>
 </html>

@@ -18,51 +18,51 @@
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="personCtrl.new()"><i
             class="material-icons left">person_add</i>Crear</a>
 
-    <table class="responsive-table striped centered">
+    <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
 
         <thead>
         <tr class="tr-header-width-and-height">
             <th class="width-5"></th>
-            <th class="width-15"><a href ng-click="personCtrl.reverseOrder(name)">Nombre</a></th>
-            <th class="width-15"><a href ng-click="personCtrl.reverseOrder(lastname)">Apellido</a></th>
-            <th class="width-15"><a href ng-click="personCtrl.reverseOrder(username)">Usuario</a></th>
-            <th class="width-20"><a href ng-click="personCtrl.reverseOrder(work_position)">Posicion</a></th>
-            <th class="width-10"><a href ng-click="personCtrl.reverseOrder(work_hours)">Asignacion</a></th>
-            <th class="width-15"><a href ng-click="personCtrl.reverseOrder(enabled)">Habilitado</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(name)">Nombre</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(lastname)">Apellido</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(username)">Usuario</a></th>
+            <th class="width-20"><a href ng-click="tableCtrl.reverseOrder(work_position)">Posicion</a></th>
+            <th class="width-10"><a href ng-click="tableCtrl.reverseOrder(work_hours)">Asignacion</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(enabled)">Habilitado</a></th>
             <th class="width-5"></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_name" ng-model="personCtrl.search.name"
+                <input-field-text ng-id="search_name" ng-model="tableCtrl.search.name"
                                   ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_lastname" ng-model="personCtrl.search.lastname"
+                <input-field-text ng-id="search_lastname" ng-model="tableCtrl.search.lastname"
                                   ng-placeholder="Ingrese Apellido"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_username" ng-model="personCtrl.search.username"
+                <input-field-text ng-id="search_username" ng-model="tableCtrl.search.username"
                                   ng-placeholder="Ingrese Usuario"></input-field-text>
             </th>
             <th class="th-filter-padding width-20">
-                <input-field-text ng-id="search_position" ng-model="personCtrl.search.work_position"
+                <input-field-text ng-id="search_position" ng-model="tableCtrl.search.work_position"
                                   ng-placeholder="Ingrese Posición"></input-field-text>
             </th>
             <th class="th-filter-padding width-10">
-                <input-field-text ng-id="search_hours" ng-model="personCtrl.search.work_hours"
+                <input-field-text ng-id="search_hours" ng-model="tableCtrl.search.work_hours"
                                   ng-placeholder="Ingrese Horas"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <select-status ng-model="personCtrl.status"></select-status>
+                <select-status ng-model="tableCtrl.status"></select-status>
             </th>
             <th class="th-filter-padding width-5"></th>
         </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="person in personCtrl.people | orderBy:personCtrl.sortType:personCtrl.sortReverse |
-        filter:personCtrl.search:personCtrl.startsWith | filterByStatus:personCtrl.status"
+        <tr ng-repeat="person in personCtrl.people | orderBy:tableCtrl.sortType:tableCtrl.sortReverse |
+        filter:tableCtrl.search:tableCtrl.startsWith | filterByStatus:tableCtrl.status"
             class="tr-body-width-and-height">
             <td class="width-5"><i class="material-icons center material-icons-line-heigth">person</i></td>
             <td class="width-15 truncate">{{ person.name }}</td>
@@ -294,6 +294,7 @@
 </div>
 
 <asset:javascript src="angular-controllers/person.js"/>
+<asset:javascript src="angular-controllers/ts-table.js"/>
 
 </body>
 </html>

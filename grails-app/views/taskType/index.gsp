@@ -18,31 +18,31 @@
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="taskCtrl.new()"><i
             class="material-icons left">note_add</i>Crear</a>
 
-    <table class="responsive-table striped centered">
+    <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
 
         <thead>
         <tr class="tr-header-width-and-height">
             <th class="width-10"></th>
-            <th class="width-40"><a href ng-click="taskCtrl.reverseOrder(name)">Nombre</a></th>
-            <th class="width-25"><a href ng-click="taskCtrl.reverseOrder(enabled)">Habilitado</a></th>
+            <th class="width-40"><a href ng-click="tableCtrl.reverseOrder(name)">Nombre</a></th>
+            <th class="width-25"><a href ng-click="tableCtrl.reverseOrder(enabled)">Habilitado</a></th>
             <th class="width-25"></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-10"></th>
             <th class="th-filter-padding width-40">
-                <input-field-text ng-id="search_name" ng-model="taskCtrl.search.name"
+                <input-field-text ng-id="search_name" ng-model="tableCtrl.search.name"
                                   ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding width-25">
-                <select-status ng-model="taskCtrl.status"></select-status>
+                <select-status ng-model="tableCtrl.status"></select-status>
             </th>
             <th class="th-filter-padding width-25"></th>
         </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="taskType in taskCtrl.taskTypes | orderBy:taskCtrl.sortType:taskCtrl.sortReverse |
-        filter:taskCtrl.search:taskCtrl.startsWith | filterByStatus:taskCtrl.status"
+        <tr ng-repeat="taskType in taskCtrl.taskTypes | orderBy:tableCtrl.sortType:tableCtrl.sortReverse |
+        filter:tableCtrl.search:tableCtrl.startsWith | filterByStatus:tableCtrl.status"
             class="tr-body-width-and-height">
             <td class="width-10"><i class="material-icons center material-icons-line-heigth">assignment</i></td>
             <td class="width-40 truncate">{{ taskType.name | uppercase }}</td>
@@ -148,6 +148,7 @@
 </div>
 
 <asset:javascript src="angular-controllers/tasktype.js"/>
+<asset:javascript src="angular-controllers/ts-table.js"/>
 
 </body>
 </html>

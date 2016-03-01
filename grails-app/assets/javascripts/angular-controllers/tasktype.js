@@ -1,5 +1,3 @@
-//= require shared/table-body-observer
-
 (function() {
     'use strict';
 
@@ -12,11 +10,6 @@
     function TaskTypeController(taskTypeService, utilsService) {
 
         var vm = this;
-
-        vm.sortType = 'name'; // set the default sort type
-        vm.sortReverse = false;  // set the default sort order
-        vm.search = '';     // set the default search/filter term
-        vm.status = 'all';
 
         vm.taskTypes = [];
         vm.taskTypeToCreate = null;
@@ -85,19 +78,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-
-        /** Table Ordering & Filtering **/
-
-        vm.reverseOrder = function (sortType) {
-            vm.sortType = sortType;
-            vm.sortReverse = !vm.sortReverse
-        };
-
-        vm.startsWith = function (actual, expected) {
-            var lowerStr = (actual + "").toLowerCase();
-            return lowerStr.indexOf(expected.toLowerCase()) === 0;
-        };
 
     }
 

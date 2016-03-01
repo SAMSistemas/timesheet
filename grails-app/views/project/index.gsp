@@ -21,40 +21,40 @@
     <table class="responsive-table striped centered">
 
         <thead>
-        <tr class="tr-header-width-and-height">
+        <tr class="tr-header-width-and-height" ng-controller="TsTableController as tableCtrl">
             <th class="width-5"></th>
-            <th class="width-15"><a href ng-click="projectCtrl.reverseOrder(client)">Cliente</a></th>
-            <th class="width-15"><a href ng-click="projectCtrl.reverseOrder(name)">Nombre</a></th>
-            <th class="width-15"><a href ng-click="projectCtrl.reverseOrder(short_name)">Sigla</a></th>
-            <th class="width-15"><a href ng-click="projectCtrl.reverseOrder(start_date)">Fecha Inicio</a></th>
-            <th class="width-20"><a href ng-click="projectCtrl.reverseOrder(enabled)">Habilitado</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(client)">Cliente</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(name)">Nombre</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(short_name)">Sigla</a></th>
+            <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(start_date)">Fecha Inicio</a></th>
+            <th class="width-20"><a href ng-click="tableCtrl.reverseOrder(enabled)">Habilitado</a></th>
             <th class="width-15"></th>
         </tr>
         <tr class="grey darken-2 tr-header-width-and-height">
             <th class="th-filter-padding width-5"></th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_client" ng-model="projectCtrl.search.client.name"
+                <input-field-text ng-id="search_client" ng-model="tableCtrl.search.client.name"
                                   ng-placeholder="Ingrese Cliente"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_name" ng-model="projectCtrl.search.project_name"
+                <input-field-text ng-id="search_name" ng-model="tableCtrl.search.project_name"
                                   ng-placeholder="Ingrese Nombre"></input-field-text>
             </th>
             <th class="th-filter-padding width-15">
-                <input-field-text ng-id="search_sname" ng-model="projectCtrl.search.short_name"
+                <input-field-text ng-id="search_sname" ng-model="tableCtrl.search.short_name"
                                   ng-placeholder="Ingrese Sigla"></input-field-text>
             </th>
             <th class="th-filter-padding width-15"></th>
             <th class="th-filter-padding width-20">
-                <select-status ng-model="projectCtrl.status"></select-status>
+                <select-status ng-model="tableCtrl.status"></select-status>
             </th>
             <th class="th-filter-padding width-15"></th>
         </tr>
         </thead>
 
         <tbody id="table-body">
-        <tr ng-repeat="project in projectCtrl.projects | orderBy:projectCtrl.sortType:projectCtrl.sortReverse |
-            filter:projectCtrl.search:projectCtrl.startsWith | filterByStatus:projectCtrl.status"
+        <tr ng-repeat="project in projectCtrl.projects | orderBy:tableCtrl.sortType:tableCtrl.sortReverse |
+            filter:tableCtrl.search:tableCtrl.startsWith | filterByStatus:tableCtrl.status"
             class="tr-body-width-and-height">
             <td class="width-5"><i class="material-icons center material-icons-line-heigth">work</i></td>
             <td class="width-15 truncate">{{ project.client.name }}</td>
@@ -234,6 +234,7 @@
 </div>
 
 <asset:javascript src="angular-controllers/project.js"/>
+<asset:javascript src="angular-controllers/ts-table.js"/>
 
 </body>
 </html>

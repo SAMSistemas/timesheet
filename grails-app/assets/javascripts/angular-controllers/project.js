@@ -1,5 +1,3 @@
-//= require shared/table-body-observer
-
 (function() {
     'use strict';
 
@@ -12,11 +10,6 @@
     function ProjectController(projectService, clientService, utilsService) {
 
         var vm = this;
-
-        vm.sortType = 'name'; // set the default sort type
-        vm.sortReverse = false;  // set the default sort order
-        vm.search = {client: "", project_name: "", short_name: ""};     // set the default search/filter term
-        vm.status = 'all';
 
         vm.projects = [];
         vm.projectToCreate = null;
@@ -123,19 +116,6 @@
         function callbackError(response) {
             utilsService.writeToLog(response, 'error');
         }
-
-
-        /* Filter functions */
-
-        vm.reverseOrder = function (sortType) {
-            vm.sortType = sortType;
-            vm.sortReverse = !vm.sortReverse
-        };
-
-        vm.startsWith = function (actual, expected) {
-            var lowerStr = (actual + "").toLowerCase();
-            return lowerStr.indexOf(expected.toLowerCase()) === 0;
-        };
 
 
         /* Filter clients by enabled */

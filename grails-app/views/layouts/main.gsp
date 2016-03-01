@@ -161,7 +161,7 @@
 
 <asset:javascript src="angular-controllers/main.js"/>
 <asset:javascript src="angular-controllers/login.js"/>
-<asset:javascript src="angular-controllers/session-info.js"/>
+<asset:javascript src="angular-controllers/ts-session-info.js"/>
 
 </body>
 </html>
