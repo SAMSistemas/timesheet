@@ -18,10 +18,10 @@
     <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="projectCtrl.new()"><i
             class="material-icons left">add</i>Crear</a>
 
-    <table class="responsive-table striped centered">
+    <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
 
         <thead>
-        <tr class="tr-header-width-and-height" ng-controller="TsTableController as tableCtrl">
+        <tr class="tr-header-width-and-height">
             <th class="width-5"></th>
             <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(client)">Cliente</a></th>
             <th class="width-15"><a href ng-click="tableCtrl.reverseOrder(name)">Nombre</a></th>
