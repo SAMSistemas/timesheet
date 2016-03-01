@@ -28,15 +28,34 @@
     width: 100% !important;
 }
 
-.modal-label {
+.modal-date .select-modal input.select-dropdown {
+    color: #757575 !important;
+    border-color: #bdbdbd !important;
+    line-height: 3rem !important;
+    text-align: center;
 }
 
-.modal-label-select {
-    margin-top: 15px;
+.modal-date .select-modal span.caret {
+    color: #757575 !important;
+}
+
+.modal-date ul.dropdown-content {
+    max-height: 150px !important;
+}
+
+.modal-date ul.dropdown-content li span {
+    text-align: center !important;
+}
+
+.modal-label {
 }
 
 .modal-label-date {
     margin-top: 5px;
+}
+
+.modal-label-select {
+    margin-top: 15px;
 }
 
 .modal-label-radioButton {

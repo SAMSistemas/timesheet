@@ -9,31 +9,3 @@
 *= require shared/has-error.css
 *= require_self
 */
-
-.select-modal input.select-dropdown {
-    color: #757575 !important;
-    border-color: #bdbdbd !important;
-    line-height: 3rem !important;
-    text-align: center;
-}
-
-.select-modal span.caret {
-    color: #757575 !important;
-}
-
-.combodate select {
-    display: inline;
-    text-align: center;
-    color: #009688;
-    width: 20% !important;
-}
-
-/* Date Combo Styles */
-
-ul.dropdown-content {
-    max-height: 150px !important;
-}
-
-ul.dropdown-content li span {
-    text-align: center !important;
-}

@@ -15,7 +15,8 @@
 
     <h3 class="card-title teal-text">Lista de Personas</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="personCtrl.new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
+       ng-click="personCtrl.new()"><i
             class="material-icons left">person_add</i>Crear</a>
 
     <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
@@ -103,7 +104,8 @@
                         <input name="name" type="text" maxlength="30" ng-model="personCtrl.personToCreate.name"
                                required/>
                         <label ng-class="{'has-error': personCtrl.createForm.name.$invalid}">Nombre
-                            <span ng-show="personCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.createForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -114,7 +116,8 @@
                         <input name="lastname" type="text" maxlength="30"
                                ng-model="personCtrl.personToCreate.lastname" required>
                         <label ng-class="{'has-error': personCtrl.createForm.lastname.$invalid}">Apellido
-                            <span ng-show="personCtrl.createForm.lastname.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.createForm.lastname.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -126,8 +129,10 @@
                                ng-model="personCtrl.personToCreate.username" required available
                                url-to-check="/people?username=">
                         <label ng-class="{'has-error': personCtrl.createForm.username.$invalid}">Usuario
-                            <span ng-show="personCtrl.createForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="personCtrl.createForm.username.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="personCtrl.createForm.username.$error.required"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.createForm.username.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -138,8 +143,10 @@
                         <input name="password" type="text" maxlength="8"
                                ng-model="personCtrl.personToCreate.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label ng-class="{'has-error': personCtrl.createForm.password.$invalid}">Contraseña
-                            <span ng-show="personCtrl.createForm.password.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="personCtrl.createForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
+                            <span ng-show="personCtrl.createForm.password.$error.required"
+                                  class="has-error">es obligatoria</span>
+                            <span ng-show="personCtrl.createForm.password.$error.pattern"
+                                  class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>
@@ -147,14 +154,16 @@
                 %{--Work Position Select--}%
                 <div class="row">
                     <div class="col s12">
-                        <select class="col s12 browser-default" name="position" ng-model="personCtrl.personToCreate.work_position"
+                        <select class="col s12 browser-default" name="position"
+                                ng-model="personCtrl.personToCreate.work_position"
                                 ng-options="work_position.description as work_position.description for work_position in personCtrl.work_positions"
                                 required>
                             <option value="" disabled selected>~ Elegí una posición ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
                                ng-class="{'has-error': personCtrl.createForm.position.$invalid}">Posición
-                            <span ng-show="personCtrl.createForm.position.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="personCtrl.createForm.position.$error.required"
+                                  class="has-error">es obligatoria</span>
                         </label>
                     </div>
                 </div>
@@ -162,13 +171,15 @@
                 %{--Hours Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <select class="col s12 browser-default" name="workHours" ng-model="personCtrl.personToCreate.work_hours"
+                        <select class="col s12 browser-default" name="workHours"
+                                ng-model="personCtrl.personToCreate.work_hours"
                                 ng-options="work_hour for work_hour in personCtrl.work_hours" required>
                             <option value="" disabled selected>~ Elegí una hora ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
                                ng-class="{'has-error': personCtrl.createForm.workHours.$invalid}">Horas
-                            <span ng-show="personCtrl.createForm.workHours.$error.required" class="has-error">es obligatoria</span>
+                            <span ng-show="personCtrl.createForm.workHours.$error.required"
+                                  class="has-error">es obligatoria</span>
                         </label>
                     </div>
                 </div>
@@ -176,7 +187,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="personCtrl.personToCreate.enabled"
+                        <input id="enable" type="checkbox" class="filled-in"
+                               ng-model="personCtrl.personToCreate.enabled"
                                checked="checked">
                         <label for="enable">Habilitado</label>
                     </div>
@@ -208,7 +220,8 @@
                         <input name="name" type="text" maxlength="30" ng-model="personCtrl.personToEdit.name"
                                required>
                         <label ng-class="{'has-error': personCtrl.editForm.name.$invalid}">Nombre
-                            <span ng-show="personCtrl.editForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.editForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -219,7 +232,8 @@
                         <input name="lastname" type="text" maxlength="30"
                                ng-model="personCtrl.personToEdit.lastname" required>
                         <label ng-class="{'has-error': personCtrl.editForm.lastname.$invalid}">Apellido
-                            <span ng-show="personCtrl.editForm.lastname.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.editForm.lastname.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -228,11 +242,14 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="username" type="text" maxlength="25"
-                               ng-model="personCtrl.personToEdit.username" required available original-value="personCtrl.person.username"
+                               ng-model="personCtrl.personToEdit.username" required available
+                               original-value="personCtrl.person.username"
                                url-to-check="/people?username=">
                         <label ng-class="{'has-error': personCtrl.editForm.username.$invalid}">Usuario
-                            <span ng-show="personCtrl.editForm.username.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="personCtrl.editForm.username.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="personCtrl.editForm.username.$error.required"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.editForm.username.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -243,8 +260,10 @@
                         <input name="password" type="text" maxlength="8"
                                ng-model="personCtrl.personToEdit.password" ng-pattern="/[a-zA-Z]{8}/" required>
                         <label ng-class="{'has-error': personCtrl.editForm.password.$invalid}">Contraseña
-                            <span ng-show="personCtrl.editForm.password.$invalid" class="has-error">es obligatorio</span>
-                            <span ng-show="personCtrl.createForm.password.$error.pattern" class="has-error">debe ser de ocho letras</span>
+                            <span ng-show="personCtrl.editForm.password.$invalid"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="personCtrl.createForm.password.$error.pattern"
+                                  class="has-error">debe ser de ocho letras</span>
                         </label>
                     </div>
                 </div>
@@ -263,7 +282,8 @@
                 %{--Hours Field--}%
                 <div id="edit-hours" class="row">
                     <div class="col s12">
-                        <select id="edit_hours" class="col s12 browser-default" ng-model="personCtrl.personToEdit.work_hours"
+                        <select id="edit_hours" class="col s12 browser-default"
+                                ng-model="personCtrl.personToEdit.work_hours"
                                 ng-options="work_hour for work_hour in personCtrl.work_hours">
                             <option value="" disabled selected>~ Elegí una hora ~</option>
                         </select>
@@ -274,7 +294,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="personCtrl.personToEdit.enabled">
+                        <input id="edit_enable" type="checkbox" class="filled-in"
+                               ng-model="personCtrl.personToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>

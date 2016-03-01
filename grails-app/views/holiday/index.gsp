@@ -26,9 +26,11 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="create_name" type="text" name="name" ng-model="holidayCtrl.eventToCreate.title" required>
+                        <input id="create_name" type="text" name="name" ng-model="holidayCtrl.eventToCreate.title"
+                               required>
                         <label ng-class="{'has-error': holidayCtrl.createForm.name.$invalid}">Nombre
-                            <span ng-show="holidayCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="holidayCtrl.createForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -36,14 +38,16 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="create_date" type="text" ng-value="holidayCtrl.eventToCreate.date | date: 'dd-MM-yyyy'" disabled>
+                        <input id="create_date" type="text"
+                               ng-value="holidayCtrl.eventToCreate.date | date: 'dd-MM-yyyy'" disabled>
                         <label for="create_date">Fecha</label>
                     </div>
                 </div>
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="modal-action modal-close btn-flat disabled" ng-disabled="holidayCtrl.createForm.$invalid"
+                    <button class="modal-action modal-close btn-flat disabled"
+                            ng-disabled="holidayCtrl.createForm.$invalid"
                             ng-class="{'teal-text teal-hover': holidayCtrl.createForm.$valid}">Guardar</button>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
                 </div>
@@ -63,9 +67,11 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_name" type="text" name="name" ng-model="holidayCtrl.eventToUpdate.title" required>
+                        <input id="edit_name" type="text" name="name" ng-model="holidayCtrl.eventToUpdate.title"
+                               required>
                         <label ng-class="{'has-error': holidayCtrl.editForm.name.$invalid}">Nombre
-                            <span ng-show="holidayCtrl.editForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="holidayCtrl.editForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -73,14 +79,16 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_date" type="text" ng-value="holidayCtrl.eventToUpdate.date | date: 'dd-MM-yyyy'" disabled>
+                        <input id="edit_date" type="text" ng-value="holidayCtrl.eventToUpdate.date | date: 'dd-MM-yyyy'"
+                               disabled>
                         <label for="edit_date">Fecha</label>
                     </div>
                 </div>
 
                 %{--Button Row--}%
                 <div class="modal-footer">
-                    <button class="modal-action modal-close btn-flat disabled" ng-disabled="holidayCtrl.editForm.$invalid"
+                    <button class="modal-action modal-close btn-flat disabled"
+                            ng-disabled="holidayCtrl.editForm.$invalid"
                             ng-class="{'teal-text teal-hover': holidayCtrl.editForm.$valid}">Guardar</button>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover"
                        ng-click="holidayCtrl.delete()">Eliminar</a>

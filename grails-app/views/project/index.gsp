@@ -15,7 +15,8 @@
 
     <h3 class="card-title teal-text">Lista de Proyectos</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="projectCtrl.new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
+       ng-click="projectCtrl.new()"><i
             class="material-icons left">add</i>Crear</a>
 
     <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
@@ -94,12 +95,14 @@
                 <div class="row">
                     <div class="col s12">
                         <select class="col s12 browser-default" name="client" ng-model="projectCtrl.clientSelected"
-                                ng-options="client.name for client in projectCtrl.enabledClients track by client.name" required>
+                                ng-options="client.name for client in projectCtrl.enabledClients track by client.name"
+                                required>
                             <option value="" disabled selected>~ Elija un cliente ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
                                ng-class="{'has-error': projectCtrl.createForm.client.$invalid}">Cliente
-                            <span ng-show="projectCtrl.createForm.client.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="projectCtrl.createForm.client.$error.required"
+                                  class="has-error">es obligatorio</span>
                         </label>
                     </div>
                 </div>
@@ -110,8 +113,10 @@
                         <input name="name" type="text" maxlength="50" ng-model="projectCtrl.projectToCreate.name"
                                required available url-to-check="/projects?name=">
                         <label ng-class="{'has-error': projectCtrl.createForm.name.$invalid}">Nombre de proyecto
-                            <span ng-show="projectCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.createForm.name.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="projectCtrl.createForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="projectCtrl.createForm.name.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -122,8 +127,10 @@
                         <input name="sname" type="text" maxlength="10" ng-model="projectCtrl.projectToCreate.short_name"
                                required available url-to-check="/projects?short_name=">
                         <label ng-class="{'has-error': projectCtrl.createForm.sname.$invalid}">Sigla
-                            <span ng-show="projectCtrl.createForm.sname.$error.required" class="has-error">es obligatoria</span>
-                            <span ng-show="projectCtrl.createForm.sname.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="projectCtrl.createForm.sname.$error.required"
+                                  class="has-error">es obligatoria</span>
+                            <span ng-show="projectCtrl.createForm.sname.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -131,8 +138,10 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <span id="dateComboCreate" ng-combo-date-picker="exp" ng-model="projectCtrl.dateSelected"
-                              ng-months="{{ projectCtrl.months }}" ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        <ng-combo-date-picker class="modal-date" id="dateComboCreate"
+                                              ng-model="projectCtrl.dateSelected"
+                                              ng-months="{{ projectCtrl.months }}" ng-min-date="2005-01-01"
+                                              ng-max-date="2020-12-31"></ng-combo-date-picker>
                         <label class="modal-label modal-label-date left">Fecha Inicio</label>
                     </div>
                 </div>
@@ -140,7 +149,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="projectCtrl.projectToCreate.enabled">
+                        <input id="enable" type="checkbox" class="filled-in"
+                               ng-model="projectCtrl.projectToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -183,8 +193,10 @@
                                ng-model="projectCtrl.projectToEdit.name" required available
                                original-value="projectCtrl.project.name" url-to-check="/projects?name=">
                         <label ng-class="{'has-error': projectCtrl.editForm.project_name.$invalid}">Nombre de proyecto
-                            <span ng-show="projectCtrl.editForm.project_name.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.editForm.project_name.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="projectCtrl.editForm.project_name.$error.required"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="projectCtrl.editForm.project_name.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -196,8 +208,10 @@
                                ng-model="projectCtrl.projectToEdit.short_name" required available
                                original-value="projectCtrl.project.short_name" url-to-check="/projects?short_name=">
                         <label ng-class="{'has-error': projectCtrl.editForm.sname.$invalid}">Sigla
-                            <span ng-show="projectCtrl.editForm.sname.$error.required" class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.editForm.sname.$error.available" class="has-error">ya existe</span>
+                            <span ng-show="projectCtrl.editForm.sname.$error.required"
+                                  class="has-error">es obligatorio</span>
+                            <span ng-show="projectCtrl.editForm.sname.$error.available"
+                                  class="has-error">ya existe</span>
                         </label>
                     </div>
                 </div>
@@ -205,8 +219,9 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <span id="dateComboEdit" ng-combo-date-picker="exp" ng-model="projectCtrl.dateSelected"
-                              ng-months="{{ projectCtrl.months }}" ng-min-date="2005-01-01" ng-max-date="2020-12-31"></span>
+                        <ng-combo-date-picker id="dateComboEdit" class="modal-date" ng-model="projectCtrl.dateSelected"
+                                              ng-months="{{ projectCtrl.months }}" ng-min-date="2005-01-01"
+                                              ng-max-date="2020-12-31"></ng-combo-date-picker>
                         <label class="modal-label modal-label-date left">Fecha Inicio</label>
                     </div>
                 </div>
@@ -214,7 +229,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="projectCtrl.projectToEdit.enabled">
+                        <input id="edit_enable" type="checkbox" class="filled-in"
+                               ng-model="projectCtrl.projectToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 // Fuente: http://stackoverflow.com/questions/15592117/email-form-validation-one-at-a-time
 
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -19,11 +19,13 @@
             },
             link: function (scope, elem, attr, ctrl) {
                 elem.on('blur', function () {
-                    var viewValue = ctrl.$viewValue; // get the value of the input
+                    var inputValue = ctrl.$viewValue; // get the value of the input
 
-                    if (scope.originalValue !== viewValue && viewValue !== "") {
-                        // check if the value isn't equal to the value before the edition and it isn't empty
-                        $http.get(scope.urlToCheck + viewValue).then(
+                    if (scope.originalValue === inputValue && inputValue === "") {
+                        ctrl.$setValidity('available', true);
+                        scope.$apply();
+                    } else {
+                        $http.get(scope.urlToCheck + inputValue).then(
                             function (response) {
                                 if (response.data.length === 0) { // if it doesn't exists, it set the validity to true
                                     ctrl.$setValidity('available', true);
@@ -34,9 +36,6 @@
                             function () { // if there is an error, it set the validity to false
                                 ctrl.$setValidity('available', false);
                             });
-                    } else { // if it's the same or it's empty, it's ok
-                        ctrl.$setValidity('available', true);
-                        scope.$apply();
                     }
                 })
             }

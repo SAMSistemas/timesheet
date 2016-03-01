@@ -11,6 +11,7 @@
     <asset:stylesheet src="shared/errors.css"/>
 
 </head>
+
 <body>
 
 <div>
@@ -29,7 +30,6 @@
     <br>
 
 </div>
-
 
 </body>
 </html>

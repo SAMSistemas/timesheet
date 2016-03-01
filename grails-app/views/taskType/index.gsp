@@ -15,7 +15,8 @@
 
     <h3 class="card-title teal-text">Lista de Tipos de Tarea</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger" ng-click="taskCtrl.new()"><i
+    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
+       ng-click="taskCtrl.new()"><i
             class="material-icons left">note_add</i>Crear</a>
 
     <table class="responsive-table striped centered" ng-controller="TsTableController as tableCtrl">
@@ -79,7 +80,8 @@
                         <input name="name" type="text" maxlength="30" ng-model="taskCtrl.taskTypeToCreate.name"
                                required available url-to-check="/taskTypes?name=">
                         <label ng-class="{'has-error': taskCtrl.createForm.name.$invalid}">Nombre
-                            <span ng-show="taskCtrl.createForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="taskCtrl.createForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                             <span ng-show="taskCtrl.createForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -88,7 +90,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="enable" type="checkbox" class="filled-in" ng-model="taskCtrl.taskTypeToCreate.enabled">
+                        <input id="enable" type="checkbox" class="filled-in"
+                               ng-model="taskCtrl.taskTypeToCreate.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -117,9 +120,11 @@
                 <div class="row">
                     <div class="col s12">
                         <input name="name" type="text" maxlength="30" ng-model="taskCtrl.taskTypeToEdit.name"
-                               required available original-value="taskCtrl.taskType.name" url-to-check="/taskTypes?name=">
+                               required available original-value="taskCtrl.taskType.name"
+                               url-to-check="/taskTypes?name=">
                         <label ng-class="{'has-error': taskCtrl.editForm.name.$invalid}">Nombre
-                            <span ng-show="taskCtrl.editForm.name.$error.required" class="has-error">es obligatorio</span>
+                            <span ng-show="taskCtrl.editForm.name.$error.required"
+                                  class="has-error">es obligatorio</span>
                             <span ng-show="taskCtrl.editForm.name.$error.available" class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -128,7 +133,8 @@
                 %{--Enabled Checkbox--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in" ng-model="taskCtrl.taskTypeToEdit.enabled">
+                        <input id="edit_enable" type="checkbox" class="filled-in"
+                               ng-model="taskCtrl.taskTypeToEdit.enabled">
                         <label for="edit_enable">Habilitado</label>
                     </div>
                 </div>

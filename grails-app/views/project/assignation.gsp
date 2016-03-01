@@ -20,7 +20,8 @@
             <h6 class="col s6 label">Clientes habilitados</h6>
 
             <select name="clientSelect" class="col s6 browser-default" ng-change="assignCtrl.changeClient()"
-                    ng-model="assignCtrl.clientSelected" ng-options="client.name for client in assignCtrl.clients" required>
+                    ng-model="assignCtrl.clientSelected" ng-options="client.name for client in assignCtrl.clients"
+                    required>
                 <option value="" disabled>- Elegí una de las siguientes opciones -</option>
             </select>
         </div>

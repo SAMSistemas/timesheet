@@ -1,35 +1,35 @@
 <!doctype html>
 <html>
-    <head>
+<head>
 
-        <title>Error 500</title>
-        <meta name="layout" content="main">
+    <title>Error 500</title>
+    <meta name="layout" content="main">
 
-        <link rel="shortcut icon" href="assets/favicon.ico">
+    <link rel="shortcut icon" href="assets/favicon.ico">
 
-        <asset:stylesheet src="public/font.css"/>
-        <asset:stylesheet src="shared/errors.css"/>
+    <asset:stylesheet src="public/font.css"/>
+    <asset:stylesheet src="shared/errors.css"/>
 
-    </head>
-    <body>
+</head>
 
-    <div>
+<body>
 
-        <h3 class="card-title center teal-text">500 - Error en el servidor</h3>
+<div>
 
-        <br>
-        <br>
-        <br>
+    <h3 class="card-title center teal-text">500 - Error en el servidor</h3>
 
-
-        <img class="error-image-common" src="assets/error-500.png" alt="Error 500">
-
-        <br>
-        <br>
-        <br>
-
-    </div>
+    <br>
+    <br>
+    <br>
 
 
-    </body>
+    <img class="error-image-common" src="assets/error-500.png" alt="Error 500">
+
+    <br>
+    <br>
+    <br>
+
+</div>
+
+</body>
 </html>

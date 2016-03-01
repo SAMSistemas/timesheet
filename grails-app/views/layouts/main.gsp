@@ -114,8 +114,9 @@
         %{--From Date Selection--}%
         <div class="row">
             <div class="col s12">
-                <span id="dateFrom" ng-combo-date-picker="exp" ng-model="mainCtrl.fromDateSelected"
-                      ng-months="{{ mainCtrl.months }}"  ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
+                <ng-combo-date-picker id="dateFrom" class="modal-date" ng-model="mainCtrl.fromDateSelected"
+                                      ng-months="{{ mainCtrl.months }}" ng-min-date="2010-01-01"
+                                      ng-max-date="2020-12-31"></ng-combo-date-picker>
                 <label class="modal-label modal-label-date left">Desde</label>
             </div>
         </div>
@@ -123,8 +124,9 @@
         %{--To Date Selection--}%
         <div class="row">
             <div class="col s12">
-                <span id="dateTo" ng-combo-date-picker="exp" ng-model="mainCtrl.toDateSelected"
-                      ng-months="{{ mainCtrl.months }}" ng-min-date="2010-01-01" ng-max-date="2020-12-31"></span>
+                <ng-combo-date-picker id="dateTo" class="modal-date" ng-model="mainCtrl.toDateSelected"
+                                      ng-months="{{ mainCtrl.months }}" ng-min-date="2010-01-01"
+                                      ng-max-date="2020-12-31"></ng-combo-date-picker>
                 <label class="modal-label modal-label-date left">Hasta</label>
             </div>
         </div>
