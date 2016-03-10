@@ -15,7 +15,7 @@
 
     <h3 class="card-title teal-text">Lista de Clientes</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
+    <a href="#cu-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
        ng-click="clientCtrl.new()"><i
             class="material-icons left">enhanced_encryption</i>Crear</a>
 
@@ -62,7 +62,7 @@
                 </div>
             </td>
             <td>
-                <a href="#edit-modal" ng-click="clientCtrl.edit(client)"
+                <a href="#cu-modal" ng-click="clientCtrl.edit(client)"
                    class="waves-effect waves-light btn-flat btn-edit-padding teal-text teal-hover z-depth-0 modal-trigger"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
             </td>
@@ -72,23 +72,23 @@
     </table>
 
 
-    <!--Create Modal-->
-    <div id="create-modal" class="modal modal-large">
-        <form name="clientCtrl.createForm" ng-submit="clientCtrl.create()" novalidate>
+    <!--Create and Update Modal-->
+    <div id="cu-modal" class="modal modal-large">
+        <form name="clientCtrl.cuForm" ng-submit="clientCtrl.createOrUpdate()" novalidate>
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Crear cliente</h2>
+                <h2 class="card-title teal-text modal-card-title">{{clientCtrl.actionToPerform}} cliente</h2>
 
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToCreate.name" required
-                               available url-to-check="/clients?name=">
-                        <label ng-class="{'has-error': clientCtrl.createForm.name.$invalid}">Nombre
-                            <span ng-show="clientCtrl.createForm.name.$error.required"
+                        <input name="name" type="text" maxlength="30" ng-model="clientCtrl.cuClient.name" required
+                               available url-to-check="/clients?name=" original-value="clientCtrl.client.name">
+                        <label ng-class="{'has-error': clientCtrl.cuForm.name.$invalid}">Nombre
+                            <span ng-show="clientCtrl.cuForm.name.$error.required"
                                   class="has-error">es obligatorio</span>
-                            <span ng-show="clientCtrl.createForm.name.$error.available"
+                            <span ng-show="clientCtrl.cuForm.name.$error.available"
                                   class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -97,12 +97,13 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToCreate.short_name"
-                               required available url-to-check="/clients?short_name=">
-                        <label ng-class="{'has-error': clientCtrl.createForm.sname.$invalid}">Sigla
-                            <span ng-show="clientCtrl.createForm.sname.$error.required"
+                        <input name="short_name" type="text" maxlength="5" ng-model="clientCtrl.cuClient.short_name"
+                               required available url-to-check="/clients?short_name="
+                               original-value="clientCtrl.client.short_name">
+                        <label ng-class="{'has-error': clientCtrl.cuForm.short_name.$invalid}">Sigla
+                            <span ng-show="clientCtrl.cuForm.short_name.$error.required"
                                   class="has-error">es obligatoria</span>
-                            <span ng-show="clientCtrl.createForm.sname.$error.available"
+                            <span ng-show="clientCtrl.cuForm.short_name.$error.available"
                                   class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -112,7 +113,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input id="enable" type="checkbox" class="filled-in"
-                               ng-model="clientCtrl.clientToCreate.enabled">
+                               ng-model="clientCtrl.cuClient.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -121,65 +122,8 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="clientCtrl.createForm.$invalid"
-                        ng-class="{'teal-text teal-hover': clientCtrl.createForm.$valid}">Guardar</button>
-                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
-            </div>
-
-        </form>
-    </div>
-
-    <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-large">
-        <form name="clientCtrl.editForm" ng-submit="clientCtrl.update()" novalidate>
-            <div class="modal-content modal-content-padding">
-
-                %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Editar cliente</h2>
-
-                %{--Name Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input name="name" type="text" maxlength="30" ng-model="clientCtrl.clientToEdit.name"
-                               required available original-value="clientCtrl.client.name" url-to-check="/clients?name=">
-                        <label ng-class="{'has-error': clientCtrl.editForm.name.$invalid}">Nombre
-                            <span ng-show="clientCtrl.editForm.name.$error.required"
-                                  class="has-error">es obligatorio</span>
-                            <span ng-show="clientCtrl.editForm.name.$error.available" class="has-error">ya existe</span>
-                        </label>
-                    </div>
-                </div>
-
-                %{--Short Name Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input name="sname" type="text" maxlength="5" ng-model="clientCtrl.clientToEdit.short_name"
-                               ng-model="clientCtrl.clientToEdit.short_name" required available
-                               original-value="clientCtrl.client.short_name" url-to-check="/clients?short_name=">
-                        <label ng-class="{'has-error': clientCtrl.editForm.sname.$invalid}">Sigla
-                            <span ng-show="clientCtrl.editForm.sname.$error.required"
-                                  class="has-error">es obligatoria</span>
-                            <span ng-show="clientCtrl.editForm.sname.$error.available"
-                                  class="has-error">ya existe</span>
-                        </label>
-                    </div>
-                </div>
-
-                %{--Enabled Checkbox--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in"
-                               ng-model="clientCtrl.clientToEdit.enabled">
-                        <label for="edit_enable">Habilitado</label>
-                    </div>
-                </div>
-
-            </div>
-
-            %{--Button Row--}%
-            <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="clientCtrl.editForm.$invalid"
-                        ng-class="{'teal-text teal-hover': clientCtrl.editForm.$valid}">Guardar</button>
+                <button class="modal-action modal-close btn-flat disabled" ng-disabled="clientCtrl.cuForm.$invalid"
+                        ng-class="{'teal-text teal-hover': clientCtrl.cuForm.$valid}">{{clientCtrl.actionToPerform}}</button>
                 <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 

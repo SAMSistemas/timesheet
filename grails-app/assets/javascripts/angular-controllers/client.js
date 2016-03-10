@@ -12,17 +12,14 @@
         var vm = this;
 
         vm.clients = [];
-        vm.clientToCreate = null;
-        vm.clientToEdit = null;
+        vm.cuClient = null;
         vm.client = null;
 
-        vm.createForm = null;
-        vm.editForm = null;
+        vm.cuForm = null;
 
         vm.new = openCreate;
-        vm.create = create;
         vm.edit = openUpdate;
-        vm.update = update;
+        vm.createOrUpdate = createOrUpdate;
 
         clientService.get(getSuccess, callbackError);
 
@@ -30,37 +27,36 @@
         /** Controller Functions **/
 
         function openCreate() {
-            vm.clientToCreate = {name: "", short_name: "", enabled: true};
-
-            // To clear the errors from previous create forms
-            if (vm.createForm !== null) {
-                vm.createForm.name.$setValidity('available', true);
-                vm.createForm.sname.$setValidity('available', true);
-            }
-        };
-
-        function create() {
-            if (vm.createForm.$valid) {
-                clientService.create(vm.clientToCreate, createSuccess, callbackError);
-            }
-        };
+            vm.cuClient = {name: "", short_name: "", enabled: true};
+            vm.actionToPerform = "Crear";
+            clearFields();
+        }
 
         function openUpdate(client) {
-            vm.clientToEdit = angular.copy(client);
+            vm.cuClient = angular.copy(client);
             vm.client = client;
+            vm.actionToPerform = "Editar";
+            clearFields();
+        }
 
-            // To clear the errors from previous edit forms
-            if (vm.editForm !== null) {
-                vm.editForm.name.$setValidity('available', true);
-                vm.editForm.sname.$setValidity('available', true);
+        function clearFields() {
+            // To clear the errors from previous cuForms
+            if (vm.cuForm !== null) {
+                vm.cuForm.name.$setValidity('available', true);
+                vm.cuForm.short_name.$setValidity('available', true);
             }
-        };
+        }
 
-        function update() {
-            if (vm.editForm.$valid) {
-                clientService.update(vm.clientToEdit, updateSuccess, callbackError);
+        function createOrUpdate() {
+            if (vm.cuForm.$valid) {
+                if (vm.cuClient.id) {
+                    clientService.update(vm.cuClient, updateSuccess, callbackError);
+                    delete vm.client;
+                } else {
+                    clientService.create(vm.cuClient, createSuccess, callbackError);
+                }
             }
-        };
+        }
 
         /** Callback Handlers **/
 

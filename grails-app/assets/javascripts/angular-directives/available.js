@@ -21,7 +21,7 @@
                 elem.on('blur', function () {
                     var inputValue = ctrl.$viewValue; // get the value of the input
 
-                    if (scope.originalValue === inputValue && inputValue === "") {
+                    if (scope.originalValue === inputValue || inputValue === "") {
                         ctrl.$setValidity('available', true);
                         scope.$apply();
                     } else {
