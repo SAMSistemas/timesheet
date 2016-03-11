@@ -11,45 +11,41 @@
 
         var vm = this;
 
-        vm.eventToCreate = {};
-        vm.eventToUpdate = {};
+        vm.cuEvent = {};
 
         vm.events_array = [];
         vm.new_event_source = [];
 
-        vm.createForm = null;
-        vm.editForm = null;
+        vm.cuForm = null;
 
-        vm.create = create;
-        vm.update = update;
         vm.delete = deleteHoliday;
+        vm.createOrUpdate = createOrUpdate;
 
         holidayService.get(getSuccess, callbackError);
 
 
         /** Controller Functions **/
 
-        function create() {
-            holidayService.create(vm.eventToCreate, createSuccess, callbackError);
-        };
-
-        function update() {
-            //Remove previous event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-
-            holidayService.update(vm.eventToUpdate, updateSuccess, callbackError);
-
-            //Add new event source to calendar to render it
-            vm.addEventSource(vm.eventToUpdate);
-
-        };
-
         function deleteHoliday() {
-            holidayService.delete(vm.eventToUpdate.id, deleteSuccess, callbackError);
+            holidayService.delete(vm.cuEvent, deleteSuccess, callbackError);
 
             //Remove event from calendar
-            vm.removeEvent(vm.eventToUpdate);
-        };
+            vm.removeEvent(vm.cuEvent);
+        }
+
+        function createOrUpdate() {
+            if (vm.cuEvent.id) {
+                //Remove previous event from calendar
+                vm.removeEvent(vm.cuEvent);
+
+                holidayService.update(vm.cuEvent, updateSuccess, callbackError);
+
+                //Add new event source to calendar to render it
+                vm.addEventSource(vm.cuEvent);
+            } else {
+                holidayService.create(vm.cuEvent, createSuccess, callbackError);
+            }
+        }
 
 
         /** Callback Handlers **/
@@ -57,21 +53,16 @@
         function getSuccess(response) {
             vm.events_array = response.data;
             vm.initCalendar();
-
         }
 
         function createSuccess(response) {
-            vm.eventToCreate.id = response.data.id;
-            vm.addEventSource(vm.eventToCreate);
-            utilsService.writeToLog(response, 'created');
+            vm.addEventSource(response.data);
         }
 
         function updateSuccess(response) {
-            utilsService.writeToLog(response, 'updated');
         }
 
         function deleteSuccess(response) {
-            utilsService.writeToLog(response, 'deleted');
         }
 
         function callbackError(response) {
@@ -101,13 +92,14 @@
                     dow: [1, 2, 3, 4, 5]  //days of week (Monday, Thursday, Wednesday, Tuesday, Friday in this example)
                 },
                 dayClick: function (date, event) {
-                    vm.eventToCreate.id = null;
-                    vm.eventToCreate.title = "";
-                    vm.eventToCreate.date = date.format();
+                    vm.cuEvent = {
+                        id: null,
+                        title: "",
+                        date: date.format()
+                    };
                     $scope.$apply();
-
-                    $('#create_modal').openModal();
-
+                    vm.actionToPerform = "Crear";
+                    $('#cu-modal').openModal();
                 },
                 eventLimit: true, // allow "more" link when too many events
                 events: vm.events_array,
@@ -115,13 +107,14 @@
                 eventClick: function (calEvent) {
                     var event_id = calEvent.id;
                     var events = vm.findEventById(event_id);
-
-                    vm.eventToUpdate.id = events[0].id;
-                    vm.eventToUpdate.title = events[0].title;
-                    vm.eventToUpdate.date = events[0].date;
+                    vm.cuEvent = {
+                        id: events[0].id,
+                        title: events[0].title,
+                        date: events[0].date
+                    };
+                    vm.actionToPerform = "Editar";
                     $scope.$apply();
-
-                    $('#edit_modal').openModal();
+                    $('#cu-modal').openModal();
                 }
             });
         };

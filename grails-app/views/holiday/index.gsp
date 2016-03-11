@@ -15,21 +15,21 @@
 
     <div id='calendar'></div>
 
-    <!--Create Modal-->
-    <div id="create_modal" class="modal modal-medium">
-        <form name="holidayCtrl.createForm" ng-submit="holidayCtrl.create()" novalidate>
+    <!--Create and Update Modal-->
+    <div id="cu-modal" class="modal modal-large">
+        <form name="holidayCtrl.cuForm" novalidate>
             <div class="modal-content">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Crear feriado</h2>
+                <ts-modal-title action="{{holidayCtrl.actionToPerform}}" object="feriado"></ts-modal-title>
 
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="create_name" type="text" name="name" ng-model="holidayCtrl.eventToCreate.title"
+                        <input id="title" type="text" name="title" ng-model="holidayCtrl.cuEvent.title"
                                required>
-                        <label ng-class="{'has-error': holidayCtrl.createForm.name.$invalid}">Nombre
-                            <span ng-show="holidayCtrl.createForm.name.$error.required"
+                        <label ng-class="{'has-error': holidayCtrl.cuForm.title.$invalid}">Nombre
+                            <span ng-show="holidayCtrl.cuForm.title.$error.required"
                                   class="has-error">es obligatorio</span>
                         </label>
                     </div>
@@ -38,64 +38,24 @@
                 %{--Date Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input id="create_date" type="text"
-                               ng-value="holidayCtrl.eventToCreate.date | date: 'dd-MM-yyyy'" disabled>
-                        <label for="create_date">Fecha</label>
+                        <input id="date" type="text"
+                               ng-value="holidayCtrl.cuEvent.date | date: 'dd-MM-yyyy'" disabled>
+                        <label for="date">Fecha</label>
                     </div>
                 </div>
 
                 %{--Button Row--}%
                 <div class="modal-footer">
                     <button class="modal-action modal-close btn-flat disabled"
-                            ng-disabled="holidayCtrl.createForm.$invalid"
-                            ng-class="{'teal-text teal-hover': holidayCtrl.createForm.$valid}">Guardar</button>
-                    <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
-                </div>
-
-            </div>
-        </form>
-    </div>
-
-    <!--Edit Modal-->
-    <div id="edit_modal" class="modal modal-large">
-        <form name="holidayCtrl.editForm" ng-submit="holidayCtrl.update()" novalidate>
-            <div class="modal-content">
-
-                %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Editar feriado</h2>
-
-                %{--Name Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input id="edit_name" type="text" name="name" ng-model="holidayCtrl.eventToUpdate.title"
-                               required>
-                        <label ng-class="{'has-error': holidayCtrl.editForm.name.$invalid}">Nombre
-                            <span ng-show="holidayCtrl.editForm.name.$error.required"
-                                  class="has-error">es obligatorio</span>
-                        </label>
-                    </div>
-                </div>
-
-                %{--Date Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input id="edit_date" type="text" ng-value="holidayCtrl.eventToUpdate.date | date: 'dd-MM-yyyy'"
-                               disabled>
-                        <label for="edit_date">Fecha</label>
-                    </div>
-                </div>
-
-                %{--Button Row--}%
-                <div class="modal-footer">
-                    <button class="modal-action modal-close btn-flat disabled"
-                            ng-disabled="holidayCtrl.editForm.$invalid"
-                            ng-class="{'teal-text teal-hover': holidayCtrl.editForm.$valid}">Guardar</button>
-                    <a href class="modal-action modal-close btn-flat teal-text teal-hover"
+                            ng-disabled="holidayCtrl.cuForm.$invalid" ng-click="holidayCtrl.createOrUpdate()"
+                            ng-class="{'teal-text teal-hover': holidayCtrl.cuForm.$valid}">{{holidayCtrl.actionToPerform}}</button>
+                    <a href class="modal-action modal-close btn-flat teal-text teal-hover" ng-show="holidayCtrl.cuEvent.id !== null"
                        ng-click="holidayCtrl.delete()">Eliminar</a>
                     <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
                 </div>
 
             </div>
+        </form>
     </div>
 
 </div>

@@ -28,8 +28,8 @@
             $http.put('/holidays/' + eventToEdit.id, eventToEdit).then(callbackSuccess, callbackFailure);
         };
 
-        function deleteHoliday(callbackSuccess, callbackFailure) {
-            $http.delete('/holidays/' + vm.eventToUpdate.id).then(callbackSuccess, callbackFailure);
+        function deleteHoliday(eventToDelete, callbackSuccess, callbackFailure) {
+            $http.delete('/holidays/' + eventToDelete.id).then(callbackSuccess, callbackFailure);
         };
 
     }
