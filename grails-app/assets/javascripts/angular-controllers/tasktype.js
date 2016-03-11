@@ -12,17 +12,14 @@
         var vm = this;
 
         vm.taskTypes = [];
-        vm.taskTypeToCreate = null;
-        vm.taskTypeToEdit = null;
+        vm.cuTaskType = null;
         vm.taskType = null;
 
-        vm.createForm = null;
-        vm.editForm = null;
+        vm.cuForm = null;
 
         vm.new = openCreate;
-        vm.create = create;
         vm.edit = openUpdate;
-        vm.update = update;
+        vm.createOrUpdate = createOrUpdate;
 
         taskTypeService.get(getSuccess, callbackError);
 
@@ -30,35 +27,34 @@
         /** Controller Functions **/
 
         function openCreate() {
-            vm.taskTypeToCreate = {name: "", enabled: true};
-
-            // To clear the errors from previous create forms
-            if (vm.createForm !== null) {
-                vm.createForm.name.$setValidity('available', true);
-            }
-        };
-
-        function create() {
-            if (vm.createForm.$valid) {
-                taskTypeService.create(vm.taskTypeToCreate, createSuccess, callbackError);
-            }
-        };
+            vm.cuTaskType = {name: "", enabled: true};
+            vm.actionToPerform = "Crear";
+            clearFields();
+        }
 
         function openUpdate(taskType) {
-            vm.taskTypeToEdit = angular.copy(taskType);
+            vm.cuTaskType = angular.copy(taskType);
             vm.taskType = taskType;
+            vm.actionToPerform = "Editar";
+            clearFields();
+        }
 
+        function clearFields() {
             // To clear the errors from previous edit forms
-            if (vm.editForm !== null) {
-                vm.editForm.name.$setValidity('available', true);
+            if (vm.cuForm !== null) {
+                vm.cuForm.name.$setValidity('available', true);
             }
-        };
+        }
 
-        function update() {
-            if (vm.editForm.$valid) {
-                taskTypeService.update(vm.taskTypeToEdit, updateSuccess, callbackError);
+        function createOrUpdate() {
+            if (vm.cuForm.$valid) {
+                if (vm.cuTaskType.id) {
+                    taskTypeService.update(vm.cuTaskType, updateSuccess, callbackError);
+                } else {
+                    taskTypeService.create(vm.cuTaskType, createSuccess, callbackError);
+                }
             }
-        };
+        }
 
 
         /** Callback Handlers **/
