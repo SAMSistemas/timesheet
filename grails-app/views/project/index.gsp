@@ -15,7 +15,7 @@
 
     <h3 class="card-title teal-text">Lista de Proyectos</h3>
 
-    <a href="#create-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
+    <a href="#cu-modal" class="waves-effect waves-light btn btn-create-padding modal-trigger"
        ng-click="projectCtrl.new()"><i
             class="material-icons left">add</i>Crear</a>
 
@@ -73,7 +73,7 @@
             <td class="width-15">
                 <a href class="btn-flat btn-edit-padding z-depth-0 disabled" ng-show="!project.client.enabled"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
-                <a href="#edit-modal" ng-click="projectCtrl.edit(project)" ng-show="project.client.enabled"
+                <a href="#cu-modal" ng-click="projectCtrl.edit(project)" ng-show="project.client.enabled"
                    class="waves-effect btn-flat btn-edit-padding z-depth-0 teal-text teal-hover modal-trigger"><i
                         class="material-icons left icon-margin">mode_edit</i>Editar</a>
             </td>
@@ -83,13 +83,13 @@
     </table>
 
 
-    <!--Create Modal-->
-    <div id="create-modal" class="modal modal-large">
-        <form name="projectCtrl.createForm" ng-submit="projectCtrl.create()" novalidate>
+    <!--Create and Update Modal-->
+    <div id="cu-modal" class="modal modal-large">
+        <form name="projectCtrl.cuForm" ng-submit="projectCtrl.createOrUpdate()" novalidate>
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Crear proyecto</h2>
+                <h2 class="card-title teal-text modal-card-title">{{projectCtrl.actionToPerform}} proyecto</h2>
 
                 %{--Client Select--}%
                 <div class="row">
@@ -100,8 +100,8 @@
                             <option value="" disabled selected>~ Elija un cliente ~</option>
                         </select>
                         <label class="modal-label modal-label-select left"
-                               ng-class="{'has-error': projectCtrl.createForm.client.$invalid}">Cliente
-                            <span ng-show="projectCtrl.createForm.client.$error.required"
+                               ng-class="{'has-error': projectCtrl.cuForm.client.$invalid}">Cliente
+                            <span ng-show="projectCtrl.cuForm.client.$error.required"
                                   class="has-error">es obligatorio</span>
                         </label>
                     </div>
@@ -110,12 +110,12 @@
                 %{--Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="name" type="text" maxlength="50" ng-model="projectCtrl.projectToCreate.name"
-                               required available url-to-check="/projects?name=">
-                        <label ng-class="{'has-error': projectCtrl.createForm.name.$invalid}">Nombre de proyecto
-                            <span ng-show="projectCtrl.createForm.name.$error.required"
+                        <input name="name" type="text" maxlength="50" ng-model="projectCtrl.cuProject.name"
+                               required available url-to-check="/projects?name=" original-value="projectCtrl.project.name">
+                        <label ng-class="{'has-error': projectCtrl.cuForm.name.$invalid}">Nombre de proyecto
+                            <span ng-show="projectCtrl.cuForm.name.$error.required"
                                   class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.createForm.name.$error.available"
+                            <span ng-show="projectCtrl.cuForm.name.$error.available"
                                   class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -124,12 +124,12 @@
                 %{--Short Name Field--}%
                 <div class="row">
                     <div class="col s12">
-                        <input name="sname" type="text" maxlength="10" ng-model="projectCtrl.projectToCreate.short_name"
-                               required available url-to-check="/projects?short_name=">
-                        <label ng-class="{'has-error': projectCtrl.createForm.sname.$invalid}">Sigla
-                            <span ng-show="projectCtrl.createForm.sname.$error.required"
+                        <input name="short_name" type="text" maxlength="10" ng-model="projectCtrl.cuProject.short_name"
+                               required available url-to-check="/projects?short_name=" original-value="projectCtrl.project.short_name">
+                        <label ng-class="{'has-error': projectCtrl.cuForm.short_name.$invalid}">Sigla
+                            <span ng-show="projectCtrl.cuForm.short_name.$error.required"
                                   class="has-error">es obligatoria</span>
-                            <span ng-show="projectCtrl.createForm.sname.$error.available"
+                            <span ng-show="projectCtrl.cuForm.short_name.$error.available"
                                   class="has-error">ya existe</span>
                         </label>
                     </div>
@@ -150,7 +150,7 @@
                 <div class="row">
                     <div class="col s12">
                         <input id="enable" type="checkbox" class="filled-in"
-                               ng-model="projectCtrl.projectToCreate.enabled">
+                               ng-model="projectCtrl.cuProject.enabled">
                         <label for="enable">Habilitado</label>
                     </div>
                 </div>
@@ -159,88 +159,8 @@
 
             %{--Button Row--}%
             <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="projectCtrl.createForm.$invalid"
-                        ng-class="{'teal-text teal-hover': projectCtrl.createForm.$valid}">Guardar</button>
-                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
-            </div>
-
-        </form>
-    </div>
-
-    <!--Edit Modal-->
-    <div id="edit-modal" class="modal modal-large">
-        <form name="projectCtrl.editForm" ng-submit="projectCtrl.update()" novalidate>
-            <div class="modal-content modal-content-padding">
-
-                %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">Editar projecto</h2>
-
-                %{--Client Select--}%
-                <div class="row">
-                    <div class="col s12">
-                        <select class="col s12 browser-default" ng-model="projectCtrl.clientSelected"
-                                ng-options="client.name for client in projectCtrl.enabledClients track by client.name">
-                            <option value="" disabled>~ Elija un cliente ~</option>
-                        </select>
-                        <label class="modal-label modal-label-select left">Cliente</label>
-                    </div>
-                </div>
-
-                %{--Name Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input name="project_name" type="text" maxlength="50"
-                               ng-model="projectCtrl.projectToEdit.name" required available
-                               original-value="projectCtrl.project.name" url-to-check="/projects?name=">
-                        <label ng-class="{'has-error': projectCtrl.editForm.project_name.$invalid}">Nombre de proyecto
-                            <span ng-show="projectCtrl.editForm.project_name.$error.required"
-                                  class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.editForm.project_name.$error.available"
-                                  class="has-error">ya existe</span>
-                        </label>
-                    </div>
-                </div>
-
-                %{--Short Name Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input name="sname" type="text" maxlength="10"
-                               ng-model="projectCtrl.projectToEdit.short_name" required available
-                               original-value="projectCtrl.project.short_name" url-to-check="/projects?short_name=">
-                        <label ng-class="{'has-error': projectCtrl.editForm.sname.$invalid}">Sigla
-                            <span ng-show="projectCtrl.editForm.sname.$error.required"
-                                  class="has-error">es obligatorio</span>
-                            <span ng-show="projectCtrl.editForm.sname.$error.available"
-                                  class="has-error">ya existe</span>
-                        </label>
-                    </div>
-                </div>
-
-                %{--Date Field--}%
-                <div class="row">
-                    <div class="col s12">
-                        <ng-combo-date-picker id="dateComboEdit" class="modal-date" ng-model="projectCtrl.dateSelected"
-                                              ng-months="{{ projectCtrl.months }}" ng-min-date="2005-01-01"
-                                              ng-max-date="2020-12-31"></ng-combo-date-picker>
-                        <label class="modal-label modal-label-date left">Fecha Inicio</label>
-                    </div>
-                </div>
-
-                %{--Enabled Checkbox--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input id="edit_enable" type="checkbox" class="filled-in"
-                               ng-model="projectCtrl.projectToEdit.enabled">
-                        <label for="edit_enable">Habilitado</label>
-                    </div>
-                </div>
-
-            </div>
-
-            %{--Button Row--}%
-            <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="projectCtrl.editForm.$invalid"
-                        ng-class="{'teal-text teal-hover': projectCtrl.editForm.$valid}">Guardar</button>
+                <button class="modal-action modal-close btn-flat disabled" ng-disabled="projectCtrl.cuForm.$invalid"
+                        ng-class="{'teal-text teal-hover': projectCtrl.cuForm.$valid}">{{projectCtrl.actionToPerform}}</button>
                 <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
             </div>
 

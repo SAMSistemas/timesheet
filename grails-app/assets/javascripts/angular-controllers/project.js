@@ -12,14 +12,13 @@
         var vm = this;
 
         vm.projects = [];
-        vm.projectToCreate = null;
-        vm.projectToEdit = null;
+        vm.cuProject = null;
         vm.project = null;
 
         vm.enabledClients = [];
         vm.clientSelected = null;
 
-        vm.createForm = null;
+        vm.cuForm = null;
         vm.editForm = null;
 
         vm.months = "Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre";
@@ -27,9 +26,8 @@
         vm.dateSelected = new Date();
 
         vm.new = openCreate;
-        vm.create = create;
         vm.edit = openUpdate;
-        vm.update = update;
+        vm.createOrUpdate = createOrUpdate;
 
         clientService.getEnabled(getEnabledSuccess, callbackError);
 
@@ -40,7 +38,7 @@
 
         function openCreate() {
             vm.clientSelected = "";
-            vm.projectToCreate = {
+            vm.cuProject = {
                 client_name: "",
                 client: {name: "", enabled: true},
                 project_name: "",
@@ -48,52 +46,40 @@
                 start_date: "",
                 enabled: true
             };
-
-            // To clear the errors from previous create forms
-            if (vm.createForm !== null) {
-                vm.createForm.project_name.$setValidity('available', true);
-                vm.createForm.sname.$setValidity('available', true);
-            }
-        };
-
-        function create() {
-            vm.projectToCreate.client_name = vm.clientSelected.name;
-            vm.projectToCreate.start_date = vm.generateCreateStringDate(vm.dateSelected);
-
-            if (vm.createForm.$valid) {
-                projectService.create(vm.projectToCreate, createSuccess, callbackError);
-            }
-
-            vm.clientSelected = {};
-        };
+            vm.actionToPerform = "Crear";
+            clearFields();
+        }
 
         function openUpdate(project) {
             vm.clientSelected = {};
             vm.clientSelected.name = project.client.name;
             vm.parseDate(project.start_date);
-
-            vm.projectToEdit = angular.copy(project);
+            vm.cuProject = angular.copy(project);
             vm.project = project;
+            vm.actionToPerform = "Editar";
+            clearFields();
+        }
 
+        function clearFields() {
             // To clear the errors from previous edit forms
-            if (vm.editForm !== null) {
-                vm.editForm.project_name.$setValidity('available', true);
-                vm.editForm.sname.$setValidity('available', true);
+            if (vm.cuForm !== null) {
+                vm.cuForm.name.$setValidity('available', true);
+                vm.cuForm.short_name.$setValidity('available', true);
             }
+        }
 
-        };
-
-        function update() {
-            vm.projectToEdit.client_name = vm.clientSelected.name;
-            vm.projectToEdit.start_date = vm.generateEditStringDate(vm.dateSelected);
-
-            if (vm.editForm.$valid) {
-                projectService.update(vm.projectToEdit, updateSuccess, callbackError);
+        function createOrUpdate() {
+            if (vm.cuForm.$valid) {
+                vm.cuProject.client_name = vm.clientSelected.name;
+                vm.cuProject.start_date = vm.generateStringDate(vm.dateSelected);
+                if (vm.cuProject.id) {
+                    projectService.update(vm.cuProject, updateSuccess, callbackError);
+                } else {
+                    projectService.create(vm.cuProject, createSuccess, callbackError);
+                }
+                vm.clientSelected = {};
             }
-
-            vm.clientSelected = {};
-        };
-
+        }
 
         /** Callback Handlers **/
 
@@ -102,11 +88,11 @@
         }
 
         function createSuccess(response) {
-            vm.addToTable(vm.projects, response.data);
+            utilsService.addToTable(vm.projects, response.data);
         }
 
         function updateSuccess(response) {
-            vm.updateInTable(vm.projects, response.data);
+            utilsService.updateInTable(vm.projects, response.data);
         }
 
         function getEnabledSuccess(response) {
@@ -151,21 +137,13 @@
             vm.dateSelected = new Date(date_array[2], date_array[1] - 1, date_array[0]);
         };
 
-        vm.generateCreateStringDate = function (date) {
+        vm.generateStringDate = function (date) {
             var day = date.getDate();
             var monthIndex = date.getMonth();
             var month = monthIndex + 1;
             var year = date.getFullYear();
             return day + '-' + month + '-' + year;
 
-        };
-
-        vm.generateEditStringDate = function (date) {
-            var day = date.getDate();
-            var monthIndex = date.getMonth();
-            var month = monthIndex + 1;
-            var year = date.getFullYear();
-            return day + '-' + month + '-' + year;
         };
 
     }
