@@ -93,11 +93,7 @@
             </div>
 
             %{--Button Row--}%
-            <div class="modal-footer modal-footer-padding">
-                <button class="modal-action modal-close btn-flat disabled" ng-disabled="taskCtrl.cuForm.$invalid"
-                        ng-class="{'teal-text teal-hover': taskCtrl.cuForm.$valid}">{{taskCtrl.actionToPerform}}</button>
-                <a href class="modal-action modal-close btn-flat teal-text teal-hover">Cancelar</a>
-            </div>
+            <ts-modal-button label="{{taskCtrl.actionToPerform}}" cu-form="taskCtrl.cuForm"></ts-modal-button>
 
         </form>
     </div>
