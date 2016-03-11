@@ -147,13 +147,7 @@
                 </div>
 
                 %{--Enabled Checkbox--}%
-                <div class="row">
-                    <div class="col s12">
-                        <input id="enable" type="checkbox" class="filled-in"
-                               ng-model="projectCtrl.cuProject.enabled">
-                        <label for="enable">Habilitado</label>
-                    </div>
-                </div>
+                <ts-modal-checkbox label="Habilitado" ng-model="projectCtrl.cuProject.enabled"></ts-modal-checkbox>
 
             </div>
 

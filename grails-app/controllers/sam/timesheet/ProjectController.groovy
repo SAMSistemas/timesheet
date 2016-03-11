@@ -58,6 +58,8 @@ class ProjectController extends RestfulController {
         def paramsJSON = request.JSON
         def params = [:]
 
+        log.info paramsJSON
+
         if (paramsJSON.client_name)
             params.put("client", Client.findByName(paramsJSON.client_name))
 
@@ -70,7 +72,7 @@ class ProjectController extends RestfulController {
         if (paramsJSON.start_date)
             params.put("start_date", formatDate(paramsJSON.start_date))
 
-        if (paramsJSON.enabled)
+        if (paramsJSON.enabled != null)
             params.put("enabled", paramsJSON.enabled)
 
         params

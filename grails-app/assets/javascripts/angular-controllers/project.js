@@ -72,6 +72,7 @@
             if (vm.cuForm.$valid) {
                 vm.cuProject.client_name = vm.clientSelected.name;
                 vm.cuProject.start_date = vm.generateStringDate(vm.dateSelected);
+                console.log(vm.cuProject);
                 if (vm.cuProject.id) {
                     projectService.update(vm.cuProject, updateSuccess, callbackError);
                 } else {

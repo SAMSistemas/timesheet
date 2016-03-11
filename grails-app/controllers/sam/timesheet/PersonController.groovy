@@ -61,7 +61,7 @@ class PersonController extends RestfulController {
         if (paramsJSON.work_position)
             params.put("work_position", WorkPosition.findByDescription(paramsJSON.work_position))
 
-        if (paramsJSON.enabled)
+        if (paramsJSON.enabled != null)
             params.put("enabled", paramsJSON.enabled)
 
         params
