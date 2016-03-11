@@ -12,20 +12,17 @@
         var vm = this;
 
         vm.people = [];
-        vm.personToCreate = null;
-        vm.personToEdit = null;
+        vm.cuPerson = null;
         vm.person = null;
 
-        vm.createForm = null;
-        vm.editForm = null;
+        vm.cuForm = null;
 
         vm.work_hours = [4, 6, 8];
         vm.work_positions = [];
 
         vm.new = openCreate;
-        vm.create = create;
         vm.edit = openUpdate;
-        vm.update = update;
+        vm.createOrUpdate = createOrUpdate;
 
         personService.get(getSuccess, callbackError);
 
@@ -35,7 +32,7 @@
         /** Controller Functions **/
 
         function openCreate() {
-            vm.personToCreate = {
+            vm.cuPerson = {
                 name: "",
                 lastname: "",
                 username: "",
@@ -44,34 +41,33 @@
                 work_position: "",
                 enabled: true
             };
-
-            // To clear the errors from previous create forms
-            if (vm.createForm !== null) {
-                vm.createForm.username.$setValidity('available', true);
-            }
-        };
-
-        function create() {
-            if (vm.createForm.$valid) {
-                personService.create(vm.personToCreate, createSuccess, callbackError);
-            }
+            vm.actionToPerform = "Crear";
+            clearFields();
         };
 
         function openUpdate(person) {
-            vm.personToEdit = angular.copy(person);
+            vm.cuPerson = angular.copy(person);
             vm.person = person;
+            vm.actionToPerform = "Editar";
+            clearFields();
+        };
 
+        function clearFields() {
             // To clear the errors from previous edit forms
-            if (vm.editForm !== null) {
-                vm.editForm.username.$setValidity('available', true);
+            if (vm.cuForm !== null) {
+                vm.cuForm.username.$setValidity('available', true);
             }
-        };
+        }
 
-        function update() {
-            if (vm.editForm.$valid) {
-                personService.update(vm.personToEdit, updateSuccess, callbackError);
+        function createOrUpdate() {
+            if (vm.cuForm.$valid) {
+                if (vm.cuPerson.id) {
+                    personService.update(vm.cuPerson, updateSuccess, callbackError);
+                } else {
+                    personService.create(vm.cuPerson, createSuccess, callbackError);
+                }
             }
-        };
+        }
 
 
         /** Callback Handlers **/
