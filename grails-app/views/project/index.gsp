@@ -89,7 +89,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">{{projectCtrl.actionToPerform}} proyecto</h2>
+                <ts-modal-title action="{{projectCtrl.actionToPerform}}" object="projecto"></ts-modal-title>
 
                 %{--Client Select--}%
                 <div class="row">

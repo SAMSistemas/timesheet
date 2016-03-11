@@ -72,7 +72,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">{{taskCtrl.actionToPerform}} tipo de tarea</h2>
+                <ts-modal-title action="{{taskCtrl.actionToPerform}}" object="tipo de tarea"></ts-modal-title>
 
                 %{--Name Field--}%
                 <div class="row">

@@ -78,7 +78,7 @@
             <div class="modal-content modal-content-padding">
 
                 %{--Title--}%
-                <h2 class="card-title teal-text modal-card-title">{{clientCtrl.actionToPerform}} cliente</h2>
+                <ts-modal-title action="{{clientCtrl.actionToPerform}}" object="cliente"></ts-modal-title>
 
                 %{--Name Field--}%
                 <div class="row">
