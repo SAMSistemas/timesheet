@@ -78,10 +78,14 @@
 
         function createSuccess(response) {
             utilsService.addToTable(vm.people, response.data);
+            var $toast = $('<span>La persona se creó satisfactoriamente!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function updateSuccess(response) {
             utilsService.updateInTable(vm.people, response.data);
+            var $toast = $('<span>La persona ha sido editada!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function getWorkPositionSuccess(response) {

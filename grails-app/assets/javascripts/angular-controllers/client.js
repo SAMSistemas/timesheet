@@ -66,10 +66,14 @@
 
         function createSuccess(response) {
             utilsService.addToTable(vm.clients, response.data);
+            var $toast = $('<span>El cliente se creó satisfactoriamente!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function updateSuccess(response) {
             utilsService.updateInTable(vm.clients, response.data);
+            var $toast = $('<span>El cliente ha sido editado!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function callbackError(response) {

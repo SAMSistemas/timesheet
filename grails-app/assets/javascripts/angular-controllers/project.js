@@ -90,10 +90,14 @@
 
         function createSuccess(response) {
             utilsService.addToTable(vm.projects, response.data);
+            var $toast = $('<span>El proyecto se creo satisfactoriamente!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function updateSuccess(response) {
             utilsService.updateInTable(vm.projects, response.data);
+            var $toast = $('<span>El proyecto ha sido editado!</span>');
+            Materialize.toast($toast, 4000, 'rounded');
         }
 
         function getEnabledSuccess(response) {
