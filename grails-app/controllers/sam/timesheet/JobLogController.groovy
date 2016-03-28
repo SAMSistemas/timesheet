@@ -22,6 +22,22 @@ class JobLogController extends RestfulController {
     }
 
     @Override
+    def index() {
+
+        def filters = [:]
+
+        if(params.username) {
+            def person = Person.findByUsername(params.username)
+            filters.put("person", person)
+        }
+
+        if (filters.isEmpty())
+            respond JobLog.list()
+        else
+            respond JobLog.findAllWhere(filters)
+    }
+
+    @Override
     protected getObjectToBind() {
         def paramsJSON = request.JSON
         def params = [:]

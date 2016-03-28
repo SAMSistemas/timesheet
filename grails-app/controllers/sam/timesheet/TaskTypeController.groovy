@@ -20,6 +20,12 @@ class TaskTypeController extends RestfulController {
         if (params.enabled)
             filters.put("enabled", Boolean.parseBoolean(params.enabled))
 
+        if (params.workPosition){
+            def workPos = WorkPosition.findByDescription(params.workPosition)
+            respond TaskType_x_WorkPosition.findAllByWork_position(workPos)
+        }
+
+
         if (filters.isEmpty())
             respond TaskType.list()
         else
