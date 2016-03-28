@@ -12,6 +12,7 @@ json {
     start_date new SimpleDateFormat("yyyy-MM-dd").format(project.start_date)
     enabled project.enabled
     client {
+        id project.id
         name project.client.name
         short_name project.client.short_name
         enabled project.client.enabled
