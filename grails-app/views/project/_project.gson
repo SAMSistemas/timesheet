@@ -1,6 +1,7 @@
 import sam.timesheet.Project
 import java.text.SimpleDateFormat
 
+
 model {
 	Project project
 }
