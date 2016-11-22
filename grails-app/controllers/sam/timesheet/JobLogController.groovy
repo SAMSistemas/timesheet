@@ -135,7 +135,7 @@ class JobLogController {
 
             FileOutputStream file = reportService.makeReport(resultData,filters)
 
-            Path path = Paths.get("C:\\tmp\\report.pdf");
+            Path path = Paths.get("E:\\Desarrollo\\SAM_Apps\\Timesheet\\Reports\\report.pdf");
             byte[] data = Files.readAllBytes(path);
 
             response.setContentType("application/pdf")
